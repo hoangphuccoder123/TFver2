@@ -1,0 +1,83 @@
+{
+  "position": "Thợ cắt tóc",
+  "category": "Dịch vụ làm đẹp",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Basic haircutting techniques?",
+        "Hair types và texture identification?",
+        "Sanitization và hygiene procedures?",
+        "Tool maintenance và care?",
+        "Color theory trong hair coloring?",
+        "Face shape analysis?",
+        "Product knowledge (shampoos, treatments)?",
+        "Customer consultation skills?",
+        "Appointment scheduling systems?",
+        "Workplace safety protocols?"
+      ],
+      "behavioral": [
+        "Tại sao chọn cosmetology career?",
+        "Customer service approach?",
+        "Creativity trong hairstyling?",
+        "Continuing education commitment?",
+        "Building client relationships?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Advanced cutting techniques?",
+        "Chemical processing expertise?",
+        "Hair coloring advanced methods?",
+        "Special occasion styling?",
+        "Hair problem diagnosis?",
+        "Trend analysis và adaptation?",
+        "Retail sales skills?",
+        "Training junior stylists?",
+        "Salon workflow optimization?",
+        "Client retention strategies?"
+      ],
+      "behavioral": [
+        "Salon team collaboration?",
+        "Difficult client situations handling?",
+        "Professional development initiatives?",
+        "Artistic vision development?",
+        "Business aspects understanding?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Salon management operations?",
+        "Staff training program development?",
+        "Business development strategies?",
+        "Advanced color correction?",
+        "Bridal và event styling expertise?",
+        "Product line development?",
+        "Competition participation?",
+        "Industry trend leadership?",
+        "Quality control systems?",
+        "Financial management cho salon?"
+      ],
+      "behavioral": [
+        "Salon leadership approach?",
+        "Brand building initiatives?",
+        "Community involvement?",
+        "Mentoring new stylists?",
+        "Industry networking importance?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Client unhappy với haircut result?",
+    "Chemical process goes wrong (overprocessing)?",
+    "Difficult client với unrealistic expectations?",
+    "Salon equipment breaks during busy time?",
+    "Client allergic reaction to products?"
+  ],
+  "practical_challenges": [
+    "Transform damaged hair into healthy style",
+    "Create wedding hairstyle from inspiration photo",
+    "Fix color mistake from previous salon",
+    "Work với challenging hair texture",
+    "Manage full book of appointments efficiently"
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "title": "Lộ trình phát triển nghề nghiệp - Kỹ sư Xây dựng",
+  "duration": "12-15 tháng",
+  "difficulty": "Khó",
+  "description": "Lộ trình toàn diện để trở thành Kỹ sư Xây dựng chuyên nghiệp",
+  "phases": [
+    {
+      "phase": "Giai đoạn 1: Kiến thức nền tảng",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Toán học & Vật lý ứng dụng",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "Cơ học kết cấu",
+            "Toán cao cấp trong xây dựng",
+            "Vật liệu xây dựng"
+          ],
+          "practice": [
+            "Tính toán tải trọng",
+            "Phân tích ứng suất",
+            "Bài tập cơ học kết cấu"
+          ]
+        },
+        {
+          "skill": "AutoCAD cơ bản",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "AutoCAD tutorials",
+            "Technical drawing standards",
+            "2D drafting techniques"
+          ],
+          "practice": [
+            "Vẽ bản vẽ kiến trúc",
+            "Detailed drawings",
+            "Annotation và dimensioning"
+          ]
+        },
+        {
+          "skill": "Quy chuẩn & Tiêu chuẩn",
+          "timeToLearn": "2-3 tuần",
+          "resources": [
+            "TCVN xây dựng Việt Nam",
+            "Building codes",
+            "Safety regulations"
+          ],
+          "practice": [
+            "Áp dụng quy chuẩn vào thiết kế",
+            "Compliance checking",
+            "Safety analysis"
+          ]
+        }
+      ],
+      "projects": [
+        "Thiết kế nhà ở 2 tầng",
+        "Tính toán kết cấu đơn giản",
+        "Bản vẽ thi công chi tiết"
+      ],
+      "assessment": "Hiểu được nguyên lý cơ bản và có thể vẽ CAD"
+    },
+    {
+      "phase": "Giai đoạn 2: Thiết kế kết cấu",
+      "duration": "4-5 tháng",
+      "skills": [
+        {
+          "skill": "Structural Analysis Software",
+          "timeToLearn": "6-8 tuần",
+          "resources": [
+            "SAP2000 tutorials",
+            "ETABS documentation",
+            "Structural modeling"
+          ],
+          "practice": [
+            "Modeling simple structures",
+            "Load analysis",
+            "Results interpretation"
+          ]
+        },
+        {
+          "skill": "Reinforced Concrete Design",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "ACI concrete code",
+            "Concrete design principles",
+            "Detailing standards"
+          ],
+          "practice": [
+            "Design concrete beams, columns",
+            "Foundation design",
+            "Reinforcement detailing"
+          ]
+        },
+        {
+          "skill": "Steel Structure Design",
+          "timeToLearn": "4-5 tuần",
+          "resources": [
+            "Steel design standards",
+            "Connection design",
+            "Stability analysis"
+          ],
+          "practice": [
+            "Steel frame design",
+            "Connection calculations",
+            "Stability checks"
+          ]
+        }
+      ],
+      "projects": [
+        "Thiết kế khung bê tông cốt thép",
+        "Steel warehouse structure",
+        "Foundation system design"
+      ],
+      "assessment": "Có thể thiết kế kết cấu cơ bản với software"
+    },
+    {
+      "phase": "Giai đoạn 3: BIM & Advanced Tools",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Revit Structure",
+          "timeToLearn": "6-8 tuần",
+          "resources": [
+            "Revit Structure tutorials",
+            "BIM workflows",
+            "Family creation"
+          ],
+          "practice": [
+            "3D structural modeling",
+            "BIM coordination",
+            "Clash detection"
+          ]
+        },
+        {
+          "skill": "Project Management",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "Construction project management",
+            "MS Project",
+            "Cost estimation"
+          ],
+          "practice": [
+            "Project scheduling",
+            "Resource planning",
+            "Budget management"
+          ]
+        },
+        {
+          "skill": "Quality Control",
+          "timeToLearn": "2-3 tuần",
+          "resources": [
+            "Construction quality standards",
+            "Inspection procedures",
+            "Testing methods"
+          ],
+          "practice": [
+            "Site inspection checklists",
+            "Quality assurance plans",
+            "Non-conformance reports"
+          ]
+        }
+      ],
+      "projects": [
+        "Complete BIM model cho commercial building",
+        "Construction management plan",
+        "Quality control system"
+      ],
+      "assessment": "Thành thạo BIM và có thể manage construction projects"
+    },
+    {
+      "phase": "Giai đoạn 4: Specialization & Leadership",
+      "duration": "2-3 tháng",
+      "skills": [
+        {
+          "skill": "Specialization (chọn 1)",
+          "timeToLearn": "6-8 tuần",
+          "options": [
+            "Seismic Design",
+            "High-rise Buildings",
+            "Bridge Engineering",
+            "Geotechnical Engineering"
+          ],
+          "practice": [
+            "Advanced analysis techniques",
+            "Specialized software",
+            "Code-specific design"
+          ]
+        },
+        {
+          "skill": "Team Leadership",
+          "timeToLearn": "2-3 tuần",
+          "resources": [
+            "Engineering management",
+            "Team coordination",
+            "Client communication"
+          ],
+          "practice": [
+            "Lead design teams",
+            "Present to clients",
+            "Coordinate với contractors"
+          ]
+        }
+      ],
+      "projects": [
+        "Complex structural system design",
+        "Lead multi-disciplinary project",
+        "Technical presentation to stakeholders"
+      ],
+      "assessment": "Senior Engineer với specialization và leadership skills"
+    }
+  ],
+  "continuousLearning": [
+    "Theo dõi new building materials và technologies",
+    "Sustainability và green building practices",
+    "Advanced analysis methods",
+    "Professional engineering license"
+  ],
+  "careerPaths": [
+    "Senior Structural Engineer",
+    "Project Manager",
+    "Design Manager",
+    "Principal Engineer",
+    "Consulting Engineer"
+  ],
+  "salaryProgression": {
+    "junior": "12-18 triệu VNĐ/tháng",
+    "mid": "25-40 triệu VNĐ/tháng",
+    "senior": "50-80 triệu VNĐ/tháng",
+    "principal": "80-150 triệu VNĐ/tháng"
+  },
+  "tips": [
+    "Master both traditional calculations và software tools",
+    "Develop strong visualization skills",
+    "Understand construction processes",
+    "Build relationships với contractors và suppliers",
+    "Stay updated với building codes changes"
+  ]
+}

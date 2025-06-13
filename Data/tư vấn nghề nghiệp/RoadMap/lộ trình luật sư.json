@@ -1,0 +1,275 @@
+{
+  "title": "Lộ trình Luật sư",
+  "description": "Lộ trình phát triển nghề nghiệp luật sư từ cử nhân luật đến luật sư cao cấp",
+  "duration": "5-7 năm",
+  "difficulty": "Rất khó",
+  "overview": "Nghề luật sư đòi hỏi kiến thức pháp lý sâu rộng và kỹ năng thực hành cao. Lộ trình này sẽ hướng dẫn bạn từ việc tốt nghiệp luật đến trở thành luật sư có kinh nghiệm với chuyên môn sâu.",
+  "phases": [
+    {
+      "phase": 1,
+      "title": "Nền tảng Pháp lý Cơ bản",
+      "duration": "12-18 tháng",
+      "description": "Xây dựng nền tảng kiến thức pháp luật và chuẩn bị thi luật sư",
+      "skills": [
+        {
+          "name": "Lý thuyết Nhà nước và Pháp luật",
+          "description": "Hiểu về hệ thống pháp luật Việt Nam và các nguyên tắc cơ bản",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Giáo trình Lý thuyết Nhà nước và Pháp luật",
+            "Hiến pháp năm 2013 và các luật cơ bản"
+          ],
+          "practiceExercises": [
+            "Phân tích cấu trúc hệ thống pháp luật",
+            "Nghiên cứu các nguyên tắc pháp lý cơ bản"
+          ]
+        },
+        {
+          "name": "Luật Dân sự",
+          "description": "Nắm vững các quy định về dân sự, hợp đồng, quyền sở hữu",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Bộ luật Dân sự 2015",
+            "Các nghị định hướng dẫn thi hành"
+          ],
+          "practiceExercises": [
+            "Phân tích các loại hợp đồng dân sự",
+            "Giải quyết tranh chấp dân sự giả định"
+          ]
+        },
+        {
+          "name": "Luật Hình sự",
+          "description": "Hiểu về tội phạm, hình phạt và trách nhiệm hình sự",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Bộ luật Hình sự 2017",
+            "Bộ luật Tố tụng Hình sự 2015"
+          ],
+          "practiceExercises": [
+            "Phân tích các tội danh thường gặp",
+            "Xây dựng chiến lược bào chữa"
+          ]
+        },
+        {
+          "name": "Chuẩn bị thi Luật sư",
+          "description": "Ôn tập và chuẩn bị cho kỳ thi chứng chỉ hành nghề luật sư",
+          "timeEstimate": "4-6 tháng",
+          "resources": [
+            "Đề thi luật sư các năm",
+            "Khóa học luyện thi luật sư"
+          ],
+          "practiceExercises": [
+            "Làm đề thi thử hàng tuần",
+            "Thực hành viết văn bản pháp lý"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Nghiên cứu Án lệ",
+          "description": "Nghiên cứu và phân tích các án lệ thực tế",
+          "duration": "2-3 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "title": "Thực hành Luật sư Cơ bản",
+      "duration": "18-24 tháng",
+      "description": "Bắt đầu hành nghề và tích lũy kinh nghiệm thực tế",
+      "skills": [
+        {
+          "name": "Tư vấn pháp lý",
+          "description": "Cung cấp tư vấn pháp lý cho cá nhân và doanh nghiệp",
+          "timeEstimate": "6-8 tháng",
+          "resources": [
+            "Kỹ năng tư vấn pháp lý",
+            "Mẫu văn bản pháp lý"
+          ],
+          "practiceExercises": [
+            "Tư vấn cho các case study",
+            "Soạn thảo văn bản pháp lý"
+          ]
+        },
+        {
+          "name": "Đại diện tại tòa án",
+          "description": "Đại diện cho khách hàng trong các phiên tòa",
+          "timeEstimate": "8-10 tháng",
+          "resources": [
+            "Kỹ năng biện hộ tại tòa",
+            "Luật Tố tụng Dân sự"
+          ],
+          "practiceExercises": [
+            "Thực hành biện hộ",
+            "Chuẩn bị hồ sơ tố tụng"
+          ]
+        },
+        {
+          "name": "Soạn thảo hợp đồng",
+          "description": "Soạn thảo và rà soát các loại hợp đồng",
+          "timeEstimate": "4-6 tháng",
+          "resources": [
+            "Mẫu hợp đồng chuẩn",
+            "Thực tiễn soạn thảo hợp đồng"
+          ],
+          "practiceExercises": [
+            "Soạn thảo hợp đồng mua bán",
+            "Rà soát hợp đồng phức tạp"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Tư vấn Pháp lý Startup",
+          "description": "Tư vấn toàn diện cho một công ty khởi nghiệp",
+          "duration": "3-4 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "title": "Luật sư Chuyên ngành",
+      "duration": "24-30 tháng",
+      "description": "Phát triển chuyên môn sâu trong các lĩnh vực cụ thể",
+      "skills": [
+        {
+          "name": "Luật Doanh nghiệp",
+          "description": "Chuyên sâu về pháp lý doanh nghiệp, M&A, IPO",
+          "timeEstimate": "8-10 tháng",
+          "resources": [
+            "Luật Doanh nghiệp 2020",
+            "Luật Chứng khoán 2019"
+          ],
+          "practiceExercises": [
+            "Tư vấn thành lập doanh nghiệp",
+            "Hỗ trợ giao dịch M&A"
+          ]
+        },
+        {
+          "name": "Luật Lao động",
+          "description": "Chuyên môn về quan hệ lao động và tranh chấp",
+          "timeEstimate": "6-8 tháng",
+          "resources": [
+            "Bộ luật Lao động 2019",
+            "Thông tư hướng dẫn"
+          ],
+          "practiceExercises": [
+            "Giải quyết tranh chấp lao động",
+            "Soạn thảo quy chế lao động"
+          ]
+        },
+        {
+          "name": "Luật Tài chính Ngân hàng",
+          "description": "Chuyên môn về pháp lý tài chính, ngân hàng",
+          "timeEstimate": "8-10 tháng",
+          "resources": [
+            "Luật Ngân hàng",
+            "Luật Bảo hiểm"
+          ],
+          "practiceExercises": [
+            "Tư vấn sản phẩm tài chính",
+            "Xử lý tranh chấp ngân hàng"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Tư vấn M&A",
+          "description": "Tham gia vào một giao dịch M&A thực tế",
+          "duration": "4-6 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "title": "Luật sư Cao cấp",
+      "duration": "12-18 tháng",
+      "description": "Trở thành luật sư dẫn dắt và có uy tín trong ngành",
+      "skills": [
+        {
+          "name": "Quản lý văn phòng luật sư",
+          "description": "Kỹ năng quản lý và phát triển văn phòng luật sư",
+          "timeEstimate": "4-6 tháng",
+          "resources": [
+            "Law Firm Management",
+            "Business Development for Lawyers"
+          ],
+          "practiceExercises": [
+            "Lập kế hoạch kinh doanh",
+            "Quản lý đội ngũ luật sư"
+          ]
+        },
+        {
+          "name": "Luật quốc tế",
+          "description": "Hiểu biết về luật quốc tế và giao dịch xuyên biên giới",
+          "timeEstimate": "6-8 tháng",
+          "resources": [
+            "International Law",
+            "Cross-border Transactions"
+          ],
+          "practiceExercises": [
+            "Tư vấn đầu tư nước ngoài",
+            "Xử lý tranh chấp quốc tế"
+          ]
+        },
+        {
+          "name": "Trọng tài thương mại",
+          "description": "Trở thành trọng tài viên giải quyết tranh chấp",
+          "timeEstimate": "2-4 tháng",
+          "resources": [
+            "Luật Trọng tài Thương mại",
+            "Khóa học Trọng tài viên"
+          ],
+          "practiceExercises": [
+            "Thực hành làm trọng tài",
+            "Soạn thảo phán quyết trọng tài"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Tư vấn Pháp lý Quốc tế",
+          "description": "Tư vấn cho giao dịch đầu tư quốc tế",
+          "duration": "6-8 tháng"
+        }
+      ]
+    }
+  ],
+  "assessmentCriteria": [
+    "Kiến thức pháp luật sâu rộng và cập nhật",
+    "Kỹ năng tư vấn và biện hộ hiệu quả",
+    "Khả năng soạn thảo văn bản pháp lý chính xác",
+    "Uy tín và mạng lưới khách hàng",
+    "Kỹ năng quản lý và phát triển kinh doanh"
+  ],
+  "careerPaths": [
+    {
+      "position": "Luật sư tập sự",
+      "salaryRange": "10-20 triệu VNĐ/tháng",
+      "description": "Mới tốt nghiệp, đang học tập và tích lũy kinh nghiệm"
+    },
+    {
+      "position": "Luật sư",
+      "salaryRange": "25-50 triệu VNĐ/tháng",
+      "description": "Có chứng chỉ hành nghề và kinh nghiệm thực tế"
+    },
+    {
+      "position": "Luật sư cao cấp/Đối tác",
+      "salaryRange": "80-200 triệu VNĐ/tháng",
+      "description": "Chuyên gia hàng đầu hoặc đối tác của văn phòng luật"
+    }
+  ],
+  "continuousLearning": [
+    "Cập nhật thường xuyên các văn bản pháp luật mới",
+    "Tham gia các khóa học chuyên sâu",
+    "Nghiên cứu án lệ và thực tiễn tư pháp",
+    "Tham gia các hội thảo chuyên ngành"
+  ],
+  "tips": [
+    "Xây dựng mạng lưới quan hệ nghề nghiệp rộng",
+    "Chuyên sâu vào 1-2 lĩnh vực pháp luật",
+    "Phát triển kỹ năng giao tiếp và thuyết phục",
+    "Duy trì đạo đức nghề nghiệp cao",
+    "Không ngừng học hỏi và cập nhật kiến thức"
+  ]
+}

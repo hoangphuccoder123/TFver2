@@ -1,0 +1,83 @@
+{
+  "position": "Bác sĩ",
+  "category": "Y tế - Chăm sóc sức khỏe",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Medical history taking và physical examination process?",
+        "Common diseases trong specialty của bạn?",
+        "Drug interactions và contraindications?",
+        "Emergency situations management?",
+        "Patient safety protocols?",
+        "Medical record documentation requirements?",
+        "Infection control measures?",
+        "Pain assessment và management?",
+        "Diagnostic imaging interpretation basics?",
+        "Laboratory results interpretation?"
+      ],
+      "behavioral": [
+        "Tại sao chọn nghề bác sĩ?",
+        "Difficult patient interaction handling?",
+        "Medical error prevention approach?",
+        "Continuing education commitment?",
+        "Team collaboration trong healthcare setting?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Evidence-based medicine application?",
+        "Clinical decision-making processes?",
+        "Quality improvement initiatives participation?",
+        "Teaching medical students/residents experience?",
+        "Research methodology và clinical trials?",
+        "Healthcare technology integration?",
+        "Patient care coordination?",
+        "Chronic disease management strategies?",
+        "Medical ethics dilemmas resolution?",
+        "Healthcare policy awareness?"
+      ],
+      "behavioral": [
+        "Leadership roles trong medical teams?",
+        "Patient advocacy examples?",
+        "Difficult diagnosis communication?",
+        "Work-life balance maintenance?",
+        "Peer review và feedback processes?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Department management và resource allocation?",
+        "Clinical pathway development?",
+        "Medical staff recruitment và development?",
+        "Healthcare innovation implementation?",
+        "Patient safety culture development?",
+        "Medical education program leadership?",
+        "Research program development?",
+        "Healthcare administration understanding?",
+        "Policy development và implementation?",
+        "Community health initiatives?"
+      ],
+      "behavioral": [
+        "Medical leadership philosophy?",
+        "Healthcare transformation initiatives?",
+        "Crisis management trong healthcare?",
+        "Mentoring junior medical staff?",
+        "Professional legacy goals?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Patient refuses necessary treatment, approach?",
+    "Medical emergency với limited resources?",
+    "Family disagreement về treatment plan?",
+    "Colleague making medical errors repeatedly?",
+    "Patient complaint về quality of care?"
+  ],
+  "clinical_scenarios": [
+    "Present case study diagnosis và treatment plan",
+    "Explain complex medical condition đến patient",
+    "Discuss end-of-life care với family",
+    "Handle medical complication during procedure",
+    "Manage multiple critically ill patients"
+  ]
+}

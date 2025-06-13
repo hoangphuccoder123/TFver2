@@ -1,0 +1,83 @@
+{
+  "position": "Nhà quản lý Sự kiện",
+  "category": "Tổ chức sự kiện",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Event planning fundamentals?",
+        "Venue selection criteria?",
+        "Budget management basics?",
+        "Vendor coordination skills?",
+        "Timeline creation và management?",
+        "Guest registration systems?",
+        "Catering arrangement procedures?",
+        "Audio-visual equipment setup?",
+        "Event marketing basics?",
+        "Risk management awareness?"
+      ],
+      "behavioral": [
+        "Tại sao chọn event management?",
+        "Multitasking under pressure?",
+        "Attention to detail importance?",
+        "Client relationship building?",
+        "Creative problem-solving approach?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Complex event coordination?",
+        "Sponsorship negotiation skills?",
+        "Event ROI measurement?",
+        "Corporate event planning?",
+        "Entertainment booking procedures?",
+        "Event technology integration?",
+        "Crisis management protocols?",
+        "Team management skills?",
+        "Contract negotiation abilities?",
+        "Post-event evaluation methods?"
+      ],
+      "behavioral": [
+        "Leadership trong high-pressure situations?",
+        "Client expectation management?",
+        "Team coordination during events?",
+        "Innovation trong event experiences?",
+        "Professional network building?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Strategic event planning?",
+        "Large-scale event management?",
+        "Event portfolio oversight?",
+        "Advanced budget management?",
+        "International event coordination?",
+        "Event business development?",
+        "Quality assurance systems?",
+        "Technology trend integration?",
+        "Industry partnership development?",
+        "Event sustainability planning?"
+      ],
+      "behavioral": [
+        "Event management leadership?",
+        "Business growth strategy development?",
+        "Industry expertise recognition?",
+        "Team development initiatives?",
+        "Innovation trong event industry?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Key vendor cancels day before event?",
+    "Weather threatens outdoor event?",
+    "VIP guest has special last-minute requirements?",
+    "Budget gets cut significantly mid-planning?",
+    "Technical difficulties during live event?"
+  ],
+  "event_challenges": [
+    "Plan multi-day conference với 500+ attendees",
+    "Coordinate outdoor music festival",
+    "Organize corporate product launch",
+    "Manage wedding với complex logistics",
+    "Create memorable fundraising gala"
+  ]
+}

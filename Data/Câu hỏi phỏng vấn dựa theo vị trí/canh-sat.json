@@ -1,0 +1,83 @@
+{
+  "position": "Cảnh sát",
+  "category": "An ninh - Trật tự",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Law enforcement procedures và protocols?",
+        "Criminal law basics?",
+        "Report writing standards?",
+        "Evidence collection techniques?",
+        "Traffic enforcement procedures?",
+        "Community policing principles?",
+        "Emergency response protocols?",
+        "Use of force guidelines?",
+        "Court testimony preparation?",
+        "Radio communication procedures?"
+      ],
+      "behavioral": [
+        "Tại sao chọn law enforcement career?",
+        "High-stress situations management?",
+        "Community relationship building?",
+        "Ethical decision making?",
+        "Physical fitness maintenance?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Criminal investigation methods?",
+        "Interview và interrogation techniques?",
+        "Crime scene management?",
+        "Surveillance operations?",
+        "Gang activity assessment?",
+        "Domestic violence response?",
+        "Drug enforcement procedures?",
+        "Youth crime prevention?",
+        "Inter-agency cooperation?",
+        "Technology usage trong policing?"
+      ],
+      "behavioral": [
+        "Leadership trong crisis situations?",
+        "Community outreach initiatives?",
+        "Officer safety prioritization?",
+        "Professional development commitment?",
+        "Conflict resolution skills?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Department management operations?",
+        "Strategic planning cho law enforcement?",
+        "Budget management cho police operations?",
+        "Policy development và implementation?",
+        "Training program development?",
+        "Crime statistics analysis?",
+        "Public relations management?",
+        "Emergency preparedness planning?",
+        "Inter-jurisdictional coordination?",
+        "Technology integration strategies?"
+      ],
+      "behavioral": [
+        "Law enforcement leadership philosophy?",
+        "Community trust building initiatives?",
+        "Officer development và mentoring?",
+        "Public accountability commitment?",
+        "Reform implementation experience?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Domestic violence call với armed suspect?",
+    "Community protests management?",
+    "Officer misconduct allegation investigation?",
+    "High-speed pursuit decision making?",
+    "Mental health crisis intervention?"
+  ],
+  "situational_judgement": [
+    "De-escalate tense confrontation",
+    "Handle traffic accident investigation",
+    "Respond to school emergency",
+    "Coordinate multi-agency operation",
+    "Manage community relations crisis"
+  ]
+}

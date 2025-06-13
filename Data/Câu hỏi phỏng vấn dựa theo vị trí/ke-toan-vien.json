@@ -1,0 +1,83 @@
+{
+  "position": "Kế toán viên",
+  "category": "Tài chính - Kế toán",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Nguyên tắc kế toán cơ bản (Balance Sheet, P&L)?",
+        "Tài sản, Nợ phải trả, Vốn chủ sở hữu là gì?",
+        "Chu kỳ kế toán bao gồm những bước nào?",
+        "Depreciation methods nào bạn biết?",
+        "Accounts Receivable và Accounts Payable khác biệt?",
+        "Cash flow statement importance?",
+        "Internal controls trong accounting process?",
+        "Tax compliance requirements cơ bản?",
+        "Accrual vs Cash basis accounting?",
+        "Cost accounting principles?"
+      ],
+      "behavioral": [
+        "Tại sao chọn nghề kế toán?",
+        "Xử lý khi phát hiện sai sót trong báo cáo?",
+        "Accuracy và deadline pressure cân bằng thế nào?",
+        "Experience với accounting software?",
+        "Team work trong department ra sao?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Financial ratio analysis và interpretation?",
+        "Budget preparation và variance analysis?",
+        "Management accounting vs Financial accounting?",
+        "Standard costing và variance analysis?",
+        "Capital budgeting techniques?",
+        "Risk assessment trong financial reporting?",
+        "ERP systems integration với accounting?",
+        "Month-end closing procedures optimization?",
+        "Audit preparation và support?",
+        "Financial forecasting methods?"
+      ],
+      "behavioral": [
+        "Junior staff training và development?",
+        "Process improvement initiatives experience?",
+        "Cross-functional collaboration với other departments?",
+        "Client relationship management (cho accounting firms)?",
+        "Ethical dilemmas handling trong profession?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "IFRS/GAAP compliance và implementation?",
+        "Financial reporting automation strategies?",
+        "Advanced analytics trong financial planning?",
+        "Merger & acquisition accounting treatments?",
+        "Treasury management best practices?",
+        "Performance measurement systems design?",
+        "Regulatory reporting requirements management?",
+        "Financial systems architecture planning?",
+        "Business partnership strategic advice?",
+        "Digital transformation trong finance function?"
+      ],
+      "behavioral": [
+        "Finance team leadership approach?",
+        "C-level executive reporting và communication?",
+        "Change management trong finance processes?",
+        "Strategic planning participation?",
+        "Professional development commitment?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Month-end closing bị delay, action plan?",
+    "Auditor yêu cầu additional documentation, response?",
+    "System migration project participation approach?",
+    "Cash flow shortage identification và recommendation?",
+    "Compliance issue discovery và resolution process?"
+  ],
+  "technical_challenges": [
+    "Analyze financial performance của company",
+    "Prepare budget variance report với recommendations",
+    "Design internal control procedures",
+    "Calculate cost of capital cho investment decision",
+    "Develop KPI dashboard cho management reporting"
+  ]
+}

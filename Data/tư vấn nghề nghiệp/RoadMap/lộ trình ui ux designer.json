@@ -1,0 +1,251 @@
+{
+  "title": "Lộ trình phát triển nghề nghiệp - UI/UX Designer", 
+  "duration": "12-15 tháng",
+  "difficulty": "Trung bình",
+  "description": "Lộ trình toàn diện để trở thành UI/UX Designer chuyên nghiệp",
+  "phases": [
+    {
+      "phase": "Giai đoạn 1: Nền tảng thiết kế",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Design Principles & Theory",
+          "timeToLearn": "3-4 tuần", 
+          "resources": [
+            "Design of Everyday Things (sách)",
+            "Color theory fundamentals",
+            "Typography basics"
+          ],
+          "practice": [
+            "Phân tích thiết kế của các app/website nổi tiếng",
+            "Tạo mood boards và style guides",
+            "Thực hành về color palettes"
+          ]
+        },
+        {
+          "skill": "Figma/Sketch",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "Figma Academy",
+            "Sketch documentation",
+            "Design system tutorials"
+          ],
+          "practice": [
+            "Tạo wireframes cho mobile app",
+            "Design components library",
+            "Prototype interactive flows"
+          ]
+        },
+        {
+          "skill": "User Research Methods",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "User interview techniques",
+            "Survey design principles",
+            "Usability testing methods"
+          ],
+          "practice": [
+            "Conduct user interviews",
+            "Create user personas",
+            "Design usability test plans"
+          ]
+        }
+      ],
+      "projects": [
+        "Redesign một mobile app interface",
+        "Landing page design cho startup",
+        "User research report"
+      ],
+      "assessment": "Có thể tạo basic UI designs và hiểu user research"
+    },
+    {
+      "phase": "Giai đoạn 2: UX Research & Strategy",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Information Architecture",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "IA principles và best practices",
+            "Card sorting techniques", 
+            "Site mapping methods"
+          ],
+          "practice": [
+            "Create site maps cho complex websites",
+            "User flow diagrams",
+            "Information hierarchy exercises"
+          ]
+        },
+        {
+          "skill": "User Experience Strategy",
+          "timeToLearn": "4-5 tuần",
+          "resources": [
+            "Jobs-to-be-Done framework",
+            "User journey mapping",
+            "Design thinking process"
+          ],
+          "practice": [
+            "Map complete user journeys",
+            "Identify pain points và opportunities",
+            "Design strategy presentations"
+          ]
+        },
+        {
+          "skill": "Usability Testing",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "Usability testing protocols",
+            "A/B testing principles",
+            "Analytics interpretation"
+          ],
+          "practice": [
+            "Conduct moderated usability tests",
+            "Analyze user behavior data",
+            "Create testing reports"
+          ]
+        }
+      ],
+      "projects": [
+        "Complete UX audit của existing product",
+        "E-commerce checkout flow optimization",
+        "Mobile app user journey redesign"
+      ],
+      "assessment": "Thành thạo UX research và có thể đưa ra strategic recommendations"
+    },
+    {
+      "phase": "Giai đoạn 3: Advanced UI Design",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Advanced Visual Design",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "Advanced typography techniques",
+            "Grid systems và layouts",
+            "Visual hierarchy principles"
+          ],
+          "practice": [
+            "Create sophisticated design systems",
+            "Advanced animation principles",
+            "Responsive design patterns"
+          ]
+        },
+        {
+          "skill": "Interaction Design",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "Micro-interactions design",
+            "Animation principles",
+            "Transition design"
+          ],
+          "practice": [
+            "Design complex interactions",
+            "Create animated prototypes",
+            "Motion design exercises"
+          ]
+        },
+        {
+          "skill": "Design Systems",
+          "timeToLearn": "4-5 tuần",
+          "resources": [
+            "Atomic design methodology",
+            "Component-based design",
+            "Design tokens"
+          ],
+          "practice": [
+            "Build comprehensive design system",
+            "Create design guidelines",
+            "Maintain component library"
+          ]
+        }
+      ],
+      "projects": [
+        "Enterprise design system",
+        "Complex dashboard interface",
+        "Interactive prototype với advanced animations"
+      ],
+      "assessment": "Có thể create sophisticated UI designs và maintain design systems"
+    },
+    {
+      "phase": "Giai đoạn 4: Leadership & Specialization",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Design Leadership",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "Design team management",
+            "Stakeholder communication",
+            "Design process optimization"
+          ],
+          "practice": [
+            "Lead design reviews",
+            "Mentor junior designers",
+            "Present design decisions to executives"
+          ]
+        },
+        {
+          "skill": "Business & Strategy",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "Design ROI measurement",
+            "Product strategy basics",
+            "Market research methods"
+          ],
+          "practice": [
+            "Align design với business goals",
+            "Calculate design impact",
+            "Competitive analysis"
+          ]
+        },
+        {
+          "skill": "Specialization (chọn 1)",
+          "timeToLearn": "6-8 tuần",
+          "options": [
+            "Service Design",
+            "Voice UI Design", 
+            "AR/VR Design",
+            "Design Research"
+          ],
+          "practice": [
+            "Deep dive vào specialized area",
+            "Expert-level projects",
+            "Industry-specific knowledge"
+          ]
+        }
+      ],
+      "projects": [
+        "Lead design cho major product feature",
+        "Design strategy cho new product line", 
+        "Specialized design innovation project"
+      ],
+      "assessment": "Senior Designer với leadership skills và specialization"
+    }
+  ],
+  "continuousLearning": [
+    "Theo dõi design trends và emerging technologies",
+    "Participate trong design communities",
+    "Attend design conferences và workshops",
+    "Read design blogs và case studies"
+  ],
+  "careerPaths": [
+    "Senior UI/UX Designer",
+    "Design Lead",
+    "Product Designer",
+    "Design Manager",
+    "Head of Design"
+  ],
+  "salaryProgression": {
+    "junior": "10-18 triệu VNĐ/tháng",
+    "mid": "18-32 triệu VNĐ/tháng",
+    "senior": "32-55 triệu VNĐ/tháng", 
+    "lead": "55-90 triệu VNĐ/tháng"
+  },
+  "tips": [
+    "Build strong portfolio với case studies chi tiết",
+    "Practice presenting design decisions",
+    "Stay close to users và their needs",
+    "Learn basic frontend development",
+    "Develop business acumen alongside design skills"
+  ]
+}

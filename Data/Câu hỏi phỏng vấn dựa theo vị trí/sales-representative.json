@@ -1,0 +1,83 @@
+{
+  "position": "Sales Representative",
+  "category": "Bán hàng - Kinh doanh",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Sales process steps từ prospecting đến closing?",
+        "Lead qualification techniques?",
+        "Product knowledge importance?",
+        "CRM systems usage?",
+        "Cold calling best practices?",
+        "Objection handling strategies?",
+        "Sales presentation skills?",
+        "Follow-up procedures?",
+        "Territory management basics?",
+        "Sales metrics tracking?"
+      ],
+      "behavioral": [
+        "Tại sao chọn sales career?",
+        "Rejection handling approach?",
+        "Motivation maintenance strategies?",
+        "Customer relationship building?",
+        "Goal setting và achievement?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Consultative selling techniques?",
+        "Solution selling methodology?",
+        "Account management strategies?",
+        "Sales forecasting accuracy?",
+        "Negotiation skills advanced?",
+        "Cross-selling và upselling?",
+        "Customer retention programs?",
+        "Sales team collaboration?",
+        "Digital selling tools?",
+        "Market analysis capabilities?"
+      ],
+      "behavioral": [
+        "Complex sales cycles management?",
+        "Key account relationship development?",
+        "Team collaboration trong sales organization?",
+        "Customer success partnership?",
+        "Professional development initiatives?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Sales strategy development?",
+        "Territory planning và optimization?",
+        "Sales team leadership?",
+        "Revenue forecasting accuracy?",
+        "Partnership development?",
+        "Market expansion planning?",
+        "Sales process optimization?",
+        "Customer analytics utilization?",
+        "Sales technology integration?",
+        "Performance management systems?"
+      ],
+      "behavioral": [
+        "Sales team leadership approach?",
+        "Revenue growth strategy development?",
+        "Cross-functional collaboration?",
+        "Customer advocacy programs?",
+        "Industry expertise development?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Customer budget suddenly gets cut, response?",
+    "Competitor offers lower price, competitive strategy?",
+    "Customer unhappy with product performance?",
+    "Missing quarterly quota, recovery plan?",
+    "Key customer considering switching vendors?"
+  ],
+  "sales_scenarios": [
+    "Present solution to skeptical prospect",
+    "Negotiate contract terms effectively",
+    "Handle price objection professionally",
+    "Recover lost customer relationship",
+    "Expand business với existing account"
+  ]
+}

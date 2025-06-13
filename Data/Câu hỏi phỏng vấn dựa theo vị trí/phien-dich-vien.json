@@ -1,0 +1,83 @@
+{
+  "position": "Phiên dịch viên",
+  "category": "Ngôn ngữ - Dịch thuật",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Language proficiency assessment (source và target)?",
+        "Translation techniques và methodologies?",
+        "Cultural adaptation trong translation?",
+        "CAT tools (Computer-Assisted Translation)?",
+        "Terminology management?",
+        "Proofreading và editing skills?",
+        "Research skills cho specialized terms?",
+        "Time management cho translation projects?",
+        "Quality assurance procedures?",
+        "Client communication protocols?"
+      ],
+      "behavioral": [
+        "Tại sao chọn translation career?",
+        "Handling challenging translation passages?",
+        "Cultural sensitivity awareness?",
+        "Continuous learning approach?",
+        "Deadline pressure management?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Specialized field expertise (legal, medical, technical)?",
+        "Simultaneous interpretation skills?",
+        "Advanced CAT tools proficiency?",
+        "Project management cho large translations?",
+        "Quality control systems?",
+        "Client relationship management?",
+        "Translation memory development?",
+        "Localization processes?",
+        "Confidentiality protocols?",
+        "Industry-specific terminology?"
+      ],
+      "behavioral": [
+        "Complex project coordination?",
+        "Team collaboration với other translators?",
+        "Client expectation management?",
+        "Professional development initiatives?",
+        "Cultural mediation skills?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Translation agency management?",
+        "Team coordination và workflow optimization?",
+        "Advanced localization strategies?",
+        "Technology integration trong translation workflow?",
+        "Quality management systems?",
+        "Business development activities?",
+        "Training program development?",
+        "Industry standards compliance?",
+        "Multi-language project coordination?",
+        "Translation automation evaluation?"
+      ],
+      "behavioral": [
+        "Translation team leadership?",
+        "Business strategy development?",
+        "Industry networking importance?",
+        "Professional standards advocacy?",
+        "Innovation trong translation practices?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Technical document với highly specialized terminology?",
+    "Client requests rush translation với tight deadline?",
+    "Cultural reference doesn't translate directly?",
+    "Client disagrees với translation choices?",
+    "Source text contains errors or ambiguities?"
+  ],
+  "translation_challenges": [
+    "Translate legal contract maintaining precision",
+    "Adapt marketing content for different culture",
+    "Handle simultaneous interpretation session",
+    "Localize software interface effectively",
+    "Translate medical documentation accurately"
+  ]
+}

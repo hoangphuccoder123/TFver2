@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Công nghiệp - Sản xuất",
+  "description": "Các nghề nghiệp trong lĩnh vực công nghiệp chế tạo và sản xuất",
+  "careers": [
+    {
+      "name": "Kỹ sư Chất lượng",
+      "description": "Kiểm soát và đảm bảo chất lượng sản phẩm trong quy trình sản xuất",
+      "hollandType": ["Investigative", "Conventional"],
+      "skills": [
+        "Kiểm soát chất lượng",
+        "Sử dụng thiết bị đo lường",
+        "ISO 9001, Six Sigma",
+        "Phân tích thống kê",
+        "Quy trình sản xuất"
+      ],
+      "salary": {
+        "entry": "12-18 triệu VNĐ/tháng",
+        "mid": "22-38 triệu VNĐ/tháng",
+        "senior": "45-75 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Kỹ thuật (các chuyên ngành)",
+      "careerPath": "QC Inspector → QA Engineer → QA Manager → Quality Director",
+      "marketDemand": "Cao",
+      "growthRate": "7-11%/năm",
+      "companies": ["Samsung", "Toyota", "Honda", "Panasonic"]
+    },
+    {
+      "name": "Kỹ sư An toàn Lao động",
+      "description": "Đảm bảo an toàn và sức khỏe nghề nghiệp trong môi trường sản xuất",
+      "hollandType": ["Investigative", "Social"],
+      "skills": [
+        "Đánh giá rủi ro an toàn",
+        "Pháp luật an toàn lao động",
+        "Huấn luyện an toàn",
+        "Điều tra tai nạn",
+        "Thiết kế hệ thống an toàn"
+      ],
+      "salary": {
+        "entry": "10-16 triệu VNĐ/tháng",
+        "mid": "20-32 triệu VNĐ/tháng",
+        "senior": "38-65 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân An toàn lao động hoặc Kỹ thuật",
+      "careerPath": "Chuyên viên ATLĐ → Kỹ sư ATLĐ → Trưởng phòng → Giám đốc HSE",
+      "marketDemand": "Cao",
+      "growthRate": "8-12%/năm",
+      "companies": ["Formosa", "Vinfast", "Thái Nguyên Iron & Steel", "Hoa Phat"]
+    },
+    {
+      "name": "Kỹ sư Môi trường",
+      "description": "Quản lý và xử lý các vấn đề môi trường trong sản xuất công nghiệp",
+      "hollandType": ["Investigative", "Realistic"],
+      "skills": [
+        "Xử lý nước thải",
+        "Kiểm soát ô nhiễm không khí",
+        "Đánh giá tác động môi trường",
+        "Pháp luật môi trường",
+        "Công nghệ xanh"
+      ],
+      "salary": {
+        "entry": "11-17 triệu VNĐ/tháng",
+        "mid": "21-35 triệu VNĐ/tháng",
+        "senior": "40-70 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Môi trường hoặc Hóa học",
+      "careerPath": "Chuyên viên môi trường → Kỹ sư → Trưởng phòng → Giám đốc môi trường",
+      "marketDemand": "Cao",
+      "growthRate": "9-13%/năm",
+      "companies": ["VEOLIA", "Sembcorp", "Công ty Môi trường Đô thị", "Green Dragon Water"]
+    }
+  ]
+}

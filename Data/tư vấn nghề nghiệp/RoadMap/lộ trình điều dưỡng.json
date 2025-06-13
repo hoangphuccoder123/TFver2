@@ -1,0 +1,301 @@
+{
+  "title": "Lộ trình Điều dưỡng",
+  "description": "Lộ trình phát triển nghề nghiệp điều dưỡng từ cơ bản đến chuyên gia",
+  "duration": "3-5 năm",
+  "difficulty": "Trung bình khó",
+  "overview": "Nghề điều dưỡng đòi hỏi kiến thức y học vững vàng, kỹ năng chăm sóc bệnh nhân và tinh thần tr책nhiệm cao. Lộ trình này sẽ giúp bạn phát triển từ điều dưỡng viên mới vào nghề đến điều dưỡng trưởng có chuyên môn cao.",
+  "phases": [
+    {
+      "phase": 1,
+      "title": "Nền tảng Điều dưỡng Cơ bản",
+      "duration": "6-12 tháng",
+      "description": "Xây dựng nền tảng kiến thức y học và kỹ năng điều dưỡng cơ bản",
+      "skills": [
+        {
+          "name": "Giải phẫu sinh lý",
+          "description": "Hiểu về cấu trúc và chức năng cơ thể người",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Sách Giải phẫu sinh lý",
+            "Atlas giải phẫu người"
+          ],
+          "practiceExercises": [
+            "Học thuộc các hệ cơ quan",
+            "Thực hành trên mô hình giải phẫu"
+          ]
+        },
+        {
+          "name": "Kỹ thuật điều dưỡng cơ bản",
+          "description": "Nắm vững các thủ thuật điều dưỡng căn bản",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Giáo trình Kỹ thuật điều dưỡng",
+            "Video hướng dẫn thực hành"
+          ],
+          "practiceExercises": [
+            "Thực hành đo sinh hiệu",
+            "Kỹ thuật tiêm thuốc"
+          ]
+        },
+        {
+          "name": "Kiểm soát nhiễm khuẩn",
+          "description": "Hiểu về nguyên tắc vô khuẩn và kiểm soát nhiễm khuẩn",
+          "timeEstimate": "1-2 tháng",
+          "resources": [
+            "Hướng dẫn kiểm soát nhiễm khuẩn",
+            "Quy trình vô khuẩn bệnh viện"
+          ],
+          "practiceExercises": [
+            "Thực hành rửa tay đúng cách",
+            "Sử dụng thiết bị bảo hộ"
+          ]
+        },
+        {
+          "name": "Giao tiếp với bệnh nhân",
+          "description": "Kỹ năng giao tiếp hiệu quả với bệnh nhân và gia đình",
+          "timeEstimate": "1-2 tháng",
+          "resources": [
+            "Sách Giao tiếp trong y tế",
+            "Kỹ năng tư vấn sức khỏe"
+          ],
+          "practiceExercises": [
+            "Thực hành tư vấn bệnh nhân",
+            "Xử lý tình huống khó khăn"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Chăm sóc Bệnh nhân Cơ bản",
+          "description": "Thực hành chăm sóc một bệnh nhân từ nhập viện đến xuất viện",
+          "duration": "2-3 tuần"
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "title": "Điều dưỡng Thực hành",
+      "duration": "12-18 tháng",
+      "description": "Phát triển kỹ năng chăm sóc bệnh nhân và làm việc trong môi trường lâm sàng",
+      "skills": [
+        {
+          "name": "Chăm sóc bệnh nhân nội khoa",
+          "description": "Chăm sóc bệnh nhân các bệnh nội khoa thường gặp",
+          "timeEstimate": "4-5 tháng",
+          "resources": [
+            "Sách Điều dưỡng nội khoa",
+            "Quy trình chăm sóc chuẩn"
+          ],
+          "practiceExercises": [
+            "Chăm sóc bệnh nhân tiểu đường",
+            "Theo dõi bệnh nhân cao huyết áp"
+          ]
+        },
+        {
+          "name": "Chăm sóc bệnh nhân ngoại khoa",
+          "description": "Chăm sóc bệnh nhân trước và sau phẫu thuật",
+          "timeEstimate": "4-5 tháng",
+          "resources": [
+            "Điều dưỡng ngoại khoa",
+            "Chăm sóc bệnh nhân phẫu thuật"
+          ],
+          "practiceExercises": [
+            "Chuẩn bị bệnh nhân phẫu thuật",
+            "Chăm sóc hậu phẫu"
+          ]
+        },
+        {
+          "name": "Cấp cứu và hồi sức",
+          "description": "Kỹ năng cấp cứu và chăm sóc bệnh nhân nguy kịch",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "BLS, ACLS Training",
+            "Kỹ thuật cấp cứu"
+          ],
+          "practiceExercises": [
+            "Thực hành CPR",
+            "Xử lý tình huống cấp cứu"
+          ]
+        },
+        {
+          "name": "Quản lý thuốc",
+          "description": "Quản lý và sử dụng thuốc an toàn",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Dược lý học ứng dụng",
+            "Hệ thống quản lý thuốc"
+          ],
+          "practiceExercises": [
+            "Tính toán liều thuốc",
+            "Theo dõi tác dụng phụ"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Cải thiện Chất lượng Chăm sóc",
+          "description": "Tham gia dự án cải thiện quy trình chăm sóc bệnh nhân",
+          "duration": "2-3 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "title": "Điều dưỡng Chuyên khoa",
+      "duration": "12-18 tháng",
+      "description": "Phát triển chuyên môn sâu trong các lĩnh vực chuyên khoa",
+      "skills": [
+        {
+          "name": "Điều dưỡng chuyên khoa",
+          "description": "Chuyên sâu trong một lĩnh vực như ICU, Emergency, Surgery",
+          "timeEstimate": "6-8 tháng",
+          "resources": [
+            "Chứng chỉ chuyên khoa điều dưỡng",
+            "Tài liệu chuyên ngành"
+          ],
+          "practiceExercises": [
+            "Chăm sóc bệnh nhân chuyên khoa",
+            "Sử dụng thiết bị chuyên dụng"
+          ]
+        },
+        {
+          "name": "Giáo dục sức khỏe",
+          "description": "Kỹ năng giáo dục và tư vấn sức khỏe cho bệnh nhân",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Phương pháp giáo dục sức khỏe",
+            "Tài liệu tuyên truyền"
+          ],
+          "practiceExercises": [
+            "Lập kế hoạch giáo dục",
+            "Tổ chức lớp học sức khỏe"
+          ]
+        },
+        {
+          "name": "Nghiên cứu điều dưỡng",
+          "description": "Thực hiện nghiên cứu để cải thiện thực hành điều dưỡng",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Phương pháp nghiên cứu y học",
+            "Evidence-based Practice"
+          ],
+          "practiceExercises": [
+            "Đọc và phân tích bài báo khoa học",
+            "Thực hiện nghiên cứu nhỏ"
+          ]
+        },
+        {
+          "name": "Hướng dẫn sinh viên",
+          "description": "Kỹ năng hướng dẫn và mentoring sinh viên điều dưỡng",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Phương pháp giảng dạy lâm sàng",
+            "Kỹ năng mentoring"
+          ],
+          "practiceExercises": [
+            "Hướng dẫn thực hành lâm sàng",
+            "Đánh giá kỹ năng sinh viên"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Nghiên cứu Điều dưỡng",
+          "description": "Thực hiện một nghiên cứu về cải thiện chăm sóc bệnh nhân",
+          "duration": "4-6 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "title": "Lãnh đạo Điều dưỡng",
+      "duration": "6-12 tháng",
+      "description": "Phát triển kỹ năng lãnh đạo và quản lý trong điều dưỡng",
+      "skills": [
+        {
+          "name": "Quản lý điều dưỡng",
+          "description": "Kỹ năng quản lý đội ngũ và tổ chức điều dưỡng",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Quản lý dịch vụ điều dưỡng",
+            "Leadership in Healthcare"
+          ],
+          "practiceExercises": [
+            "Lập kế hoạch nhân sự",
+            "Quản lý chất lượng dịch vụ"
+          ]
+        },
+        {
+          "name": "Phát triển nghề nghiệp",
+          "description": "Phát triển nghề nghiệp cho điều dưỡng viên",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Professional Development",
+            "Career Planning"
+          ],
+          "practiceExercises": [
+            "Thiết kế chương trình đào tạo",
+            "Đánh giá năng lực nhân viên"
+          ]
+        },
+        {
+          "name": "Chính sách y tế",
+          "description": "Hiểu biết về chính sách và quản lý y tế",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Chính sách y tế Việt Nam",
+            "Healthcare Management"
+          ],
+          "practiceExercises": [
+            "Phân tích tác động chính sách",
+            "Đề xuất cải tiến dịch vụ"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Cải thiện Hệ thống Điều dưỡng",
+          "description": "Dẫn dắt dự án cải thiện toàn diện hệ thống điều dưỡng",
+          "duration": "6-8 tháng"
+        }
+      ]
+    }
+  ],
+  "assessmentCriteria": [
+    "Kiến thức y học và kỹ thuật điều dưỡng vững vàng",
+    "Kỹ năng chăm sóc bệnh nhân hiệu quả",
+    "Khả năng làm việc trong môi trường áp lực cao",
+    "Kỹ năng giao tiếp và làm việc nhóm",
+    "Tinh thần trách nhiệm và đạo đức nghề nghiệp"
+  ],
+  "careerPaths": [
+    {
+      "position": "Điều dưỡng viên",
+      "salaryRange": "8-15 triệu VNĐ/tháng",
+      "description": "Thực hiện các công việc điều dưỡng cơ bản"
+    },
+    {
+      "position": "Điều dưỡng trưởng khoa",
+      "salaryRange": "15-25 triệu VNĐ/tháng",
+      "description": "Quản lý đội ngũ điều dưỡng một khoa"
+    },
+    {
+      "position": "Trưởng phòng Điều dưỡng",
+      "salaryRange": "25-40 triệu VNĐ/tháng",
+      "description": "Quản lý toàn bộ hệ thống điều dưỡng bệnh viện"
+    }
+  ],
+  "continuousLearning": [
+    "Cập nhật kiến thức y học và công nghệ mới",
+    "Tham gia các khóa đào tạo chuyên sâu",
+    "Học các kỹ thuật điều dưỡng tiên tiến",
+    "Phát triển kỹ năng nghiên cứu và EBP"
+  ],
+  "tips": [
+    "Luôn đặt an toàn bệnh nhân lên hàng đầu",
+    "Phát triển kỹ năng giao tiếp và empathy",
+    "Học hỏi không ngừng và cập nhật kiến thức",
+    "Xây dựng mối quan hệ tốt với đồng nghiệp",
+    "Tham gia các tổ chức nghề nghiệp"
+  ]
+}

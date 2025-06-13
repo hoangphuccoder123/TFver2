@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Vận tải - Logistics",
+  "description": "Các nghề nghiệp trong lĩnh vực vận tải, kho bãi và chuỗi cung ứng",
+  "careers": [
+    {
+      "name": "Chuyên viên Logistics",
+      "description": "Quản lý chuỗi cung ứng, vận chuyển và kho bãi hàng hóa",
+      "hollandType": ["Conventional", "Enterprising"],
+      "skills": [
+        "Quản lý chuỗi cung ứng",
+        "Kế hoạch vận chuyển",
+        "Sử dụng WMS, TMS",
+        "Tối ưu hóa chi phí",
+        "Quản lý nhà cung cấp"
+      ],
+      "salary": {
+        "entry": "9-15 triệu VNĐ/tháng",
+        "mid": "18-30 triệu VNĐ/tháng",
+        "senior": "35-60 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Logistics, Quản trị kinh doanh",
+      "careerPath": "Nhân viên logistics → Chuyên viên → Trưởng phòng → Giám đốc chuỗi cung ứng",
+      "marketDemand": "Rất cao",
+      "growthRate": "12-18%/năm",
+      "companies": ["Lazada", "Shopee", "Grab", "Giao Hàng Nhanh"]
+    },
+    {
+      "name": "Lái xe chuyên nghiệp",
+      "description": "Điều khiển các loại xe vận tải hàng hóa và hành khách",
+      "hollandType": ["Realistic", "Conventional"],
+      "skills": [
+        "Lái xe an toàn",
+        "Kiến thức luật giao thông",
+        "Bảo dưỡng xe cơ bản",
+        "Định hướng và đọc bản đồ",
+        "Giao tiếp với khách hàng"
+      ],
+      "salary": {
+        "entry": "8-12 triệu VNĐ/tháng",
+        "mid": "13-20 triệu VNĐ/tháng",
+        "senior": "22-35 triệu VNĐ/tháng"
+      },
+      "education": "THPT + Bằng lái xe hạng phù hợp",
+      "careerPath": "Lái xe → Lái xe chính → Đội trưởng → Quản lý đội xe",
+      "marketDemand": "Rất cao",
+      "growthRate": "8-12%/năm",
+      "companies": ["Grab", "Be", "Mai Linh", "Vinasun"]
+    },
+    {
+      "name": "Quản lý Kho bãi",
+      "description": "Quản lý hoạt động nhập xuất kho, tồn kho và bảo quản hàng hóa",
+      "hollandType": ["Conventional", "Enterprising"],
+      "skills": [
+        "Quản lý tồn kho",
+        "Sử dụng WMS",
+        "Tối ưu hóa không gian kho",
+        "Kiểm soát chất lượng",
+        "Lãnh đạo nhóm"
+      ],
+      "salary": {
+        "entry": "10-16 triệu VNĐ/tháng",
+        "mid": "20-32 triệu VNĐ/tháng",
+        "senior": "38-65 triệu VNĐ/tháng"
+      },
+      "education": "Cao đẳng/Đại học Logistics hoặc Quản trị",
+      "careerPath": "Nhân viên kho → Quản lý ca → Quản lý kho → Giám đốc logistics",
+      "marketDemand": "Cao",
+      "growthRate": "10-15%/năm",
+      "companies": ["VinCommerce", "Aeon", "Saigon Co.op", "Big C"]
+    }
+  ]
+}

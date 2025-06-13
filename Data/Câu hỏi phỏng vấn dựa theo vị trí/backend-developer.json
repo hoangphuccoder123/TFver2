@@ -1,0 +1,83 @@
+{
+  "position": "Backend Developer",
+  "category": "Công nghệ thông tin",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "API là gì và RESTful API hoạt động như thế nào?",
+        "Database và SQL cơ bản?",
+        "HTTP methods (GET, POST, PUT, DELETE) dùng khi nào?",
+        "MVC pattern là gì?",
+        "Framework nào bạn đã sử dụng (Node.js, Django, Spring)?",
+        "Authentication và Authorization khác nhau như thế nào?",
+        "JSON và XML khác biệt gì?",
+        "Version control (Git) sử dụng ra sao?",
+        "Environment variables để làm gì?",
+        "Logging trong application quan trọng như thế nào?"
+      ],
+      "behavioral": [
+        "Tại sao chọn Backend development?",
+        "Thách thức lớn nhất khi học backend?",
+        "Bạn debug lỗi như thế nào?",
+        "Kinh nghiệm làm việc với database?",
+        "Dự án backend nào bạn tự hào nhất?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Database indexing và query optimization?",
+        "Caching strategies (Redis, Memcached)?",
+        "Message queues và asynchronous processing?",
+        "Microservices vs Monolithic architecture?",
+        "Docker và containerization benefits?",
+        "API rate limiting và security measures?",
+        "Database transactions và ACID properties?",
+        "Load balancing và horizontal scaling?",
+        "Event-driven architecture patterns?",
+        "Testing strategies (Unit, Integration, E2E)?"
+      ],
+      "behavioral": [
+        "Code review process và best practices?",
+        "Production incident handling experience?",
+        "Team collaboration với Frontend developers?",
+        "Technical documentation viết như thế nào?",
+        "Performance optimization approach?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "System design cho high-traffic applications?",
+        "Database sharding và replication strategies?",
+        "Event sourcing và CQRS patterns?",
+        "Service mesh và distributed systems?",
+        "Security best practices (OWASP Top 10)?",
+        "Monitoring và alerting systems setup?",
+        "CI/CD pipeline design cho backend services?",
+        "Data consistency trong distributed systems?",
+        "Performance bottlenecks identification?",
+        "Architecture decision records (ADRs)?"
+      ],
+      "behavioral": [
+        "Technical leadership và architecture decisions?",
+        "Cross-functional team collaboration?",
+        "Mentoring junior developers approach?",
+        "Technology evaluation và adoption process?",
+        "Scalability planning và capacity management?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Database server bị crash, recovery plan của bạn?",
+    "API response time chậm, troubleshooting steps?",
+    "Security vulnerability được phát hiện, action plan?",
+    "Third-party service down, fallback strategy?",
+    "Memory leak trong production, debugging approach?"
+  ],
+  "coding_challenges": [
+    "Design URL shortener service (như bit.ly)",
+    "Implement rate limiting middleware",
+    "Build caching layer cho database queries",
+    "Create pagination system cho large datasets",
+    "Design authentication system với JWT"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Làm đẹp - Thẩm mỹ",
+  "description": "Các nghề nghiệp trong lĩnh vực làm đẹp, chăm sóc sắc đẹp và thẩm mỹ",
+  "careers": [
+    {
+      "name": "Chuyên viên Trang điểm",
+      "description": "Trang điểm cho khách hàng trong các dịp đặc biệt và chụp ảnh",
+      "hollandType": ["Artistic", "Social"],
+      "skills": [
+        "Kỹ thuật trang điểm",
+        "Phối màu và tạo kiểu",
+        "Sử dụng mỹ phẩm chuyên nghiệp",
+        "Hiểu biết về xu hướng làm đẹp",
+        "Giao tiếp với khách hàng"
+      ],
+      "salary": {
+        "entry": "8-15 triệu VNĐ/tháng",
+        "mid": "18-30 triệu VNĐ/tháng", 
+        "senior": "35-60 triệu VNĐ/tháng"
+      },
+      "education": "Chứng chỉ trang điểm chuyên nghiệp",
+      "careerPath": "Makeup Artist → Senior MUA → Makeup Instructor → Salon Owner",
+      "marketDemand": "Cao",
+      "growthRate": "10-15%/năm",
+      "companies": ["Sephora", "Guardian", "Beauty Box", "Hasaki"]
+    },
+    {
+      "name": "Hair Stylist",
+      "description": "Cắt, nhuộm, tạo kiểu tóc và tư vấn kiểu tóc phù hợp cho khách hàng",
+      "hollandType": ["Artistic", "Social"],
+      "skills": [
+        "Kỹ thuật cắt tóc",
+        "Nhuộm và uốn tóc",
+        "Tạo kiểu tóc",
+        "Tư vấn kiểu tóc",
+        "Sử dụng dụng cụ chuyên nghiệp"
+      ],
+      "salary": {
+        "entry": "7-12 triệu VNĐ/tháng",
+        "mid": "15-25 triệu VNĐ/tháng",
+        "senior": "30-50 triệu VNĐ/tháng"
+      },
+      "education": "Chứng chỉ Hair Stylist",
+      "careerPath": "Thợ cắt tóc → Hair Stylist → Senior Stylist → Salon Manager",
+      "marketDemand": "Cao",
+      "growthRate": "8-12%/năm",
+      "companies": ["30Shine", "Hair Salon David", "Toc Tien Hair", "Academy Hair"]
+    },
+    {
+      "name": "Chuyên viên Spa & Massage",
+      "description": "Thực hiện các liệu pháp massage và chăm sóc da chuyên nghiệp",
+      "hollandType": ["Social", "Realistic"],
+      "skills": [
+        "Kỹ thuật massage",
+        "Chăm sóc da mặt",
+        "Các liệu pháp thư giãn",
+        "Kiến thức về da và cơ thể",
+        "Tư vấn khách hàng"
+      ],
+      "salary": {
+        "entry": "6-10 triệu VNĐ/tháng",
+        "mid": "12-20 triệu VNĐ/tháng",
+        "senior": "25-40 triệu VNĐ/tháng"
+      },
+      "education": "Chứng chỉ Spa & Massage",  
+      "careerPath": "Kỹ thuật viên → Chuyên viên → Trưởng ca → Quản lý spa",
+      "marketDemand": "Cao",
+      "growthRate": "9-14%/năm",
+      "companies": ["Thann Sanctuary", "Lily Spa", "Tropic Spa", "Sen Spa"]
+    }
+  ]
+}

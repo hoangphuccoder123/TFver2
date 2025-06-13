@@ -1,0 +1,83 @@
+{
+  "position": "Nhà báo",
+  "category": "Truyền thông - Báo chí",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "News writing structure (5W1H principle)?",
+        "Interview techniques và preparation?",
+        "Fact-checking methods?",
+        "Source verification processes?",
+        "Ethics trong journalism?",
+        "Social media journalism best practices?",
+        "Photography basics cho news?",
+        "Deadline pressure management?",
+        "Media law understanding?",
+        "Digital publishing platforms?"
+      ],
+      "behavioral": [
+        "Tại sao chọn journalism career?",
+        "Difficult interview situations handling?",
+        "Maintaining objectivity trong controversial topics?",
+        "Public interest vs privacy balance?",
+        "Building trust với sources?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Investigative journalism methods?",
+        "Data journalism và analysis?",
+        "Multimedia storytelling techniques?",
+        "Editorial decision-making processes?",
+        "Crisis communication coverage?",
+        "International reporting considerations?",
+        "Freedom of information requests?",
+        "Digital forensics cho journalism?",
+        "Audience engagement strategies?",
+        "Cross-platform content adaptation?"
+      ],
+      "behavioral": [
+        "Editorial independence maintenance?",
+        "Source protection strategies?",
+        "Ethical dilemmas resolution?",
+        "Team collaboration trong newsroom?",
+        "Professional credibility building?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Newsroom management và operations?",
+        "Editorial strategy development?",
+        "Media business model understanding?",
+        "Innovation trong journalism practices?",
+        "Quality control systems?",
+        "Legal risk assessment?",
+        "Brand building cho media outlet?",
+        "Audience analytics utilization?",
+        "Partnership development?",
+        "Industry trend analysis?"
+      ],
+      "behavioral": [
+        "Editorial leadership philosophy?",
+        "Team development trong newsroom?",
+        "Public accountability commitment?",
+        "Industry advocacy efforts?",
+        "Journalism education involvement?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Source provides confidential information, verification approach?",
+    "Breaking news conflicts với scheduled content?",
+    "Legal threat over published story, response?",
+    "Source wants to retract information after publication?",
+    "Advertiser pressure influences editorial decisions?"
+  ],
+  "writing_challenges": [
+    "Write breaking news story trong tight deadline",
+    "Investigate complex financial scandal",
+    "Cover sensitive community issue fairly",
+    "Adapt long-form story cho multiple platforms",
+    "Interview hostile or uncooperative subject"
+  ]
+}

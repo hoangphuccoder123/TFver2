@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Thể thao - Giải trí",
+  "description": "Các nghề nghiệp trong lĩnh vực thể thao, fitness và giải trí",
+  "careers": [
+    {
+      "name": "Huấn luyện viên Thể thao",
+      "description": "Huấn luyện và phát triển kỹ năng thể thao cho vận động viên",
+      "hollandType": ["Social", "Realistic"],
+      "skills": [
+        "Kiến thức chuyên môn thể thao",
+        "Kỹ năng huấn luyện",
+        "Tâm lý học thể thao",
+        "Lập kế hoạch tập luyện",
+        "Truyền động lực"
+      ],
+      "salary": {
+        "entry": "8-15 triệu VNĐ/tháng",
+        "mid": "18-35 triệu VNĐ/tháng",
+        "senior": "40-80 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Thể dục thể thao + Chứng chỉ HLV",
+      "careerPath": "Trợ lý HLV → HLV → HLV trưởng → Giám đốc kỹ thuật",
+      "marketDemand": "Trung bình",
+      "growthRate": "5-8%/năm",
+      "companies": ["VFF", "Câu lạc bộ bóng đá", "Sở Văn hóa Thể thao", "Các trung tâm thể thao"]
+    },
+    {
+      "name": "Personal Trainer",
+      "description": "Hướng dẫn tập luyện cá nhân và tư vấn dinh dưỡng thể hình",
+      "hollandType": ["Social", "Realistic"],
+      "skills": [
+        "Kiến thức về tập luyện",
+        "Dinh dưỡng thể thao",
+        "Đánh giá thể lực",
+        "Lập chương trình tập",
+        "Động viên khách hàng"
+      ],
+      "salary": {
+        "entry": "10-18 triệu VNĐ/tháng",
+        "mid": "20-35 triệu VNĐ/tháng",
+        "senior": "40-70 triệu VNĐ/tháng"
+      },
+      "education": "Chứng chỉ Personal Trainer + Kiến thức thể hình",
+      "careerPath": "PT thực tập → Personal Trainer → Master Trainer → Gym Manager",
+      "marketDemand": "Cao",
+      "growthRate": "12-18%/năm",
+      "companies": ["California Fitness", "Elite Fitness", "Gym Plus", "Anytime Fitness"]
+    },
+    {
+      "name": "Quản lý Sự kiện",
+      "description": "Tổ chức và quản lý các sự kiện thể thao, giải trí",
+      "hollandType": ["Enterprising", "Social"],
+      "skills": [
+        "Quản lý dự án sự kiện",
+        "Kỹ năng tổ chức",
+        "Marketing sự kiện",
+        "Quản lý ngân sách",
+        "Giao tiếp và đàm phán"
+      ],
+      "salary": {
+        "entry": "12-20 triệu VNĐ/tháng",
+        "mid": "25-45 triệu VNĐ/tháng",
+        "senior": "50-90 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Marketing, Quản trị kinh doanh",
+      "careerPath": "Coordinator → Event Manager → Senior Manager → Director",
+      "marketDemand": "Cao",
+      "growthRate": "8-12%/năm",
+      "companies": ["BTC Vietnam", "Saigon Sports", "Sport5", "VPF"]
+    }
+  ]
+}

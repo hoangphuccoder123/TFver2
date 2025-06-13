@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Nghệ thuật - Văn hóa",
+  "description": "Các nghề nghiệp trong lĩnh vực nghệ thuật, văn hóa và sáng tạo",
+  "careers": [
+    {
+      "name": "Nhiếp ảnh gia",
+      "description": "Chụp ảnh chuyên nghiệp cho các sự kiện, sản phẩm và dịch vụ",
+      "hollandType": ["Artistic", "Enterprising"],
+      "skills": [
+        "Kỹ thuật chụp ảnh",
+        "Sử dụng máy ảnh chuyên nghiệp",
+        "Photoshop, Lightroom",
+        "Tư duy thẩm mỹ",
+        "Giao tiếp với khách hàng"
+      ],
+      "salary": {
+        "entry": "8-15 triệu VNĐ/tháng",
+        "mid": "20-40 triệu VNĐ/tháng",
+        "senior": "50-100 triệu VNĐ/tháng"
+      },
+      "education": "Chứng chỉ nhiếp ảnh hoặc tự học",
+      "careerPath": "Photographer → Senior Photographer → Studio Owner → Art Director",
+      "marketDemand": "Trung bình cao",
+      "growthRate": "6-10%/năm",
+      "companies": ["Studio ảnh cưới", "Công ty sự kiện", "Báo chí", "Freelance"]
+    },
+    {
+      "name": "Nhạc sĩ/Ca sĩ",
+      "description": "Sáng tác nhạc, biểu diễn và thu âm các tác phẩm âm nhạc",
+      "hollandType": ["Artistic", "Enterprising"],
+      "skills": [
+        "Kỹ năng âm nhạc",
+        "Sáng tác và biểu diễn",
+        "Sử dụng phần mềm âm nhạc",
+        "Marketing cá nhân",
+        "Kỹ năng biểu diễn"
+      ],
+      "salary": {
+        "entry": "5-12 triệu VNĐ/tháng",
+        "mid": "15-30 triệu VNĐ/tháng",
+        "senior": "40-200 triệu VNĐ/tháng"
+      },
+      "education": "Học viện Âm nhạc hoặc tự học",
+      "careerPath": "Ca sĩ nghiệp dư → Ca sĩ chuyên nghiệp → Ngôi sao → Producer",
+      "marketDemand": "Thấp",
+      "growthRate": "2-5%/năm",
+      "companies": ["Công ty giải trí", "Studio thu âm", "Freelance", "YouTube/TikTok"]
+    },
+    {
+      "name": "Diễn viên",
+      "description": "Biểu diễn trong các tác phẩm điện ảnh, truyền hình và sân khấu",
+      "hollandType": ["Artistic", "Social"],
+      "skills": [
+        "Kỹ năng diễn xuất",
+        "Thể hiện cảm xúc",
+        "Học thuộc lời thoại",
+        "Thể hiện trên camera",
+        "Làm việc nhóm"
+      ],
+      "salary": {
+        "entry": "3-8 triệu VNĐ/tháng",
+        "mid": "10-25 triệu VNĐ/tháng",
+        "senior": "30-500 triệu VNĐ/tháng"
+      },
+      "education": "Học viện Sân khấu Điện ảnh hoặc tự học",
+      "careerPath": "Diễn viên quần chúng → Diễn viên → Ngôi sao → Đạo diễn",
+      "marketDemand": "Thấp",  
+      "growthRate": "1-4%/năm",
+      "companies": ["VFC", "HTV", "Galaxy Studios", "Các đoàn nghệ thuật"]
+    }
+  ]
+}

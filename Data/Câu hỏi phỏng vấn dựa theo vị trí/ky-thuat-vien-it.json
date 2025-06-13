@@ -1,0 +1,83 @@
+{
+  "position": "Kỹ thuật viên IT",
+  "category": "Công nghệ thông tin",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Computer hardware troubleshooting?",
+        "Operating systems installation và configuration?",
+        "Network basics (TCP/IP, DNS, DHCP)?",
+        "Software installation và updates?",
+        "Printer và peripheral setup?",
+        "Backup và recovery procedures?",
+        "Virus removal và security basics?",
+        "User account management?",
+        "Remote support tools?",
+        "Documentation practices?"
+      ],
+      "behavioral": [
+        "Tại sao chọn IT support career?",
+        "Customer service approach trong technical support?",
+        "Learning new technologies methodology?",
+        "Problem-solving under pressure?",
+        "Patience với non-technical users?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Server administration (Windows/Linux)?",
+        "Network infrastructure management?",
+        "Security policy implementation?",
+        "Database administration basics?",
+        "Virtualization technologies?",
+        "Active Directory management?",
+        "Mobile device management?",
+        "Cloud services integration?",
+        "Disaster recovery planning?",
+        "Performance monitoring tools?"
+      ],
+      "behavioral": [
+        "Team collaboration trong IT projects?",
+        "Training end users effectively?",
+        "Project management involvement?",
+        "Vendor relationship management?",
+        "Process improvement initiatives?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "IT infrastructure architecture?",
+        "Advanced security implementation?",
+        "Budget planning cho IT operations?",
+        "Compliance và governance?",
+        "Technology strategic planning?",
+        "Team management và development?",
+        "Vendor evaluation và procurement?",
+        "Business continuity planning?",
+        "Innovation và technology adoption?",
+        "Enterprise system integration?"
+      ],
+      "behavioral": [
+        "IT leadership approach?",
+        "Business alignment strategies?",
+        "Team development initiatives?",
+        "Strategic technology decisions?",
+        "Industry expertise sharing?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Critical server fails during business hours?",
+    "Security breach suspected, immediate actions?",
+    "User accidentally deletes important files?",
+    "Network performance issues affecting productivity?",
+    "Software upgrade causes compatibility problems?"
+  ],
+  "technical_challenges": [
+    "Diagnose network connectivity issue",
+    "Set up secure remote access solution",
+    "Plan system migration strategy",
+    "Implement backup recovery procedure",
+    "Troubleshoot performance bottleneck"
+  ]
+}

@@ -1,0 +1,32 @@
+NGUYỄN VĂN A
+Software Developer
+
+THÔNG TIN LIÊN HỆ:
+Email: nguyenvana@email.com
+Điện thoại: 0123456789
+Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM
+
+HỌC VẤN:
+- Cử nhân Công nghệ thông tin - Đại học Bách Khoa TP.HCM (2018-2022)
+- GPA: 3.2/4.0
+
+KINH NGHIỆM LÀM VIỆC:
+- Junior Developer tại Công ty ABC (2022-2024) - 2 năm
+  + Phát triển ứng dụng web sử dụng React, Node.js
+  + Tham gia phát triển hệ thống quản lý khách hàng
+  + Làm việc nhóm với 5 thành viên
+
+KỸ NĂNG:
+- JavaScript, TypeScript, React, Node.js
+- Python, Django, Flask
+- MySQL, PostgreSQL, MongoDB
+- Git, Docker, AWS
+- HTML, CSS, Bootstrap
+
+DỰ ÁN:
+- Hệ thống quản lý bán hàng online (2023)
+- Ứng dụng di động React Native (2024)
+
+CHỨNG CHỈ:
+- AWS Certified Developer Associate (2023)
+- Google Analytics Certificate (2022)

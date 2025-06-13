@@ -1,0 +1,83 @@
+{
+  "position": "Data Scientist",
+  "category": "Công nghệ thông tin - Phân tích dữ liệu",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Machine Learning và Deep Learning khác biệt như thế nào?",
+        "Python libraries nào thường dùng cho Data Science?",
+        "Supervised và Unsupervised Learning là gì?",
+        "Overfitting và Underfitting có nghĩa gì?",
+        "Cross-validation dùng để làm gì?",
+        "Correlation và Causation khác nhau ra sao?",
+        "Data preprocessing steps quan trọng nào?",
+        "SQL cơ bản cho data analysis?",
+        "Statistical significance nghĩa là gì?",
+        "Feature engineering là gì?"
+      ],
+      "behavioral": [
+        "Tại sao chọn ngành Data Science?",
+        "Dự án data nào bạn tự hào nhất?",
+        "Bạn học công nghệ mới như thế nào?",
+        "Thách thức lớn nhất khi làm với data?",
+        "Kinh nghiệm present findings cho non-technical stakeholders?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Model evaluation metrics cho classification/regression?",
+        "Ensemble methods (Random Forest, Gradient Boosting)?",
+        "Feature selection techniques?",
+        "Time series analysis và forecasting?",
+        "A/B testing design và statistical tests?",
+        "Big Data tools (Spark, Hadoop) experience?",
+        "Neural networks architectures?",
+        "Data visualization best practices?",
+        "ETL processes và data pipelines?",
+        "Model deployment strategies?"
+      ],
+      "behavioral": [
+        "Collaborate với engineering teams như thế nào?",
+        "Data quality issues xử lý ra sao?",
+        "Business impact measurement approach?",
+        "Model performance monitoring?",
+        "Stakeholder expectations management?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "MLOps và model lifecycle management?",
+        "Distributed computing cho large-scale data?",
+        "Advanced deep learning architectures?",
+        "Causal inference methods?",
+        "Real-time machine learning systems?",
+        "Data governance và privacy compliance?",
+        "AutoML và model optimization?",
+        "Multi-modal data integration?",
+        "Recommendation systems design?",
+        "Explainable AI techniques?"
+      ],
+      "behavioral": [
+        "Data strategy development cho organization?",
+        "Technical leadership trong data teams?",
+        "Cross-functional collaboration best practices?",
+        "Research to production transition?",
+        "Team building và talent development?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Data có bias, bạn xử lý như thế nào?",
+    "Model accuracy drop trong production, investigation approach?",
+    "Stakeholder yêu cầu impossible timeline, response?",
+    "Missing data problem, handling strategies?",
+    "Model interpretability requirements từ business?"
+  ],
+  "coding_challenges": [
+    "Build predictive model cho customer churn",
+    "Analyze sales data và tìm insights",
+    "Create recommendation engine",
+    "Time series forecasting cho inventory",
+    "A/B test analysis và statistical inference"
+  ]
+}

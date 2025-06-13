@@ -1,0 +1,301 @@
+{
+  "title": "Lộ trình Nhân sự HR",
+  "description": "Lộ trình phát triển nghề nghiệp quản trị nhân sự từ cơ bản đến chuyên gia",
+  "duration": "2-4 năm",
+  "difficulty": "Trung bình",
+  "overview": "Nghề quản trị nhân sự đóng vai trò quan trọng trong việc phát triển con người và tổ chức. Lộ trình này sẽ giúp bạn phát triển từ nhân viên HR cơ bản đến chuyên gia quản trị nhân sự có khả năng chiến lược.",
+  "phases": [
+    {
+      "phase": 1,
+      "title": "Nền tảng Quản trị Nhân sự",
+      "duration": "6-9 tháng",
+      "description": "Xây dựng nền tảng kiến thức cơ bản về quản trị nhân sự",
+      "skills": [
+        {
+          "name": "Tuyển dụng và tuyển chọn",
+          "description": "Kỹ năng tuyển dụng và lựa chọn nhân tài",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Sách Quản trị nhân sự hiện đại",
+            "Khóa học Recruitment"
+          ],
+          "practiceExercises": [
+            "Viết job description",
+            "Thực hành phỏng vấn"
+          ]
+        },
+        {
+          "name": "Luật lao động",
+          "description": "Hiểu biết về luật lao động và quy định pháp lý",
+          "timeEstimate": "1-2 tháng",
+          "resources": [
+            "Bộ luật Lao động 2019",
+            "Các nghị định hướng dẫn"
+          ],
+          "practiceExercises": [
+            "Soạn thảo hợp đồng lao động",
+            "Xử lý tranh chấp lao động"
+          ]
+        },
+        {
+          "name": "Quản lý lương và phúc lợi",
+          "description": "Thiết kế và quản lý hệ thống lương thưởng",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Compensation & Benefits",
+            "Phần mềm tính lương"
+          ],
+          "practiceExercises": [
+            "Thiết kế bảng lương",
+            "Tính toán các khoản phúc lợi"
+          ]
+        },
+        {
+          "name": "Hành chính nhân sự",
+          "description": "Quản lý hồ sơ và các thủ tục hành chính",
+          "timeEstimate": "1-2 tháng",
+          "resources": [
+            "Quy trình HR",
+            "Phần mềm quản lý nhân sự"
+          ],
+          "practiceExercises": [
+            "Quản lý hồ sơ nhân viên",
+            "Báo cáo nhân sự"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Tuyển dụng Nhân tài",
+          "description": "Thực hiện một quy trình tuyển dụng hoàn chỉnh",
+          "duration": "1-2 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "title": "Phát triển Nhân sự",
+      "duration": "9-12 tháng",
+      "description": "Chuyên sâu về phát triển và đào tạo nhân lực",
+      "skills": [
+        {
+          "name": "Đào tạo và phát triển",
+          "description": "Thiết kế và triển khai chương trình đào tạo",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Learning & Development",
+            "Adult Learning Theory"
+          ],
+          "practiceExercises": [
+            "Phân tích nhu cầu đào tạo",
+            "Thiết kế chương trình học"
+          ]
+        },
+        {
+          "name": "Đánh giá hiệu suất",
+          "description": "Xây dựng hệ thống đánh giá và quản lý hiệu suất",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Performance Management",
+            "KPI và OKR"
+          ],
+          "practiceExercises": [
+            "Thiết kế biểu mẫu đánh giá",
+            "Thực hiện đánh giá 360 độ"
+          ]
+        },
+        {
+          "name": "Quy hoạch nhân sự",
+          "description": "Lập kế hoạch phát triển nghề nghiệp cho nhân viên",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Career Development",
+            "Succession Planning"
+          ],
+          "practiceExercises": [
+            "Lập sơ đồ thay thế",
+            "Tư vấn nghề nghiệp"
+          ]
+        },
+        {
+          "name": "Gắn kết nhân viên",
+          "description": "Xây dựng văn hóa và gắn kết nhân viên",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Employee Engagement",
+            "Organizational Culture"
+          ],
+          "practiceExercises": [
+            "Khảo sát mức độ hài lòng",
+            "Tổ chức team building"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Phát triển Nhân tài",
+          "description": "Xây dựng chương trình phát triển nhân tài toàn diện",
+          "duration": "3-4 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "title": "Quản trị Nhân sự Chiến lược",
+      "duration": "9-15 tháng",
+      "description": "Phát triển tư duy chiến lược và kỹ năng lãnh đạo HR",
+      "skills": [
+        {
+          "name": "HR Analytics",
+          "description": "Phân tích dữ liệu nhân sự để đưa ra quyết định",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "People Analytics",
+            "HR Dashboard và BI"
+          ],
+          "practiceExercises": [
+            "Phân tích tỷ lệ nghỉ việc",
+            "Dự báo nhu cầu nhân sự"
+          ]
+        },
+        {
+          "name": "Quản lý thay đổi",
+          "description": "Dẫn dắt và quản lý thay đổi tổ chức",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Change Management",
+            "Organizational Development"
+          ],
+          "practiceExercises": [
+            "Lập kế hoạch thay đổi",
+            "Quản lý kháng cự thay đổi"
+          ]
+        },
+        {
+          "name": "Chiến lược nhân sự",
+          "description": "Xây dựng chiến lược nhân sự phù hợp với chiến lược kinh doanh",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Strategic HRM",
+            "Business Strategy"
+          ],
+          "practiceExercises": [
+            "Lập chiến lược nhân sự 3 năm",
+            "Phân tích cạnh tranh nhân tài"
+          ]
+        },
+        {
+          "name": "Quản lý đa văn hóa",
+          "description": "Quản lý nhân sự trong môi trường đa văn hóa",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "Cross-cultural Management",
+            "Diversity & Inclusion"
+          ],
+          "practiceExercises": [
+            "Thiết kế chính sách D&I",
+            "Quản lý xung đột văn hóa"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Chuyển đổi Số HR",
+          "description": "Dẫn dắt quá trình số hóa các quy trình HR",
+          "duration": "4-6 tháng"
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "title": "Lãnh đạo Nhân sự",
+      "duration": "6-12 tháng",
+      "description": "Phát triển thành lãnh đạo cấp cao trong lĩnh vực nhân sự",
+      "skills": [
+        {
+          "name": "Lãnh đạo tổ chức",
+          "description": "Kỹ năng lãnh đạo và quản lý tổ chức hiệu quả",
+          "timeEstimate": "3-4 tháng",
+          "resources": [
+            "Executive Leadership",
+            "Organizational Leadership"
+          ],
+          "practiceExercises": [
+            "Xây dựng tầm nhìn tổ chức",
+            "Phát triển đội ngũ lãnh đạo"
+          ]
+        },
+        {
+          "name": "Quản trị rủi ro nhân sự",
+          "description": "Nhận diện và quản lý các rủi ro liên quan đến nhân sự",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "HR Risk Management",
+            "Compliance Management"
+          ],
+          "practiceExercises": [
+            "Đánh giá rủi ro nhân sự",
+            "Xây dựng kế hoạch ứng phó"
+          ]
+        },
+        {
+          "name": "Tư vấn chiến lược",
+          "description": "Trở thành đối tác chiến lược cho ban lãnh đạo",
+          "timeEstimate": "2-3 tháng",
+          "resources": [
+            "HR Business Partner",
+            "Strategic Consulting"
+          ],
+          "practiceExercises": [
+            "Tư vấn cho CEO về nhân sự",
+            "Phân tích tác động chiến lược"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dự án Chuyển đổi Tổ chức",
+          "description": "Dẫn dắt một dự án chuyển đổi tổ chức lớn",
+          "duration": "6-8 tháng"
+        }
+      ]
+    }
+  ],
+  "assessmentCriteria": [
+    "Kiến thức sâu về quản trị nhân sự và luật lao động",
+    "Kỹ năng tuyển dụng và phát triển nhân tài",
+    "Khả năng phân tích và sử dụng dữ liệu HR",
+    "Kỹ năng lãnh đạo và quản lý thay đổi",
+    "Tư duy chiến lược và khả năng tư vấn"
+  ],
+  "careerPaths": [
+    {
+      "position": "Nhân viên HR",
+      "salaryRange": "8-15 triệu VNĐ/tháng",
+      "description": "Thực hiện các công việc HR cơ bản"
+    },
+    {
+      "position": "HR Manager/Trưởng phòng Nhân sự",
+      "salaryRange": "20-35 triệu VNĐ/tháng",
+      "description": "Quản lý toàn bộ hoạt động nhân sự"
+    },
+    {
+      "position": "HR Director/Giám đốc Nhân sự",
+      "salaryRange": "50-100 triệu VNĐ/tháng",
+      "description": "Chịu trách nhiệm chiến lược nhân sự toàn công ty"
+    }
+  ],
+  "continuousLearning": [
+    "Cập nhật xu hướng HR và công nghệ mới",
+    "Học các phương pháp quản lý hiện đại",
+    "Phát triển kỹ năng phân tích dữ liệu",
+    "Tham gia các chứng chỉ HR quốc tế"
+  ],
+  "tips": [
+    "Xây dựng mối quan hệ tốt với tất cả cấp độ trong tổ chức",
+    "Phát triển tư duy kinh doanh và hiểu về ngành",
+    "Thường xuyên cập nhật luật lao động",
+    "Đầu tư vào kỹ năng giao tiếp và đàm phán",
+    "Sử dụng công nghệ để tối ưu hóa quy trình HR"
+  ]
+}

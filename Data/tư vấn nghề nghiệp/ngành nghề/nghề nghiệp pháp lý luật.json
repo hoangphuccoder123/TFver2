@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Pháp lý - Luật",
+  "description": "Các nghề nghiệp trong lĩnh vực pháp lý và tư vấn luật",
+  "careers": [
+    {
+      "name": "Luật sư",
+      "description": "Tư vấn pháp lý, đại diện khách hàng trong các vụ việc pháp lý",
+      "hollandType": ["Investigative", "Enterprising"],
+      "skills": [
+        "Kiến thức pháp luật sâu rộng",
+        "Kỹ năng biện luận",
+        "Viết văn bản pháp lý",
+        "Phân tích và tổng hợp",
+        "Giao tiếp thuyết phục"
+      ],
+      "salary": {
+        "entry": "15-25 triệu VNĐ/tháng",
+        "mid": "30-60 triệu VNĐ/tháng",
+        "senior": "80-200 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Luật + Chứng chỉ hành nghề luật sư",
+      "careerPath": "Luật sư tập sự → Luật sư → Luật sư chính → Đối tác văn phòng luật",
+      "marketDemand": "Trung bình",
+      "growthRate": "4-7%/năm",
+      "companies": ["BMVN", "Rajah & Tann", "Baker McKenzie", "Tilleke & Gibbins"]
+    },
+    {
+      "name": "Chuyên viên Pháp chế Doanh nghiệp",
+      "description": "Tư vấn pháp lý nội bộ cho doanh nghiệp, đảm bảo tuân thủ quy định",
+      "hollandType": ["Conventional", "Investigative"],
+      "skills": [
+        "Luật doanh nghiệp",
+        "Soạn thảo hợp đồng",
+        "Tuân thủ pháp lý",
+        "Quản lý rủi ro pháp lý",
+        "Tư vấn nội bộ"
+      ],
+      "salary": {
+        "entry": "12-20 triệu VNĐ/tháng",
+        "mid": "25-45 triệu VNĐ/tháng",
+        "senior": "50-90 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Luật (chuyên ngành Luật Kinh tế)",
+      "careerPath": "Chuyên viên pháp chế → Trưởng phòng pháp chế → Giám đốc pháp lý",
+      "marketDemand": "Cao",
+      "growthRate": "8-12%/năm",
+      "companies": ["Vingroup", "Techcombank", "Masan", "FPT"]
+    },
+    {
+      "name": "Công chứng viên",
+      "description": "Thực hiện các thủ tục công chứng, chứng thực các văn bản pháp lý",
+      "hollandType": ["Conventional", "Social"],
+      "skills": [
+        "Kiến thức pháp luật về công chứng",
+        "Tỉ mỉ và chính xác",
+        "Giao tiếp với khách hàng",
+        "Kiểm tra và thẩm định",
+        "Quản lý hồ sơ"
+      ],
+      "salary": {
+        "entry": "10-15 triệu VNĐ/tháng",
+        "mid": "20-35 triệu VNĐ/tháng",
+        "senior": "40-70 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Luật + Chứng chỉ công chứng viên",
+      "careerPath": "Trợ lý công chứng → Công chứng viên → Trưởng văn phòng công chứng",
+      "marketDemand": "Ổn định",
+      "growthRate": "3-5%/năm",
+      "companies": ["Văn phòng Công chứng Hà Nội", "Văn phòng Công chứng TP.HCM", "Các văn phòng công chứng tư nhân"]
+    }
+  ]
+}

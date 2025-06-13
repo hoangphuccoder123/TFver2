@@ -1,0 +1,83 @@
+{
+  "position": "Product Manager",
+  "category": "Quản lý sản phẩm",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Product lifecycle stages và management?",
+        "User stories và acceptance criteria writing?",
+        "Product roadmap creation basics?",
+        "Market research methods?",
+        "Agile/Scrum methodologies understanding?",
+        "MVP (Minimum Viable Product) concept?",
+        "A/B testing fundamentals?",
+        "Product metrics và KPIs?",
+        "Stakeholder management principles?",
+        "Competitive analysis approaches?"
+      ],
+      "behavioral": [
+        "Tại sao chọn Product Management?",
+        "Prioritization decisions under pressure?",
+        "Conflicting stakeholder requirements handling?",
+        "Feature failure response?",
+        "Cross-functional team collaboration?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Product strategy development?",
+        "Go-to-market planning?",
+        "Customer journey mapping?",
+        "Data-driven decision making?",
+        "Product positioning và messaging?",
+        "Feature prioritization frameworks?",
+        "User research và usability testing?",
+        "Product analytics tools usage?",
+        "Technical debt vs new features balance?",
+        "Product-market fit assessment?"
+      ],
+      "behavioral": [
+        "Team leadership without authority?",
+        "Product vision communication?",
+        "Customer feedback incorporation?",
+        "Engineering team collaboration?",
+        "Market timing decisions?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Product portfolio management?",
+        "Platform strategy development?",
+        "Advanced analytics và machine learning integration?",
+        "International product expansion?",
+        "Monetization strategy optimization?",
+        "Product partnerships và integrations?",
+        "Innovation processes design?",
+        "Acquisition integration planning?",
+        "Ecosystem strategy development?",
+        "Product org structure optimization?"
+      ],
+      "behavioral": [
+        "Product organization leadership?",
+        "Strategic partnerships negotiation?",
+        "Board-level product reporting?",
+        "Product team scaling?",
+        "Industry thought leadership?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Engineering pushback on product requirements?",
+    "Customer churn increases suddenly, investigation?",
+    "Competitor launches similar feature first?",
+    "Sales team requests feature that doesn't align with strategy?",
+    "Limited development resources, feature prioritization?"
+  ],
+  "case_studies": [
+    "Launch strategy cho new product feature",
+    "Improve user engagement for existing product",
+    "Enter new market segment planning",
+    "Respond to competitive threat",
+    "Optimize product pricing strategy"
+  ]
+}

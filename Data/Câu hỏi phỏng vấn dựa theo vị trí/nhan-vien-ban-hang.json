@@ -1,0 +1,83 @@
+{
+  "position": "Nhân viên Bán hàng",
+  "category": "Bán hàng - Dịch vụ khách hàng",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Customer service principles?",
+        "Product knowledge importance?",
+        "Cash handling procedures?",
+        "POS system operation?",
+        "Inventory management basics?",
+        "Return và exchange policies?",
+        "Visual merchandising basics?",
+        "Sales transaction processing?",
+        "Customer complaint handling?",
+        "Store policies compliance?"
+      ],
+      "behavioral": [
+        "Tại sao chọn retail sales?",
+        "Customer satisfaction approach?",
+        "Teamwork trong retail environment?",
+        "Dealing với difficult customers?",
+        "Sales goals motivation?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Advanced sales techniques?",
+        "Customer relationship building?",
+        "Upselling và cross-selling strategies?",
+        "Inventory control systems?",
+        "Loss prevention awareness?",
+        "Store display optimization?",
+        "Customer data management?",
+        "Multi-channel sales support?",
+        "Performance metrics tracking?",
+        "Staff training assistance?"
+      ],
+      "behavioral": [
+        "Sales team collaboration?",
+        "Customer loyalty building?",
+        "Process improvement suggestions?",
+        "Leadership potential demonstration?",
+        "Professional development interests?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Store operations management?",
+        "Sales performance analysis?",
+        "Staff scheduling và management?",
+        "Budget và profit margin understanding?",
+        "Marketing campaign implementation?",
+        "Vendor relationship management?",
+        "Customer analytics utilization?",
+        "Multi-location coordination?",
+        "Technology integration planning?",
+        "Compliance monitoring systems?"
+      ],
+      "behavioral": [
+        "Retail management philosophy?",
+        "Team development strategies?",
+        "Customer experience enhancement?",
+        "Business growth initiatives?",
+        "Industry trend adaptation?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Customer demands refund without receipt?",
+    "Product defect discovered after purchase?",
+    "Store busy với insufficient staff?",
+    "Customer complaint about service quality?",
+    "Inventory shortage during sale event?"
+  ],
+  "sales_scenarios": [
+    "Help indecisive customer choose product",
+    "Handle return của expensive item",
+    "Manage long checkout lines efficiently",
+    "Resolve pricing discrepancy",
+    "Assist customer với special needs"
+  ]
+}

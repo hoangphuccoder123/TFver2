@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech CV - Nền tảng Tuyển dụng & Hướng nghiệp Hàng đầu Việt Nam</title>
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --accent-color: #4facfe;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --background-light: #f8fafc;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo .material-symbols-outlined {
+            font-size: 2rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: #ff6b35;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--secondary-gradient);
+            color: var(--white);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover {
+            color: #ff6b35;
+        }        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            animation: floatBackground 20s ease-in-out infinite;
+        }
+
+        @keyframes floatBackground {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(0) translateY(-10px); }
+            75% { transform: translateX(10px) translateY(-5px); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease 0.2s both;
+        }        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(135deg, #4facfe, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--white);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: #667eea;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+        }        .showcase-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+            opacity: 1;
+            pointer-events: auto;
+            filter: none;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .showcase-card .icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--secondary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .showcase-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--background-light);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+            align-items: stretch;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 1.2rem 1.2rem 1.1rem 1.2rem;
+            border-radius: 20px;
+            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.10);
+            border: 1.5px solid #f3f4f6;
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: default;
+            pointer-events: none;
+            min-width: 0;
+            max-width: 340px;
+            margin: 0 auto;
+            min-height: 170px;
+            height: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 20px 20px 0 0;
+            opacity: 0.12;
+        }
+
+        .feature-icon {
+            width: 54px;
+            height: 54px;
+            background: var(--secondary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.7rem;
+            box-shadow: 0 2px 8px rgba(255,107,53,0.08);
+        }
+
+        .feature-icon .material-symbols-outlined {
+            font-size: 2.1rem;
+            color: var(--white);
+        }
+
+        .feature-card h3 {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.01em;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        .feature-card p {
+            color: #5a6270;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            font-weight: 400;
+            opacity: 0.92;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 7.2em; /* 1.5 * 0.92rem * 5 dòng */
+            max-height: 7.5em;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--background-light);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+            align-items: stretch;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 1.2rem 1.2rem 1.1rem 1.2rem;
+            border-radius: 20px;
+            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.10);
+            border: 1.5px solid #f3f4f6;
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: default;
+            pointer-events: none;
+            min-width: 0;
+            max-width: 340px;
+            margin: 0 auto;
+            min-height: 170px;
+            height: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 20px 20px 0 0;
+            opacity: 0.12;
+        }
+
+        .feature-icon {
+            width: 54px;
+            height: 54px;
+            background: var(--secondary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.7rem;
+            box-shadow: 0 2px 8px rgba(255,107,53,0.08);
+        }
+
+        .feature-icon .material-symbols-outlined {
+            font-size: 2.1rem;
+            color: var(--white);
+        }
+
+        .feature-card h3 {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.01em;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        .feature-card p {
+            color: #5a6270;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            font-weight: 400;
+            opacity: 0.92;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 7.2em; /* 1.5 * 0.92rem * 5 dòng */
+            max-height: 7.5em;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }        /* Footer */
+        .footer {
+            background: #0d1117;
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ff6b35;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2d3748;
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #a0aec0;
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .feature-showcase {
+                max-width: 400px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+        }        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 0.875rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ff6b35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#home" class="logo">
+                <span class="material-symbols-outlined">work</span>
+                Tech CV
+            </a>            <ul class="nav-menu">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#features">Tính năng</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+            <a href="Ứng Viên.html" class="cta-button">Bắt đầu ngay</a>
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#features">Tính năng</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+                <li><a href="Ứng Viên.html" style="color: #ff6b35; font-weight: 600;">Bắt đầu ngay</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container"><div class="hero-content">
+                <h1>Nền tảng <span class="highlight">Tuyển dụng</span> & <span class="highlight">Hướng nghiệp</span> Hàng đầu Việt Nam</h1>
+                <p>Kết nối nhà tuyển dụng và ứng viên tài năng với công nghệ AI tiên tiến. Trải nghiệm tuyển dụng và phát triển sự nghiệp hoàn toàn mới.</p>
+                <div class="hero-buttons">
+                    <a href="Ứng Viên.html" class="btn-primary">
+                        <span class="material-symbols-outlined">person</span>
+                        Dành cho Ứng viên
+                    </a>
+                    <a href="đăng nhập nhà tuyển dụng.html" class="btn-secondary">
+                        <span class="material-symbols-outlined">business</span>
+                        Dành cho Nhà tuyển dụng
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="feature-showcase">
+                    <div class="showcase-card" data-link="main.html#ai-interview">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <h4>AI Phỏng vấn</h4>
+                        <p>Luyện tập với AI thông minh</p>
+                    </div>
+                    <div class="showcase-card" data-link="main.html#cv-analysis">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">analytics</span>
+                        </div>
+                        <h4>Phân tích CV</h4>
+                        <p>Đánh giá và cải thiện CV</p>
+                    </div>
+                    <div class="showcase-card" data-link="Nhà Tuyển Dụng.html#dashboard">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">dashboard</span>
+                        </div>
+                        <h4>Quản lý tuyển dụng</h4>
+                        <p>Dashboard HR toàn diện</p>
+                    </div>
+                    <div class="showcase-card" data-link="Nhà Tuyển Dụng.html#analytics">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">route</span>
+                        </div>
+                        <h4>Hướng nghiệp AI</h4>
+                        <p>Lộ trình sự nghiệp cá nhân</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Tính năng nổi bật</h2>
+                <p>Khám phá các tính năng độc đáo được tích hợp AI giúp bạn thành công trong sự nghiệp</p>
+            </div>
+
+            <div class="features-grid">                <!-- AI Interview -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">psychology</span>
+                    </div>
+                    <h3>🎯 Phỏng vấn ảo với AI</h3>
+                    <p>Luyện tập phỏng vấn 1-1 với AI, mô phỏng tình huống thực tế, nhận phản hồi chi tiết về câu trả lời, kỹ năng giao tiếp và ngôn ngữ cơ thể. Tăng tự tin, cải thiện ứng biến, chuẩn bị tốt cho phỏng vấn thật.</p>
+                </div>
+
+                <!-- CV Analysis -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">description</span>
+                    </div>
+                    <h3>📊 Phân tích CV thông minh</h3>
+                    <p>AI đánh giá điểm mạnh, điểm yếu từng phần trong CV, đề xuất cải thiện, tối ưu từ khóa để vượt qua hệ thống lọc tự động. Hỗ trợ nhiều định dạng file, trả kết quả nhanh chóng, trực quan.</p>
+                </div>
+
+                <!-- Career Guidance -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">route</span>
+                    </div>
+                    <h3>🚀 Hướng nghiệp cá nhân hóa</h3>
+                    <p>Xây dựng lộ trình nghề nghiệp riêng dựa trên kỹ năng, sở thích, xu hướng thị trường. Đề xuất khóa học, chứng chỉ, mục tiêu rõ ràng, từng bước phát triển sự nghiệp.</p>
+                </div>
+
+                <!-- Recruitment Management -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">groups</span>
+                    </div>
+                    <h3>💼 Quản lý tuyển dụng toàn diện</h3>
+                    <p>Dashboard HR hiện đại: đăng tin, lọc CV tự động, quản lý pipeline ứng viên, phỏng vấn video, báo cáo phân tích chi tiết. Giảm thời gian, nâng cao chất lượng tuyển dụng.</p>
+                </div>
+
+                <!-- Holland Test -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">psychology_alt</span>
+                    </div>
+                    <h3>🧠 Trắc nghiệm Holland RIASEC</h3>
+                    <p>Bài test tính cách nghề nghiệp quốc tế, phân tích 6 nhóm tính cách, gợi ý top 10 nghề phù hợp. Hỗ trợ định hướng nghề nghiệp sớm, chính xác.</p>
+                </div>
+
+                <!-- Professional Community -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">forum</span>
+                    </div>
+                    <h3>🌟 Cộng đồng chuyên gia</h3>
+                    <p>Kết nối 50.000+ chuyên gia, 200+ ngành nghề. Thảo luận, nhận mentoring 1-1, chia sẻ kinh nghiệm, mở rộng network, phát triển bản thân.</p>
+                </div>
+
+                <!-- Online Courses -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">school</span>
+                    </div>
+                    <h3>📚 Khóa học phát triển kỹ năng</h3>
+                    <p>Hàng trăm khóa học kỹ năng mềm, chuyên môn, ngoại ngữ. Nội dung cập nhật, giảng viên uy tín, giúp nâng cao năng lực, đáp ứng yêu cầu công việc hiện đại.</p>
+                </div>
+
+                <!-- Job Market Reports -->
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">insights</span>
+                    </div>
+                    <h3>📈 Báo cáo thị trường việc làm</h3>
+                    <p>Cập nhật xu hướng tuyển dụng, mức lương, nhu cầu nhân lực mới nhất. Hỗ trợ doanh nghiệp, ứng viên đưa ra quyết định chính xác, kịp thời.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="section-container">
+            <div class="cta-content fade-in">
+                <h2>Sẵn sàng bước vào tương lai sự nghiệp?</h2>
+                <p>Tham gia cùng hàng chục ngàn ứng viên và nhà tuyển dụng đã thành công với Tech CV. Bắt đầu hành trình phát triển sự nghiệp của bạn ngay hôm nay!</p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <a href="Ứng Viên.html" class="btn-primary">
+                        <span class="material-symbols-outlined">person_add</span>
+                        Bắt đầu với tư cách Ứng viên
+                    </a>
+                    <a href="Nhà Tuyển Dụng.html" class="btn-secondary">
+                        <span class="material-symbols-outlined">business_center</span>
+                        Đăng ký Nhà tuyển dụng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ứng viên</h3>
+                    <ul>
+                        <li><a href="main.html">Phỏng vấn AI</a></li>
+                        <li><a href="main.html">Phân tích CV</a></li>
+                        <li><a href="main.html">Trắc nghiệm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Nhà tuyển dụng</h3>
+                    <ul>
+                        <li><a href="Nhà Tuyển Dụng.html">Đăng tuyển dụng</a></li>
+                        <li><a href="Nhà Tuyển Dụng.html">Quản lý CV</a></li>
+                        <li><a href="Nhà Tuyển Dụng.html">Báo cáo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="#contact">Trợ giúp</a></li>
+                        <li><a href="#contact">FAQ</a></li>
+                        <li><a href="#contact">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tech CV. Tất cả quyền được bảo lưu. | <a href="#" style="color: #ff6b35;">Điều khoản sử dụng</a> | <a href="#" style="color: #ff6b35;">Chính sách bảo mật</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileMenuIcon = mobileToggle.querySelector('.material-symbols-outlined');
+
+        mobileToggle.addEventListener('click', function() {
+            const isActive = mobileNav.classList.contains('active');
+            
+            if (isActive) {
+                mobileNav.classList.remove('active');
+                mobileMenuIcon.textContent = 'menu';
+            } else {
+                mobileNav.classList.add('active');
+                mobileMenuIcon.textContent = 'close';
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                mobileMenuIcon.textContent = 'menu';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileToggle.contains(event.target) && !mobileNav.contains(event.target)) {
+                mobileNav.classList.remove('active');
+                mobileMenuIcon.textContent = 'menu';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        function fadeInOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < windowHeight * 0.8) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initial check
+        fadeInOnScroll();
+
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+
+        // Feature card hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });        // Showcase card hover effects and click handlers
+        document.querySelectorAll('.showcase-card').forEach(card => {
+            // Enable clicking functionality
+            card.onclick = function() {
+                const link = card.getAttribute('data-link');
+                if (link) {
+                    window.location.href = link;
+                }
+            };
+            
+            // Add hover effects
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });// Apply debounced scroll handlers
+        const debouncedFadeIn = debounce(fadeInOnScroll, 10);
+        window.removeEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('scroll', debouncedFadeIn);
+
+        // Handle window resize for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mobileNav.classList.remove('active');
+                mobileMenuIcon.textContent = 'menu';
+            }
+        });
+
+        // Add loading states for feature cards
+        document.querySelectorAll('.feature-card, .showcase-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Add a subtle loading effect
+                this.style.opacity = '0.8';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            });
+        });
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function showLoginAlert() {
+            alert('Vui lòng đăng nhập để sử dụng tính năng này!');
+        }        // Kiểm tra trạng thái đăng nhập và mở khóa các thẻ chức năng hero section
+        (function() {
+    function isLoggedIn() {
+        // Luôn return true để mở khóa các thẻ hero section
+        return true;
+    }
+    function unlockShowcaseCards() {
+        document.querySelectorAll('.showcase-card').forEach(card => {
+            card.classList.remove('locked');
+            card.onclick = function() {
+                const link = card.getAttribute('data-link');
+                if (link) window.location.href = link;
+            };
+            card.style.opacity = '1';
+            card.style.pointerEvents = 'auto';
+            card.style.filter = 'none';
+        });
+    }
+    function lockShowcaseCards() {
+        document.querySelectorAll('.showcase-card').forEach(card => {
+            card.classList.add('locked');
+            card.onclick = function() { showLoginAlert(); };
+            card.style.opacity = '0.6';
+            card.style.pointerEvents = 'none';
+            card.style.filter = 'grayscale(0.3)';
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Luôn mở khóa các thẻ hero section
+        unlockShowcaseCards();
+    });
+    window.unlockShowcaseCards = unlockShowcaseCards;
+    window.lockShowcaseCards = lockShowcaseCards;
+})();
+    </script>
+</body>
+</html>

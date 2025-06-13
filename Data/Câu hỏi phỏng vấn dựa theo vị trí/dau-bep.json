@@ -1,0 +1,83 @@
+{
+  "position": "Đầu bếp",
+  "category": "Dịch vụ - Ẩm thực",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Basic cooking techniques (sauté, braise, roast)?",
+        "Food safety và sanitation procedures?",
+        "Knife skills và kitchen equipment usage?",
+        "Recipe scaling và portion control?",
+        "Ingredient identification và quality assessment?",
+        "Kitchen workflow organization?",
+        "Temperature control importance?",
+        "Menu item preparation timing?",
+        "Food storage guidelines?",
+        "Cost control basics?"
+      ],
+      "behavioral": [
+        "Tại sao chọn culinary career?",
+        "High-pressure kitchen environment handling?",
+        "Creativity trong food preparation?",
+        "Team collaboration trong kitchen?",
+        "Customer satisfaction commitment?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Menu development và costing?",
+        "Advanced cooking techniques?",
+        "Kitchen management systems?",
+        "Staff training và supervision?",
+        "Inventory management procedures?",
+        "Dietary restrictions accommodation?",
+        "Seasonal menu planning?",
+        "Food presentation standards?",
+        "Quality consistency maintenance?",
+        "Vendor relationship management?"
+      ],
+      "behavioral": [
+        "Kitchen team leadership experience?",
+        "Innovation trong menu creation?",
+        "Customer complaint resolution?",
+        "Professional development initiatives?",
+        "Work-life balance maintenance?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Restaurant operations management?",
+        "Financial management cho kitchen operations?",
+        "Concept development cho new restaurants?",
+        "Large-scale catering operations?",
+        "Culinary trends analysis?",
+        "Franchise operations oversight?",
+        "Food service technology integration?",
+        "Regulatory compliance management?",
+        "Brand development trong culinary industry?",
+        "International cuisine expertise?"
+      ],
+      "behavioral": [
+        "Culinary vision leadership?",
+        "Business development activities?",
+        "Industry networking importance?",
+        "Mentoring young chefs?",
+        "Culinary innovation contributions?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Customer has severe food allergy, safety protocols?",
+    "Key ingredient supplier fails to deliver?",
+    "Kitchen equipment breaks during busy service?",
+    "Staff member consistently underperforms?",
+    "Food critic visits unexpectedly?"
+  ],
+  "practical_challenges": [
+    "Create new dish với seasonal ingredients",
+    "Manage kitchen during peak hours",
+    "Train new cook on complex preparation",
+    "Adapt menu for dietary restrictions",
+    "Control food costs while maintaining quality"
+  ]
+}

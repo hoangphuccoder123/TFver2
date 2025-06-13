@@ -1,0 +1,83 @@
+{
+  "position": "Nhân viên Ngân hàng",
+  "category": "Tài chính - Ngân hàng",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Banking products và services knowledge?",
+        "Customer account management basics?",
+        "Transaction processing procedures?",
+        "Loan application processes?",
+        "Compliance regulations understanding?",
+        "Risk assessment fundamentals?",
+        "Financial documentation requirements?",
+        "Cash handling procedures?",
+        "Customer service standards?",
+        "Banking software systems?"
+      ],
+      "behavioral": [
+        "Tại sao chọn banking career?",
+        "Customer trust building approach?",
+        "Accuracy và attention to detail?",
+        "Handling sensitive financial information?",
+        "Professional integrity commitment?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Credit analysis techniques?",
+        "Investment products knowledge?",
+        "Regulatory compliance monitoring?",
+        "Anti-money laundering procedures?",
+        "Financial planning basics?",
+        "Business banking services?",
+        "Risk management principles?",
+        "Performance metrics tracking?",
+        "Cross-selling strategies?",
+        "Audit preparation procedures?"
+      ],
+      "behavioral": [
+        "Complex customer needs analysis?",
+        "Team collaboration trong banking environment?",
+        "Professional development commitment?",
+        "Ethical decision-making approach?",
+        "Customer relationship management?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Advanced financial analysis?",
+        "Portfolio management principles?",
+        "Regulatory affairs management?",
+        "Team leadership trong banking operations?",
+        "Strategic planning participation?",
+        "Digital banking integration?",
+        "Performance management systems?",
+        "Risk mitigation strategies?",
+        "Business development activities?",
+        "Industry trend analysis?"
+      ],
+      "behavioral": [
+        "Banking leadership approach?",
+        "Customer experience enhancement?",
+        "Team development initiatives?",
+        "Business growth strategies?",
+        "Professional standards advocacy?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Customer disputes transaction error?",
+    "Suspected fraudulent activity on account?",
+    "Loan application doesn't meet criteria?",
+    "System outage during busy banking hours?",
+    "Customer complaint về service quality?"
+  ],
+  "banking_scenarios": [
+    "Assess loan application risk factors",
+    "Resolve customer account discrepancy",
+    "Explain complex financial product",
+    "Handle suspicious transaction report",
+    "Coordinate với compliance team"
+  ]
+}

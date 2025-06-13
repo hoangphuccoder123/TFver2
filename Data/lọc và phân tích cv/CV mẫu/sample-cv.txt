@@ -1,0 +1,58 @@
+NGUYỄN VĂN THÀNH
+Frontend Developer
+
+THÔNG TIN CÁ NHÂN
+Email: nguyenvanthanh@gmail.com
+Điện thoại: 0123456789
+Địa chỉ: Hà Nội, Việt Nam
+Ngày sinh: 15/03/1995
+
+MỤC TIÊU NGHỀ NGHIỆP
+Trở thành một Frontend Developer chuyên nghiệp, có khả năng phát triển các ứng dụng web hiện đại và thân thiện với người dùng. Mong muốn làm việc trong môi trường năng động, có cơ hội học hỏi và phát triển kỹ năng.
+
+HỌC VẤN
+• Cử nhân Công nghệ Thông tin - Đại học Bách Khoa Hà Nội (2017-2021)
+  GPA: 3.2/4.0
+• Chứng chỉ React Developer - Udemy (2021)
+• Chứng chỉ JavaScript Advanced - Coursera (2022)
+
+KINH NGHIỆM LÀM VIỆC
+Frontend Developer | FPT Software | 2021 - Hiện tại
+• Phát triển giao diện người dùng cho các ứng dụng web sử dụng React.js
+• Tối ưu hóa hiệu suất ứng dụng, giảm thời gian tải trang xuống 40%
+• Làm việc với team backend để tích hợp API RESTful
+• Tham gia code review và đảm bảo chất lượng code
+
+Intern Frontend Developer | Viettel Solutions | 2020 - 2021
+• Hỗ trợ phát triển các tính năng mới cho website công ty
+• Học hỏi và áp dụng các best practices trong phát triển frontend
+• Sử dụng HTML, CSS, JavaScript để tạo các component tái sử dụng
+
+KỸ NĂNG CHUYÊN MÔN
+• Ngôn ngữ lập trình: JavaScript (ES6+), TypeScript, HTML5, CSS3
+• Framework/Library: React.js, Vue.js, Angular (cơ bản)
+• CSS Framework: Bootstrap, Tailwind CSS, Material-UI
+• Tools: Git, Webpack, npm/yarn, VS Code
+• Database: MySQL (cơ bản), MongoDB (cơ bản)
+• Others: RESTful API, Responsive Design, Cross-browser compatibility
+
+DỰ ÁN CÁ NHÂN
+E-commerce Website (2022)
+• Xây dựng trang web bán hàng trực tuyến sử dụng React.js và Node.js
+• Tích hợp thanh toán online và quản lý đơn hàng
+• Responsive design, tương thích với mobile
+
+Task Management App (2021)
+• Ứng dung quản lý công việc cá nhân sử dụng Vue.js
+• Sử dụng localStorage để lưu trữ dữ liệu
+• Có tính năng drag & drop, filter và search
+
+NGÔN NGỮ
+• Tiếng Việt: Bản ngữ
+• Tiếng Anh: Trung cấp (TOEIC 650)
+
+SỞ THÍCH
+• Đọc sách công nghệ
+• Chơi game
+• Đi du lịch
+• Học các công nghệ mới

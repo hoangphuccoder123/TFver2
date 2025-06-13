@@ -1,0 +1,86 @@
+{
+  "nghề_nghiệp_thiết_kế": {
+    "ui_ux_designer": {
+      "tên": "UI/UX Designer",
+      "mô_tả": "Thiết kế giao diện và trải nghiệm người dùng cho sản phẩm số",
+      "kiểu_holland": ["A", "I"],
+      "kỹ_năng_cần_thiết": [
+        "Figma/Adobe XD",
+        "User Research",
+        "Wireframing",
+        "Prototyping",
+        "Visual Design",
+        "Design Thinking",
+        "HTML/CSS cơ bản",
+        "Typography",
+        "Color Theory",
+        "Usability Testing"
+      ],
+      "mức_lương": {
+        "entry": "10-15 triệu VNĐ",
+        "middle": "15-25 triệu VNĐ",
+        "senior": "25-40 triệu VNĐ",
+        "lead": "40-60 triệu VNĐ"
+      },
+      "yêu_cầu_học_vấn": [
+        "Cử nhân Mỹ thuật",
+        "Cử nhân Thiết kế Đồ họa",
+        "Bootcamp UX/UI",
+        "Tự học + Portfolio mạnh"
+      ],
+      "lộ_trình_nghề_nghiệp": [
+        "Junior UI/UX Designer (0-2 năm)",
+        "UI/UX Designer (2-4 năm)",
+        "Senior UI/UX Designer (4-7 năm)",
+        "Lead Designer (7-10 năm)",
+        "Design Director (10+ năm)"
+      ],
+      "nhu_cầu_thị_trường": "Cao",
+      "tỷ_lệ_tăng_trưởng": "15-20%/năm"
+    },
+    "graphic_designer": {
+      "tên": "Graphic Designer",
+      "mô_tả": "Thiết kế đồ họa cho in ấn, quảng cáo và truyền thông",
+      "kiểu_holland": ["A", "C"],
+      "kỹ_năng_cần_thiết": [
+        "Adobe Creative Suite (Photoshop, Illustrator, InDesign)",
+        "Typography",
+        "Color Theory",
+        "Layout Design",
+        "Brand Identity",
+        "Print Design",
+        "Digital Design",
+        "Creative Thinking"
+      ],
+      "mức_lương": {
+        "entry": "8-12 triệu VNĐ",
+        "middle": "12-18 triệu VNĐ",
+        "senior": "18-30 triệu VNĐ"
+      },
+      "nhu_cầu_thị_trường": "Trung bình",
+      "tỷ_lệ_tăng_trưởng": "5-8%/năm"
+    },
+    "motion_designer": {
+      "tên": "Motion Designer",
+      "mô_tả": "Thiết kế đồ họa chuyển động cho video, quảng cáo và web",
+      "kiểu_holland": ["A", "I"],
+      "kỹ_năng_cần_thiết": [
+        "After Effects",
+        "Cinema 4D",
+        "Premiere Pro",
+        "Animation Principles",
+        "Storyboarding",
+        "Visual Effects",
+        "3D Modeling",
+        "Creative Storytelling"
+      ],
+      "mức_lương": {
+        "entry": "12-18 triệu VNĐ",
+        "middle": "18-28 triệu VNĐ",
+        "senior": "28-45 triệu VNĐ"
+      },
+      "nhu_cầu_thị_trường": "Cao",
+      "tỷ_lệ_tăng_trưởng": "18-25%/năm"
+    }
+  }
+}

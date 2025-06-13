@@ -1,0 +1,83 @@
+{
+  "position": "Nông dân",
+  "category": "Nông nghiệp - Thủy sản",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Crop cultivation basics?",
+        "Soil preparation techniques?",
+        "Pest và disease identification?",
+        "Irrigation systems understanding?",
+        "Harvesting methods?",
+        "Farm equipment operation?",
+        "Seed selection criteria?",
+        "Weather pattern awareness?",
+        "Basic animal husbandry?",
+        "Farm safety procedures?"
+      ],
+      "behavioral": [
+        "Tại sao chọn agriculture profession?",
+        "Working với seasonal variations?",
+        "Physical demands của farming?",
+        "Problem-solving trong unpredictable conditions?",
+        "Community cooperation trong agriculture?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Crop rotation planning?",
+        "Advanced irrigation management?",
+        "Integrated pest management?",
+        "Farm business management?",
+        "Market analysis for crops?",
+        "Sustainable farming practices?",
+        "Agricultural technology adoption?",
+        "Livestock management systems?",
+        "Quality control for produce?",
+        "Agricultural finance understanding?"
+      ],
+      "behavioral": [
+        "Farm operation optimization?",
+        "Adapting to climate change impacts?",
+        "Balancing productivity với sustainability?",
+        "Collaboration với agricultural experts?",
+        "Innovation trong farming techniques?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Large-scale farm management?",
+        "Agricultural investment planning?",
+        "Advanced sustainable agriculture?",
+        "Farm diversification strategies?",
+        "Agricultural policy understanding?",
+        "Precision agriculture technologies?",
+        "Supply chain management?",
+        "Agricultural research participation?",
+        "Farm succession planning?",
+        "Environmental impact assessment?"
+      ],
+      "behavioral": [
+        "Agricultural leadership trong community?",
+        "Mentoring young farmers?",
+        "Advocating for agricultural interests?",
+        "Innovation trong sustainable practices?",
+        "Long-term agricultural planning?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Crop failure due to unexpected weather?",
+    "Pest outbreak threatens entire harvest?",
+    "Market prices drop significantly?",
+    "Equipment breakdown during critical season?",
+    "Water shortage affects irrigation?"
+  ],
+  "farming_challenges": [
+    "Plan crop rotation for soil health",
+    "Manage farm budget during low-price season",
+    "Implement sustainable farming practices",
+    "Diversify farm income sources",
+    "Adapt farming to climate change"
+  ]
+}

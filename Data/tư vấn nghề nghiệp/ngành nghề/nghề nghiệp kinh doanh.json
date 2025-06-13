@@ -1,0 +1,88 @@
+{
+  "nghề_nghiệp_kinh_doanh": {
+    "marketing_manager": {
+      "tên": "Marketing Manager",
+      "mô_tả": "Quản lý và thực hiện các chiến lược marketing để thúc đẩy doanh số",
+      "kiểu_holland": ["E", "A", "S"],
+      "kỹ_năng_cần_thiết": [
+        "Digital Marketing",
+        "Content Marketing",
+        "SEO/SEM",
+        "Social Media Marketing",
+        "Google Analytics",
+        "Brand Management",
+        "Project Management",
+        "Communication",
+        "Market Research",
+        "Campaign Management"
+      ],
+      "mức_lương": {
+        "entry": "12-18 triệu VNĐ",
+        "middle": "18-28 triệu VNĐ",
+        "senior": "28-45 triệu VNĐ",
+        "director": "45-80 triệu VNĐ"
+      },
+      "yêu_cầu_học_vấn": [
+        "Cử nhân Marketing",
+        "Cử nhân Quản trị Kinh doanh",
+        "Cử nhân Truyền thông",
+        "Chứng chỉ Digital Marketing"
+      ],
+      "lộ_trình_nghề_nghiệp": [
+        "Marketing Executive (0-2 năm)",
+        "Marketing Specialist (2-4 năm)",
+        "Marketing Manager (4-7 năm)",
+        "Senior Marketing Manager (7-10 năm)",
+        "Marketing Director (10+ năm)"
+      ],
+      "nhu_cầu_thị_trường": "Cao",
+      "tỷ_lệ_tăng_trưởng": "10-15%/năm"
+    },
+    "business_analyst": {
+      "tên": "Business Analyst",
+      "mô_tả": "Phân tích quy trình kinh doanh và đề xuất giải pháp cải thiện",
+      "kiểu_holland": ["I", "E", "C"],
+      "kỹ_năng_cần_thiết": [
+        "Business Process Analysis",
+        "Requirements Gathering",
+        "Data Analysis",
+        "Project Management",
+        "SQL",
+        "Excel/Power BI",
+        "Communication",
+        "Problem Solving",
+        "Process Mapping",
+        "Stakeholder Management"
+      ],
+      "mức_lương": {
+        "entry": "15-20 triệu VNĐ",
+        "middle": "20-30 triệu VNĐ",
+        "senior": "30-50 triệu VNĐ"
+      },
+      "nhu_cầu_thị_trường": "Cao",
+      "tỷ_lệ_tăng_trưởng": "12-18%/năm"
+    },
+    "sales_manager": {
+      "tên": "Sales Manager",
+      "mô_tả": "Quản lý đội ngũ bán hàng và phát triển kế hoạch bán hàng",
+      "kiểu_holland": ["E", "S"],
+      "kỹ_năng_cần_thiết": [
+        "Sales Techniques",
+        "Customer Relationship Management",
+        "Team Leadership",
+        "Negotiation",
+        "Communication",
+        "Market Analysis",
+        "Performance Management",
+        "Strategic Planning"
+      ],
+      "mức_lương": {
+        "entry": "12-20 triệu VNĐ",
+        "middle": "20-35 triệu VNĐ",
+        "senior": "35-60 triệu VNĐ"
+      },
+      "nhu_cầu_thị_trường": "Cao",
+      "tỷ_lệ_tăng_trưởng": "8-12%/năm"
+    }
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "title": "Lộ trình phát triển nghề nghiệp - Lập trình viên Backend",
+  "duration": "15-20 tháng",
+  "difficulty": "Khó",
+  "description": "Lộ trình toàn diện để trở thành Backend Developer chuyên nghiệp",
+  "phases": [
+    {
+      "phase": "Giai đoạn 1: Nền tảng lập trình",
+      "duration": "3-4 tháng",
+      "skills": [
+        {
+          "skill": "Ngôn ngữ lập trình (Python/Java/C#)",
+          "timeToLearn": "6-8 tuần",
+          "resources": [
+            "Python.org tutorials",
+            "Oracle Java tutorials",
+            "Microsoft C# documentation"
+          ],
+          "practice": [
+            "Giải 100 bài algorithm trên LeetCode",
+            "Tạo console applications",
+            "Làm quen với OOP concepts"
+          ]
+        },
+        {
+          "skill": "Database cơ bản (SQL)",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "W3Schools SQL Tutorial",
+            "MySQL documentation",
+            "PostgreSQL tutorials"
+          ],
+          "practice": [
+            "Viết complex SQL queries",
+            "Database design exercises",
+            "Normalization và indexing"
+          ]
+        },
+        {
+          "skill": "Git & Version Control",
+          "timeToLearn": "2-3 tuần",
+          "resources": [
+            "Pro Git book",
+            "GitHub documentation",
+            "Git branching strategies"
+          ],
+          "practice": [
+            "Quản lý source code với Git",
+            "Collaborative development",
+            "Pull request workflows"
+          ]
+        }
+      ],
+      "projects": [
+        "Library management system",
+        "Student grade calculator",
+        "Simple inventory system"
+      ],
+      "assessment": "Thành thạo một ngôn ngữ lập trình và SQL cơ bản"
+    },
+    {
+      "phase": "Giai đoạn 2: Web Development & APIs",
+      "duration": "4-5 tháng",
+      "skills": [
+        {
+          "skill": "Web Framework (Django/Spring Boot/.NET)",
+          "timeToLearn": "6-8 tuần",
+          "resources": [
+            "Django documentation",
+            "Spring Boot guides",
+            "ASP.NET Core tutorials"
+          ],
+          "practice": [
+            "Build REST APIs",
+            "Authentication & authorization",
+            "Database integration"
+          ]
+        },
+        {
+          "skill": "API Design & Documentation",
+          "timeToLearn": "2-3 tuần",
+          "resources": [
+            "RESTful API design principles",
+            "OpenAPI/Swagger documentation",
+            "Postman for API testing"
+          ],
+          "practice": [
+            "Design RESTful endpoints",
+            "API versioning strategies",
+            "Comprehensive API documentation"
+          ]
+        },
+        {
+          "skill": "Database Advanced",
+          "timeToLearn": "4-5 tuần",
+          "resources": [
+            "Database optimization techniques",
+            "NoSQL databases (MongoDB)",
+            "Redis caching"
+          ],
+          "practice": [
+            "Query optimization",
+            "Database migrations",
+            "Caching strategies"
+          ]
+        }
+      ],
+      "projects": [
+        "E-commerce API backend",
+        "Blog platform với authentication",
+        "Task management API"
+      ],
+      "assessment": "Có thể xây dựng complete backend APIs với database"
+    },
+    {
+      "phase": "Giai đoạn 3: Scalability & DevOps",
+      "duration": "4-5 tháng",
+      "skills": [
+        {
+          "skill": "Microservices Architecture",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "Microservices patterns",
+            "Service communication",
+            "API Gateway patterns"
+          ],
+          "practice": [
+            "Break monolith into microservices",
+            "Inter-service communication",
+            "Distributed tracing"
+          ]
+        },
+        {
+          "skill": "Docker & Containerization",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "Docker documentation",
+            "Kubernetes basics",
+            "Container orchestration"
+          ],
+          "practice": [
+            "Containerize applications",
+            "Multi-container setup với Docker Compose",
+            "Deploy to Kubernetes"
+          ]
+        },
+        {
+          "skill": "Cloud Platforms (AWS/Azure/GCP)",
+          "timeToLearn": "4-6 tuần",
+          "resources": [
+            "AWS certification materials",
+            "Azure documentation",
+            "Cloud architecture patterns"
+          ],
+          "practice": [
+            "Deploy applications to cloud",
+            "Use cloud databases và services",
+            "Implement CI/CD pipelines"
+          ]
+        },
+        {
+          "skill": "Performance & Monitoring",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "Application performance monitoring",
+            "Logging best practices",
+            "Error tracking systems"
+          ],
+          "practice": [
+            "Setup monitoring dashboards",
+            "Performance tuning",
+            "Error handling và logging"
+          ]
+        }
+      ],
+      "projects": [
+        "Microservices-based social platform",
+        "Real-time chat system với WebSockets",
+        "Scalable file upload service"
+      ],
+      "assessment": "Có thể thiết kế và deploy scalable backend systems"
+    },
+    {
+      "phase": "Giai đoạn 4: Architecture & Leadership",
+      "duration": "4-6 tháng",
+      "skills": [
+        {
+          "skill": "System Architecture",
+          "timeToLearn": "6-8 tuần",
+          "resources": [
+            "System design interviews",
+            "High-level system architecture",
+            "Scalability patterns"
+          ],
+          "practice": [
+            "Design large-scale systems",
+            "Architecture documentation",
+            "Technology evaluation"
+          ]
+        },
+        {
+          "skill": "Security Best Practices",
+          "timeToLearn": "3-4 tuần",
+          "resources": [
+            "OWASP security guidelines",
+            "Authentication protocols",
+            "Data encryption methods"
+          ],
+          "practice": [
+            "Security audits",
+            "Implement OAuth2/JWT",
+            "Data protection compliance"
+          ]
+        },
+        {
+          "skill": "Team Leadership",
+          "timeToLearn": "Ongoing",
+          "resources": [
+            "Technical leadership skills",
+            "Code review processes",
+            "Mentoring practices"
+          ],
+          "practice": [
+            "Lead technical decisions",
+            "Mentor junior developers",
+            "Architecture presentations"
+          ]
+        }
+      ],
+      "projects": [
+        "Enterprise-level backend system",
+        "Technical documentation và standards",
+        "Open source contributions"
+      ],
+      "assessment": "Senior Backend Developer với architectural expertise"
+    }
+  ],
+  "continuousLearning": [
+    "Theo dõi latest frameworks và tools",
+    "Học new programming languages",
+    "Attend conferences và workshops",
+    "Read technical blogs và research papers"
+  ],
+  "careerPaths": [
+    "Senior Backend Developer",
+    "Backend Team Lead",
+    "Software Architect",
+    "DevOps Engineer",
+    "CTO/Technical Director"
+  ],
+  "salaryProgression": {
+    "junior": "15-25 triệu VNĐ/tháng",
+    "mid": "25-40 triệu VNĐ/tháng", 
+    "senior": "40-70 triệu VNĐ/tháng",
+    "lead": "70-120 triệu VNĐ/tháng"
+  },
+  "tips": [
+    "Tập trung vào system design và scalability",
+    "Thực hành với real-world projects",
+    "Học multiple programming languages",
+    "Hiểu rõ về database optimization",
+    "Keep up với cloud technologies"
+  ]
+}

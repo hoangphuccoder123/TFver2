@@ -1,0 +1,72 @@
+{
+  "categoryName": "Nghề nghiệp Giáo dục",
+  "description": "Các nghề nghiệp trong lĩnh vực giáo dục và đào tạo",
+  "careers": [
+    {
+      "name": "Giáo viên Tiểu học",
+      "description": "Giảng dạy các môn học cơ bản cho học sinh tiểu học, phát triển kỹ năng sống",
+      "hollandType": ["Social", "Artistic"],
+      "skills": [
+        "Kỹ năng sư phạm",
+        "Giao tiếp với trẻ em",
+        "Kiên nhẫn và tình yêu trẻ",
+        "Tổ chức hoạt động",
+        "Kiến thức đa lĩnh vực"
+      ],
+      "salary": {
+        "entry": "8-12 triệu VNĐ/tháng",
+        "mid": "15-25 triệu VNĐ/tháng",
+        "senior": "30-45 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân Sư phạm Tiểu học (4 năm)",
+      "careerPath": "Sinh viên Sư phạm → Giáo viên → Tổ trưởng → Hiệu trưởng",
+      "marketDemand": "Trung bình",
+      "growthRate": "3-5%/năm",
+      "companies": ["Trường Tiểu học Nguyễn Du", "Trường Quốc tế VAS", "Trường Olympia", "Trường Vinschool"]
+    },
+    {
+      "name": "Giảng viên Đại học",
+      "description": "Giảng dạy và nghiên cứu khoa học tại các trường đại học",
+      "hollandType": ["Investigative", "Social"],
+      "skills": [
+        "Kiến thức chuyên sâu",
+        "Kỹ năng nghiên cứu",
+        "Thuyết trình công khai",
+        "Viết bài khoa học",
+        "Tư duy phê phán"
+      ],
+      "salary": {
+        "entry": "15-25 triệu VNĐ/tháng",
+        "mid": "30-50 triệu VNĐ/tháng",
+        "senior": "60-100 triệu VNĐ/tháng"
+      },
+      "education": "Thạc sĩ (tối thiểu) hoặc Tiến sĩ (ưu tiên)",
+      "careerPath": "Nghiên cứu sinh → Giảng viên → Phó Giáo sư → Giáo sư",
+      "marketDemand": "Trung bình",
+      "growthRate": "4-6%/năm",
+      "companies": ["ĐH Bách khoa Hà Nội", "ĐH Kinh tế Quốc dân", "ĐH FPT", "ĐH RMIT"]
+    },
+    {
+      "name": "Chuyên viên Đào tạo Doanh nghiệp",
+      "description": "Thiết kế và triển khai các chương trình đào tạo cho nhân viên công ty",
+      "hollandType": ["Social", "Enterprising"],
+      "skills": [
+        "Thiết kế chương trình đào tạo",
+        "Kỹ năng thuyết trình",
+        "Hiểu biết về doanh nghiệp",
+        "Đánh giá hiệu quả đào tạo",
+        "Sử dụng công nghệ e-learning"
+      ],
+      "salary": {
+        "entry": "12-18 triệu VNĐ/tháng",
+        "mid": "25-40 triệu VNĐ/tháng",
+        "senior": "50-80 triệu VNĐ/tháng"
+      },
+      "education": "Cử nhân (chuyên ngành liên quan) + Chứng chỉ đào tạo",
+      "careerPath": "Trợ lý đào tạo → Chuyên viên đào tạo → Trưởng phòng đào tạo → Giám đốc nhân sự",
+      "marketDemand": "Cao",
+      "growthRate": "8-12%/năm",
+      "companies": ["Viettel", "FPT", "Vingroup", "Samsung Vietnam"]
+    }
+  ]
+}

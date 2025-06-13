@@ -1,0 +1,83 @@
+{
+  "position": "Kỹ sư Cơ khí",
+  "category": "Kỹ thuật - Cơ khí",
+  "difficulty_levels": {
+    "junior": {
+      "technical": [
+        "Engineering fundamentals (thermodynamics, mechanics)?",
+        "CAD software proficiency (AutoCAD, SolidWorks)?",
+        "Manufacturing processes understanding?",
+        "Material properties và selection?",
+        "Quality control principles?",
+        "Safety protocols trong manufacturing?",
+        "Technical drawing interpretation?",
+        "Measurement và testing procedures?",
+        "Project documentation standards?",
+        "Problem-solving methodologies?"
+      ],
+      "behavioral": [
+        "Tại sao chọn mechanical engineering?",
+        "Attention to detail trong design work?",
+        "Team collaboration trong engineering projects?",
+        "Continuous learning approach?",
+        "Safety consciousness trong work?"
+      ]
+    },
+    "mid": {
+      "technical": [
+        "Advanced design principles?",
+        "Process optimization techniques?",
+        "Project management skills?",
+        "Failure analysis methods?",
+        "Cost estimation và value engineering?",
+        "Automation systems understanding?",
+        "Environmental considerations trong design?",
+        "Vendor evaluation và selection?",
+        "Testing và validation procedures?",
+        "Regulatory compliance knowledge?"
+      ],
+      "behavioral": [
+        "Leadership trong technical teams?",
+        "Innovation trong engineering solutions?",
+        "Client communication về technical issues?",
+        "Mentoring junior engineers?",
+        "Professional development commitment?"
+      ]
+    },
+    "senior": {
+      "technical": [
+        "Systems engineering approach?",
+        "Advanced project management?",
+        "R&D program leadership?",
+        "Strategic technology planning?",
+        "Budget management cho engineering projects?",
+        "International standards compliance?",
+        "Intellectual property management?",
+        "Technology transfer processes?",
+        "Risk assessment và mitigation?",
+        "Industry expertise development?"
+      ],
+      "behavioral": [
+        "Engineering leadership philosophy?",
+        "Innovation culture development?",
+        "Cross-functional collaboration?",
+        "Business impact assessment?",
+        "Professional legacy goals?"
+      ]
+    }
+  },
+  "scenario_questions": [
+    "Design fails performance specifications?",
+    "Manufacturing process causes quality issues?",
+    "Project budget constraints affect design options?",
+    "Safety concern identified trong existing design?",
+    "Client requests design changes late trong project?"
+  ],
+  "engineering_challenges": [
+    "Design cost-effective manufacturing solution",
+    "Optimize existing process for efficiency",
+    "Troubleshoot equipment failure",
+    "Develop new product specification",
+    "Plan facility layout for new production line"
+  ]
+}
