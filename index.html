@@ -36,14 +36,12 @@
             color: var(--text-dark);
             overflow-x: hidden;
             scroll-behavior: smooth;
-        }
-
-        /* Header & Navigation */
+        }        /* Header & Navigation */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--primary-gradient);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding: 1rem 0;
@@ -52,7 +50,7 @@
         }
 
         .header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
+            background: var(--primary-gradient);
             box-shadow: var(--shadow-md);
         }
 
@@ -63,15 +61,13 @@
             justify-content: space-between;
             align-items: center; 
             padding: 0 2rem;
-        }
-
-        .logo {
+        }        .logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--text-dark);
+            color: var(--white);
             text-decoration: none;
             transition: var(--transition);
         }
@@ -93,11 +89,9 @@
             list-style: none;
             gap: 2.5rem;
             align-items: center;
-        }
-
-        .nav-menu a {
+        }        .nav-menu a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--white);
             font-weight: 500;
             position: relative;
             transition: var(--transition);
@@ -112,10 +106,8 @@
             height: 2px;
             background: var(--secondary-gradient);
             transition: var(--transition);
-        }
-
-        .nav-menu a:hover {
-            color: #ff6b35;
+        }        .nav-menu a:hover {
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .nav-menu a:hover::after {
@@ -141,33 +133,28 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-toggle {
+        /* Mobile Menu */        .mobile-menu-toggle {
             display: none;
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-dark);
+            color: var(--white);
             padding: 0.5rem;
             border-radius: 8px;
             transition: var(--transition);
-        }
-
-        .mobile-menu-toggle:hover {
-            background: rgba(255, 107, 53, 0.1);
-        }
-
-        .mobile-nav {
+        }        .mobile-menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }        .mobile-nav {
             display: none;
             position: fixed;
             top: 80px;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.98);
+            background: var(--primary-gradient);
             backdrop-filter: blur(20px);
             padding: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: var(--shadow-lg);
             z-index: 999;
         }
@@ -187,11 +174,9 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-        }
-
-        .mobile-nav a {
+        }        .mobile-nav a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--white);
             font-weight: 500;
             font-size: 1.1rem;
             padding: 0.5rem 0;
@@ -199,8 +184,8 @@
         }
 
         .mobile-nav a:hover {
-            color: #ff6b35;
-        }        /* Hero Section */
+            color: rgba(255, 255, 255, 0.8);
+        }/* Hero Section */
         .hero {
             min-height: 70vh;
             background: var(--primary-gradient);
@@ -398,6 +383,22 @@
             color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
+        }        /* Features section specific styles */
+        .features .section-header h2 {
+            color: var(--white);
+        }
+
+        .features .section-header p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* About section specific styles */
+        .about-awards .section-header h2 {
+            color: var(--white);
+        }
+
+        .about-awards .section-header p {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .features-grid {
@@ -483,14 +484,26 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            min-height: 7.2em; /* 1.5 * 0.92rem * 5 dòng */
-            max-height: 7.5em;
+            min-height: 7.2em; /* 1.5 * 0.92rem * 5 dòng */            max-height: 7.5em;
         }
 
         /* Features Section */
         .features {
             padding: 6rem 0;
-            background: var(--background-light);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        .features::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff6b35, transparent);
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
         }
 
         .section-container {
@@ -510,9 +523,7 @@
             font-weight: 800;
             color: var(--text-dark);
             margin-bottom: 1rem;
-        }
-
-        .section-header p {
+        }        .section-header p {
             font-size: 1.2rem;
             color: var(--text-light);
             max-width: 600px;
@@ -534,20 +545,31 @@
             border-radius: 20px;
             box-shadow: 0 6px 24px rgba(102, 126, 234, 0.10);
             border: 1.5px solid #f3f4f6;
-            transition: box-shadow 0.3s, transform 0.3s;
-            cursor: default;
-            pointer-events: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            pointer-events: auto;
             min-width: 0;
             max-width: 340px;
             margin: 0 auto;
             min-height: 170px;
-            height: 170px;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
             position: relative;
             overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+            border-color: #ff6b35;
+        }
+
+        .feature-card.expanded {
+            height: auto;
+            max-height: none;
         }
 
         .feature-card::before {
@@ -603,15 +625,245 @@
             overflow: hidden;
             text-overflow: ellipsis;
             min-height: 7.2em; /* 1.5 * 0.92rem * 5 dòng */
-            max-height: 7.5em;
+            max-height: 7.5em;        }        /* About Us / Awards Section */
+        .about-awards {
+            padding: 6rem 0;
+            background: var(--primary-gradient);
+            position: relative;
+            overflow: hidden;
+        }        .about-awards::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }        .about-awards::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" /><stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" /></radialGradient></defs><circle cx="200" cy="200" r="150" fill="url(%23grad1)"/><circle cx="800" cy="800" r="200" fill="url(%23grad1)"/></svg>');
+            animation: floatPattern 15s ease-in-out infinite;
         }
 
-        /* CTA Section */
+        @keyframes floatPattern {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            50% { transform: translateX(20px) translateY(-10px) rotate(5deg); }
+        }        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-section {
+            text-align: center;
+        }        .about-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .achievements {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 107, 53, 0.1);
+            transition: var(--transition);
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .achievement-text h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-text p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }        .awards-gallery {
+            position: relative;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--white);
+            padding: 2rem 1.5rem 1.5rem;
+        }
+
+        .slide-overlay h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-overlay p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+
+        .gallery-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            pointer-events: auto;
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-btn:hover {
+            background: var(--white);
+            transform: scale(1.1);
+        }
+
+        .gallery-btn .material-symbols-outlined {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--white);
+            transform: scale(1.2);
+        }        /* CTA Section */
         .cta {
             padding: 6rem 0;
             background: var(--text-dark);
             color: var(--white);
             text-align: center;
+            position: relative;
+        }
+
+        .cta::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4facfe, transparent);
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
         }
 
         .cta-content h2 {
@@ -632,13 +884,113 @@
             background: #0d1117;
             color: var(--white);
             padding: 3rem 0 1.5rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff6b35, transparent);
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr;
+            gap: 2.5rem;
             margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .material-symbols-outlined {
+            font-size: 2rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin: 0;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            text-decoration: none;
+            border: 1px solid #2d3748;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .social-link.facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .social-link.facebook:hover {
+            background: #166fe5;
+        }
+
+        .social-link.linkedin {
+            background: #0a66c2;
+            color: white;
+        }
+
+        .social-link.linkedin:hover {
+            background: #094a8f;
+        }
+
+        .social-link.youtube {
+            background: #ff0000;
+            color: white;
+        }
+
+        .social-link.youtube:hover {
+            background: #cc0000;
+        }
+
+        .social-link.twitter {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .social-link.twitter:hover {
+            background: #0d8bd9;
         }
 
         .footer-section h3 {
@@ -667,12 +1019,73 @@
             color: #ff6b35;
         }
 
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .contact-item .material-symbols-outlined {
+            font-size: 1.2rem;
+            color: #ff6b35;
+        }
+
+        .contact-item a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-item a:hover {
+            color: #ff6b35;
+        }
+
         .footer-bottom {
             border-top: 1px solid #2d3748;
             padding-top: 1.5rem;
             text-align: center;
             color: #a0aec0;
             font-size: 0.85rem;
+        }
+
+        /* Footer Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-logo {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .contact-info {
+                align-items: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
         }
 
         /* Animations */
@@ -744,12 +1157,38 @@
 
             .feature-card {
                 padding: 2rem 1.5rem;
+            }            .cta-content h2 {
+                font-size: 2.5rem;
+            }            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .cta-content h2 {
-                font-size: 2.5rem;
+            .about-section h3 {
+                font-size: 1.6rem;
             }
-        }        @media (max-width: 480px) {
+
+            .achievement-item {
+                padding: 1.2rem;
+            }            .achievement-icon {
+                font-size: 1.5rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .gallery-wrapper {
+                height: 300px;
+            }
+
+            .gallery-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .gallery-btn .material-symbols-outlined {
+                font-size: 1.3rem;
+            }
+        }@media (max-width: 480px) {
             .nav-container {
                 padding: 0 1rem;
             }
@@ -773,10 +1212,47 @@
 
             .cta-content h2 {
                 font-size: 2rem;
+            }            .section-header h2 {
+                font-size: 2rem;
+            }            .about-section h3 {
+                font-size: 1.4rem;
             }
 
-            .section-header h2 {
-                font-size: 2rem;
+            .achievement-item {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+            }            .achievement-icon {
+                align-self: center;
+            }
+
+            .gallery-wrapper {
+                height: 250px;
+            }
+
+            .gallery-controls {
+                padding: 0 0.5rem;
+            }
+
+            .gallery-btn {
+                width: 35px;
+                height: 35px;
+            }
+
+            .gallery-btn .material-symbols-outlined {
+                font-size: 1.1rem;
+            }
+
+            .slide-overlay {
+                padding: 1.5rem 1rem 1rem;
+            }
+
+            .slide-overlay h4 {
+                font-size: 1.1rem;
+            }
+
+            .slide-overlay p {
+                font-size: 0.85rem;
             }
         }
 
@@ -830,6 +1306,7 @@
             </a>            <ul class="nav-menu">
                 <li><a href="#home">Trang chủ</a></li>
                 <li><a href="#features">Tính năng</a></li>
+                <li><a href="#about">Về chúng tôi</a></li>
                 <li><a href="#contact">Liên hệ</a></li>
             </ul>
             <a href="Ứng Viên.html" class="cta-button">Bắt đầu ngay</a>
@@ -838,10 +1315,10 @@
             </button>
         </nav>
 
-        <!-- Mobile Menu -->        <div class="mobile-nav" id="mobileNav">
-            <ul>
+        <!-- Mobile Menu -->        <div class="mobile-nav" id="mobileNav">            <ul>
                 <li><a href="#home">Trang chủ</a></li>
                 <li><a href="#features">Tính năng</a></li>
+                <li><a href="#about">Về chúng tôi</a></li>
                 <li><a href="#contact">Liên hệ</a></li>
                 <li><a href="Ứng Viên.html" style="color: #ff6b35; font-weight: 600;">Bắt đầu ngay</a></li>
             </ul>
@@ -978,6 +1455,94 @@
                     <p>Cập nhật xu hướng tuyển dụng, mức lương, nhu cầu nhân lực mới nhất. Hỗ trợ doanh nghiệp, ứng viên đưa ra quyết định chính xác, kịp thời.</p>
                 </div>
             </div>
+        </div>    </section>
+
+    <!-- About Us / Awards Section -->
+    <section class="about-awards" id="about">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Về Tech CV</h2>
+                <p>Hành trình phát triển và những thành tích đáng tự hào của chúng tôi</p>
+            </div><div class="about-content">
+                <!-- Achievement Section -->
+                <div class="about-section">
+                    <h3>🏆 Achievement</h3>
+                    <div class="gallery-container">                        <div class="gallery-wrapper">
+                            <div class="gallery-slide active" data-slide="0">
+                                <img src="ảnh/hackathon 2024.jpg" alt="Hackathon 2024 - Giải Triển Vọng" loading="lazy">
+                                <div class="slide-overlay">
+                                    <h4>🥇 Hackathon 2024</h4>
+                                    <p>Giải Triển Vọng với giải pháp AI tuyển dụng thông minh, vượt qua 200+ đội tham gia</p>
+                                </div>
+                            </div>
+                            <div class="gallery-slide" data-slide="1">
+                                <img src="ảnh/kinh doanh 2024.jpg" alt="Giải thưởng Kinh doanh 2024" loading="lazy">
+                                <div class="slide-overlay">
+                                    <h4>💼 Business Award 2024</h4>
+                                    <p>Top 52 Dự án xuất sắc cuộc thi khởi nghiệp sáng tạo công nghệ RND To Start-Up 2024</p>
+                                </div>
+                            </div>
+                            <div class="gallery-slide" data-slide="2">
+                                <img src="ảnh/Biz day.jpg" alt="Biz Day - Giải Nhất Cuộc thi Kinh doanh" loading="lazy">
+                                <div class="slide-overlay">
+                                    <h4>🏆 Biz Day - Giải Nhất</h4>
+                                    <p>Giải Nhất cuộc thi kinh doanh của trường với ý tưởng sáng tạo và mô hình kinh doanh bền vững</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-controls">
+                            <button class="gallery-btn prev-btn" id="achievementPrevBtn">
+                                <span class="material-symbols-outlined">chevron_left</span>
+                            </button>
+                            <button class="gallery-btn next-btn" id="achievementNextBtn">
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </button>                        </div>
+                        
+                        <div class="gallery-dots">
+                            <span class="dot active" data-slide="0"></span>
+                            <span class="dot" data-slide="1"></span>
+                            <span class="dot" data-slide="2"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Partnership Opportunities Section -->
+                <div class="about-section">
+                    <h3>🤝 Partnership Opportunities</h3>
+                    <div class="gallery-container">
+                        <div class="gallery-wrapper">
+                            <div class="gallery-slide active" data-slide="0">
+                                <img src="ảnh/top cv 1.jpg" alt="Biz Day - Partnership" loading="lazy">
+                                <div class="slide-overlay">
+                                    <h4></h4>
+                                    <p>Nhóm đã may mắn gặp được CEO của TOP CV - 1 trong những doanh nghiệp đi đầu về tuyển dụng ở Việt Nam</p>
+                                </div>
+                            </div>
+                            <div class="gallery-slide" data-slide="1">
+                                <img src="ảnh/top cv 2.jpg" alt="Team Tech CV" loading="lazy">
+                                <div class="slide-overlay">
+                                    <h4>🌟 Our Team</h4>
+                                    <p>Đội ngũ Tech CV đã được anh Vũ Nhật Anh-CEO TOP CV gặp gỡ trong buổi trao giải Hackathon 2024 </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-controls">
+                            <button class="gallery-btn prev-btn" id="partnershipPrevBtn">
+                                <span class="material-symbols-outlined">chevron_left</span>
+                            </button>
+                            <button class="gallery-btn next-btn" id="partnershipNextBtn">
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </button>
+                        </div>
+                        
+                        <div class="gallery-dots">
+                            <span class="dot active" data-slide="0"></span>
+                            <span class="dot" data-slide="1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1003,29 +1568,76 @@
     <footer class="footer" id="contact">
         <div class="section-container">
             <div class="footer-content">
+                <!-- Company Info Section -->
                 <div class="footer-section">
-                    <h3>Ứng viên</h3>
+                    <div class="footer-logo">
+                        <span class="material-symbols-outlined">work</span>
+                        <h3>Tech CV</h3>
+                    </div>
+                    <p class="footer-description">Nền tảng tuyển dụng và hướng nghiệp hàng đầu Việt Nam, kết nối nhà tuyển dụng và ứng viên tài năng với công nghệ AI tiên tiến.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" class="social-link facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="social-link linkedin">
+                            <span class="material-symbols-outlined">business</span>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="social-link youtube">
+                            <span class="material-symbols-outlined">play_circle</span>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="social-link twitter">
+                            <span class="material-symbols-outlined">alternate_email</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Candidates Section -->
+                <div class="footer-section">
+                    <h3>Dành cho Ứng viên</h3>
                     <ul>
-                        <li><a href="main.html">Phỏng vấn AI</a></li>
-                        <li><a href="main.html">Phân tích CV</a></li>
-                        <li><a href="main.html">Trắc nghiệm</a></li>
+                        <li><a href="Ứng Viên.html">Tìm việc làm</a></li>
+                        <li><a href="main.html#cv-analysis">Phân tích CV</a></li>
+                        <li><a href="main.html#ai-interview">Luyện phỏng vấn AI</a></li>
+                        <li><a href="main.html#career-guidance">Hướng nghiệp</a></li>
+                        <li><a href="main.html#holland-test">Test Holland</a></li>
                     </ul>
                 </div>
+
+                <!-- Employers Section -->
                 <div class="footer-section">
-                    <h3>Nhà tuyển dụng</h3>
+                    <h3>Dành cho Nhà tuyển dụng</h3>
                     <ul>
                         <li><a href="Nhà Tuyển Dụng.html">Đăng tuyển dụng</a></li>
-                        <li><a href="Nhà Tuyển Dụng.html">Quản lý CV</a></li>
-                        <li><a href="Nhà Tuyển Dụng.html">Báo cáo</a></li>
+                        <li><a href="Nhà Tuyển Dụng.html#search-cv">Tìm kiếm CV</a></li>
+                        <li><a href="Nhà Tuyển Dụng.html#dashboard">Quản lý tuyển dụng</a></li>
+                        <li><a href="Nhà Tuyển Dụng.html#analytics">Báo cáo thống kê</a></li>
+                        <li><a href="Nhà Tuyển Dụng.html#packages">Gói dịch vụ</a></li>
                     </ul>
                 </div>
+
+                <!-- Contact Section -->
                 <div class="footer-section">
-                    <h3>Hỗ trợ</h3>
-                    <ul>
-                        <li><a href="#contact">Trợ giúp</a></li>
-                        <li><a href="#contact">FAQ</a></li>
-                        <li><a href="#contact">Liên hệ</a></li>
-                    </ul>
+                    <h3>Liên hệ</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="material-symbols-outlined">mail</span>
+                            <a href="mailto:hoanphuc135@gmail.com">hoanphuc135@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="material-symbols-outlined">call</span>
+                            <a href="tel:0899280108">0899 280 108</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="material-symbols-outlined">location_on</span>
+                            <span>Hà Nội, Việt Nam</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span>T2-T6: 8:00 - 18:00</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1219,7 +1831,151 @@
     });
     window.unlockShowcaseCards = unlockShowcaseCards;
     window.lockShowcaseCards = lockShowcaseCards;
-})();
+})();        // Gallery Slider functionality for dual galleries
+        
+        // Achievement Gallery
+        let achievementCurrentSlide = 0;
+        const achievementSlides = document.querySelectorAll('.about-section:first-child .gallery-slide');
+        const achievementDots = document.querySelectorAll('.about-section:first-child .dot');
+        const achievementPrevBtn = document.getElementById('achievementPrevBtn');
+        const achievementNextBtn = document.getElementById('achievementNextBtn');
+
+        function showAchievementSlide(index) {
+            achievementSlides.forEach(slide => slide.classList.remove('active'));
+            achievementDots.forEach(dot => dot.classList.remove('active'));
+            
+            if (achievementSlides[index]) {
+                achievementSlides[index].classList.add('active');
+            }
+            if (achievementDots[index]) {
+                achievementDots[index].classList.add('active');
+            }
+            
+            achievementCurrentSlide = index;
+        }
+
+        function nextAchievementSlide() {
+            achievementCurrentSlide = (achievementCurrentSlide + 1) % achievementSlides.length;
+            showAchievementSlide(achievementCurrentSlide);
+        }
+
+        function prevAchievementSlide() {
+            achievementCurrentSlide = (achievementCurrentSlide - 1 + achievementSlides.length) % achievementSlides.length;
+            showAchievementSlide(achievementCurrentSlide);
+        }
+
+        // Partnership Gallery
+        let partnershipCurrentSlide = 0;
+        const partnershipSlides = document.querySelectorAll('.about-section:last-child .gallery-slide');
+        const partnershipDots = document.querySelectorAll('.about-section:last-child .dot');
+        const partnershipPrevBtn = document.getElementById('partnershipPrevBtn');
+        const partnershipNextBtn = document.getElementById('partnershipNextBtn');
+
+        function showPartnershipSlide(index) {
+            partnershipSlides.forEach(slide => slide.classList.remove('active'));
+            partnershipDots.forEach(dot => dot.classList.remove('active'));
+            
+            if (partnershipSlides[index]) {
+                partnershipSlides[index].classList.add('active');
+            }
+            if (partnershipDots[index]) {
+                partnershipDots[index].classList.add('active');
+            }
+            
+            partnershipCurrentSlide = index;
+        }
+
+        function nextPartnershipSlide() {
+            partnershipCurrentSlide = (partnershipCurrentSlide + 1) % partnershipSlides.length;
+            showPartnershipSlide(partnershipCurrentSlide);
+        }
+
+        function prevPartnershipSlide() {
+            partnershipCurrentSlide = (partnershipCurrentSlide - 1 + partnershipSlides.length) % partnershipSlides.length;
+            showPartnershipSlide(partnershipCurrentSlide);
+        }
+
+        // Event listeners for Achievement gallery
+        if (achievementNextBtn) {
+            achievementNextBtn.addEventListener('click', nextAchievementSlide);
+        }
+        if (achievementPrevBtn) {
+            achievementPrevBtn.addEventListener('click', prevAchievementSlide);
+        }
+
+        // Event listeners for Partnership gallery
+        if (partnershipNextBtn) {
+            partnershipNextBtn.addEventListener('click', nextPartnershipSlide);
+        }
+        if (partnershipPrevBtn) {
+            partnershipPrevBtn.addEventListener('click', prevPartnershipSlide);
+        }
+
+        // Dot navigation for Achievement
+        achievementDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showAchievementSlide(index));
+        });
+
+        // Dot navigation for Partnership
+        partnershipDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showPartnershipSlide(index));
+        });
+
+        // Auto-play for both galleries (optional)
+        setInterval(() => {
+            nextAchievementSlide();
+            nextPartnershipSlide();
+        }, 6000); // Change slide every 6 seconds
+
+        // Touch/swipe support for Achievement gallery
+        const achievementWrapper = document.querySelector('.about-section:first-child .gallery-wrapper');
+        if (achievementWrapper) {
+            let startX = 0;
+            let endX = 0;
+
+            achievementWrapper.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            achievementWrapper.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                const threshold = 50;
+                const diff = startX - endX;
+
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        nextAchievementSlide();
+                    } else {
+                        prevAchievementSlide();
+                    }
+                }
+            });
+        }
+
+        // Touch/swipe support for Partnership gallery
+        const partnershipWrapper = document.querySelector('.about-section:last-child .gallery-wrapper');
+        if (partnershipWrapper) {
+            let startX = 0;
+            let endX = 0;
+
+            partnershipWrapper.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            partnershipWrapper.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                const threshold = 50;
+                const diff = startX - endX;
+
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        nextPartnershipSlide();
+                    } else {
+                        prevPartnershipSlide();
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
