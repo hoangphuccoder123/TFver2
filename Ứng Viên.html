@@ -768,13 +768,11 @@
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            try {
+            const password = document.getElementById('loginPassword').value;            try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 showToast('Đăng nhập thành công!', 'success');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'main.html';
                 }, 2000);
             } catch (error) {
                 let errorMessage = 'Đã xảy ra lỗi khi đăng nhập';
