@@ -28,10 +28,16 @@
             padding: 2rem;
         }
 
-        .back-btn {
+        .nav-buttons {
             position: fixed;
             top: 2rem;
             left: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .back-btn, .achievement-btn {
             background: rgba(255, 255, 255, 0.9);
             border: none;
             padding: 0.8rem 1.5rem;
@@ -43,12 +49,11 @@
             align-items: center;
             gap: 0.5rem;
             color: #667eea;
-            text-decoration: none;
+            text-decoration: none; 
             backdrop-filter: blur(10px);
-            z-index: 1000;
         }
 
-        .back-btn:hover {
+        .back-btn:hover, .achievement-btn:hover {
             background: rgba(255, 255, 255, 1);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -141,10 +146,25 @@
         }
 
         /* Upload and Filter Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 2rem;
+            height: calc(100vh - 200px);
+        }
+
+        .cv-management-section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 1.5rem;
+            overflow-y: auto;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
         .upload-filter-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
@@ -687,178 +707,108 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Recruitment Chatbot Styles */
-        .chatbot-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 400px;
-            height: 600px;
+        /* Chatbot Section Styles */
+        .chatbot-section {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 600px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            z-index: 1000;
-            transform: translateY(100vh);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-        }
-
-        .chatbot-container.open {
-            transform: translateY(0);
         }
 
         .chatbot-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            padding: 1rem;
+            text-align: center;
         }
 
-        .chatbot-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 6s ease-in-out infinite;
+        .chatbot-header h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .chatbot-title {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .chatbot-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
+        .chatbot-header p {
+            margin: 0;
+            font-size: 0.9rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
-            animation: pulse 2s infinite;
-        }
-
-        .chatbot-close {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .chatbot-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .chatbot-messages {
+        .chat-messages {
             flex: 1;
             padding: 1rem;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            background: #f8fafc;
+            max-height: calc(600px - 160px);
         }
 
         .message {
             display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            max-width: 85%;
-            animation: slideIn 0.3s ease-out;
+            margin-bottom: 1rem;
+            animation: slideIn 0.3s ease;
         }
 
         .message.user {
-            align-self: flex-end;
-            flex-direction: row-reverse;
+            justify-content: flex-end;
         }
 
         .message-avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
             flex-shrink: 0;
-            font-size: 1rem;
-        }
-
-        .message.bot .message-avatar {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
         }
 
         .message.user .message-avatar {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            margin-right: 0;
+            margin-left: 0.5rem;
+            order: 2;
+        }
+
+        .message.bot .message-avatar {
+            background: #e2e8f0;
         }
 
         .message-content {
-            padding: 0.8rem 1.2rem;
-            border-radius: 18px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .message.bot .message-content {
             background: white;
-            border: 1px solid #e2e8f0;
-            color: #2d3748;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 80%;
+            word-wrap: break-word;
+            line-height: 1.4;
         }
 
         .message.user .message-content {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
 
-        .message-time {
-            font-size: 0.75rem;
-            opacity: 0.6;
-            margin-top: 0.3rem;
-            text-align: right;
-        }
-
-        .message.bot .message-time {
-            text-align: left;
-        }
-
         .typing-indicator {
-            display: flex;
+            display: none;
             align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 0;
+            margin-bottom: 1rem;
+        }
+
+        .typing-indicator.active {
+            display: flex;
         }
 
         .typing-dots {
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             gap: 0.3rem;
         }
@@ -866,197 +816,167 @@
         .typing-dot {
             width: 8px;
             height: 8px;
+            background: #667eea;
             border-radius: 50%;
-            background: #667eea;
-            animation: typingPulse 1.4s infinite;
+            animation: typingPulse 1.5s infinite;
         }
 
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        .suggestion-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
         }
 
-        .suggestion-chip {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            padding: 0.4rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
         }
 
-        .suggestion-chip:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-1px);
-        }
-
-        .chatbot-input {
+        .chat-input-container {
             padding: 1rem;
-            border-top: 1px solid #e2e8f0;
             background: white;
-        }
-
-        .input-container {
+            border-top: 1px solid #e2e8f0;
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             align-items: flex-end;
         }
 
-        .chatbot-textarea {
+        .chat-input {
             flex: 1;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 0.8rem 1rem;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             resize: none;
-            max-height: 80px;
-            min-height: 40px;
-            font-family: inherit;
+            outline: none;
             transition: border-color 0.3s ease;
         }
 
-        .chatbot-textarea:focus {
-            outline: none;
+        .chat-input:focus {
             border-color: #667eea;
         }
 
-        .send-button {
+        .chat-send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
             width: 40px;
             height: 40px;
-            border: none;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
             transition: all 0.3s ease;
             flex-shrink: 0;
         }
 
-        .send-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        .chat-send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .send-button:disabled {
-            opacity: 0.5;
+        .chat-send-btn:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        .chatbot-toggle {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            border: none;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            z-index: 999;
-            font-size: 1.5rem;
+        .chat-send-btn .material-symbols-outlined {
+            font-size: 1.2rem;
         }
 
-        .chatbot-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 20px;
-            height: 20px;
-            background: #ef4444;
-            color: white;
-            border-radius: 50%;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            animation: bounceIn 0.5s ease;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes slideIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(10px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-
-        @keyframes typingPulse {
-            0%, 60%, 100% { 
-                transform: scale(1); 
-                opacity: 0.4; 
-            }
-            30% { 
-                transform: scale(1.2); 
-                opacity: 1; 
-            }
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        /* Mobile responsiveness for chatbot */
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .chatbot-container {
-                width: calc(100vw - 2rem);
-                height: calc(100vh - 4rem);
-                bottom: 1rem;
-                right: 1rem;
-                left: 1rem;
-                border-radius: 15px;
+            .nav-buttons {
+                position: relative;
+                top: auto;
+                left: auto;
+                justify-content: center;
+                margin-bottom: 1rem;
             }
 
-            .chatbot-toggle {
-                bottom: 1rem;
-                right: 1rem;
+            .back-btn, .achievement-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                height: auto;
+            }
+
+            .upload-filter-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .nav-tab {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .main-layout {
+                gap: 0.5rem;
+            }
+
+            .cv-management-section,
+            .chatbot-section {
+                padding: 1rem;
+            }
+
+            .chatbot-section {
+                height: 350px;
+            }
+
+            .chat-messages {
+                max-height: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn">
-        <span class="material-symbols-outlined">arrow_back</span>
-        Quay lại
-    </a>
+    <div class="nav-buttons">
+        <a href="index.html" class="back-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Quay lại
+        </a>
+        <a href="team achievements.html" class="achievement-btn">
+            <span class="material-symbols-outlined">emoji_events</span>
+            Thành tích
+        </a>
+    </div>
 
     <div class="container">
         <div class="header">
@@ -1078,119 +998,167 @@
 
             <!-- CV Management Tab (Combined Upload + Manage) -->
             <div class="tab-content active" id="management-tab">
-                <!-- Upload and Filter Container -->
-                <div class="upload-filter-container">
-                    <!-- Quick Upload Section -->
-                    <div class="upload-section">
-                        <div class="section-header">
-                            <h2>📁 Tải Lên CV</h2>
-                            <p>Kéo thả hoặc click để chọn file</p>
+                <div class="main-layout">
+                    <!-- CV Management Section (70%) -->
+                    <div class="cv-management-section">
+                        <!-- Upload and Filter Container -->
+                        <div class="upload-filter-container">
+                            <!-- Quick Upload Section -->
+                            <div class="upload-section">
+                                <div class="section-header">
+                                    <h2>📁 Tải Lên CV</h2>
+                                    <p>Kéo thả hoặc click để chọn file</p>
+                                </div>
+                                
+                                <div class="upload-area" id="upload-area">
+                                    <div class="upload-icon">
+                                        <span class="material-symbols-outlined">cloud_upload</span>
+                                    </div>
+                                    <h3>Thả file CV vào đây</h3>
+                                    <p>PDF, DOC, DOCX, JPG, PNG (Max 10MB)</p>
+                                    <input type="file" id="cv-files" class="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                </div>
+
+                                <div id="upload-progress" style="display: none;">
+                                    <div style="background: #e2e8f0; border-radius: 10px; height: 8px; margin: 1rem 0;">
+                                        <div id="progress-bar" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    <p id="upload-status">Đang xử lý file...</p>
+                                </div>
+
+                                <div id="upload-results" style="display: none;">
+                                    <h4 style="margin-bottom: 0.8rem; font-size: 1rem;">Kết Quả:</h4>
+                                    <div id="results-list"></div>
+                                </div>
+                            </div>
+
+                            <!-- Advanced Filters & Search -->
+                            <div class="filter-section">
+                                <div class="section-header">
+                                    <h2>🔍 Bộ Lọc & Tìm Kiếm</h2>
+                                    <p>Lọc trong cơ sở dữ liệu CV</p>
+                                </div>
+                                
+                                <div class="filter-grid">
+                                    <div class="filter-group">
+                                        <label>Vị Trí</label>
+                                        <select id="filter-position">
+                                            <option value="">Tất cả vị trí</option>
+                                            <option value="frontend">Frontend Developer</option>
+                                            <option value="backend">Backend Developer</option>
+                                            <option value="fullstack">Fullstack Developer</option>
+                                            <option value="mobile">Mobile Developer</option>
+                                            <option value="data">Data Scientist</option>
+                                            <option value="design">UI/UX Designer</option>
+                                            <option value="marketing">Marketing</option>
+                                            <option value="other">Khác</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Kinh Nghiệm</label>
+                                        <select id="filter-experience">
+                                            <option value="">Tất cả cấp độ</option>
+                                            <option value="0-1">Fresher (0-1 năm)</option>
+                                            <option value="1-3">Junior (1-3 năm)</option>
+                                            <option value="3-5">Middle (3-5 năm)</option>
+                                            <option value="5+">Senior (5+ năm)</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Điểm CV</label>
+                                        <select id="filter-score">
+                                            <option value="">Tất cả điểm</option>
+                                            <option value="90-100">Xuất sắc (90-100)</option>
+                                            <option value="80-89">Tốt (80-89)</option>
+                                            <option value="70-79">Khá (70-79)</option>
+                                            <option value="0-69">Cần cải thiện (<70)</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Từ Khóa</label>
+                                        <input type="text" id="search-keyword" placeholder="Tên, kỹ năng, công ty...">
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button class="btn btn-primary" id="apply-filters">
+                                        <span class="material-symbols-outlined">search</span>
+                                        Áp Dụng
+                                    </button>
+                                    <button class="btn btn-secondary" id="reset-filters">
+                                        <span class="material-symbols-outlined">refresh</span>
+                                        Đặt Lại
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CV Database Grid -->
+                        <div class="cv-database-section">
+                            <div class="section-header">
+                                <h2>📊 Cơ Sở Dữ Liệu CV</h2>
+                                <div class="database-stats">
+                                    <span class="stat-item">
+                                        <span class="material-symbols-outlined">folder</span>
+                                        <span id="total-cvs">0</span> Tổng CV
+                                    </span>
+                                    <span class="stat-item">
+                                        <span class="material-symbols-outlined">star</span>
+                                        <span id="excellent-cvs">0</span> Xuất sắc
+                                    </span>
+                                    <span class="stat-item">
+                                        <span class="material-symbols-outlined">trending_up</span>
+                                        <span id="good-cvs">0</span> Tốt
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="cv-grid" id="cv-grid">
+                                <!-- CV cards will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chatbot Section (30%) -->
+                    <div class="chatbot-section">
+                        <div class="chatbot-header">
+                            <h3>🤖 AI Assistant</h3>
+                            <p>Hỗ trợ phân tích và tư vấn CV</p>
                         </div>
                         
-                        <div class="upload-area" id="upload-area">
-                            <div class="upload-icon">
-                                <span class="material-symbols-outlined">cloud_upload</span>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message bot">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    Xin chào! Tôi là AI Assistant của bạn. Tôi có thể giúp bạn:
+                                    <br><br>
+                                    • Phân tích và đánh giá CV
+                                    <br>
+                                    • Tư vấn lựa chọn ứng viên
+                                    <br>
+                                    • Gợi ý câu hỏi phỏng vấn
+                                    <br>
+                                    • So sánh các CV
+                                    <br><br>
+                                    Hãy tải lên CV hoặc hỏi tôi bất cứ điều gì!
+                                </div>
                             </div>
-                            <h3>Thả file CV vào đây</h3>
-                            <p>PDF, DOC, DOCX, JPG, PNG (Max 10MB)</p>
-                            <input type="file" id="cv-files" class="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
                         </div>
 
-                        <div id="upload-progress" style="display: none;">
-                            <div style="background: #e2e8f0; border-radius: 10px; height: 8px; margin: 1rem 0;">
-                                <div id="progress-bar" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s ease;"></div>
+                        <div class="typing-indicator" id="typing-indicator">
+                            <div class="message-avatar">🤖</div>
+                            <div class="typing-dots">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
                             </div>
-                            <p id="upload-status">Đang xử lý file...</p>
                         </div>
 
-                        <div id="upload-results" style="display: none;">
-                            <h4 style="margin-bottom: 0.8rem; font-size: 1rem;">Kết Quả:</h4>
-                            <div id="results-list"></div>
-                        </div>
-                    </div>
-
-                    <!-- Advanced Filters & Search -->
-                    <div class="filter-section">
-                        <div class="section-header">
-                            <h2>🔍 Bộ Lọc & Tìm Kiếm</h2>
-                            <p>Lọc trong cơ sở dữ liệu CV</p>
-                        </div>
-                        
-                        <div class="filter-grid">
-                            <div class="filter-group">
-                                <label>Vị Trí</label>
-                                <select id="filter-position">
-                                    <option value="">Tất cả vị trí</option>
-                                    <option value="frontend">Frontend Developer</option>
-                                    <option value="backend">Backend Developer</option>
-                                    <option value="fullstack">Fullstack Developer</option>
-                                    <option value="mobile">Mobile Developer</option>
-                                    <option value="data">Data Scientist</option>
-                                    <option value="design">UI/UX Designer</option>
-                                    <option value="marketing">Marketing</option>
-                                    <option value="other">Khác</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <label>Kinh Nghiệm</label>
-                                <select id="filter-experience">
-                                    <option value="">Tất cả cấp độ</option>
-                                    <option value="0-1">Fresher (0-1 năm)</option>
-                                    <option value="1-3">Junior (1-3 năm)</option>
-                                    <option value="3-5">Middle (3-5 năm)</option>
-                                    <option value="5+">Senior (5+ năm)</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <label>Điểm CV</label>
-                                <select id="filter-score">
-                                    <option value="">Tất cả điểm</option>
-                                    <option value="90-100">Xuất sắc (90-100)</option>
-                                    <option value="80-89">Tốt (80-89)</option>
-                                    <option value="70-79">Khá (70-79)</option>
-                                    <option value="0-69">Cần cải thiện (<70)</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <label>Từ Khóa</label>
-                                <input type="text" id="search-keyword" placeholder="Tên, kỹ năng, công ty...">
-                            </div>
-                        </div>
-                        <div class="filter-actions">
-                            <button class="btn btn-primary" id="apply-filters">
-                                <span class="material-symbols-outlined">search</span>
-                                Áp Dụng
-                            </button>
-                            <button class="btn btn-secondary" id="reset-filters">
-                                <span class="material-symbols-outlined">refresh</span>
-                                Đặt Lại
+                        <div class="chat-input-container">
+                            <textarea class="chat-input" id="chat-input" placeholder="Nhập tin nhắn..." rows="2"></textarea>
+                            <button class="chat-send-btn" id="chat-send-btn">
+                                <span class="material-symbols-outlined">send</span>
                             </button>
                         </div>
-                    </div>
-                </div>
-
-                <!-- CV Database Grid -->
-                <div class="cv-database-section">
-                    <div class="section-header">
-                        <h2>📊 Cơ Sở Dữ Liệu CV</h2>
-                        <div class="database-stats">
-                            <span class="stat-item">
-                                <span class="material-symbols-outlined">folder</span>
-                                <span id="total-cvs">0</span> Tổng CV
-                            </span>
-                            <span class="stat-item">
-                                <span class="material-symbols-outlined">star</span>
-                                <span id="excellent-cvs">0</span> Xuất sắc
-                            </span>
-                            <span class="stat-item">
-                                <span class="material-symbols-outlined">trending_up</span>
-                                <span id="good-cvs">0</span> Tốt
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="cv-grid" id="cv-grid">
-                        <!-- CV cards will be populated here -->
                     </div>
                 </div>
             </div>
@@ -1275,64 +1243,6 @@
             <div class="loading" id="loading">
                 <div class="spinner"></div>
                 <p>Processing data...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- AI Recruitment Advisor Chatbot -->
-    <button class="chatbot-toggle" id="chatbotToggle">
-        🤖
-        <div class="notification-badge" id="notificationBadge" style="display: none;">1</div>
-    </button>
-
-    <div class="chatbot-container" id="chatbotContainer">
-        <div class="chatbot-header">
-            <div class="chatbot-title">
-                <span>🎯</span>
-                <div>
-                    <div>AI Tư Vấn Tuyển Dụng</div>
-                    <div class="chatbot-status">
-                        <div class="status-dot"></div>
-                        <span>Trực tuyến</span>
-                    </div>
-                </div>
-            </div>
-            <button class="chatbot-close" id="chatbotClose">×</button>
-        </div>
-
-        <div class="chatbot-messages" id="chatbotMessages">
-            <div class="message bot">
-                <div class="message-avatar">🤖</div>
-                <div>
-                    <div class="message-content">
-                        Xin chào! Tôi là AI Tư Vấn Tuyển Dụng của Tech CV. Tôi có thể giúp bạn:
-                        
-                        • Phân tích dữ liệu CV trong hệ thống
-                        • Đề xuất câu hỏi phỏng vấn phù hợp
-                        • Tư vấn chiến lược tuyển dụng
-                        • So sánh mức lương thị trường
-                        • Đưa ra quyết định tuyển dụng tối ưu
-                        
-                        Bạn cần hỗ trợ gì hôm nay?
-                    </div>
-                    <div class="suggestion-chips">
-                        <div class="suggestion-chip" data-suggestion="Phân tích dữ liệu CV hiện tại">📊 Phân tích dữ liệu CV</div>
-                        <div class="suggestion-chip" data-suggestion="Top ứng viên xuất sắc nhất">🏆 Top ứng viên</div>
-                        <div class="suggestion-chip" data-suggestion="Thống kê CV theo vị trí">📈 Thống kê vị trí</div>
-                    </div>
-                    <div class="message-time">Vừa xong</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="chatbot-input">
-            <div class="input-container">
-                <textarea class="chatbot-textarea" id="chatbotInput" placeholder="Nhập câu hỏi của bạn..." rows="1"></textarea>
-                <button class="send-button" id="sendButton">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
-                    </svg>
-                </button>
             </div>
         </div>
     </div>
@@ -3119,15 +3029,247 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
                     ]
                 };
             }
+        }
+
+        // Chatbot functionality
+        class CVChatbot {
+            constructor() {
+                console.log('CVChatbot constructor called');
+                this.messages = [];
+                this.messagesContainer = document.getElementById('chat-messages');
+                this.chatInput = document.getElementById('chat-input');
+                this.sendButton = document.getElementById('chat-send-btn');
+                this.typingIndicator = document.getElementById('typing-indicator');
+                
+                console.log('Elements found:', {
+                    messagesContainer: this.messagesContainer,
+                    chatInput: this.chatInput,
+                    sendButton: this.sendButton,
+                    typingIndicator: this.typingIndicator
+                });
+                
+                if (this.messagesContainer && this.chatInput && this.sendButton) {
+                    this.initializeEventListeners();
+                    console.log('Chatbot initialized successfully');
+                } else {
+                    console.error('Chatbot elements not found!');
+                }
+            }
+
+            initializeEventListeners() {
+                console.log('Initializing event listeners');
+                
+                // Send message on button click
+                this.sendButton.addEventListener('click', () => {
+                    console.log('Send button clicked');
+                    this.sendMessage();
+                });
+
+                // Send message on Enter key (but allow Shift+Enter for new line)
+                this.chatInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        console.log('Enter key pressed');
+                        this.sendMessage();
+                    }
+                });
+
+                // Auto-resize textarea
+                this.chatInput.addEventListener('input', () => {
+                    this.chatInput.style.height = 'auto';
+                    this.chatInput.style.height = Math.min(this.chatInput.scrollHeight, 100) + 'px';
+                });
+                
+                console.log('Event listeners initialized');
+            }
+
+            async sendMessage() {
+                console.log('Send message called');
+                const message = this.chatInput.value.trim();
+                if (!message) {
+                    console.log('Empty message, returning');
+                    return;
+                }
+
+                console.log('Sending message:', message);
+
+                // Add user message
+                this.addMessage('user', message);
+                this.chatInput.value = '';
+                this.chatInput.style.height = 'auto';
+
+                // Show typing indicator
+                this.showTyping();
+
+                try {
+                    // Simulate AI response (replace with actual AI integration)
+                    const response = await this.getAIResponse(message);
+                    this.hideTyping();
+                    this.addMessage('bot', response.text || response);
+                } catch (error) {
+                    console.error('Error getting AI response:', error);
+                    this.hideTyping();
+                    this.addMessage('bot', 'Xin lỗi, tôi gặp sự cố khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.');
+                }
+            }
+
+            addMessage(sender, content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = sender === 'bot' ? '🤖' : '👤';
+
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.innerHTML = content.replace(/\n/g, '<br>');
+
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(messageContent);
+
+                this.messagesContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+
+            showTyping() {
+                this.typingIndicator.style.display = 'flex';
+                this.scrollToBottom();
+            }
+
+            hideTyping() {
+                this.typingIndicator.style.display = 'none';
+            }
 
             scrollToBottom() {
                 this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
             }
+
+            async getAIResponse(message) {
+                // Simulate typing delay
+                await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+
+                const lowerMessage = message.toLowerCase();
+                
+                // Context-aware responses based on current CVs and filters
+                if (lowerMessage.includes('phân tích') || lowerMessage.includes('đánh giá')) {
+                    return this.getAnalysisResponse();
+                } else if (lowerMessage.includes('so sánh') || lowerMessage.includes('compare')) {
+                    return this.getComparisonResponse();
+                } else if (lowerMessage.includes('câu hỏi') || lowerMessage.includes('phỏng vấn')) {
+                    return this.getInterviewResponse();
+                } else if (lowerMessage.includes('thống kê') || lowerMessage.includes('số liệu')) {
+                    return this.getStatisticsResponse();
+                } else if (lowerMessage.includes('tư vấn') || lowerMessage.includes('gợi ý')) {
+                    return this.getAdviceResponse();
+                } else {
+                    return this.getGeneralResponse();
+                }
+            }
+
+            getAnalysisResponse() {
+                const totalCVs = document.getElementById('total-cvs').textContent;
+                const excellentCVs = document.getElementById('excellent-cvs').textContent;
+                
+                return `📊 Phân tích hiện tại:
+                
+• Tổng số CV: ${totalCVs}
+• CV xuất sắc: ${excellentCVs}
+• Tỷ lệ CV chất lượng cao: ${totalCVs > 0 ? Math.round(excellentCVs / totalCVs) * 100 : 0}%
+
+Bạn muốn tôi phân tích chi tiết CV nào cụ thể không?`;
+            }
+
+            getComparisonResponse() {
+                return `🔍 Để so sánh CV hiệu quả:
+
+1. **Kỹ năng chính**: So sánh độ phù hợp với job description
+2. **Kinh nghiệm**: Đánh giá chất lượng và độ liên quan
+3. **Học vấn**: Xem xét background phù hợp
+4. **Điểm tổng thể**: Dựa trên thuật toán AI
+
+Bạn có muốn tôi so sánh 2-3 CV cụ thể không?`;
+            }
+
+            getInterviewResponse() {
+                return `❓ Gợi ý câu hỏi phỏng vấn:
+
+**Câu hỏi kỹ thuật:**
+• "Mô tả dự án bạn tự hào nhất?"
+• "Cách giải quyết vấn đề phức tạp?"
+• "Kỹ năng muốn phát triển trong 6 tháng tới?"
+
+**Câu hỏi soft skills:**
+• "Làm thế nào để làm việc nhóm hiệu quả?"
+• "Xử lý tình huống áp lực cao?"
+
+Bạn muốn câu hỏi cho vị trí nào cụ thể?`;
+            }
+
+            getStatisticsResponse() {
+                return `📈 Thống kê CV trong hệ thống:
+
+• **Vị trí phổ biến**: Frontend (35%), Backend (28%), Fullstack (20%)
+• **Kinh nghiệm trung bình**: 2.5 năm
+• **Điểm CV trung bình**: 75/100
+• **Xu hướng**: React, Node.js, Python đang tăng mạnh
+
+Bạn cần thống kê theo tiêu chí nào khác không?`;
+            }
+
+            getAdviceResponse() {
+                return `💡 Tư vấn tuyển dụng:
+
+**Lựa chọn ứng viên:**
+1. Ưu tiên CV có điểm ≥ 80
+2. Kiểm tra portfolio/dự án thực tế
+3. Đánh giá cultural fit
+
+**Quy trình hiệu quả:**
+• Sàng lọc CV → Phỏng vấn điện thoại → Technical test → Onsite interview
+
+Bạn cần tư vấn cho vị trí nào cụ thể?`;
+            }
+
+            getGeneralResponse() {
+                const responses = [
+                    `Tôi có thể giúp bạn:
+• Phân tích và đánh giá CV
+• So sánh ứng viên
+• Gợi ý câu hỏi phỏng vấn
+• Thống kê dữ liệu tuyển dụng
+
+Bạn cần hỗ trợ gì cụ thể?`,
+                    
+                    `💼 Với vai trò HR Assistant, tôi có thể:
+• Đọc và phân tích CV tự động
+• Tạo báo cáo thống kê
+• Tư vấn lựa chọn ứng viên
+• Hỗ trợ quy trình tuyển dụng
+
+Hãy cho tôi biết bạn đang cần gì!`,
+                    
+                    `🎯 Hãy thử hỏi tôi:
+"Phân tích CV này"
+"So sánh 2 ứng viên này"
+"Gợi ý câu hỏi phỏng vấn"
+"Thống kê theo vị trí"
+
+Tôi sẵn sàng hỗ trợ bạn!`
+                ];
+                
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
         }
 
-        // Initialize the AI Recruitment Advisor
+        // Initialize chatbot
+        let cvChatbot;
+
+        // Initialize the AI Recruitment Advisor and Chatbot
         document.addEventListener('DOMContentLoaded', () => {
-            new RecruitmentAdvisor();
+            console.log('DOM Content Loaded - Initializing chatbot...');
+            cvChatbot = new CVChatbot();
+            console.log('Chatbot initialized:', cvChatbot);
         });
 
     </script>
