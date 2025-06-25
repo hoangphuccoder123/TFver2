@@ -601,18 +601,30 @@
         }
         
         .criteria-item:nth-child(1) {
-            border-left-color: #60a5fa; /* Blue */
+            border-left-color: #3b82f6; /* Blue */
         }
         
         .criteria-item:nth-child(2) {
-            border-left-color: #34d399; /* Green */
+            border-left-color: #60a5fa; /* Light Blue */
         }
         
         .criteria-item:nth-child(3) {
-            border-left-color: #a78bfa; /* Purple */
+            border-left-color: #34d399; /* Green */
         }
         
         .criteria-item:nth-child(4) {
+            border-left-color: #10b981; /* Emerald */
+        }
+        
+        .criteria-item:nth-child(5) {
+            border-left-color: #a78bfa; /* Purple */
+        }
+        
+        .criteria-item:nth-child(6) {
+            border-left-color: #8b5cf6; /* Violet */
+        }
+        
+        .criteria-item:nth-child(7) {
             border-left-color: #fbbf24; /* Yellow */
         }
         
@@ -649,18 +661,30 @@
         }
         
         .criteria-item:nth-child(1) label::before {
-            content: '📝';
+            content: '🎯';
         }
         
         .criteria-item:nth-child(2) label::before {
-            content: '💼';
+            content: '📝';
         }
         
         .criteria-item:nth-child(3) label::before {
-            content: '🔧';
+            content: '💼';
         }
         
         .criteria-item:nth-child(4) label::before {
+            content: '📊';
+        }
+        
+        .criteria-item:nth-child(5) label::before {
+            content: '🔧';
+        }
+        
+        .criteria-item:nth-child(6) label::before {
+            content: '🤝';
+        }
+        
+        .criteria-item:nth-child(7) label::before {
             content: '🎓';
         }
             
@@ -710,19 +734,31 @@
         }
         
         .criteria-item:nth-child(1) .weight-slider::-webkit-slider-thumb {
-            border-color: #60a5fa;
+            border-color: #3b82f6; /* Blue */
         }
         
         .criteria-item:nth-child(2) .weight-slider::-webkit-slider-thumb {
-            border-color: #34d399;
+            border-color: #60a5fa; /* Light Blue */
         }
         
         .criteria-item:nth-child(3) .weight-slider::-webkit-slider-thumb {
-            border-color: #a78bfa;
+            border-color: #34d399; /* Green */
         }
         
         .criteria-item:nth-child(4) .weight-slider::-webkit-slider-thumb {
-            border-color: #fbbf24;
+            border-color: #10b981; /* Emerald */
+        }
+        
+        .criteria-item:nth-child(5) .weight-slider::-webkit-slider-thumb {
+            border-color: #a78bfa; /* Purple */
+        }
+        
+        .criteria-item:nth-child(6) .weight-slider::-webkit-slider-thumb {
+            border-color: #8b5cf6; /* Violet */
+        }
+        
+        .criteria-item:nth-child(7) .weight-slider::-webkit-slider-thumb {
+            border-color: #fbbf24; /* Yellow */
         }
             
         .weight-slider::-webkit-slider-thumb:hover {
@@ -770,18 +806,30 @@
         }
         
         .criteria-item:nth-child(1) .weight-value {
-            background: #60a5fa; /* Blue */
+            background: #3b82f6; /* Blue */
         }
         
         .criteria-item:nth-child(2) .weight-value {
-            background: #34d399; /* Green */
+            background: #60a5fa; /* Light Blue */
         }
         
         .criteria-item:nth-child(3) .weight-value {
-            background: #a78bfa; /* Purple */
+            background: #34d399; /* Green */
         }
         
         .criteria-item:nth-child(4) .weight-value {
+            background: #10b981; /* Emerald */
+        }
+        
+        .criteria-item:nth-child(5) .weight-value {
+            background: #a78bfa; /* Purple */
+        }
+        
+        .criteria-item:nth-child(6) .weight-value {
+            background: #8b5cf6; /* Violet */
+        }
+        
+        .criteria-item:nth-child(7) .weight-value {
             background: #fbbf24; /* Yellow */
         }
             
@@ -796,19 +844,31 @@
         }
         
         .criteria-item:nth-child(1) .criteria-details {
-            border-left-color: rgba(96, 165, 250, 0.4);
+            border-left-color: rgba(59, 130, 246, 0.4); /* Blue */
         }
         
         .criteria-item:nth-child(2) .criteria-details {
-            border-left-color: rgba(52, 211, 153, 0.4);
+            border-left-color: rgba(96, 165, 250, 0.4); /* Light Blue */
         }
         
         .criteria-item:nth-child(3) .criteria-details {
-            border-left-color: rgba(167, 139, 250, 0.4);
+            border-left-color: rgba(52, 211, 153, 0.4); /* Green */
         }
         
         .criteria-item:nth-child(4) .criteria-details {
-            border-left-color: rgba(251, 191, 36, 0.4);
+            border-left-color: rgba(16, 185, 129, 0.4); /* Emerald */
+        }
+        
+        .criteria-item:nth-child(5) .criteria-details {
+            border-left-color: rgba(167, 139, 250, 0.4); /* Purple */
+        }
+        
+        .criteria-item:nth-child(6) .criteria-details {
+            border-left-color: rgba(139, 92, 246, 0.4); /* Violet */
+        }
+        
+        .criteria-item:nth-child(7) .criteria-details {
+            border-left-color: rgba(251, 191, 36, 0.4); /* Yellow */
         }
             
         .weight-warning {
@@ -1584,10 +1644,10 @@
                                 <label>Điểm CV</label>
                                 <select id="filter-score">
                                     <option value="">Tất cả điểm</option>
-                                    <option value="90-100">Xuất sắc (90-100)</option>
-                                    <option value="80-89">Tốt (80-89)</option>
-                                    <option value="70-79">Khá (70-79)</option>
-                                    <option value="0-69">Cần cải thiện (<70)</option>
+                                    <option value="180-200">Xuất sắc (180-200)</option>
+                                    <option value="160-179">Tốt (160-179)</option>
+                                    <option value="140-159">Khá (140-159)</option>
+                                    <option value="0-139">Cần cải thiện (<140)</option>
                                 </select>
                             </div>
                             <div class="filter-group">
@@ -1711,7 +1771,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- CV Scoring Settings Tab -->
             <div class="tab-content" id="settings-tab">
                 <div class="section-header">
@@ -1723,40 +1782,63 @@
                     <div class="scoring-criteria-section">
                         <div class="criteria-header">
                             <h3>Tiêu Chí Đánh Giá</h3>
-                            <p>Tổng điểm: <span id="total-weight">100</span>%</p>
+                            <p>Tổng điểm: <span id="total-weight">200</span>%</p>
                         </div>
                         
                         <div class="criteria-form">
                             <div class="criteria-item">
-                                <label for="professionalism-weight">Chuyên Nghiệp & Rõ Ràng <small>(Trọng số hiện tại: <b id="professionalism-percent">25%</b>)</small></label>
+                                <label for="job-relevance-weight">Mức độ Phù hợp với Vị trí <small>(Trọng số hiện tại: <b id="job-relevance-percent">50%</b>)</small></label>
                                 <div class="slider-container">
                                     <div class="slider-track"></div>
-                                    <input type="range" min="5" max="50" value="25" class="weight-slider" id="professionalism-weight">
-                                    <span class="weight-value" id="professionalism-value">25</span>
+                                    <input type="range" min="10" max="100" value="50" class="weight-slider" id="job-relevance-weight">
+                                    <span class="weight-value" id="job-relevance-value">50</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá mức độ phù hợp của kỹ năng, kinh nghiệm với yêu cầu cụ thể của vị trí (điểm cao nhất cho sự khớp với JD)</p>
+                                </div>
+                            </div>
+
+                            <div class="criteria-item">
+                                <label for="professionalism-weight">Chuyên Nghiệp & Rõ Ràng <small>(Trọng số hiện tại: <b id="professionalism-percent">30%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="10" max="100" value="30" class="weight-slider" id="professionalism-weight">
+                                    <span class="weight-value" id="professionalism-value">30</span>
                                 </div>
                                 <div class="criteria-details">
                                     <p>Đánh giá email, số điện thoại, họ tên đầy đủ, cấu trúc CV và mức độ chi tiết của CV</p>
                                 </div>
                             </div>
-
                             <div class="criteria-item">
-                                <label for="experience-weight">Kinh Nghiệm Làm Việc <small>(Trọng số hiện tại: <b id="experience-percent">30%</b>)</small></label>
+                                <label for="experience-weight">Kinh Nghiệm Làm Việc <small>(Trọng số hiện tại: <b id="experience-percent">40%</b>)</small></label>
                                 <div class="slider-container">
                                     <div class="slider-track"></div>
-                                    <input type="range" min="5" max="50" value="30" class="weight-slider" id="experience-weight">
-                                    <span class="weight-value" id="experience-value">30</span>
+                                    <input type="range" min="10" max="100" value="40" class="weight-slider" id="experience-weight">
+                                    <span class="weight-value" id="experience-value">40</span>
                                 </div>
                                 <div class="criteria-details">
-                                    <p>Đánh giá số lượng, chất lượng kinh nghiệm làm việc và mức độ liên quan đến vị trí ứng tuyển</p>
+                                    <p>Đánh giá số lượng và chất lượng kinh nghiệm làm việc dựa trên thời gian và vị trí</p>
                                 </div>
                             </div>
 
                             <div class="criteria-item">
-                                <label for="skills-weight">Kỹ Năng Chuyên Môn <small>(Trọng số hiện tại: <b id="skills-percent">25%</b>)</small></label>
+                                <label for="achievements-weight">Thành tựu & Kết quả <small>(Trọng số hiện tại: <b id="achievements-percent">30%</b>)</small></label>
                                 <div class="slider-container">
                                     <div class="slider-track"></div>
-                                    <input type="range" min="5" max="50" value="25" class="weight-slider" id="skills-weight">
-                                    <span class="weight-value" id="skills-value">25</span>
+                                    <input type="range" min="10" max="100" value="30" class="weight-slider" id="achievements-weight">
+                                    <span class="weight-value" id="achievements-value">30</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá thành tựu cụ thể với con số/phần trăm, chứng minh hiệu quả làm việc (ví dụ: tăng doanh số 20%, giảm chi phí 15%)</p>
+                                </div>
+                            </div>
+
+                            <div class="criteria-item">
+                                <label for="skills-weight">Kỹ Năng Chuyên Môn <small>(Trọng số hiện tại: <b id="skills-percent">30%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="10" max="100" value="30" class="weight-slider" id="skills-weight">
+                                    <span class="weight-value" id="skills-value">30</span>
                                 </div>
                                 <div class="criteria-details">
                                     <p>Đánh giá số lượng kỹ năng liên quan, công nghệ và công cụ mà ứng viên thành thạo</p>
@@ -1764,11 +1846,23 @@
                             </div>
 
                             <div class="criteria-item">
-                                <label for="education-weight">Học Vấn <small>(Trọng số hiện tại: <b id="education-percent">20%</b>)</small></label>
+                                <label for="soft-skills-weight">Kỹ năng mềm / Phẩm chất cá nhân <small>(Trọng số hiện tại: <b id="soft-skills-percent">20%</b>)</small></label>
                                 <div class="slider-container">
                                     <div class="slider-track"></div>
-                                    <input type="range" min="5" max="50" value="20" class="weight-slider" id="education-weight">
-                                    <span class="weight-value" id="education-value">20</span>
+                                    <input type="range" min="10" max="100" value="20" class="weight-slider" id="soft-skills-weight">
+                                    <span class="weight-value" id="soft-skills-value">20</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá kỹ năng mềm như làm việc nhóm, lãnh đạo, giao tiếp, thích nghi, và các hoạt động thể hiện phẩm chất cá nhân</p>
+                                </div>
+                            </div>
+
+                            <div class="criteria-item">
+                                <label for="education-weight">Học Vấn <small>(Trọng số hiện tại: <b id="education-percent">30%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="10" max="100" value="30" class="weight-slider" id="education-weight">
+                                    <span class="weight-value" id="education-value">30</span>
                                 </div>
                                 <div class="criteria-details">
                                     <p>Đánh giá bằng cấp, chi tiết học vấn, thành tích học tập và trình độ đại học/cao học</p>
@@ -1778,7 +1872,7 @@
 
                         <div class="weight-warning" id="weight-warning" style="display: none;">
                             <span class="material-symbols-outlined">warning</span>
-                            <p>Tổng điểm phân bổ phải bằng 100 điểm để đảm bảo đánh giá chính xác!</p>
+                            <p>Tổng điểm phân bổ phải bằng 200 điểm để đảm bảo đánh giá chính xác!</p>
                         </div>
 
                         <div class="settings-actions">
@@ -2197,7 +2291,7 @@ Return the JSON object now:`;
                     reason: analysis.reason,      // Lưu lý do điểm số
                     skills: extractSkills(cvText),
                     uploadDate: new Date(),
-                    status: analysis.score >= 90 ? 'excellent' : analysis.score >= 80 ? 'good' : analysis.score >= 70 ? 'average' : 'poor',
+                    status: analysis.score >= 180 ? 'excellent' : analysis.score >= 160 ? 'good' : analysis.score >= 140 ? 'average' : 'poor',
                     rawText: cvText
                 };
             } catch (error) {
@@ -2413,10 +2507,13 @@ Return the JSON object now:`;
             const weights = getScoringWeights();
             
             let breakdown = {
-                professionalism: 0,    // Default: 25 điểm max
-                experience: 0,         // Default: 30 điểm max  
-                skills: 0,             // Default: 25 điểm max
-                education: 0           // Default: 20 điểm max
+                jobRelevance: 0,       // Default: 50 điểm max
+                professionalism: 0,    // Default: 30 điểm max
+                experience: 0,         // Default: 40 điểm max  
+                achievements: 0,       // Default: 30 điểm max
+                skills: 0,             // Default: 30 điểm max
+                softSkills: 0,         // Default: 20 điểm max
+                education: 0           // Default: 30 điểm max
             };
 
             // 1. ĐIỂM CHUYÊN NGHIỆP VÀ RÕ RÀNG
@@ -2524,15 +2621,105 @@ Return the JSON object now:`;
             
             breakdown.education = Math.min(educationMax, educationScore);
 
+            // 5. ĐIỂM MỨC ĐỘ PHÙ HỢP VỚI VỊ TRÍ (Job Relevance)
+            const jobRelevanceMax = weights.jobRelevance;
+            let jobRelevanceScore = 0;
+            
+            // Logic đánh giá phù hợp với vị trí (mô phỏng, trong ứng dụng thực tế sẽ cần JD để so sánh)
+            // Giả định có một số từ khóa của JD để so sánh
+            const jobPositionKeywords = ['developer', 'lập trình viên', 'kỹ sư phần mềm', 'product manager', 'ui/ux', 
+                                       'marketing', 'sales', 'nhân sự', 'tài chính', 'kế toán'];
+            
+            // Tìm từ khóa vị trí trong CV (30% của trọng số)
+            const foundPositionKeywords = jobPositionKeywords.filter(keyword => 
+                cvText.toLowerCase().includes(keyword.toLowerCase())).length;
+            jobRelevanceScore += Math.min(jobRelevanceMax * 0.3, foundPositionKeywords * (jobRelevanceMax * 0.15));
+            
+            // Kiểm tra xem kinh nghiệm làm việc có phù hợp với vị trí (40% của trọng số)
+            if (parsedData.work_experience && parsedData.work_experience.length > 0) {
+                // Kiểm tra số năm kinh nghiệm (giả định yêu cầu 2+ năm)
+                let hasRelevantExp = parsedData.work_experience.some(exp => {
+                    if (exp.year_range) {
+                        // Phân tích thời gian làm việc (giả định định dạng "2018-2022" hoặc "2018-present")
+                        const years = exp.year_range.split('-');
+                        if (years.length === 2) {
+                            const start = parseInt(years[0]);
+                            const end = years[1].toLowerCase() === 'present' ? new Date().getFullYear() : parseInt(years[1]);
+                            if (!isNaN(start) && !isNaN(end) && (end - start) >= 2) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                });
+                
+                if (hasRelevantExp) jobRelevanceScore += jobRelevanceMax * 0.4;
+            }
+            
+            // Các kỹ năng cốt lõi cho vị trí (30% của trọng số)
+            // Giả định một số kỹ năng cốt lõi (thực tế sẽ dựa vào JD)
+            const coreSkillsKeywords = ['javascript', 'react', 'node.js', 'sql', 'java', 'python', 'marketing', 'sales', 'communication'];
+            const foundCoreSkills = coreSkillsKeywords.filter(skill => 
+                cvText.toLowerCase().includes(skill.toLowerCase())).length;
+            jobRelevanceScore += Math.min(jobRelevanceMax * 0.3, foundCoreSkills * (jobRelevanceMax * 0.1));
+            
+            breakdown.jobRelevance = Math.min(jobRelevanceMax, jobRelevanceScore);
+
+            // 6. ĐIỂM THÀNH TỰU VÀ KẾT QUẢ (Achievements)
+            const achievementsMax = weights.achievements;
+            let achievementsScore = 0;
+            
+            // Tìm các chỉ số định lượng (%, con số, tăng trưởng, giảm chi phí, v.v.) (50% của trọng số)
+            const quantifiableRegex = /\d+(\.\d+)?%|\btăng\b.*\d+|\bgiảm\b.*\d+|\bhoàn thành\b|\bthành công\b|\bgold\b|\baward\b|\bgiải thưởng\b/gi;
+            const quantifiableMatches = cvText.match(quantifiableRegex) || [];
+            achievementsScore += Math.min(achievementsMax * 0.5, quantifiableMatches.length * (achievementsMax * 0.1));
+            
+            // Các dự án đặc biệt/giải thưởng (30% của trọng số)
+            const projectRegex = /\bdự án\b|\bproject\b|\bgiải thưởng\b|\baward\b|\bcertificat/gi;
+            const projectMatches = cvText.match(projectRegex) || [];
+            achievementsScore += Math.min(achievementsMax * 0.3, projectMatches.length * (achievementsMax * 0.1));
+            
+            // Vai trò lãnh đạo (20% của trọng số) 
+            const leadershipRegex = /\blãnh đạo\b|\bquản lý\b|\bteam lead\b|\bmanager\b|\bhead\b|\blead\b|\btrưởng\b|\bmanage\b/gi;
+            const leadershipMatches = cvText.match(leadershipRegex) || [];
+            if (leadershipMatches.length > 0) achievementsScore += achievementsMax * 0.2;
+            
+            breakdown.achievements = Math.min(achievementsMax, achievementsScore);
+
+            // 7. ĐIỂM KỸ NĂNG MỀM (Soft Skills)
+            const softSkillsMax = weights.softSkills;
+            let softSkillsScore = 0;
+            
+            // Danh sách các kỹ năng mềm phổ biến
+            const softSkillKeywords = [
+                'giao tiếp', 'communication', 'teamwork', 'làm việc nhóm', 'leadership', 'lãnh đạo',
+                'giải quyết vấn đề', 'problem solving', 'critical thinking', 'tư duy phản biện',
+                'adaptability', 'thích nghi', 'sáng tạo', 'creativity', 'time management', 'quản lý thời gian',
+                'thuyết trình', 'presentation', 'đàm phán', 'negotiation', 'emotional intelligence', 'trí tuệ cảm xúc'
+            ];
+            
+            // Tìm các kỹ năng mềm trong CV (70% của trọng số)
+            const foundSoftSkills = softSkillKeywords.filter(skill => 
+                cvText.toLowerCase().includes(skill.toLowerCase())).length;
+            softSkillsScore += Math.min(softSkillsMax * 0.7, foundSoftSkills * (softSkillsMax * 0.1));
+            
+            // Hoạt động ngoại khóa, tình nguyện, câu lạc bộ (30% của trọng số)
+            const extracurricularRegex = /\btình nguyện\b|\bvolunteer\b|\bcâu lạc bộ\b|\bclub\b|\bhoạt động\b|\bactivit(y|ies)\b|\bextracurricular\b/gi;
+            const extracurricularMatches = cvText.match(extracurricularRegex) || [];
+            softSkillsScore += Math.min(softSkillsMax * 0.3, extracurricularMatches.length * (softSkillsMax * 0.1));
+            
+            breakdown.softSkills = Math.min(softSkillsMax, softSkillsScore);
+
             // TỔNG ĐIỂM
-            score = breakdown.professionalism + breakdown.experience + breakdown.skills + breakdown.education;
+            score = breakdown.jobRelevance + breakdown.professionalism + breakdown.experience + 
+                    breakdown.achievements + breakdown.skills + breakdown.softSkills + breakdown.education;
             
             console.log('CV Score Breakdown:', breakdown, 'Total:', score);
             
             return { 
-                score: Math.min(100, Math.max(0, score)),
+                score: Math.min(200, Math.max(0, score)),
                 breakdown: breakdown,
-                reason: `Chuyên nghiệp: ${Math.round(breakdown.professionalism)}/${weights.professionalism}, Kinh nghiệm: ${Math.round(breakdown.experience)}/${weights.experience}, Kỹ năng: ${Math.round(breakdown.skills)}/${weights.skills}, Học vấn: ${Math.round(breakdown.education)}/${weights.education}`
+                reason: `Phù hợp vị trí: ${Math.round(breakdown.jobRelevance)}/${weights.jobRelevance}, Chuyên nghiệp: ${Math.round(breakdown.professionalism)}/${weights.professionalism}, Kinh nghiệm: ${Math.round(breakdown.experience)}/${weights.experience}, Thành tựu: ${Math.round(breakdown.achievements)}/${weights.achievements}, Kỹ năng chuyên môn: ${Math.round(breakdown.skills)}/${weights.skills}, Kỹ năng mềm: ${Math.round(breakdown.softSkills)}/${weights.softSkills}, Học vấn: ${Math.round(breakdown.education)}/${weights.education}`
             };
         }
 
@@ -2754,8 +2941,8 @@ Return the JSON object now:`;
 
         function updateStatistics() {
             const total = cvDatabase.length;
-            const excellent = cvDatabase.filter(cv => cv.score >= 90).length;
-            const good = cvDatabase.filter(cv => cv.score >= 80 && cv.score < 90).length;
+            const excellent = cvDatabase.filter(cv => cv.score >= 180).length;
+            const good = cvDatabase.filter(cv => cv.score >= 160 && cv.score < 180).length;
             const average = total > 0 ? Math.round(cvDatabase.reduce((sum, cv) => sum + cv.score, 0) / total) : 0;
 
             // Update the correct element IDs based on the HTML structure
@@ -2778,7 +2965,7 @@ Return the JSON object now:`;
                 charts.scoreChart = new Chart(scoreCtx, {
                     type: 'pie',
                     data: {
-                        labels: ['Xuất sắc (90-100)', 'Tốt (80-89)', 'Khá (70-79)', 'Cần cải thiện (<70)'],
+                        labels: ['Xuất sắc (180-200)', 'Tốt (160-179)', 'Khá (140-159)', 'Cần cải thiện (<140)'],
                         datasets: [{
                             data: [0, 0, 0, 0],
                             backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444'],
@@ -2832,9 +3019,9 @@ Return the JSON object now:`;
 
             // Update score chart
             const scoreData = [
-                cvDatabase.filter(cv => cv.score >= 90).length,
-                cvDatabase.filter(cv => cv.score >= 80 && cv.score < 90).length,
-                cvDatabase.filter(cv => cv.score >= 70 && cv.score < 80).length,
+                cvDatabase.filter(cv => cv.score >= 180).length,
+                cvDatabase.filter(cv => cv.score >= 160 && cv.score < 180).length,
+                cvDatabase.filter(cv => cv.score >= 140 && cv.score < 160).length,
                 cvDatabase.filter(cv => cv.score < 70).length
             ];
             charts.scoreChart.data.datasets[0].data = scoreData;
@@ -2877,9 +3064,9 @@ Return the JSON object now:`;
         }
 
         function getScoreColor(score) {
-            if (score >= 90) return '#10b981';
-            if (score >= 80) return '#3b82f6';
-            if (score >= 70) return '#f59e0b';
+            if (score >= 180) return '#10b981';
+            if (score >= 160) return '#3b82f6';
+            if (score >= 140) return '#f59e0b';
             return '#ef4444';
         }
 
@@ -3340,9 +3527,9 @@ Return the JSON object now:`;
 
             handleDataAnalysisQuery(message) {
                 const total = cvDatabase.length;
-                const excellent = cvDatabase.filter(cv => cv.score >= 90).length;
-                const good = cvDatabase.filter(cv => cv.score >= 80 && cv.score < 90).length;
-                const average = cvDatabase.filter(cv => cv.score >= 70 && cv.score < 80).length;
+                const excellent = cvDatabase.filter(cv => cv.score >= 180).length;
+                const good = cvDatabase.filter(cv => cv.score >= 160 && cv.score < 180).length;
+                const average = cvDatabase.filter(cv => cv.score >= 140 && cv.score < 160).length;
                 const poor = cvDatabase.filter(cv => cv.score < 70).length;
                 const avgScore = total > 0 ? Math.round(cvDatabase.reduce((sum, cv) => sum + cv.score, 0) / total) : 0;
 
@@ -3360,14 +3547,14 @@ Return the JSON object now:`;
 
 **📈 Tổng quan:**
 • Tổng số CV: ${total} hồ sơ
-• Điểm trung bình: ${avgScore}/100
+• Điểm trung bình: ${avgScore}/200
 • Vị trí phổ biến nhất: ${topPosition}
 
 **⭐ Phân loại chất lượng:**
-• Xuất sắc (90-100): ${excellent} CV (${total > 0 ? Math.round(excellent/total*100) : 0}%)
-• Tốt (80-89): ${good} CV (${total > 0 ? Math.round(good/total*100) : 0}%)
-• Khá (70-79): ${average} CV (${total > 0 ? Math.round(average/total*100) : 0}%)
-• Cần cải thiện (<70): ${poor} CV (${total > 0 ? Math.round(poor/total*100) : 0}%)
+• Xuất sắc (180-200): ${excellent} CV (${total > 0 ? Math.round(excellent/total*100) : 0}%)
+• Tốt (160-179): ${good} CV (${total > 0 ? Math.round(good/total*100) : 0}%)
+• Khá (140-159): ${average} CV (${total > 0 ? Math.round(average/total*100) : 0}%)
+• Cần cải thiện (<140): ${poor} CV (${total > 0 ? Math.round(poor/total*100) : 0}%)
 
 **💼 Phân bố vị trí:**
 ${Object.entries(positions).slice(0, 5).map(([pos, count]) => 
@@ -3457,7 +3644,7 @@ ${sortedPositions.map(([pos, count], index) => {
     
     return `${index + 1}. **${pos}**
    • Số lượng: ${count} CV (${percentage}%)
-   • Điểm TB: ${avgScore}/100
+   • Điểm TB: ${avgScore}/200
    • Kỹ năng phổ biến: ${topSkills}`;
 }).join('\n\n')}
 
@@ -3628,7 +3815,7 @@ ${randomTips.map((tip, i) => `• ${tip}`).join('\n')}
 
 **📈 Insight từ CV database hiện tại:**
 ${cvDatabase.length > 0 ? 
-`• Quality rate: ${Math.round(cvDatabase.filter(cv => cv.score >= 80).length / cvDatabase.length * 100)}% CV đạt chuẩn
+`• Quality rate: ${Math.round(cvDatabase.filter(cv => cv.score >= 160).length / cvDatabase.length * 100)}% CV đạt chuẩn
 • Cần focus: ${cvDatabase.filter(cv => cv.score < 70).length > 0 ? 'Nâng cao tiêu chuẩn screening' : 'Duy trì chất lượng hiện tại'}` :
 '• Cần xây dựng CV database để insights tốt hơn'}`,
                     suggestions: [
@@ -3642,7 +3829,7 @@ ${cvDatabase.length > 0 ?
             handleGeneralQuery(message) {
                 const dbStats = cvDatabase.length > 0 ? {
                     total: cvDatabase.length,
-                    excellent: cvDatabase.filter(cv => cv.score >= 90).length,
+                    excellent: cvDatabase.filter(cv => cv.score >= 180).length,
                     avgScore: Math.round(cvDatabase.reduce((sum, cv) => sum + cv.score, 0) / cvDatabase.length)
                 } : null;
 
@@ -3659,7 +3846,7 @@ Tôi là trợ lý AI chuyên về tuyển dụng! Tôi có thể hỗ trợ b�
 
 ${dbStats ? `
 📊 **Database hiện tại:**
-• ${dbStats.total} CV • ${dbStats.excellent} xuất sắc • Điểm TB: ${dbStats.avgScore}/100` : '📂 **Database trống** - Hãy tải lên CV để bắt đầu phân tích!'}
+• ${dbStats.total} CV • ${dbStats.excellent} xuất sắc • Điểm TB: ${dbStats.avgScore}/200` : '📂 **Database trống** - Hãy tải lên CV để bắt đầu phân tích!'}
 
 Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
                     suggestions: [
@@ -3687,10 +3874,13 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             // Get custom weights from localStorage or use defaults
             const storedWeights = localStorage.getItem('cvScoringWeights');
             const defaultWeights = {
-                professionalism: 25,
-                experience: 30,
-                skills: 25,
-                education: 20
+                jobRelevance: 50,
+                professionalism: 30,
+                experience: 40,
+                achievements: 30,
+                skills: 30,
+                softSkills: 20,
+                education: 30
             };
             
             return storedWeights ? JSON.parse(storedWeights) : defaultWeights;
@@ -3702,16 +3892,19 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
         }
         
         function updateTotalWeight() {
+            const jobRelevanceWeight = parseInt(document.getElementById('job-relevance-weight').value);
             const professionalismWeight = parseInt(document.getElementById('professionalism-weight').value);
             const experienceWeight = parseInt(document.getElementById('experience-weight').value);
+            const achievementsWeight = parseInt(document.getElementById('achievements-weight').value);
             const skillsWeight = parseInt(document.getElementById('skills-weight').value);
+            const softSkillsWeight = parseInt(document.getElementById('soft-skills-weight').value);
             const educationWeight = parseInt(document.getElementById('education-weight').value);
             
-            const total = professionalismWeight + experienceWeight + skillsWeight + educationWeight;
+            const total = jobRelevanceWeight + professionalismWeight + experienceWeight + achievementsWeight + skillsWeight + softSkillsWeight + educationWeight;
             document.getElementById('total-weight').textContent = total;
             
             const warningElement = document.getElementById('weight-warning');
-            if (total !== 100) {
+            if (total !== 200) {
                 warningElement.style.display = 'flex';
                 document.getElementById('save-weights').disabled = true;
             } else {
@@ -3728,6 +3921,10 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             const weights = getScoringWeights();
             
             // Set the sliders to the stored values
+            document.getElementById('job-relevance-weight').value = weights.jobRelevance;
+            document.getElementById('job-relevance-value').textContent = weights.jobRelevance;
+            document.getElementById('job-relevance-percent').textContent = weights.jobRelevance + '%';
+            
             document.getElementById('professionalism-weight').value = weights.professionalism;
             document.getElementById('professionalism-value').textContent = weights.professionalism;
             document.getElementById('professionalism-percent').textContent = weights.professionalism + '%';
@@ -3736,9 +3933,17 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             document.getElementById('experience-value').textContent = weights.experience;
             document.getElementById('experience-percent').textContent = weights.experience + '%';
             
+            document.getElementById('achievements-weight').value = weights.achievements;
+            document.getElementById('achievements-value').textContent = weights.achievements;
+            document.getElementById('achievements-percent').textContent = weights.achievements + '%';
+            
             document.getElementById('skills-weight').value = weights.skills;
             document.getElementById('skills-value').textContent = weights.skills;
             document.getElementById('skills-percent').textContent = weights.skills + '%';
+            
+            document.getElementById('soft-skills-weight').value = weights.softSkills;
+            document.getElementById('soft-skills-value').textContent = weights.softSkills;
+            document.getElementById('soft-skills-percent').textContent = weights.softSkills + '%';
             
             document.getElementById('education-weight').value = weights.education;
             document.getElementById('education-value').textContent = weights.education;
@@ -3765,9 +3970,12 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             // Set up event listeners for buttons
             document.getElementById('save-weights').addEventListener('click', function() {
                 const newWeights = {
+                    jobRelevance: parseInt(document.getElementById('job-relevance-weight').value),
                     professionalism: parseInt(document.getElementById('professionalism-weight').value),
                     experience: parseInt(document.getElementById('experience-weight').value),
+                    achievements: parseInt(document.getElementById('achievements-weight').value),
                     skills: parseInt(document.getElementById('skills-weight').value),
+                    softSkills: parseInt(document.getElementById('soft-skills-weight').value),
                     education: parseInt(document.getElementById('education-weight').value)
                 };
                 
@@ -3779,13 +3987,20 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             
             document.getElementById('reset-default-weights').addEventListener('click', function() {
                 const defaultWeights = {
-                    professionalism: 25,
-                    experience: 30,
-                    skills: 25,
-                    education: 20
+                    jobRelevance: 50,
+                    professionalism: 30,
+                    experience: 40,
+                    achievements: 30,
+                    skills: 30,
+                    softSkills: 20,
+                    education: 30
                 };
                 
                 // Reset sliders
+                document.getElementById('job-relevance-weight').value = defaultWeights.jobRelevance;
+                document.getElementById('job-relevance-value').textContent = defaultWeights.jobRelevance;
+                document.getElementById('job-relevance-percent').textContent = defaultWeights.jobRelevance + '%';
+                
                 document.getElementById('professionalism-weight').value = defaultWeights.professionalism;
                 document.getElementById('professionalism-value').textContent = defaultWeights.professionalism;
                 document.getElementById('professionalism-percent').textContent = defaultWeights.professionalism + '%';
@@ -3794,9 +4009,17 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
                 document.getElementById('experience-value').textContent = defaultWeights.experience;
                 document.getElementById('experience-percent').textContent = defaultWeights.experience + '%';
                 
+                document.getElementById('achievements-weight').value = defaultWeights.achievements;
+                document.getElementById('achievements-value').textContent = defaultWeights.achievements;
+                document.getElementById('achievements-percent').textContent = defaultWeights.achievements + '%';
+                
                 document.getElementById('skills-weight').value = defaultWeights.skills;
                 document.getElementById('skills-value').textContent = defaultWeights.skills;
                 document.getElementById('skills-percent').textContent = defaultWeights.skills + '%';
+                
+                document.getElementById('soft-skills-weight').value = defaultWeights.softSkills;
+                document.getElementById('soft-skills-value').textContent = defaultWeights.softSkills;
+                document.getElementById('soft-skills-percent').textContent = defaultWeights.softSkills + '%';
                 
                 document.getElementById('education-weight').value = defaultWeights.education;
                 document.getElementById('education-value').textContent = defaultWeights.education;
@@ -3816,53 +4039,77 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             const ctx = document.getElementById('weightChart').getContext('2d');
             const weights = getScoringWeights();
             
-            // Create gradient backgrounds
+            // Create gradient backgrounds for all seven criteria
             const gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient1.addColorStop(0, 'rgba(96, 165, 250, 0.9)');
-            gradient1.addColorStop(1, 'rgba(96, 165, 250, 0.7)');
+            gradient1.addColorStop(0, 'rgba(59, 130, 246, 0.9)'); // Blue - Job Relevance
+            gradient1.addColorStop(1, 'rgba(59, 130, 246, 0.7)');
             
             const gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient2.addColorStop(0, 'rgba(52, 211, 153, 0.9)');
-            gradient2.addColorStop(1, 'rgba(52, 211, 153, 0.7)');
+            gradient2.addColorStop(0, 'rgba(96, 165, 250, 0.9)'); // Light Blue - Professionalism
+            gradient2.addColorStop(1, 'rgba(96, 165, 250, 0.7)');
             
             const gradient3 = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient3.addColorStop(0, 'rgba(167, 139, 250, 0.9)');
-            gradient3.addColorStop(1, 'rgba(167, 139, 250, 0.7)');
+            gradient3.addColorStop(0, 'rgba(52, 211, 153, 0.9)'); // Green - Experience
+            gradient3.addColorStop(1, 'rgba(52, 211, 153, 0.7)');
             
             const gradient4 = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient4.addColorStop(0, 'rgba(251, 191, 36, 0.9)');
-            gradient4.addColorStop(1, 'rgba(251, 191, 36, 0.7)');
+            gradient4.addColorStop(0, 'rgba(16, 185, 129, 0.9)'); // Emerald - Achievements
+            gradient4.addColorStop(1, 'rgba(16, 185, 129, 0.7)');
+            
+            const gradient5 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient5.addColorStop(0, 'rgba(167, 139, 250, 0.9)'); // Purple - Skills
+            gradient5.addColorStop(1, 'rgba(167, 139, 250, 0.7)');
+            
+            const gradient6 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient6.addColorStop(0, 'rgba(139, 92, 246, 0.9)'); // Violet - Soft Skills
+            gradient6.addColorStop(1, 'rgba(139, 92, 246, 0.7)');
+            
+            const gradient7 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient7.addColorStop(0, 'rgba(251, 191, 36, 0.9)'); // Yellow - Education
+            gradient7.addColorStop(1, 'rgba(251, 191, 36, 0.7)');
             
             window.weightChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: [
+                        'Mức độ Phù hợp với Vị trí',
                         'Chuyên Nghiệp & Rõ Ràng',
                         'Kinh Nghiệm Làm Việc',
+                        'Thành tựu & Kết quả',
                         'Kỹ Năng Chuyên Môn',
+                        'Kỹ năng mềm / Phẩm chất cá nhân',
                         'Học Vấn'
                     ],
                     datasets: [{
                         data: [
+                            weights.jobRelevance,
                             weights.professionalism,
                             weights.experience,
+                            weights.achievements,
                             weights.skills,
+                            weights.softSkills,
                             weights.education
                         ],
                         backgroundColor: [
                             gradient1,
                             gradient2,
                             gradient3,
-                            gradient4
+                            gradient4,
+                            gradient5,
+                            gradient6,
+                            gradient7
                         ],
                         borderWidth: 3,
                         borderColor: '#ffffff',
                         hoverBorderWidth: 5,
                         hoverBorderColor: [
-                            '#60a5fa',
-                            '#34d399',
-                            '#a78bfa',
-                            '#fbbf24'
+                            '#3b82f6', // Blue - Job Relevance
+                            '#60a5fa', // Light Blue - Professionalism
+                            '#34d399', // Green - Experience
+                            '#10b981', // Emerald - Achievements
+                            '#a78bfa', // Purple - Skills
+                            '#8b5cf6', // Violet - Soft Skills
+                            '#fbbf24'  // Yellow - Education
                         ]
                     }]
                 },
@@ -3925,15 +4172,21 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
         function updateWeightChart() {
             if (!window.weightChart) return;
             
+            const jobRelevanceWeight = parseInt(document.getElementById('job-relevance-weight').value);
             const professionalismWeight = parseInt(document.getElementById('professionalism-weight').value);
             const experienceWeight = parseInt(document.getElementById('experience-weight').value);
+            const achievementsWeight = parseInt(document.getElementById('achievements-weight').value);
             const skillsWeight = parseInt(document.getElementById('skills-weight').value);
+            const softSkillsWeight = parseInt(document.getElementById('soft-skills-weight').value);
             const educationWeight = parseInt(document.getElementById('education-weight').value);
             
             window.weightChart.data.datasets[0].data = [
+                jobRelevanceWeight,
                 professionalismWeight,
                 experienceWeight,
+                achievementsWeight,
                 skillsWeight,
+                softSkillsWeight,
                 educationWeight
             ];
             
@@ -3952,9 +4205,9 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
                     cv.reason = newScoreResult.reason;
                     
                     // Update status based on new score
-                    if (cv.score >= 90) cv.status = 'excellent';
-                    else if (cv.score >= 80) cv.status = 'good';
-                    else if (cv.score >= 70) cv.status = 'average';
+                    if (cv.score >= 180) cv.status = 'excellent';
+                    else if (cv.score >= 160) cv.status = 'good';
+                    else if (cv.score >= 140) cv.status = 'average';
                     else cv.status = 'poor';
                 }
             });
