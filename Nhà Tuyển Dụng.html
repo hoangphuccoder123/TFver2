@@ -3092,6 +3092,9 @@ Return the JSON object now:`;
             if (!cv || !cv.breakdown) return;
 
             const breakdown = cv.breakdown;
+            // Get current weights for scoring display
+            const weights = getScoringWeights();
+            
             const modal = document.createElement('div');
             modal.style.cssText = `
                 position: fixed;
@@ -3115,7 +3118,7 @@ Return the JSON object now:`;
                     
                     <div style="margin-bottom: 1rem;">
                         <strong>Ứng viên:</strong> ${cv.name}<br>
-                        <strong>Tổng điểm:</strong> <span style="color: ${getScoreColor(cv.score)}; font-weight: bold; font-size: 1.2rem;">${cv.score}/100</span>
+                        <strong>Tổng điểm:</strong> <span style="color: ${getScoreColor(cv.score)}; font-weight: bold; font-size: 1.2rem;">${cv.score}/200</span>
                     </div>
                     
                     <div style="background: #f8fafc; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
@@ -3123,13 +3126,26 @@ Return the JSON object now:`;
                         
                         <div style="margin-bottom: 1rem;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>🎯 Chuyên nghiệp & Rõ ràng:</span>
-                                <span style="font-weight: bold; color: ${breakdown.professionalism >= 20 ? '#10b981' : breakdown.professionalism >= 15 ? '#f59e0b' : '#ef4444'};">
-                                    ${breakdown.professionalism}/25
+                                <span>🎯 Mức độ Phù hợp với Vị trí:</span>
+                                <span style="font-weight: bold; color: ${breakdown.jobRelevance >= weights.jobRelevance*0.8 ? '#10b981' : breakdown.jobRelevance >= weights.jobRelevance*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.jobRelevance}/${weights.jobRelevance}
                                 </span>
                             </div>
                             <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
-                                <div style="background: ${breakdown.professionalism >= 20 ? '#10b981' : breakdown.professionalism >= 15 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.professionalism/25)*100}%; border-radius: 4px;"></div>
+                                <div style="background: ${breakdown.jobRelevance >= weights.jobRelevance*0.8 ? '#10b981' : breakdown.jobRelevance >= weights.jobRelevance*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.jobRelevance/weights.jobRelevance)*100}%; border-radius: 4px;"></div>
+                            </div>
+                            <small style="color: #666;">Mức độ phù hợp với yêu cầu công việc</small>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>📝 Chuyên nghiệp & Rõ ràng:</span>
+                                <span style="font-weight: bold; color: ${breakdown.professionalism >= weights.professionalism*0.8 ? '#10b981' : breakdown.professionalism >= weights.professionalism*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.professionalism}/${weights.professionalism}
+                                </span>
+                            </div>
+                            <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
+                                <div style="background: ${breakdown.professionalism >= weights.professionalism*0.8 ? '#10b981' : breakdown.professionalism >= weights.professionalism*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.professionalism/weights.professionalism)*100}%; border-radius: 4px;"></div>
                             </div>
                             <small style="color: #666;">Email, SĐT, họ tên, cấu trúc CV, độ dài nội dung</small>
                         </div>
@@ -3137,38 +3153,64 @@ Return the JSON object now:`;
                         <div style="margin-bottom: 1rem;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                                 <span>💼 Kinh nghiệm làm việc:</span>
-                                <span style="font-weight: bold; color: ${breakdown.experience >= 25 ? '#10b981' : breakdown.experience >= 15 ? '#f59e0b' : '#ef4444'};">
-                                    ${breakdown.experience}/30
+                                <span style="font-weight: bold; color: ${breakdown.experience >= weights.experience*0.8 ? '#10b981' : breakdown.experience >= weights.experience*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.experience}/${weights.experience}
                                 </span>
                             </div>
                             <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
-                                <div style="background: ${breakdown.experience >= 25 ? '#10b981' : breakdown.experience >= 15 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.experience/30)*100}%; border-radius: 4px;"></div>
+                                <div style="background: ${breakdown.experience >= weights.experience*0.8 ? '#10b981' : breakdown.experience >= weights.experience*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.experience/weights.experience)*100}%; border-radius: 4px;"></div>
                             </div>
                             <small style="color: #666;">Số lượng và chất lượng kinh nghiệm làm việc</small>
                         </div>
                         
                         <div style="margin-bottom: 1rem;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>🛠️ Kỹ năng chuyên môn:</span>
-                                <span style="font-weight: bold; color: ${breakdown.skills >= 20 ? '#10b981' : breakdown.skills >= 15 ? '#f59e0b' : '#ef4444'};">
-                                    ${breakdown.skills}/25
+                                <span>🏆 Thành tựu & Kết quả:</span>
+                                <span style="font-weight: bold; color: ${breakdown.achievements >= weights.achievements*0.8 ? '#10b981' : breakdown.achievements >= weights.achievements*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.achievements}/${weights.achievements}
                                 </span>
                             </div>
                             <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
-                                <div style="background: ${breakdown.skills >= 20 ? '#10b981' : breakdown.skills >= 15 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.skills/25)*100}%; border-radius: 4px;"></div>
+                                <div style="background: ${breakdown.achievements >= weights.achievements*0.8 ? '#10b981' : breakdown.achievements >= weights.achievements*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.achievements/weights.achievements)*100}%; border-radius: 4px;"></div>
+                            </div>
+                            <small style="color: #666;">Thành tựu cụ thể với con số và kết quả</small>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>🛠️ Kỹ năng chuyên môn:</span>
+                                <span style="font-weight: bold; color: ${breakdown.skills >= weights.skills*0.8 ? '#10b981' : breakdown.skills >= weights.skills*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.skills}/${weights.skills}
+                                </span>
+                            </div>
+                            <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
+                                <div style="background: ${breakdown.skills >= weights.skills*0.8 ? '#10b981' : breakdown.skills >= weights.skills*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.skills/weights.skills)*100}%; border-radius: 4px;"></div>
                             </div>
                             <small style="color: #666;">Ngôn ngữ lập trình, framework, tools, design</small>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>🤝 Kỹ năng mềm:</span>
+                                <span style="font-weight: bold; color: ${breakdown.softSkills >= weights.softSkills*0.8 ? '#10b981' : breakdown.softSkills >= weights.softSkills*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.softSkills}/${weights.softSkills}
+                                </span>
+                            </div>
+                            <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
+                                <div style="background: ${breakdown.softSkills >= weights.softSkills*0.8 ? '#10b981' : breakdown.softSkills >= weights.softSkills*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.softSkills/weights.softSkills)*100}%; border-radius: 4px;"></div>
+                            </div>
+                            <small style="color: #666;">Kỹ năng giao tiếp, làm việc nhóm, lãnh đạo</small>
                         </div>
                         
                         <div style="margin-bottom: 0;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                                 <span>🎓 Học vấn:</span>
-                                <span style="font-weight: bold; color: ${breakdown.education >= 15 ? '#10b981' : breakdown.education >= 10 ? '#f59e0b' : '#ef4444'};">
-                                    ${breakdown.education}/20
+                                <span style="font-weight: bold; color: ${breakdown.education >= weights.education*0.8 ? '#10b981' : breakdown.education >= weights.education*0.6 ? '#f59e0b' : '#ef4444'};">
+                                    ${breakdown.education}/${weights.education}
                                 </span>
                             </div>
                             <div style="background: #e2e8f0; height: 8px; border-radius: 4px;">
-                                <div style="background: ${breakdown.education >= 15 ? '#10b981' : breakdown.education >= 10 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.education/20)*100}%; border-radius: 4px;"></div>
+                                <div style="background: ${breakdown.education >= weights.education*0.8 ? '#10b981' : breakdown.education >= weights.education*0.6 ? '#f59e0b' : '#ef4444'}; height: 100%; width: ${(breakdown.education/weights.education)*100}%; border-radius: 4px;"></div>
                             </div>
                             <small style="color: #666;">Bằng cấp, trường học, mức độ học vấn</small>
                         </div>
@@ -3177,11 +3219,14 @@ Return the JSON object now:`;
                     <div style="background: #e6fffa; padding: 1rem; border-radius: 10px; border-left: 4px solid #10b981;">
                         <h4 style="margin-top: 0; color: #065f46;">💡 Gợi ý cải thiện:</h4>
                         <ul style="margin: 0; padding-left: 1rem;">
-                            ${breakdown.professionalism < 20 ? '<li>Bổ sung thông tin liên hệ đầy đủ và cấu trúc CV rõ ràng hơn</li>' : ''}
-                            ${breakdown.experience < 20 ? '<li>Mô tả chi tiết hơn về kinh nghiệm làm việc và dự án</li>' : ''}
-                            ${breakdown.skills < 20 ? '<li>Liệt kê đầy đủ kỹ năng chuyên môn và công nghệ sử dụng</li>' : ''}
-                            ${breakdown.education < 15 ? '<li>Bổ sung thông tin học vấn, chứng chỉ, khóa học</li>' : ''}
-                            ${(breakdown.professionalism + breakdown.experience + breakdown.skills + breakdown.education) >= 80 ? '<li>CV rất tốt! Tiếp tục duy trì chất lượng này.</li>' : ''}
+                            ${breakdown.jobRelevance < weights.jobRelevance*0.7 ? '<li>Điều chỉnh CV để phù hợp hơn với vị trí đang ứng tuyển</li>' : ''}
+                            ${breakdown.professionalism < weights.professionalism*0.7 ? '<li>Bổ sung thông tin liên hệ đầy đủ và cấu trúc CV rõ ràng hơn</li>' : ''}
+                            ${breakdown.experience < weights.experience*0.7 ? '<li>Mô tả chi tiết hơn về kinh nghiệm làm việc và dự án</li>' : ''}
+                            ${breakdown.achievements < weights.achievements*0.7 ? '<li>Thêm thành tựu cụ thể và có thể định lượng được</li>' : ''}
+                            ${breakdown.skills < weights.skills*0.7 ? '<li>Liệt kê đầy đủ kỹ năng chuyên môn và công nghệ sử dụng</li>' : ''}
+                            ${breakdown.softSkills < weights.softSkills*0.7 ? '<li>Bổ sung thông tin về kỹ năng mềm và hoạt động ngoại khóa</li>' : ''}
+                            ${breakdown.education < weights.education*0.7 ? '<li>Bổ sung thông tin học vấn, chứng chỉ, khóa học</li>' : ''}
+                            ${cv.score >= 160 ? '<li>CV rất tốt! Tiếp tục duy trì chất lượng này.</li>' : ''}
                         </ul>
                     </div>
                     
@@ -3588,14 +3633,14 @@ ${poor > total * 0.3 ? '• Cân nhắc nâng cao tiêu chuẩn tuyển dụng' 
 ${topCandidates.map((cv, index) => {
     const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
     return `${medal} **${cv.name}**
-   • Điểm: ${cv.score}/100
+   • Điểm: ${cv.score}/200
    • Vị trí: ${getPositionName(cv.position)}
    • Kinh nghiệm: ${cv.experience}
    • Kỹ năng nổi bật: ${cv.skills.slice(0, 3).join(', ')}`;
 }).join('\n\n')}
 
 **💡 Đánh giá chung:**
-• Điểm cao nhất: ${topCandidates[0].score}/100
+• Điểm cao nhất: ${topCandidates[0].score}/200
 • Kỹ năng đa dạng: ${[...new Set(topCandidates.flatMap(cv => cv.skills))].length} kỹ năng khác nhau
 • Phù hợp cho phỏng vấn trực tiếp
 
@@ -3777,8 +3822,8 @@ ${behavioralQuestions.slice(0, 3).map((q, i) => `${i + 1}. ${q}`).join('\n')}
 
 **📊 So sánh với CV database:**
 ${cvDatabase.length > 0 ? 
-`• Avg score của ${position}: ${Math.round(cvDatabase.filter(cv => cv.position === position).reduce((sum, cv) => sum + cv.score, 0) / Math.max(1, cvDatabase.filter(cv => cv.position === position).length))}/100
-• Top candidate score: ${Math.max(...cvDatabase.filter(cv => cv.position === position).map(cv => cv.score), 0)}/100` : 
+`• Avg score của ${position}: ${Math.round(cvDatabase.filter(cv => cv.position === position).reduce((sum, cv) => sum + cv.score, 0) / Math.max(1, cvDatabase.filter(cv => cv.position === position).length))}/200
+• Top candidate score: ${Math.max(...cvDatabase.filter(cv => cv.position === position).map(cv => cv.score), 0)}/200` : 
 '• Chưa có dữ liệu CV để so sánh'}`,
                     suggestions: [
                         "So sánh lương theo thành phố",
@@ -4196,6 +4241,8 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
         function recalculateAllCVScores() {
             if (cvDatabase.length === 0) return;
             
+            console.log("Recalculating all CV scores with updated weights...");
+            
             // Recalculate score for each CV
             cvDatabase.forEach(cv => {
                 if (cv.rawText && cv.parsedData) {
@@ -4203,6 +4250,9 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
                     cv.score = newScoreResult.score;
                     cv.breakdown = newScoreResult.breakdown;
                     cv.reason = newScoreResult.reason;
+                    
+                    console.log(`Recalculated score for ${cv.name}: ${cv.score}/200`);
+                    console.log("Breakdown:", cv.breakdown);
                     
                     // Update status based on new score
                     if (cv.score >= 180) cv.status = 'excellent';
@@ -4217,6 +4267,8 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
             updateRanking();
             updateStatistics();
             updateCharts();
+            
+            showNotification('Tất cả điểm CV đã được tính toán lại với trọng số mới', 'success');
             
             showNotification('Đã cập nhật điểm cho tất cả CV theo tiêu chí mới', 'success');
         }
