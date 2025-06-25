@@ -28,16 +28,10 @@
             padding: 2rem;
         }
 
-        .nav-buttons {
+        .back-btn {
             position: fixed;
             top: 2rem;
             left: 2rem;
-            display: flex;
-            gap: 1rem;
-            z-index: 1000;
-        }
-
-        .back-btn, .achievement-btn {
             background: rgba(255, 255, 255, 0.9);
             border: none;
             padding: 0.8rem 1.5rem;
@@ -49,11 +43,12 @@
             align-items: center;
             gap: 0.5rem;
             color: #667eea;
-            text-decoration: none; 
+            text-decoration: none;
             backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
-        .back-btn:hover, .achievement-btn:hover {
+        .back-btn:hover {
             background: rgba(255, 255, 255, 1);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -146,25 +141,10 @@
         }
 
         /* Upload and Filter Layout */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 70% 30%;
-            gap: 2rem;
-            height: calc(100vh - 200px);
-        }
-
-        .cv-management-section {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 15px;
-            padding: 1.5rem;
-            overflow-y: auto;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
         .upload-filter-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 2rem;
             margin-bottom: 2rem;
         }
 
@@ -498,8 +478,443 @@
             align-items: center;
             padding: 1rem;
             background: #f8fafc;
-            border-radius: 10px;
+        }
+        
+        /* CV Scoring Settings Styles */
+        .scoring-settings-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        /* Decorative element */
+        .scoring-settings-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 50%;
+            z-index: 0;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.15);
+        }
+            
+        .scoring-criteria-section,
+        .scoring-preview-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        
+        .scoring-criteria-section:hover,
+        .scoring-preview-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+        }
+        
+        /* Section headers with decoration */
+        .criteria-header,
+        .preview-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .criteria-header::after,
+        .preview-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+            
+        .criteria-header h3,
+        .preview-header h3 {
+            font-size: 1.4rem;
+            margin: 0;
+            color: #1a202c;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .criteria-header h3::before {
+            content: '🎯';
+            font-size: 1.4rem;
+        }
+        
+        .preview-header h3::before {
+            content: '📊';
+            font-size: 1.4rem;
+        }
+            
+        .criteria-header p {
+            color: #4a5568;
+            margin: 0;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background: #f8fafc;
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+        }
+            
+        #total-weight {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+            
+        .criteria-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+            
+        .criteria-item {
+            padding: 1.5rem;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 16px;
+            border-left: 6px solid transparent;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+        
+        .criteria-item:nth-child(1) {
+            border-left-color: #60a5fa; /* Blue */
+        }
+        
+        .criteria-item:nth-child(2) {
+            border-left-color: #34d399; /* Green */
+        }
+        
+        .criteria-item:nth-child(3) {
+            border-left-color: #a78bfa; /* Purple */
+        }
+        
+        .criteria-item:nth-child(4) {
+            border-left-color: #fbbf24; /* Yellow */
+        }
+        
+        .criteria-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+        }
+            
+        .criteria-item label {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .criteria-item label small {
+            margin-left: 1.8rem;
+            background: #f0f4f8;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+        
+        .criteria-item label b {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .criteria-item:nth-child(1) label::before {
+            content: '📝';
+        }
+        
+        .criteria-item:nth-child(2) label::before {
+            content: '💼';
+        }
+        
+        .criteria-item:nth-child(3) label::before {
+            content: '🔧';
+        }
+        
+        .criteria-item:nth-child(4) label::before {
+            content: '🎓';
+        }
+            
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            background: rgba(247, 250, 252, 0.7);
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+        }
+        
+        .slider-track {
+            position: absolute;
+            height: 8px;
+            border-radius: 5px;
+            background: #e2e8f0;
+            width: 100%;
+            z-index: 0;
+        }
+            
+        .weight-slider {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            border-radius: 5px;
+            outline: none;
+            position: relative;
+            z-index: 1;
+        }
+            
+        .weight-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid #667eea;
+        }
+        
+        .criteria-item:nth-child(1) .weight-slider::-webkit-slider-thumb {
+            border-color: #60a5fa;
+        }
+        
+        .criteria-item:nth-child(2) .weight-slider::-webkit-slider-thumb {
+            border-color: #34d399;
+        }
+        
+        .criteria-item:nth-child(3) .weight-slider::-webkit-slider-thumb {
+            border-color: #a78bfa;
+        }
+        
+        .criteria-item:nth-child(4) .weight-slider::-webkit-slider-thumb {
+            border-color: #fbbf24;
+        }
+            
+        .weight-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Firefox styles */
+        .weight-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid #667eea;
+        }
+        
+        .weight-slider::-moz-range-thumb:hover {
+            transform: scale(1.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+            
+        .weight-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+            min-width: 70px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            background: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            position: relative;
+        }
+        
+        .weight-value::after {
+            content: '%';
+            font-size: 0.95rem;
+            margin-left: 2px;
+        }
+        
+        .criteria-item:nth-child(1) .weight-value {
+            background: #60a5fa; /* Blue */
+        }
+        
+        .criteria-item:nth-child(2) .weight-value {
+            background: #34d399; /* Green */
+        }
+        
+        .criteria-item:nth-child(3) .weight-value {
+            background: #a78bfa; /* Purple */
+        }
+        
+        .criteria-item:nth-child(4) .weight-value {
+            background: #fbbf24; /* Yellow */
+        }
+            
+        .criteria-details {
+            font-size: 0.9rem;
+            color: #718096;
+            padding: 0.8rem;
+            background: rgba(247, 250, 252, 0.7);
+            border-radius: 8px;
+            margin-top: 0.6rem;
+            border-left: 3px solid #e2e8f0;
+        }
+        
+        .criteria-item:nth-child(1) .criteria-details {
+            border-left-color: rgba(96, 165, 250, 0.4);
+        }
+        
+        .criteria-item:nth-child(2) .criteria-details {
+            border-left-color: rgba(52, 211, 153, 0.4);
+        }
+        
+        .criteria-item:nth-child(3) .criteria-details {
+            border-left-color: rgba(167, 139, 250, 0.4);
+        }
+        
+        .criteria-item:nth-child(4) .criteria-details {
+            border-left-color: rgba(251, 191, 36, 0.4);
+        }
+            
+        .weight-warning {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #FEF2F2, #FFEDD5);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            color: #9A3412;
+            margin: 1.5rem 0;
+            border-left: 4px solid #F87171;
+            box-shadow: 0 4px 15px rgba(248, 113, 113, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(248, 113, 113, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
+            }
+        }
+        
+        .settings-actions {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1.2rem;
+        }
+        
+        .settings-actions button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .settings-actions button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .settings-actions .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .settings-actions .btn-secondary {
+            background: #f8fafc;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .preview-chart-container {
+            height: 300px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .preview-chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(247, 250, 252, 0.5));
+            border-radius: 16px;
+            z-index: -1;
+        }
+            
+        .preview-note {
+            background: linear-gradient(135deg, #EFF6FF, #EEF2FF);
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: #1E40AF;
+            margin-top: 2rem;
+            border-left: 4px solid #3B82F6;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+        }
+            
+        .settings-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+            
+        .preview-chart-container {
+            height: 250px;
+            margin-bottom: 1.5rem;
+        }
+            
+        .preview-note {
+            background: #EFF6FF;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #1E40AF;
+            margin-top: 1.5rem;
         }
 
         .ranking-item:hover {
@@ -707,108 +1122,178 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Chatbot Section Styles */
-        .chatbot-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        /* Recruitment Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 400px;
             height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            z-index: 1000;
+            transform: translateY(100vh);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .chatbot-container.open {
+            transform: translateY(0);
         }
 
         .chatbot-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 1rem;
-            text-align: center;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .chatbot-header h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.2rem;
-            font-weight: 600;
+        .chatbot-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 6s ease-in-out infinite;
         }
 
-        .chatbot-header p {
-            margin: 0;
-            font-size: 0.9rem;
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chatbot-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        .chat-messages {
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-messages {
             flex: 1;
             padding: 1rem;
             overflow-y: auto;
-            background: #f8fafc;
-            max-height: calc(600px - 160px);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
         }
 
         .message {
             display: flex;
-            margin-bottom: 1rem;
-            animation: slideIn 0.3s ease;
+            align-items: flex-start;
+            gap: 0.8rem;
+            max-width: 85%;
+            animation: slideIn 0.3s ease-out;
         }
 
         .message.user {
-            justify-content: flex-end;
+            align-self: flex-end;
+            flex-direction: row-reverse;
         }
 
         .message-avatar {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
             flex-shrink: 0;
-        }
-
-        .message.user .message-avatar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            margin-right: 0;
-            margin-left: 0.5rem;
-            order: 2;
+            font-size: 1rem;
         }
 
         .message.bot .message-avatar {
-            background: #e2e8f0;
-        }
-
-        .message-content {
-            background: white;
-            padding: 0.75rem 1rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            max-width: 80%;
-            word-wrap: break-word;
-            line-height: 1.4;
-        }
-
-        .message.user .message-content {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
 
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            margin-bottom: 1rem;
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
         }
 
-        .typing-indicator.active {
+        .message-content {
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #2d3748;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            margin-top: 0.3rem;
+            text-align: right;
+        }
+
+        .message.bot .message-time {
+            text-align: left;
+        }
+
+        .typing-indicator {
             display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 0;
         }
 
         .typing-dots {
-            background: white;
-            padding: 0.75rem 1rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             gap: 0.3rem;
         }
@@ -816,167 +1301,197 @@
         .typing-dot {
             width: 8px;
             height: 8px;
-            background: #667eea;
             border-radius: 50%;
-            animation: typingPulse 1.5s infinite;
+            background: #667eea;
+            animation: typingPulse 1.4s infinite;
         }
 
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .chat-input-container {
-            padding: 1rem;
-            background: white;
-            border-top: 1px solid #e2e8f0;
+        .suggestion-chips {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .suggestion-chip {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-chip:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 0.8rem;
             align-items: flex-end;
         }
 
-        .chat-input {
+        .chatbot-textarea {
             flex: 1;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: 'Inter', sans-serif;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 0.8rem 1rem;
             font-size: 0.9rem;
             resize: none;
-            outline: none;
+            max-height: 80px;
+            min-height: 40px;
+            font-family: inherit;
             transition: border-color 0.3s ease;
         }
 
-        .chat-input:focus {
+        .chatbot-textarea:focus {
+            outline: none;
             border-color: #667eea;
         }
 
-        .chat-send-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
+        .send-button {
             width: 40px;
             height: 40px;
+            border: none;
             border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             transition: all 0.3s ease;
             flex-shrink: 0;
         }
 
-        .chat-send-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        .send-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
-        .chat-send-btn:disabled {
-            opacity: 0.6;
+        .send-button:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
 
-        .chat-send-btn .material-symbols-outlined {
-            font-size: 1.2rem;
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            font-size: 1.5rem;
         }
 
-        /* Mobile responsiveness */
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes typingPulse {
+            0%, 60%, 100% { 
+                transform: scale(1); 
+                opacity: 0.4; 
+            }
+            30% { 
+                transform: scale(1.2); 
+                opacity: 1; 
+            }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile responsiveness for chatbot */
         @media (max-width: 768px) {
-            .nav-buttons {
-                position: relative;
-                top: auto;
-                left: auto;
-                justify-content: center;
-                margin-bottom: 1rem;
+            .chatbot-container {
+                width: calc(100vw - 2rem);
+                height: calc(100vh - 4rem);
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                border-radius: 15px;
             }
 
-            .back-btn, .achievement-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .main-content {
-                padding: 1.5rem;
-            }
-
-            .main-layout {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                height: auto;
-            }
-
-            .upload-filter-container {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .filter-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-tabs {
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-
-            .nav-tab {
-                padding: 1rem;
-                font-size: 1rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .header p {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .main-layout {
-                gap: 0.5rem;
-            }
-
-            .cv-management-section,
-            .chatbot-section {
-                padding: 1rem;
-            }
-
-            .chatbot-section {
-                height: 350px;
-            }
-
-            .chat-messages {
-                max-height: 200px;
+            .chatbot-toggle {
+                bottom: 1rem;
+                right: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="nav-buttons">
-        <a href="index.html" class="back-btn">
-            <span class="material-symbols-outlined">arrow_back</span>
-            Quay lại
-        </a>
-        <a href="team achievements.html" class="achievement-btn">
-            <span class="material-symbols-outlined">emoji_events</span>
-            Thành tích
-        </a>
-    </div>
+    <a href="../../giao diện chính/index.html" class="back-btn">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Quay lại
+    </a>
 
     <div class="container">
         <div class="header">
@@ -994,171 +1509,127 @@
                     <span class="material-symbols-outlined">analytics</span>
                     Bảng Phân Tích
                 </div>
+                <div class="nav-tab" data-tab="settings">
+                    <span class="material-symbols-outlined">tune</span>
+                    Tùy Chỉnh Tiêu Chí
+                </div>
             </div>
 
             <!-- CV Management Tab (Combined Upload + Manage) -->
             <div class="tab-content active" id="management-tab">
-                <div class="main-layout">
-                    <!-- CV Management Section (70%) -->
-                    <div class="cv-management-section">
-                        <!-- Upload and Filter Container -->
-                        <div class="upload-filter-container">
-                            <!-- Quick Upload Section -->
-                            <div class="upload-section">
-                                <div class="section-header">
-                                    <h2>📁 Tải Lên CV</h2>
-                                    <p>Kéo thả hoặc click để chọn file</p>
-                                </div>
-                                
-                                <div class="upload-area" id="upload-area">
-                                    <div class="upload-icon">
-                                        <span class="material-symbols-outlined">cloud_upload</span>
-                                    </div>
-                                    <h3>Thả file CV vào đây</h3>
-                                    <p>PDF, DOC, DOCX, JPG, PNG (Max 10MB)</p>
-                                    <input type="file" id="cv-files" class="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
-                                </div>
-
-                                <div id="upload-progress" style="display: none;">
-                                    <div style="background: #e2e8f0; border-radius: 10px; height: 8px; margin: 1rem 0;">
-                                        <div id="progress-bar" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s ease;"></div>
-                                    </div>
-                                    <p id="upload-status">Đang xử lý file...</p>
-                                </div>
-
-                                <div id="upload-results" style="display: none;">
-                                    <h4 style="margin-bottom: 0.8rem; font-size: 1rem;">Kết Quả:</h4>
-                                    <div id="results-list"></div>
-                                </div>
+                <!-- Upload and Filter Container -->
+                <div class="upload-filter-container">
+                    <!-- Quick Upload Section -->
+                    <div class="upload-section">
+                        <div class="section-header">
+                            <h2>📁 Tải Lên CV</h2>
+                            <p>Kéo thả hoặc click để chọn file</p>
+                        </div>
+                        
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon">
+                                <span class="material-symbols-outlined">cloud_upload</span>
                             </div>
-
-                            <!-- Advanced Filters & Search -->
-                            <div class="filter-section">
-                                <div class="section-header">
-                                    <h2>🔍 Bộ Lọc & Tìm Kiếm</h2>
-                                    <p>Lọc trong cơ sở dữ liệu CV</p>
-                                </div>
-                                
-                                <div class="filter-grid">
-                                    <div class="filter-group">
-                                        <label>Vị Trí</label>
-                                        <select id="filter-position">
-                                            <option value="">Tất cả vị trí</option>
-                                            <option value="frontend">Frontend Developer</option>
-                                            <option value="backend">Backend Developer</option>
-                                            <option value="fullstack">Fullstack Developer</option>
-                                            <option value="mobile">Mobile Developer</option>
-                                            <option value="data">Data Scientist</option>
-                                            <option value="design">UI/UX Designer</option>
-                                            <option value="marketing">Marketing</option>
-                                            <option value="other">Khác</option>
-                                        </select>
-                                    </div>
-                                    <div class="filter-group">
-                                        <label>Kinh Nghiệm</label>
-                                        <select id="filter-experience">
-                                            <option value="">Tất cả cấp độ</option>
-                                            <option value="0-1">Fresher (0-1 năm)</option>
-                                            <option value="1-3">Junior (1-3 năm)</option>
-                                            <option value="3-5">Middle (3-5 năm)</option>
-                                            <option value="5+">Senior (5+ năm)</option>
-                                        </select>
-                                    </div>
-                                    <div class="filter-group">
-                                        <label>Điểm CV</label>
-                                        <select id="filter-score">
-                                            <option value="">Tất cả điểm</option>
-                                            <option value="90-100">Xuất sắc (90-100)</option>
-                                            <option value="80-89">Tốt (80-89)</option>
-                                            <option value="70-79">Khá (70-79)</option>
-                                            <option value="0-69">Cần cải thiện (<70)</option>
-                                        </select>
-                                    </div>
-                                    <div class="filter-group">
-                                        <label>Từ Khóa</label>
-                                        <input type="text" id="search-keyword" placeholder="Tên, kỹ năng, công ty...">
-                                    </div>
-                                </div>
-                                <div class="filter-actions">
-                                    <button class="btn btn-primary" id="apply-filters">
-                                        <span class="material-symbols-outlined">search</span>
-                                        Áp Dụng
-                                    </button>
-                                    <button class="btn btn-secondary" id="reset-filters">
-                                        <span class="material-symbols-outlined">refresh</span>
-                                        Đặt Lại
-                                    </button>
-                                </div>
-                            </div>
+                            <h3>Thả file CV vào đây</h3>
+                            <p>PDF, DOC, DOCX, JPG, PNG (Max 10MB)</p>
+                            <input type="file" id="cv-files" class="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
                         </div>
 
-                        <!-- CV Database Grid -->
-                        <div class="cv-database-section">
-                            <div class="section-header">
-                                <h2>📊 Cơ Sở Dữ Liệu CV</h2>
-                                <div class="database-stats">
-                                    <span class="stat-item">
-                                        <span class="material-symbols-outlined">folder</span>
-                                        <span id="total-cvs">0</span> Tổng CV
-                                    </span>
-                                    <span class="stat-item">
-                                        <span class="material-symbols-outlined">star</span>
-                                        <span id="excellent-cvs">0</span> Xuất sắc
-                                    </span>
-                                    <span class="stat-item">
-                                        <span class="material-symbols-outlined">trending_up</span>
-                                        <span id="good-cvs">0</span> Tốt
-                                    </span>
-                                </div>
+                        <div id="upload-progress" style="display: none;">
+                            <div style="background: #e2e8f0; border-radius: 10px; height: 8px; margin: 1rem 0;">
+                                <div id="progress-bar" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s ease;"></div>
                             </div>
-                            
-                            <div class="cv-grid" id="cv-grid">
-                                <!-- CV cards will be populated here -->
-                            </div>
+                            <p id="upload-status">Đang xử lý file...</p>
+                        </div>
+
+                        <div id="upload-results" style="display: none;">
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1rem;">Kết Quả:</h4>
+                            <div id="results-list"></div>
                         </div>
                     </div>
 
-                    <!-- Chatbot Section (30%) -->
-                    <div class="chatbot-section">
-                        <div class="chatbot-header">
-                            <h3>🤖 AI Assistant</h3>
-                            <p>Hỗ trợ phân tích và tư vấn CV</p>
+                    <!-- Advanced Filters & Search -->
+                    <div class="filter-section">
+                        <div class="section-header">
+                            <h2>🔍 Bộ Lọc & Tìm Kiếm</h2>
+                            <p>Lọc trong cơ sở dữ liệu CV</p>
                         </div>
                         
-                        <div class="chat-messages" id="chat-messages">
-                            <div class="message bot">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    Xin chào! Tôi là AI Assistant của bạn. Tôi có thể giúp bạn:
-                                    <br><br>
-                                    • Phân tích và đánh giá CV
-                                    <br>
-                                    • Tư vấn lựa chọn ứng viên
-                                    <br>
-                                    • Gợi ý câu hỏi phỏng vấn
-                                    <br>
-                                    • So sánh các CV
-                                    <br><br>
-                                    Hãy tải lên CV hoặc hỏi tôi bất cứ điều gì!
-                                </div>
+                        <div class="filter-grid">
+                            <div class="filter-group">
+                                <label>Vị Trí</label>
+                                <select id="filter-position">
+                                    <option value="">Tất cả vị trí</option>
+                                    <option value="frontend">Frontend Developer</option>
+                                    <option value="backend">Backend Developer</option>
+                                    <option value="fullstack">Fullstack Developer</option>
+                                    <option value="mobile">Mobile Developer</option>
+                                    <option value="data">Data Scientist</option>
+                                    <option value="design">UI/UX Designer</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Kinh Nghiệm</label>
+                                <select id="filter-experience">
+                                    <option value="">Tất cả cấp độ</option>
+                                    <option value="0-1">Fresher (0-1 năm)</option>
+                                    <option value="1-3">Junior (1-3 năm)</option>
+                                    <option value="3-5">Middle (3-5 năm)</option>
+                                    <option value="5+">Senior (5+ năm)</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Điểm CV</label>
+                                <select id="filter-score">
+                                    <option value="">Tất cả điểm</option>
+                                    <option value="90-100">Xuất sắc (90-100)</option>
+                                    <option value="80-89">Tốt (80-89)</option>
+                                    <option value="70-79">Khá (70-79)</option>
+                                    <option value="0-69">Cần cải thiện (<70)</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Từ Khóa</label>
+                                <input type="text" id="search-keyword" placeholder="Tên, kỹ năng, công ty...">
                             </div>
                         </div>
-
-                        <div class="typing-indicator" id="typing-indicator">
-                            <div class="message-avatar">🤖</div>
-                            <div class="typing-dots">
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                            </div>
-                        </div>
-
-                        <div class="chat-input-container">
-                            <textarea class="chat-input" id="chat-input" placeholder="Nhập tin nhắn..." rows="2"></textarea>
-                            <button class="chat-send-btn" id="chat-send-btn">
-                                <span class="material-symbols-outlined">send</span>
+                        <div class="filter-actions">
+                            <button class="btn btn-primary" id="apply-filters">
+                                <span class="material-symbols-outlined">search</span>
+                                Áp Dụng
+                            </button>
+                            <button class="btn btn-secondary" id="reset-filters">
+                                <span class="material-symbols-outlined">refresh</span>
+                                Đặt Lại
                             </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- CV Database Grid -->
+                <div class="cv-database-section">
+                    <div class="section-header">
+                        <h2>Kết Quả Lọc CV</h2>
+                        <div class="database-stats">
+                            <span class="stat-item">
+                                <span class="material-symbols-outlined">folder</span>
+                                <span id="total-cvs">0</span> Tổng CV
+                            </span>
+                            <span class="stat-item">
+                                <span class="material-symbols-outlined">star</span>
+                                <span id="excellent-cvs">0</span> Xuất sắc
+                            </span>
+                            <span class="stat-item">
+                                <span class="material-symbols-outlined">trending_up</span>
+                                <span id="good-cvs">0</span> Tốt
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-grid" id="cv-grid">
+                        <!-- CV cards will be populated here -->
                     </div>
                 </div>
             </div>
@@ -1238,11 +1709,168 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- CV Scoring Settings Tab -->
+            <div class="tab-content" id="settings-tab">
+                <div class="section-header">
+                    <h2>⚙️ Tùy Chỉnh Tiêu Chí Đánh Giá CV</h2>
+                    <p>Điều chỉnh trọng số đánh giá CV theo nhu cầu tuyển dụng và vị trí mục tiêu của bạn</p>
+                </div>
+
+                <div class="scoring-settings-container">
+                    <div class="scoring-criteria-section">
+                        <div class="criteria-header">
+                            <h3>Tiêu Chí Đánh Giá</h3>
+                            <p>Tổng điểm: <span id="total-weight">100</span>%</p>
+                        </div>
+                        
+                        <div class="criteria-form">
+                            <div class="criteria-item">
+                                <label for="professionalism-weight">Chuyên Nghiệp & Rõ Ràng <small>(Trọng số hiện tại: <b id="professionalism-percent">25%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="5" max="50" value="25" class="weight-slider" id="professionalism-weight">
+                                    <span class="weight-value" id="professionalism-value">25</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá email, số điện thoại, họ tên đầy đủ, cấu trúc CV và mức độ chi tiết của CV</p>
+                                </div>
+                            </div>
+
+                            <div class="criteria-item">
+                                <label for="experience-weight">Kinh Nghiệm Làm Việc <small>(Trọng số hiện tại: <b id="experience-percent">30%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="5" max="50" value="30" class="weight-slider" id="experience-weight">
+                                    <span class="weight-value" id="experience-value">30</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá số lượng, chất lượng kinh nghiệm làm việc và mức độ liên quan đến vị trí ứng tuyển</p>
+                                </div>
+                            </div>
+
+                            <div class="criteria-item">
+                                <label for="skills-weight">Kỹ Năng Chuyên Môn <small>(Trọng số hiện tại: <b id="skills-percent">25%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="5" max="50" value="25" class="weight-slider" id="skills-weight">
+                                    <span class="weight-value" id="skills-value">25</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá số lượng kỹ năng liên quan, công nghệ và công cụ mà ứng viên thành thạo</p>
+                                </div>
+                            </div>
+
+                            <div class="criteria-item">
+                                <label for="education-weight">Học Vấn <small>(Trọng số hiện tại: <b id="education-percent">20%</b>)</small></label>
+                                <div class="slider-container">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="5" max="50" value="20" class="weight-slider" id="education-weight">
+                                    <span class="weight-value" id="education-value">20</span>
+                                </div>
+                                <div class="criteria-details">
+                                    <p>Đánh giá bằng cấp, chi tiết học vấn, thành tích học tập và trình độ đại học/cao học</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="weight-warning" id="weight-warning" style="display: none;">
+                            <span class="material-symbols-outlined">warning</span>
+                            <p>Tổng điểm phân bổ phải bằng 100 điểm để đảm bảo đánh giá chính xác!</p>
+                        </div>
+
+                        <div class="settings-actions">
+                            <button class="btn btn-primary" id="save-weights">
+                                <span class="material-symbols-outlined">save</span>
+                                Lưu Thiết Lập
+                            </button>
+                            <button class="btn btn-secondary" id="reset-default-weights">
+                                <span class="material-symbols-outlined">refresh</span>
+                                Khôi Phục Mặc Định
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="scoring-preview-section">
+                        <div class="preview-header">
+                            <h3>Xem Trước Thay Đổi</h3>
+                            <p>Phân bổ tiêu chí đánh giá mới</p>
+                        </div>
+                        
+                        <div class="preview-chart-container">
+                            <canvas id="weightChart"></canvas>
+                        </div>
+                        
+                        <div class="preview-note">
+                            <p><strong>Lưu ý:</strong> Thay đổi trọng số sẽ ảnh hưởng đến tất cả CV trong hệ thống và được áp dụng ngay lập tức khi lưu. Điều chỉnh trọng số phù hợp với mục tiêu tuyển dụng sẽ giúp tìm kiếm ứng viên phù hợp hơn với vị trí cần tuyển.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="loading" id="loading">
                 <div class="spinner"></div>
                 <p>Processing data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Recruitment Advisor Chatbot -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        🤖
+        <div class="notification-badge" id="notificationBadge" style="display: none;">1</div>
+    </button>
+
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <span>🎯</span>
+                <div>
+                    <div>AI Tư Vấn Tuyển Dụng</div>
+                    <div class="chatbot-status">
+                        <div class="status-dot"></div>
+                        <span>Trực tuyến</span>
+                    </div>
+                </div>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">×</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot">
+                <div class="message-avatar">🤖</div>
+                <div>
+                    <div class="message-content">
+                        Xin chào! Tôi là AI Tư Vấn Tuyển Dụng của Tech CV. Tôi có thể giúp bạn:
+                        
+                        • Phân tích dữ liệu CV trong hệ thống
+                        • Đề xuất câu hỏi phỏng vấn phù hợp
+                        • Tư vấn chiến lược tuyển dụng
+                        • So sánh mức lương thị trường
+                        • Đưa ra quyết định tuyển dụng tối ưu
+                        
+                        Bạn cần hỗ trợ gì hôm nay?
+                    </div>
+                    <div class="suggestion-chips">
+                        <div class="suggestion-chip" data-suggestion="Phân tích dữ liệu CV hiện tại">📊 Phân tích dữ liệu CV</div>
+                        <div class="suggestion-chip" data-suggestion="Top ứng viên xuất sắc nhất">🏆 Top ứng viên</div>
+                        <div class="suggestion-chip" data-suggestion="Thống kê CV theo vị trí">📈 Thống kê vị trí</div>
+                    </div>
+                    <div class="message-time">Vừa xong</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chatbot-input">
+            <div class="input-container">
+                <textarea class="chatbot-textarea" id="chatbotInput" placeholder="Nhập câu hỏi của bạn..." rows="1"></textarea>
+                <button class="send-button" id="sendButton">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -1253,10 +1881,6 @@
         const GEMINI_API_KEY = 'AIzaSyBZS9KdjtXW-88gqbc9gLuT8-e4E606yhI';
         const GEMINI_MODEL = 'gemini-1.5-flash-latest';
         const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
-
-        // Đường dẫn data ngành nghề và lộ trình nghề nghiệp
-        const CAREER_DATA_PATH = "Data/tư vấn nghề nghiệp/ngành nghề/";
-        const ROADMAP_DATA_PATH = "Data/tư vấn nghề nghiệp/RoadMap/";
 
         // Global variables
         let cvDatabase = [];
@@ -1781,58 +2405,66 @@ Return the JSON object now:`;
             return null;
         }
 
-        // Function to calculate CV score using fixed formula
+        // Function to calculate CV score using custom weights or default formula
         function calculateCVScore(cvText, parsedData) {
             let score = 0;
+            
+            // Get custom scoring weights from localStorage or use defaults
+            const weights = getScoringWeights();
+            
             let breakdown = {
-                professionalism: 0,    // 25 điểm max
-                experience: 0,         // 30 điểm max  
-                skills: 0,            // 25 điểm max
-                education: 0          // 20 điểm max
+                professionalism: 0,    // Default: 25 điểm max
+                experience: 0,         // Default: 30 điểm max  
+                skills: 0,             // Default: 25 điểm max
+                education: 0           // Default: 20 điểm max
             };
 
-            // 1. ĐIỂM CHUYÊN NGHIỆP VÀ RÕ RÀNG (25 điểm)
+            // 1. ĐIỂM CHUYÊN NGHIỆP VÀ RÕ RÀNG
+            const professionalismMax = weights.professionalism;
             let professionalismScore = 0;
             
-            // Có email (5 điểm)
-            if (parsedData.email) professionalismScore += 5;
+            // Có email (20% của trọng số)
+            if (parsedData.email) professionalismScore += professionalismMax * 0.2;
             
-            // Có số điện thoại (5 điểm)
-            if (parsedData.phone) professionalismScore += 5;
+            // Có số điện thoại (20% của trọng số)
+            if (parsedData.phone) professionalismScore += professionalismMax * 0.2;
             
-            // Có họ tên đầy đủ (5 điểm)
-            if (parsedData.full_name && parsedData.full_name.length > 5) professionalismScore += 5;
+            // Có họ tên đầy đủ (20% của trọng số)
+            if (parsedData.full_name && parsedData.full_name.length > 5) professionalismScore += professionalismMax * 0.2;
             
-            // CV có cấu trúc tốt - check keywords (5 điểm)
+            // CV có cấu trúc tốt - check keywords (20% của trọng số)
             const structureKeywords = ['học vấn', 'kinh nghiệm', 'kỹ năng', 'thông tin', 'liên hệ', 'education', 'experience', 'skills'];
             const foundStructure = structureKeywords.filter(keyword => 
                 cvText.toLowerCase().includes(keyword.toLowerCase())).length;
-            if (foundStructure >= 3) professionalismScore += 5;
+            if (foundStructure >= 3) professionalismScore += professionalismMax * 0.2;
             
-            // CV đủ dài và chi tiết (5 điểm)
-            if (cvText.length > 500) professionalismScore += 5;
+            // CV đủ dài và chi tiết (20% của trọng số)
+            if (cvText.length > 500) professionalismScore += professionalismMax * 0.2;
             
-            breakdown.professionalism = Math.min(25, professionalismScore);
+            breakdown.professionalism = Math.min(professionalismMax, professionalismScore);
 
-            // 2. ĐIỂM KINH NGHIỆM (30 điểm)
+            // 2. ĐIỂM KINH NGHIỆM
+            const experienceMax = weights.experience;
             let experienceScore = 0;
             
             if (parsedData.work_experience && parsedData.work_experience.length > 0) {
-                // Có ít nhất 1 kinh nghiệm (10 điểm)
-                experienceScore += 10;
+                // Có ít nhất 1 kinh nghiệm (33% của trọng số)
+                experienceScore += experienceMax * 0.33;
                 
-                // Mỗi kinh nghiệm thêm (5 điểm/cái, tối đa 15 điểm)
-                experienceScore += Math.min(15, (parsedData.work_experience.length - 1) * 5);
+                // Mỗi kinh nghiệm thêm (50% của trọng số, chia theo số lượng)
+                const additionalExpWeight = experienceMax * 0.5;
+                experienceScore += Math.min(additionalExpWeight, (parsedData.work_experience.length - 1) * (additionalExpWeight / 3));
                 
-                // Kinh nghiệm có mô tả chi tiết (5 điểm)
+                // Kinh nghiệm có mô tả chi tiết (17% của trọng số)
                 const hasDetailedExp = parsedData.work_experience.some(exp => 
                     exp.position && exp.company && exp.year_range);
-                if (hasDetailedExp) experienceScore += 5;
+                if (hasDetailedExp) experienceScore += experienceMax * 0.17;
             }
             
-            breakdown.experience = Math.min(30, experienceScore);
+            breakdown.experience = Math.min(experienceMax, experienceScore);
 
-            // 3. ĐIỂM KỸ NĂNG (25 điểm)
+            // 3. ĐIỂM KỸ NĂNG
+            const skillsMax = weights.skills;
             let skillsScore = 0;
             
             const skillKeywords = [
@@ -1853,29 +2485,31 @@ Return the JSON object now:`;
             const foundSkills = skillKeywords.filter(skill => 
                 cvText.toLowerCase().includes(skill.toLowerCase())).length;
             
-            // Mỗi kỹ năng được 2 điểm, tối đa 20 điểm
-            skillsScore += Math.min(20, foundSkills * 2);
+            // Kỹ năng chiếm 80% của trọng số, mỗi kỹ năng có giá trị bằng nhau (tối đa 10 kỹ năng)
+            const skillsWeightPortion = skillsMax * 0.8;
+            skillsScore += Math.min(skillsWeightPortion, foundSkills * (skillsWeightPortion / 10));
             
-            // Có mục kỹ năng riêng biệt (5 điểm)
+            // Có mục kỹ năng riêng biệt (20% của trọng số)
             if (cvText.toLowerCase().includes('kỹ năng') || cvText.toLowerCase().includes('skills')) {
-                skillsScore += 5;
+                skillsScore += skillsMax * 0.2;
             }
             
-            breakdown.skills = Math.min(25, skillsScore);
+            breakdown.skills = Math.min(skillsMax, skillsScore);
 
-            // 4. ĐIỂM HỌC VẤN (20 điểm)
+            // 4. ĐIỂM HỌC VẤN
+            const educationMax = weights.education;
             let educationScore = 0;
             
             if (parsedData.education && parsedData.education.length > 0) {
-                // Có ít nhất 1 bằng cấp (10 điểm)
-                educationScore += 10;
+                // Có ít nhất 1 bằng cấp (50% của trọng số)
+                educationScore += educationMax * 0.5;
                 
-                // Bằng cấp có thông tin chi tiết (5 điểm)
+                // Bằng cấp có thông tin chi tiết (25% của trọng số)
                 const hasDetailedEdu = parsedData.education.some(edu => 
                     edu.degree && edu.school && edu.year_range);
-                if (hasDetailedEdu) educationScore += 5;
+                if (hasDetailedEdu) educationScore += educationMax * 0.25;
                 
-                // Bằng đại học/cao học (5 điểm)
+                // Bằng đại học/cao học (25% của trọng số)
                 const hasHigherEdu = parsedData.education.some(edu => 
                     edu.degree && (
                         edu.degree.toLowerCase().includes('đại học') ||
@@ -1885,10 +2519,10 @@ Return the JSON object now:`;
                         edu.degree.toLowerCase().includes('bachelor') ||
                         edu.degree.toLowerCase().includes('master')
                     ));
-                if (hasHigherEdu) educationScore += 5;
+                if (hasHigherEdu) educationScore += educationMax * 0.25;
             }
             
-            breakdown.education = Math.min(20, educationScore);
+            breakdown.education = Math.min(educationMax, educationScore);
 
             // TỔNG ĐIỂM
             score = breakdown.professionalism + breakdown.experience + breakdown.skills + breakdown.education;
@@ -1898,7 +2532,7 @@ Return the JSON object now:`;
             return { 
                 score: Math.min(100, Math.max(0, score)),
                 breakdown: breakdown,
-                reason: `Chuyên nghiệp: ${breakdown.professionalism}/25, Kinh nghiệm: ${breakdown.experience}/30, Kỹ năng: ${breakdown.skills}/25, Học vấn: ${breakdown.education}/20`
+                reason: `Chuyên nghiệp: ${Math.round(breakdown.professionalism)}/${weights.professionalism}, Kinh nghiệm: ${Math.round(breakdown.experience)}/${weights.experience}, Kỹ năng: ${Math.round(breakdown.skills)}/${weights.skills}, Học vấn: ${Math.round(breakdown.education)}/${weights.education}`
             };
         }
 
@@ -1997,7 +2631,7 @@ Return the JSON object now:`;
                        `;
         }
 
-               function displayCVs(cvs) {
+        function displayCVs(cvs) {
             filteredCVs = cvs;
             cvGrid.innerHTML = '';
 
@@ -2402,15 +3036,19 @@ Return the JSON object now:`;
             notification.innerHTML = `
                 <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
                     <span class="material-symbols-outlined" style="margin-right: 0.5rem;">upgrade</span>
-                    <strong>Công thức tính điểm mới!</strong>
+                    <strong>Tiêu chí đánh giá tùy chỉnh!</strong>
                 </div>
                 <div>
-                    ✅ Điểm CV giờ đây nhất quán và cố định<br>
-                    ✅ Công thức minh bạch: 25+30+25+20 = 100 điểm<br>
-                    ✅ Chi tiết breakdown từng phần<br>
-                    ✅ Click "Xem chi tiết" để xem công thức
+                    ✅ Điểm CV giờ đây có thể tùy chỉnh theo nhu cầu<br>
+                    ✅ Trọng số linh hoạt cho từng tiêu chí<br>
+                    ✅ Chi tiết breakdown theo từng mục<br>
+                    ✅ Tab "Tùy Chỉnh Tiêu Chí" để điều chỉnh
                 </div>
                 <div style="margin-top: 0.8rem; text-align: right;">
+                    <button onclick="switchTab('settings')" 
+                            style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; margin-right: 0.5rem;">
+                        Tùy Chỉnh Ngay
+                    </button>
                     <button onclick="this.parentElement.parentElement.remove()" 
                             style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer;">
                         Đóng
@@ -2845,6 +3483,9 @@ ${sortedPositions.map(([pos, count], index) => {
             }
 
             handleCVAnalysisQuery(message) {
+                // Get current weights to show in the response
+                const weights = getScoringWeights();
+                
                 const responses = [
                     {
                         text: `📊 **Hướng dẫn phân tích CV chuyên nghiệp:**
@@ -2864,17 +3505,17 @@ ${sortedPositions.map(([pos, count], index) => {
 • Leadership experience
 • Teamwork indicators
 
-**💡 Công thức tính điểm Tech CV:**
-• Chuyên nghiệp & Rõ ràng: 25 điểm
-• Kinh nghiệm làm việc: 30 điểm
-• Kỹ năng chuyên môn: 25 điểm
-• Học vấn: 20 điểm
+**💡 Công thức tính điểm Tech CV (Tùy chỉnh):**
+• Chuyên nghiệp & Rõ ràng: ${weights.professionalism} điểm
+• Kinh nghiệm làm việc: ${weights.experience} điểm
+• Kỹ năng chuyên môn: ${weights.skills} điểm
+• Học vấn: ${weights.education} điểm
 
-**🎯 Lưu ý:** Click "Xem chi tiết" trên CV card để xem breakdown điểm số cụ thể`,
+**🎯 Mẹo:** Bạn có thể điều chỉnh trọng số đánh giá CV ở tab "Tùy Chỉnh Tiêu Chí" để phù hợp với nhu cầu tuyển dụng của bạn!`,
                         suggestions: [
                             "Template đánh giá CV",
                             "Red flags cần tránh trong CV",
-                            "Cách scoring CV hiệu quả"
+                            "Cách chỉnh sửa tiêu chí đánh giá"
                         ]
                     }
                 ];
@@ -3029,248 +3670,365 @@ Hãy cho tôi biết bạn cần hỗ trợ gì cụ thể! 😊`,
                     ]
                 };
             }
-        }
-
-        // Chatbot functionality
-        class CVChatbot {
-            constructor() {
-                console.log('CVChatbot constructor called');
-                this.messages = [];
-                this.messagesContainer = document.getElementById('chat-messages');
-                this.chatInput = document.getElementById('chat-input');
-                this.sendButton = document.getElementById('chat-send-btn');
-                this.typingIndicator = document.getElementById('typing-indicator');
-                
-                console.log('Elements found:', {
-                    messagesContainer: this.messagesContainer,
-                    chatInput: this.chatInput,
-                    sendButton: this.sendButton,
-                    typingIndicator: this.typingIndicator
-                });
-                
-                if (this.messagesContainer && this.chatInput && this.sendButton) {
-                    this.initializeEventListeners();
-                    console.log('Chatbot initialized successfully');
-                } else {
-                    console.error('Chatbot elements not found!');
-                }
-            }
-
-            initializeEventListeners() {
-                console.log('Initializing event listeners');
-                
-                // Send message on button click
-                this.sendButton.addEventListener('click', () => {
-                    console.log('Send button clicked');
-                    this.sendMessage();
-                });
-
-                // Send message on Enter key (but allow Shift+Enter for new line)
-                this.chatInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        console.log('Enter key pressed');
-                        this.sendMessage();
-                    }
-                });
-
-                // Auto-resize textarea
-                this.chatInput.addEventListener('input', () => {
-                    this.chatInput.style.height = 'auto';
-                    this.chatInput.style.height = Math.min(this.chatInput.scrollHeight, 100) + 'px';
-                });
-                
-                console.log('Event listeners initialized');
-            }
-
-            async sendMessage() {
-                console.log('Send message called');
-                const message = this.chatInput.value.trim();
-                if (!message) {
-                    console.log('Empty message, returning');
-                    return;
-                }
-
-                console.log('Sending message:', message);
-
-                // Add user message
-                this.addMessage('user', message);
-                this.chatInput.value = '';
-                this.chatInput.style.height = 'auto';
-
-                // Show typing indicator
-                this.showTyping();
-
-                try {
-                    // Simulate AI response (replace with actual AI integration)
-                    const response = await this.getAIResponse(message);
-                    this.hideTyping();
-                    this.addMessage('bot', response.text || response);
-                } catch (error) {
-                    console.error('Error getting AI response:', error);
-                    this.hideTyping();
-                    this.addMessage('bot', 'Xin lỗi, tôi gặp sự cố khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.');
-                }
-            }
-
-            addMessage(sender, content) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${sender}`;
-
-                const avatar = document.createElement('div');
-                avatar.className = 'message-avatar';
-                avatar.textContent = sender === 'bot' ? '🤖' : '👤';
-
-                const messageContent = document.createElement('div');
-                messageContent.className = 'message-content';
-                messageContent.innerHTML = content.replace(/\n/g, '<br>');
-
-                messageDiv.appendChild(avatar);
-                messageDiv.appendChild(messageContent);
-
-                this.messagesContainer.appendChild(messageDiv);
-                this.scrollToBottom();
-            }
-
-            showTyping() {
-                this.typingIndicator.style.display = 'flex';
-                this.scrollToBottom();
-            }
-
-            hideTyping() {
-                this.typingIndicator.style.display = 'none';
-            }
 
             scrollToBottom() {
                 this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
             }
-
-            async getAIResponse(message) {
-                // Simulate typing delay
-                await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
-
-                const lowerMessage = message.toLowerCase();
-                
-                // Context-aware responses based on current CVs and filters
-                if (lowerMessage.includes('phân tích') || lowerMessage.includes('đánh giá')) {
-                    return this.getAnalysisResponse();
-                } else if (lowerMessage.includes('so sánh') || lowerMessage.includes('compare')) {
-                    return this.getComparisonResponse();
-                } else if (lowerMessage.includes('câu hỏi') || lowerMessage.includes('phỏng vấn')) {
-                    return this.getInterviewResponse();
-                } else if (lowerMessage.includes('thống kê') || lowerMessage.includes('số liệu')) {
-                    return this.getStatisticsResponse();
-                } else if (lowerMessage.includes('tư vấn') || lowerMessage.includes('gợi ý')) {
-                    return this.getAdviceResponse();
-                } else {
-                    return this.getGeneralResponse();
-                }
-            }
-
-            getAnalysisResponse() {
-                const totalCVs = document.getElementById('total-cvs').textContent;
-                const excellentCVs = document.getElementById('excellent-cvs').textContent;
-                
-                return `📊 Phân tích hiện tại:
-                
-• Tổng số CV: ${totalCVs}
-• CV xuất sắc: ${excellentCVs}
-• Tỷ lệ CV chất lượng cao: ${totalCVs > 0 ? Math.round(excellentCVs / totalCVs) * 100 : 0}%
-
-Bạn muốn tôi phân tích chi tiết CV nào cụ thể không?`;
-            }
-
-            getComparisonResponse() {
-                return `🔍 Để so sánh CV hiệu quả:
-
-1. **Kỹ năng chính**: So sánh độ phù hợp với job description
-2. **Kinh nghiệm**: Đánh giá chất lượng và độ liên quan
-3. **Học vấn**: Xem xét background phù hợp
-4. **Điểm tổng thể**: Dựa trên thuật toán AI
-
-Bạn có muốn tôi so sánh 2-3 CV cụ thể không?`;
-            }
-
-            getInterviewResponse() {
-                return `❓ Gợi ý câu hỏi phỏng vấn:
-
-**Câu hỏi kỹ thuật:**
-• "Mô tả dự án bạn tự hào nhất?"
-• "Cách giải quyết vấn đề phức tạp?"
-• "Kỹ năng muốn phát triển trong 6 tháng tới?"
-
-**Câu hỏi soft skills:**
-• "Làm thế nào để làm việc nhóm hiệu quả?"
-• "Xử lý tình huống áp lực cao?"
-
-Bạn muốn câu hỏi cho vị trí nào cụ thể?`;
-            }
-
-            getStatisticsResponse() {
-                return `📈 Thống kê CV trong hệ thống:
-
-• **Vị trí phổ biến**: Frontend (35%), Backend (28%), Fullstack (20%)
-• **Kinh nghiệm trung bình**: 2.5 năm
-• **Điểm CV trung bình**: 75/100
-• **Xu hướng**: React, Node.js, Python đang tăng mạnh
-
-Bạn cần thống kê theo tiêu chí nào khác không?`;
-            }
-
-            getAdviceResponse() {
-                return `💡 Tư vấn tuyển dụng:
-
-**Lựa chọn ứng viên:**
-1. Ưu tiên CV có điểm ≥ 80
-2. Kiểm tra portfolio/dự án thực tế
-3. Đánh giá cultural fit
-
-**Quy trình hiệu quả:**
-• Sàng lọc CV → Phỏng vấn điện thoại → Technical test → Onsite interview
-
-Bạn cần tư vấn cho vị trí nào cụ thể?`;
-            }
-
-            getGeneralResponse() {
-                const responses = [
-                    `Tôi có thể giúp bạn:
-• Phân tích và đánh giá CV
-• So sánh ứng viên
-• Gợi ý câu hỏi phỏng vấn
-• Thống kê dữ liệu tuyển dụng
-
-Bạn cần hỗ trợ gì cụ thể?`,
-                    
-                    `💼 Với vai trò HR Assistant, tôi có thể:
-• Đọc và phân tích CV tự động
-• Tạo báo cáo thống kê
-• Tư vấn lựa chọn ứng viên
-• Hỗ trợ quy trình tuyển dụng
-
-Hãy cho tôi biết bạn đang cần gì!`,
-                    
-                    `🎯 Hãy thử hỏi tôi:
-"Phân tích CV này"
-"So sánh 2 ứng viên này"
-"Gợi ý câu hỏi phỏng vấn"
-"Thống kê theo vị trí"
-
-Tôi sẵn sàng hỗ trợ bạn!`
-                ];
-                
-                return responses[Math.floor(Math.random() * responses.length)];
-            }
         }
 
-        // Initialize chatbot
-        let cvChatbot;
-
-        // Initialize the AI Recruitment Advisor and Chatbot
+        // Initialize the AI Recruitment Advisor
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM Content Loaded - Initializing chatbot...');
-            cvChatbot = new CVChatbot();
-            console.log('Chatbot initialized:', cvChatbot);
+            new RecruitmentAdvisor();
+            initializeScoringSettings();
         });
+
+        // Custom CV Scoring Weight Functions
+        function getScoringWeights() {
+            // Get custom weights from localStorage or use defaults
+            const storedWeights = localStorage.getItem('cvScoringWeights');
+            const defaultWeights = {
+                professionalism: 25,
+                experience: 30,
+                skills: 25,
+                education: 20
+            };
+            
+            return storedWeights ? JSON.parse(storedWeights) : defaultWeights;
+        }
+        
+        function saveScoringWeights(weights) {
+            localStorage.setItem('cvScoringWeights', JSON.stringify(weights));
+            showNotification('Đã lưu thiết lập tiêu chí đánh giá CV', 'success');
+        }
+        
+        function updateTotalWeight() {
+            const professionalismWeight = parseInt(document.getElementById('professionalism-weight').value);
+            const experienceWeight = parseInt(document.getElementById('experience-weight').value);
+            const skillsWeight = parseInt(document.getElementById('skills-weight').value);
+            const educationWeight = parseInt(document.getElementById('education-weight').value);
+            
+            const total = professionalismWeight + experienceWeight + skillsWeight + educationWeight;
+            document.getElementById('total-weight').textContent = total;
+            
+            const warningElement = document.getElementById('weight-warning');
+            if (total !== 100) {
+                warningElement.style.display = 'flex';
+                document.getElementById('save-weights').disabled = true;
+            } else {
+                warningElement.style.display = 'none';
+                document.getElementById('save-weights').disabled = false;
+            }
+            
+            // Update the preview chart
+            updateWeightChart();
+        }
+        
+        function initializeScoringSettings() {
+            // Load current weights
+            const weights = getScoringWeights();
+            
+            // Set the sliders to the stored values
+            document.getElementById('professionalism-weight').value = weights.professionalism;
+            document.getElementById('professionalism-value').textContent = weights.professionalism;
+            document.getElementById('professionalism-percent').textContent = weights.professionalism + '%';
+            
+            document.getElementById('experience-weight').value = weights.experience;
+            document.getElementById('experience-value').textContent = weights.experience;
+            document.getElementById('experience-percent').textContent = weights.experience + '%';
+            
+            document.getElementById('skills-weight').value = weights.skills;
+            document.getElementById('skills-value').textContent = weights.skills;
+            document.getElementById('skills-percent').textContent = weights.skills + '%';
+            
+            document.getElementById('education-weight').value = weights.education;
+            document.getElementById('education-value').textContent = weights.education;
+            document.getElementById('education-percent').textContent = weights.education + '%';
+            
+            // Set up event listeners for sliders
+            document.querySelectorAll('.weight-slider').forEach(slider => {
+                slider.addEventListener('input', function() {
+                    // Update the displayed value
+                    const valueDisplay = document.getElementById(this.id.replace('weight', 'value'));
+                    valueDisplay.textContent = this.value;
+                    
+                    // Update the percentage display
+                    const percentDisplay = document.getElementById(this.id.replace('weight', 'percent'));
+                    if (percentDisplay) {
+                        percentDisplay.textContent = this.value + '%';
+                    }
+                    
+                    // Update total and validation
+                    updateTotalWeight();
+                });
+            });
+            
+            // Set up event listeners for buttons
+            document.getElementById('save-weights').addEventListener('click', function() {
+                const newWeights = {
+                    professionalism: parseInt(document.getElementById('professionalism-weight').value),
+                    experience: parseInt(document.getElementById('experience-weight').value),
+                    skills: parseInt(document.getElementById('skills-weight').value),
+                    education: parseInt(document.getElementById('education-weight').value)
+                };
+                
+                saveScoringWeights(newWeights);
+                
+                // Recalculate all CV scores with the new weights
+                recalculateAllCVScores();
+            });
+            
+            document.getElementById('reset-default-weights').addEventListener('click', function() {
+                const defaultWeights = {
+                    professionalism: 25,
+                    experience: 30,
+                    skills: 25,
+                    education: 20
+                };
+                
+                // Reset sliders
+                document.getElementById('professionalism-weight').value = defaultWeights.professionalism;
+                document.getElementById('professionalism-value').textContent = defaultWeights.professionalism;
+                document.getElementById('professionalism-percent').textContent = defaultWeights.professionalism + '%';
+                
+                document.getElementById('experience-weight').value = defaultWeights.experience;
+                document.getElementById('experience-value').textContent = defaultWeights.experience;
+                document.getElementById('experience-percent').textContent = defaultWeights.experience + '%';
+                
+                document.getElementById('skills-weight').value = defaultWeights.skills;
+                document.getElementById('skills-value').textContent = defaultWeights.skills;
+                document.getElementById('skills-percent').textContent = defaultWeights.skills + '%';
+                
+                document.getElementById('education-weight').value = defaultWeights.education;
+                document.getElementById('education-value').textContent = defaultWeights.education;
+                document.getElementById('education-percent').textContent = defaultWeights.education + '%';
+                
+                updateTotalWeight();
+                
+                showNotification('Đã khôi phục thiết lập mặc định', 'info');
+            });
+            
+            // Initialize the chart
+            createWeightChart();
+            updateTotalWeight();
+        }
+        
+        function createWeightChart() {
+            const ctx = document.getElementById('weightChart').getContext('2d');
+            const weights = getScoringWeights();
+            
+            // Create gradient backgrounds
+            const gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient1.addColorStop(0, 'rgba(96, 165, 250, 0.9)');
+            gradient1.addColorStop(1, 'rgba(96, 165, 250, 0.7)');
+            
+            const gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient2.addColorStop(0, 'rgba(52, 211, 153, 0.9)');
+            gradient2.addColorStop(1, 'rgba(52, 211, 153, 0.7)');
+            
+            const gradient3 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient3.addColorStop(0, 'rgba(167, 139, 250, 0.9)');
+            gradient3.addColorStop(1, 'rgba(167, 139, 250, 0.7)');
+            
+            const gradient4 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient4.addColorStop(0, 'rgba(251, 191, 36, 0.9)');
+            gradient4.addColorStop(1, 'rgba(251, 191, 36, 0.7)');
+            
+            window.weightChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'Chuyên Nghiệp & Rõ Ràng',
+                        'Kinh Nghiệm Làm Việc',
+                        'Kỹ Năng Chuyên Môn',
+                        'Học Vấn'
+                    ],
+                    datasets: [{
+                        data: [
+                            weights.professionalism,
+                            weights.experience,
+                            weights.skills,
+                            weights.education
+                        ],
+                        backgroundColor: [
+                            gradient1,
+                            gradient2,
+                            gradient3,
+                            gradient4
+                        ],
+                        borderWidth: 3,
+                        borderColor: '#ffffff',
+                        hoverBorderWidth: 5,
+                        hoverBorderColor: [
+                            '#60a5fa',
+                            '#34d399',
+                            '#a78bfa',
+                            '#fbbf24'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    radius: '90%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                boxWidth: 10,
+                                font: {
+                                    family: 'Inter',
+                                    size: 13,
+                                    weight: '600'
+                                },
+                                color: '#4a5568'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#1a202c',
+                            bodyColor: '#4a5568',
+                            titleFont: {
+                                family: 'Inter',
+                                size: 14,
+                                weight: '600'
+                            },
+                            bodyFont: {
+                                family: 'Inter',
+                                size: 13
+                            },
+                            padding: 15,
+                            cornerRadius: 10,
+                            boxPadding: 10,
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}% (${Math.round(context.raw)} điểm)`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 1000,
+                        easing: 'easeOutCubic'
+                    }
+                }
+            });
+        }
+        
+        function updateWeightChart() {
+            if (!window.weightChart) return;
+            
+            const professionalismWeight = parseInt(document.getElementById('professionalism-weight').value);
+            const experienceWeight = parseInt(document.getElementById('experience-weight').value);
+            const skillsWeight = parseInt(document.getElementById('skills-weight').value);
+            const educationWeight = parseInt(document.getElementById('education-weight').value);
+            
+            window.weightChart.data.datasets[0].data = [
+                professionalismWeight,
+                experienceWeight,
+                skillsWeight,
+                educationWeight
+            ];
+            
+            window.weightChart.update();
+        }
+        
+        function recalculateAllCVScores() {
+            if (cvDatabase.length === 0) return;
+            
+            // Recalculate score for each CV
+            cvDatabase.forEach(cv => {
+                if (cv.rawText && cv.parsedData) {
+                    const newScoreResult = calculateCVScore(cv.rawText, cv.parsedData);
+                    cv.score = newScoreResult.score;
+                    cv.breakdown = newScoreResult.breakdown;
+                    cv.reason = newScoreResult.reason;
+                    
+                    // Update status based on new score
+                    if (cv.score >= 90) cv.status = 'excellent';
+                    else if (cv.score >= 80) cv.status = 'good';
+                    else if (cv.score >= 70) cv.status = 'average';
+                    else cv.status = 'poor';
+                }
+            });
+            
+            // Update display
+            displayCVs(cvDatabase);
+            updateRanking();
+            updateStatistics();
+            updateCharts();
+            
+            showNotification('Đã cập nhật điểm cho tất cả CV theo tiêu chí mới', 'success');
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notificationContainer = document.createElement('div');
+            notificationContainer.className = `notification ${type}`;
+            notificationContainer.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                color: white;
+                font-weight: 500;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            // Set background color based on type
+            if (type === 'success') {
+                notificationContainer.style.background = '#10b981';
+            } else if (type === 'error') {
+                notificationContainer.style.background = '#ef4444';
+            } else if (type === 'warning') {
+                notificationContainer.style.background = '#f59e0b';
+            } else { // info
+                notificationContainer.style.background = '#3b82f6';
+            }
+            
+            notificationContainer.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : type === 'warning' ? 'warning' : 'info'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notificationContainer);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notificationContainer.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notificationContainer.parentElement) {
+                        notificationContainer.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Add animation keyframes
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            </style>
+        `);
 
     </script>
 </body>
