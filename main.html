@@ -496,7 +496,7 @@
 
         .interview-chat {
             display: none;
-            height: 500px;
+            height: 600px;
             border: 1px solid #e2e8f0;
             border-radius: 15px;
             overflow: hidden;
@@ -515,6 +515,289 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .interview-controls {
+            background: #f8fafc;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .interview-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #48bb78;
+            animation: pulse 2s infinite;
+        }
+
+        .interview-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .control-btn.stop {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .control-btn.stop:hover {
+            background: #feb2b2;
+        }
+
+        .control-btn.camera {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+
+        .control-btn.camera:hover {
+            background: #90cdf4;
+        }
+
+        .control-btn.camera.active {
+            background: #48bb78;
+            color: white;
+        }
+
+        .interview-main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .camera-panel {
+            width: 300px;
+            background: #f8fafc;
+            border-left: 1px solid #e2e8f0;
+            padding: 1rem;
+            display: none;
+        }
+
+        .camera-panel.active {
+            display: block;
+        }
+
+        .video-feed {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #1a202c;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 1rem;
+        }
+
+        #candidateVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .behavior-analysis {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .behavior-score {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .behavior-score-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .behavior-indicators {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .behavior-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .indicator-name {
+            color: #4a5568;
+        }
+
+        .indicator-status {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .indicator-status.good {
+            background: rgba(72, 187, 120, 0.1);
+            color: #48bb78;
+        }
+
+        .indicator-status.average {
+            background: rgba(237, 137, 54, 0.1);
+            color: #ed8936;
+        }
+
+        .indicator-status.poor {
+            background: rgba(245, 101, 101, 0.1);
+            color: #f56565;
+        }
+
+        .interview-results {
+            display: none;
+            padding: 2rem;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 15px;
+            margin: 1rem;
+        }
+
+        .interview-results.active {
+            display: block;
+        }
+
+        .results-header {
+            margin-bottom: 2rem;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .results-subtitle {
+            color: #4a5568;
+            font-size: 1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-card h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .behavior-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .behavior-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .behavior-name {
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .behavior-score-small {
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .score-excellent {
+            background: rgba(72, 187, 120, 0.1);
+            color: #48bb78;
+        }
+
+        .score-good {
+            background: rgba(66, 153, 225, 0.1);
+            color: #4299e1;
+        }
+
+        .score-average {
+            background: rgba(237, 137, 54, 0.1);
+            color: #ed8936;
+        }
+
+        .score-poor {
+            background: rgba(245, 101, 101, 0.1);
+            color: #f56565;
         }
 
         .chat-messages {
@@ -888,6 +1171,68 @@
                 font-size: 0.9rem;
             }
 
+            /* Mobile interview adjustments */
+            .interview-chat {
+                height: 500px;
+            }
+
+            .interview-controls {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: stretch;
+            }
+
+            .interview-status {
+                justify-content: center;
+            }
+
+            .interview-actions {
+                justify-content: center;
+            }
+
+            .control-btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .interview-main {
+                flex-direction: column;
+            }
+
+            .camera-panel {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+                padding: 0.8rem;
+            }
+
+            .video-feed {
+                width: 200px;
+                height: 150px;
+                margin: 0 auto 1rem auto;
+            }
+
+            .behavior-analysis {
+                padding: 0.8rem;
+            }
+
+            .behavior-score-number {
+                font-size: 1.5rem;
+            }
+
+            .behavior-indicator {
+                font-size: 0.8rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .result-card {
+                padding: 1rem;
+            }
+
             .back-btn {
                 top: 0.5rem;
                 left: 0.5rem;
@@ -1026,9 +1371,11 @@
                         <div class="config-group">
                             <label for="interview-duration">Thời gian (phút)</label>
                             <select id="interview-duration">
-                                <option value="15">15 phút</option>
-                                <option value="30">30 phút</option>
-                                <option value="45">45 phút</option>
+                                <option value="5">5 phút (Thử nghiệm)</option>
+                                <option value="10">10 phút (Nhanh)</option>
+                                <option value="15">15 phút (Ngắn)</option>
+                                <option value="30">30 phút (Tiêu chuẩn)</option>
+                                <option value="45">45 phút (Đầy đủ)</option>
                             </select>
                         </div>
 
@@ -1045,11 +1392,118 @@
                         <span>AI Interviewer</span>
                         <div style="margin-left: auto;" id="interview-timer">00:00</div>
                     </div>
-                    <div class="chat-messages" id="chat-messages"></div>
-                    <div class="chat-input">
-                        <input type="text" id="user-response" placeholder="Nhập câu trả lời của bạn...">
-                        <button id="send-response">
-                            <span class="material-symbols-outlined">send</span>
+                    
+                    <div class="interview-controls">
+                        <div class="interview-status">
+                            <div class="status-item">
+                                <div class="status-indicator"></div>
+                                <span>Đang phỏng vấn</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="material-symbols-outlined" style="font-size: 16px;">videocam</span>
+                                <span>Camera: <span id="camera-status">Tắt</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="interview-actions">
+                            <button class="control-btn camera" id="toggle-camera">
+                                <span class="material-symbols-outlined">videocam</span>
+                                Bật Camera
+                            </button>
+                            <button class="control-btn stop" id="stop-interview">
+                                <span class="material-symbols-outlined">stop</span>
+                                Dừng Phỏng Vấn
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="interview-main">
+                        <div class="chat-area">
+                            <div class="chat-messages" id="chat-messages"></div>
+                            <div class="chat-input">
+                                <input type="text" id="user-response" placeholder="Nhập câu trả lời của bạn...">
+                                <button id="send-response">
+                                    <span class="material-symbols-outlined">send</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="camera-panel" id="camera-panel">
+                            <div class="video-feed">
+                                <video id="candidateVideo" autoplay muted></video>
+                                <div class="camera-overlay" id="camera-overlay">
+                                    <div>
+                                        <span class="material-symbols-outlined" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">videocam_off</span>
+                                        Camera tắt
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="behavior-analysis">
+                                <div class="behavior-score">
+                                    <div class="behavior-score-number" id="real-time-score">--</div>
+                                    <div style="font-size: 0.8rem; color: #4a5568;">Điểm hành vi</div>
+                                </div>
+                                
+                                <div class="behavior-indicators">
+                                    <div class="behavior-indicator">
+                                        <span class="indicator-name">Giao tiếp mắt</span>
+                                        <span class="indicator-status good" id="eye-contact-status">Tốt</span>
+                                    </div>
+                                    <div class="behavior-indicator">
+                                        <span class="indicator-name">Biểu cảm</span>
+                                        <span class="indicator-status average" id="expression-status">TB</span>
+                                    </div>
+                                    <div class="behavior-indicator">
+                                        <span class="indicator-name">Tư thế</span>
+                                        <span class="indicator-status good" id="posture-status">Tốt</span>
+                                    </div>
+                                    <div class="behavior-indicator">
+                                        <span class="indicator-name">Tự tin</span>
+                                        <span class="indicator-status average" id="confidence-status">TB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interview-results" id="interview-results">
+                    <div class="results-header">
+                        <h2 class="results-title">Kết Quả Phỏng Vấn</h2>
+                        <p class="results-subtitle">Phân tích toàn diện về hiệu suất phỏng vấn của bạn</p>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h3>
+                                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">psychology</span>
+                                Phân Tích Hành Vi
+                            </h3>
+                            <div class="behavior-breakdown" id="behavior-breakdown">
+                                <!-- Sẽ được điền bởi JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <h3>
+                                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">chat</span>
+                                Đánh Giá Phỏng Vấn
+                            </h3>
+                            <div id="interview-feedback">
+                                <!-- Sẽ được điền bởi JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="start-btn" onclick="restartInterview()">
+                            <span class="material-symbols-outlined">refresh</span>
+                            Phỏng Vấn Lại
+                        </button>
+                        <button class="start-btn" onclick="downloadReport()">
+                            <span class="material-symbols-outlined">download</span>
+                            Tải Báo Cáo
                         </button>
                     </div>
                 </div>
@@ -1113,14 +1567,25 @@
         const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;        // Global variables
         let currentMode = 'cv-analysis';
         let uploadedCV = null;
-        let currentQuestion = 0;
+        let currentQuestion = 0; // các hàm data 
         let hollandAnswers = [];
         let interviewStartTime = null;
         let interviewTimer = null;
         let personalityType = null;
-        
+        let cameraStream = null;
+        let isRecording = false;
+        let behaviorData = null;
+        let behaviorAnalysisInterval = null;
+        let interviewMessages = [];
+        let behaviorScores = {
+            communication: 0,
+            confidence: 0,
+            eyeContact: 0,
+            posture: 0,
+            expression: 0
+        };
         // Career data
-        let careerData = {};
+        let careerData = {};    
         let roadmapData = {};
         let isDataLoaded = false;
 
@@ -1281,6 +1746,11 @@
         const chatMessages = document.getElementById('chat-messages');
         const userResponse = document.getElementById('user-response');
         const sendResponse = document.getElementById('send-response');
+        const toggleCameraBtn = document.getElementById('toggle-camera');
+        const stopInterviewBtn = document.getElementById('stop-interview');
+        const cameraPanel = document.getElementById('camera-panel');
+        const candidateVideo = document.getElementById('candidateVideo');
+        const interviewResults = document.getElementById('interview-results');
         
         // Holland Test Elements
         const hollandQuestionsDiv = document.getElementById('holland-questions');
@@ -1300,6 +1770,7 @@
             setupEventListeners();
             generateHollandQuestions();
             loadCareerData();
+            loadBehaviorData();
         }
 
         function setupEventListeners() {
@@ -1323,6 +1794,10 @@
             userResponse.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') sendInterviewResponse();
             });
+
+            // Interview controls
+            toggleCameraBtn.addEventListener('click', toggleCamera);
+            stopInterviewBtn.addEventListener('click', stopInterview);
 
             // Career chat
             startCareerChat.addEventListener('click', startCareerChatbot);
@@ -1478,9 +1953,16 @@
                 interviewSetup.style.display = 'none';
                 interviewChat.classList.add('active');
                 
-                addMessage('ai', `Xin chào! Tôi là AI Interviewer. Tôi sẽ phỏng vấn bạn cho vị trí ${getPositionName(position)} ở cấp độ ${level}. Cuộc phỏng vấn sẽ kéo dài ${duration} phút. Bạn có thể giới thiệu về bản thân không?`);
+                const welcomeMessage = `Xin chào! Tôi là AI Interviewer. Tôi sẽ phỏng vấn bạn cho vị trí ${getPositionName(position)} ở cấp độ ${level}. Cuộc phỏng vấn sẽ kéo dài ${duration} phút. 
+
+Để có trải nghiệm tốt nhất, tôi khuyên bạn nên bật camera để phân tích hành vi phỏng vấn. Bạn có thể giới thiệu về bản thân không?`;
+                
+                addMessage('ai', welcomeMessage);
                 
                 startInterviewTimer(parseInt(duration));
+                interviewStartTime = Date.now();
+                interviewMessages = [];
+                
                 showLoading(false);
             } catch (error) {
                 console.error('Error starting interview:', error);
@@ -1494,6 +1976,7 @@
             if (!response) return;
 
             addMessage('user', response);
+            interviewMessages.push({ sender: 'user', message: response, timestamp: Date.now() });
             userResponse.value = '';
             
             showLoading(true);
@@ -1501,12 +1984,106 @@
             try {
                 const aiResponse = await getInterviewResponseFromAI(response);
                 addMessage('ai', aiResponse);
+                interviewMessages.push({ sender: 'ai', message: aiResponse, timestamp: Date.now() });
                 showLoading(false);
             } catch (error) {
                 console.error('Error getting AI response:', error);
-                addMessage('ai', 'Xin lỗi, tôi gặp sự cố kỹ thuật. Bạn có thể thử lại không?');
+                const fallbackResponse = 'Xin lỗi, tôi gặp sự cố kỹ thuật. Bạn có thể thử lại không?';
+                addMessage('ai', fallbackResponse);
+                interviewMessages.push({ sender: 'ai', message: fallbackResponse, timestamp: Date.now() });
                 showLoading(false);
             }
+        }
+
+        function getPositionName(value) {
+            const positions = {
+                'frontend': 'Frontend Developer',
+                'backend': 'Backend Developer', 
+                'fullstack': 'Fullstack Developer',
+                'mobile': 'Mobile Developer',
+                'devops': 'DevOps Engineer',
+                'data': 'Data Scientist',
+                'marketing': 'Marketing Specialist',
+                'design': 'UI/UX Designer',
+                'business': 'Business Analyst',
+                'manager': 'Project Manager'
+            };
+            return positions[value] || value;
+        }
+
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function startInterviewTimer(duration) {
+            let timeLeft = duration * 60; // Convert to seconds
+            const timerElement = document.getElementById('interview-timer');
+            
+            interviewTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                timeLeft--;
+                
+                if (timeLeft < 0) {
+                    clearInterval(interviewTimer);
+                    alert('Thời gian phỏng vấn đã hết!');
+                    stopInterview();
+                }
+            }, 1000);
+        }
+
+        function validateFile(file) {
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            const allowedTypes = [
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'image/jpeg',
+                'image/jpg', 
+                'image/png'
+            ];
+
+            if (file.size > maxSize) {
+                alert('File quá lớn! Vui lòng chọn file nhỏ hơn 10MB.');
+                return false;
+            }
+
+            if (!allowedTypes.includes(file.type)) {
+                alert('Định dạng file không hỗ trợ! Vui lòng chọn file PDF, DOC, DOCX, JPG hoặc PNG.');
+                return false;
+            }
+
+            return true;
+        }
+
+        async function readCVContent(file) {
+            // This is a simplified version - in real implementation you'd use proper file parsing
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (file.type.startsWith('image/')) {
+                        resolve(`[Hình ảnh CV - ${file.name}]`);
+                    } else {
+                        resolve(e.target.result || `[CV Document - ${file.name}]`);
+                    }
+                };
+                
+                if (file.type.startsWith('image/')) {
+                    reader.readAsDataURL(file);
+                } else {
+                    reader.readAsText(file);
+                }
+            });
+        }
+
+        function showLoading(show) {
+            loading.classList.toggle('show', show);
         }
 
         async function getInterviewResponseFromAI(userResponse) {
@@ -2461,6 +3038,290 @@ Return the JSON object now:`;
         function showLoading(show) {
             loading.classList.toggle('show', show);
         }
+
+        // Load behavior data from JSON file
+        async function loadBehaviorData() {
+            try {
+                const response = await fetch('./Data/Phân tích hành vi/hành vi.json');
+                behaviorData = await response.json();
+                console.log('Behavior data loaded successfully');
+            } catch (error) {
+                console.error('Error loading behavior data:', error);
+                // Fallback behavior data
+                behaviorData = {
+                    behavioral_categories: {
+                        communication_skills: { weight: 25 },
+                        emotional_intelligence: { weight: 20 },
+                        confidence_assertiveness: { weight: 20 },
+                        teamwork_collaboration: { weight: 15 },
+                        adaptability_flexibility: { weight: 20 }
+                    }
+                };
+            }
+        }
+
+        // Camera Functions
+        async function toggleCamera() {
+            if (!cameraStream) {
+                await startCamera();
+            } else {
+                stopCamera();
+            }
+        }
+
+        async function startCamera() {
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: { ideal: 640 },
+                        height: { ideal: 480 }
+                    },
+                    audio: false 
+                });
+                
+                candidateVideo.srcObject = cameraStream;
+                candidateVideo.style.display = 'block';
+                
+                document.getElementById('camera-overlay').style.display = 'none';
+                document.getElementById('camera-status').textContent = 'Bật';
+                
+                toggleCameraBtn.innerHTML = '<span class="material-symbols-outlined">videocam_off</span>Tắt Camera';
+                toggleCameraBtn.classList.add('active');
+                
+                cameraPanel.classList.add('active');
+                
+                // Start behavior analysis
+                startBehaviorAnalysis();
+                
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập và đảm bảo bạn đang sử dụng HTTPS.');
+            }
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+                
+                candidateVideo.srcObject = null;
+                candidateVideo.style.display = 'none';
+                
+                document.getElementById('camera-overlay').style.display = 'flex';
+                document.getElementById('camera-status').textContent = 'Tắt';
+                
+                toggleCameraBtn.innerHTML = '<span class="material-symbols-outlined">videocam</span>Bật Camera';
+                toggleCameraBtn.classList.remove('active');
+                
+                cameraPanel.classList.remove('active');
+                
+                // Stop behavior analysis
+                stopBehaviorAnalysis();
+            }
+        }
+
+        // Behavior Analysis Functions
+        function startBehaviorAnalysis() {
+            if (behaviorAnalysisInterval) {
+                clearInterval(behaviorAnalysisInterval);
+            }
+
+            behaviorAnalysisInterval = setInterval(() => {
+                analyzeBehaviorFrame();
+            }, 2000); // Analyze every 2 seconds
+        }
+
+        function stopBehaviorAnalysis() {
+            if (behaviorAnalysisInterval) {
+                clearInterval(behaviorAnalysisInterval);
+                behaviorAnalysisInterval = null;
+            }
+        }
+
+        function analyzeBehaviorFrame() {
+            // Simulate behavior analysis (in real implementation, this would use AI/ML)
+            const randomFactors = {
+                timeOfDay: new Date().getHours(),
+                sessionLength: interviewStartTime ? (Date.now() - interviewStartTime) / 60000 : 0,
+                messageCount: interviewMessages.length
+            };
+
+            // Simulate different behavior scores based on random factors and time
+            const baseScore = 70 + Math.random() * 20;
+            const timeVariation = Math.sin(randomFactors.sessionLength / 5) * 10;
+            
+            behaviorScores.eyeContact = Math.max(50, Math.min(100, baseScore + timeVariation + (Math.random() - 0.5) * 15));
+            behaviorScores.expression = Math.max(50, Math.min(100, baseScore + (Math.random() - 0.5) * 20));
+            behaviorScores.posture = Math.max(50, Math.min(100, baseScore + (Math.random() - 0.5) * 10));
+            behaviorScores.confidence = Math.max(50, Math.min(100, baseScore + timeVariation + (Math.random() - 0.5) * 15));
+
+            updateBehaviorDisplay();
+        }
+
+        function updateBehaviorDisplay() {
+            const overallScore = Math.round(
+                (behaviorScores.eyeContact + behaviorScores.expression + 
+                 behaviorScores.posture + behaviorScores.confidence) / 4
+            );
+
+            document.getElementById('real-time-score').textContent = overallScore;
+
+            // Update individual indicators
+            updateIndicatorStatus('eye-contact-status', behaviorScores.eyeContact);
+            updateIndicatorStatus('expression-status', behaviorScores.expression);
+            updateIndicatorStatus('posture-status', behaviorScores.posture);
+            updateIndicatorStatus('confidence-status', behaviorScores.confidence);
+        }
+
+        function updateIndicatorStatus(elementId, score) {
+            const element = document.getElementById(elementId);
+            element.className = 'indicator-status';
+            
+            if (score >= 80) {
+                element.classList.add('good');
+                element.textContent = 'Tốt';
+            } else if (score >= 65) {
+                element.classList.add('average');
+                element.textContent = 'TB';
+            } else {
+                element.classList.add('poor');
+                element.textContent = 'Kém';
+            }
+        }
+
+        // Interview Control Functions
+        function stopInterview() {
+            if (confirm('Bạn có chắc muốn kết thúc phỏng vấn?')) {
+                clearInterval(interviewTimer);
+                stopCamera();
+                stopBehaviorAnalysis();
+                
+                // Show results
+                interviewChat.classList.remove('active');
+                generateInterviewResults();
+                interviewResults.classList.add('active');
+            }
+        }
+
+        function generateInterviewResults() {
+            const overallBehaviorScore = Math.round(
+                (behaviorScores.eyeContact + behaviorScores.expression + 
+                 behaviorScores.posture + behaviorScores.confidence) / 4
+            );
+
+            // Generate behavior breakdown
+            const behaviorBreakdown = document.getElementById('behavior-breakdown');
+            behaviorBreakdown.innerHTML = `
+                <div class="behavior-item">
+                    <span class="behavior-name">Giao tiếp mắt</span>
+                    <span class="behavior-score-small ${getScoreClass(behaviorScores.eyeContact)}">${Math.round(behaviorScores.eyeContact)}</span>
+                </div>
+                <div class="behavior-item">
+                    <span class="behavior-name">Biểu cảm</span>
+                    <span class="behavior-score-small ${getScoreClass(behaviorScores.expression)}">${Math.round(behaviorScores.expression)}</span>
+                </div>
+                <div class="behavior-item">
+                    <span class="behavior-name">Tư thế</span>
+                    <span class="behavior-score-small ${getScoreClass(behaviorScores.posture)}">${Math.round(behaviorScores.posture)}</span>
+                </div>
+                <div class="behavior-item">
+                    <span class="behavior-name">Tự tin</span>
+                    <span class="behavior-score-small ${getScoreClass(behaviorScores.confidence)}">${Math.round(behaviorScores.confidence)}</span>
+                </div>
+                <div class="behavior-item" style="border-top: 2px solid #e2e8f0; margin-top: 0.5rem; padding-top: 0.8rem; font-weight: 600;">
+                    <span class="behavior-name">Tổng điểm hành vi</span>
+                    <span class="behavior-score-small ${getScoreClass(overallBehaviorScore)}">${overallBehaviorScore}</span>
+                </div>
+            `;
+
+            // Generate interview feedback
+            const interviewFeedback = document.getElementById('interview-feedback');
+            const feedbackText = generateFeedbackText(overallBehaviorScore);
+            interviewFeedback.innerHTML = `
+                <div style="text-align: left;">
+                    <p style="margin-bottom: 1rem; line-height: 1.6;">${feedbackText}</p>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid #667eea;">
+                        <strong>Thời gian phỏng vấn:</strong> ${formatInterviewDuration()}<br>
+                        <strong>Số câu hỏi:</strong> ${interviewMessages.filter(msg => msg.sender === 'ai').length}<br>
+                        <strong>Đánh giá tổng thể:</strong> ${getOverallRating(overallBehaviorScore)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getScoreClass(score) {
+            if (score >= 85) return 'score-excellent';
+            if (score >= 75) return 'score-good';
+            if (score >= 65) return 'score-average';
+            return 'score-poor';
+        }
+
+        function generateFeedbackText(score) {
+            if (score >= 85) {
+                return "Xuất sắc! Bạn đã thể hiện rất tốt trong buổi phỏng vấn. Hành vi và cách giao tiếp của bạn cho thấy sự tự tin, chuyên nghiệp và phù hợp với vị trí.";
+            } else if (score >= 75) {
+                return "Tốt! Bạn đã có một buổi phỏng vấn khá tích cực. Một số khía cạnh có thể cải thiện thêm để tăng ấn tượng với nhà tuyển dụng.";
+            } else if (score >= 65) {
+                return "Trung bình. Bạn cần cải thiện một số kỹ năng phỏng vấn, đặc biệt là về giao tiếp phi ngôn ngữ và sự tự tin.";
+            } else {
+                return "Cần cải thiện nhiều. Hãy luyện tập thêm về kỹ năng phỏng vấn, đặc biệt chú ý đến ngôn ngữ cơ thể và cách trả lời câu hỏi.";
+            }
+        }
+
+        function getOverallRating(score) {
+            if (score >= 85) return "Xuất sắc";
+            if (score >= 75) return "Tốt";
+            if (score >= 65) return "Trung bình";
+            return "Cần cải thiện";
+        }
+
+        function formatInterviewDuration() {
+            if (!interviewStartTime) return "0 phút";
+            const duration = Math.floor((Date.now() - interviewStartTime) / 60000);
+            return `${duration} phút`;
+        }
+
+        function restartInterview() {
+            // Reset states
+            interviewResults.classList.remove('active');
+            interviewSetup.style.display = 'grid';
+            chatMessages.innerHTML = '';
+            interviewMessages = [];
+            
+            // Reset behavior scores
+            behaviorScores = {
+                communication: 0,
+                confidence: 0,
+                eyeContact: 0,
+                posture: 0,
+                expression: 0
+            };
+
+            // Reset timer
+            clearInterval(interviewTimer);
+            interviewStartTime = null;
+            document.getElementById('interview-timer').textContent = '00:00';
+        }
+
+        function downloadReport() {
+            const reportData = {
+                timestamp: new Date().toISOString(),
+                interviewDuration: formatInterviewDuration(),
+                behaviorScores: behaviorScores,
+                overallScore: Math.round((behaviorScores.eyeContact + behaviorScores.expression + behaviorScores.posture + behaviorScores.confidence) / 4),
+                messages: interviewMessages
+            };
+
+            const dataStr = JSON.stringify(reportData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `interview_report_${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
     </script>
 </body>
-</html> 
+</html>
