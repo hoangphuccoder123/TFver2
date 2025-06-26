@@ -703,6 +703,24 @@
             color: #f56565;
         }
 
+        /* CV Breakdown Styles */
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            color: #4a5568;
+        }
+
+        .breakdown-item strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .score-breakdown {
+            border: 1px solid #e2e8f0;
+        }
+
         .interview-results {
             display: none;
             padding: 2rem;
@@ -1199,6 +1217,24 @@
                 flex-direction: column;
             }
 
+            /* Mobile breakdown adjustments */
+            .breakdown-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.3rem !important;
+            }
+
+            .breakdown-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.3rem 0;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+            .breakdown-item:last-child {
+                border-bottom: none;
+            }
+
             .camera-panel {
                 width: 100%;
                 border-left: none;
@@ -1279,9 +1315,28 @@
                         </div>
                         <h2>Phân Tích & Chấm Điểm CV</h2>
                         <p>Tải lên CV của bạn để nhận được đánh giá chi tiết từ AI</p>
-                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;">
-                            Hỗ trợ: PDF, DOC, DOCX, JPG, PNG (Tối đa 10MB)
+                        <p style="margin-top: 0.5rem; color: #e53e3e; font-size: 0.9rem; font-weight: 600;">
+                            ⚠️ Hiện tại chỉ hỗ trợ CV dạng hình ảnh: JPG, PNG (Tối đa 10MB)
                         </p>
+                        
+                        <!-- Công thức tính điểm CV -->
+                        <div class="scoring-formula" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 1rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #495057; font-size: 0.9rem;">
+                                <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.3rem;">calculate</span>
+                                Công Thức Tính Điểm CV (100 điểm)
+                            </h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; color: #6c757d;">
+                                <div>• <strong>Trình bày & Định dạng:</strong> 20 điểm</div>
+                                <div>• <strong>Thông tin cá nhân:</strong> 15 điểm</div>
+                                <div>• <strong>Kinh nghiệm làm việc:</strong> 25 điểm</div>
+                                <div>• <strong>Học vấn & Chứng chỉ:</strong> 20 điểm</div>
+                                <div>• <strong>Kỹ năng chuyên môn:</strong> 15 điểm</div>
+                                <div>• <strong>Tính phù hợp vị trí:</strong> 5 điểm</div>
+                            </div>
+                            <p style="margin: 0.5rem 0 0 0; font-style: italic; color: #6c757d; font-size: 0.8rem;">
+                                * AI sẽ đánh giá từng tiêu chí và tổng hợp điểm số cuối cùng
+                            </p>
+                        </div>
                         <input type="file" id="cv-analysis-file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
                         <div id="cv-file-info" style="display: none; margin-top: 1rem;">
                             <p id="cv-file-name" style="font-weight: 600; color: #48bb78;"></p>
@@ -1297,7 +1352,43 @@
                             <div class="score-number" id="cv-score">--</div>
                             <p>Điểm CV</p>
                             <p style="font-size: 0.9rem; opacity: 0.8;">Trên thang điểm 100</p>
+                            <div id="cv-rating" style="margin-top: 0.5rem; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; display: inline-block;"></div>
                         </div>
+                        
+                        <!-- Breakdown điểm số chi tiết -->
+                        <div class="score-breakdown" id="cv-score-breakdown" style="background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: none;">
+                            <h4 style="margin: 0 0 0.8rem 0; color: #495057; font-size: 0.9rem;">
+                                <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.3rem;">analytics</span>
+                                Chi Tiết Điểm Số
+                            </h4>
+                            <div class="breakdown-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.85rem;">
+                                <div class="breakdown-item">
+                                    <span>Trình bày & Định dạng:</span>
+                                    <strong id="score-presentation">--/20</strong>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Thông tin cá nhân:</span>
+                                    <strong id="score-personal">--/15</strong>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Kinh nghiệm làm việc:</span>
+                                    <strong id="score-experience">--/25</strong>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Học vấn & Chứng chỉ:</span>
+                                    <strong id="score-education">--/20</strong>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Kỹ năng chuyên môn:</span>
+                                    <strong id="score-skills">--/15</strong>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Tính phù hợp vị trí:</span>
+                                    <strong id="score-relevance">--/5</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="feedback-card">
                             <div class="feedback-section">
                                 <h4>
@@ -1827,17 +1918,53 @@
             if (file && validateFile(file)) {
                 uploadedCV = file;
                 cvUploadSection.classList.add('has-file');
+                
+                const isImageFile = file.type.startsWith('image/');
+                const fileTypeText = isImageFile ? 'Hình ảnh CV' : 'Tài liệu CV';
+                
                 document.getElementById('cv-file-name').innerHTML = `
                     <span style="color: #48bb78;">${file.name}</span>
-                    <br><small style="color: #666;">${file.type.startsWith('image/') ? 'Hình ảnh CV' : 'Tài liệu CV'} - ${(file.size / 1024).toFixed(1)} KB</small>
+                    <br><small style="color: #666;">${fileTypeText} - ${(file.size / 1024).toFixed(1)} KB</small>
                 `;
                 document.getElementById('cv-file-info').style.display = 'block';
-                analyzeCvBtn.style.display = 'flex';
+                
+                // Chỉ hiển thị nút phân tích nếu là file hình ảnh
+                if (isImageFile) {
+                    analyzeCvBtn.style.display = 'flex';
+                    analyzeCvBtn.disabled = false;
+                    analyzeCvBtn.innerHTML = `
+                        <span class="material-symbols-outlined">psychology</span>
+                        Phân Tích CV
+                    `;
+                } else {
+                    analyzeCvBtn.style.display = 'flex';
+                    analyzeCvBtn.disabled = true;
+                    analyzeCvBtn.style.opacity = '0.5';
+                    analyzeCvBtn.style.cursor = 'not-allowed';
+                    analyzeCvBtn.innerHTML = `
+                        <span class="material-symbols-outlined">block</span>
+                        Chỉ hỗ trợ phân tích file hình ảnh
+                    `;
+                    
+                    // Thông báo cho người dùng
+                    setTimeout(() => {
+                        alert('Hiện tại chỉ hỗ trợ phân tích CV dạng hình ảnh (JPG, PNG). Vui lòng chọn file hình ảnh của CV!');
+                    }, 100);
+                }
             }
         }
 
         async function analyzeCV() {
-            if (!uploadedCV) return;
+            if (!uploadedCV) {
+                alert('Vui lòng chọn file CV trước khi phân tích!');
+                return;
+            }
+
+            // Kiểm tra file có phải là hình ảnh không
+            if (!uploadedCV.type.startsWith('image/')) {
+                alert('Hiện tại chỉ hỗ trợ phân tích CV dạng hình ảnh (JPG, PNG). Vui lòng chọn file hình ảnh của CV!');
+                return;
+            }
 
             showLoading(true);
             
@@ -1856,19 +1983,37 @@
 
         async function getCVAnalysisFromAI(cvContent) {
             const prompt = `
-            Phân tích CV sau và đưa ra đánh giá chi tiết theo định dạng JSON:
+            Phân tích CV sau và đưa ra đánh giá chi tiết theo công thức tính điểm cụ thể và định dạng JSON:
 
             CV Content: ${cvContent}
+
+            CÔNG THỨC TÍNH ĐIỂM CV (Tổng 100 điểm):
+            1. Trình bày & Định dạng (20 điểm): Bố cục, font chữ, màu sắc, độ rõ ràng
+            2. Thông tin cá nhân (15 điểm): Họ tên, liên lạc, ảnh đại diện, thông tin cơ bản
+            3. Kinh nghiệm làm việc (25 điểm): Thời gian, vị trí, mô tả công việc, thành tích
+            4. Học vấn & Chứng chỉ (20 điểm): Bằng cấp, khóa học, chứng chỉ chuyên môn
+            5. Kỹ năng chuyên môn (15 điểm): Kỹ năng cứng, mềm, công nghệ, ngôn ngữ
+            6. Tính phù hợp vị trí (5 điểm): Mức độ phù hợp với các vị trí thông thường
 
             Vui lòng trả về JSON với cấu trúc sau:
             {
                 "score": 85,
+                "breakdown": {
+                    "presentation": 18,
+                    "personalInfo": 13,
+                    "experience": 22,
+                    "education": 17,
+                    "skills": 12,
+                    "relevance": 3
+                },
                 "strengths": ["Kinh nghiệm phong phú", "Kỹ năng đa dạng"],
                 "weaknesses": ["Thiếu chứng chỉ", "Mô tả công việc chưa rõ ràng"],
-                "recommendations": ["Bổ sung chứng chỉ chuyên môn", "Chi tiết hóa thành tích"]
+                "recommendations": ["Bổ sung chứng chỉ chuyên môn", "Chi tiết hóa thành tích"],
+                "rating": "Tốt"
             }
 
-            Điểm số từ 0-100. Hãy đánh giá dựa trên: trình bày, kinh nghiệm, kỹ năng, học vấn, và tính phù hợp.
+            Điểm số từ 0-100. Rating: "Xuất sắc" (90-100), "Tốt" (75-89), "Khá" (60-74), "Trung bình" (45-59), "Yếu" (0-44).
+            Hãy đánh giá chi tiết và chính xác dựa trên từng tiêu chí trong công thức.
             `;
 
             const response = await fetch(GEMINI_API_URL, {
@@ -1898,17 +2043,44 @@
                 console.error('Error parsing AI response:', e);
             }
             
-            // Fallback response
+            // Fallback response với breakdown chi tiết
             return {
                 score: 75,
+                breakdown: {
+                    presentation: 15,
+                    personalInfo: 12,
+                    experience: 18,
+                    education: 15,
+                    skills: 12,
+                    relevance: 3
+                },
                 strengths: ["CV có cấu trúc rõ ràng", "Thông tin cá nhân đầy đủ"],
                 weaknesses: ["Cần bổ sung thêm chi tiết kinh nghiệm", "Thiếu mô tả kỹ năng cụ thể"],
-                recommendations: ["Thêm portfolio dự án", "Cập nhật kỹ năng mới", "Bổ sung chứng chỉ"]
+                recommendations: ["Thêm portfolio dự án", "Cập nhật kỹ năng mới", "Bổ sung chứng chỉ"],
+                rating: "Khá"
             };
         }
 
         function displayCVResults(analysis) {
             document.getElementById('cv-score').textContent = analysis.score;
+            
+            // Hiển thị rating với màu sắc phù hợp
+            const ratingElement = document.getElementById('cv-rating');
+            const rating = analysis.rating || getRatingFromScore(analysis.score);
+            ratingElement.textContent = rating;
+            ratingElement.style.backgroundColor = getRatingColor(rating);
+            ratingElement.style.color = '#fff';
+            
+            // Hiển thị breakdown điểm số nếu có
+            if (analysis.breakdown) {
+                document.getElementById('cv-score-breakdown').style.display = 'block';
+                document.getElementById('score-presentation').textContent = `${analysis.breakdown.presentation || 0}/20`;
+                document.getElementById('score-personal').textContent = `${analysis.breakdown.personalInfo || 0}/15`;
+                document.getElementById('score-experience').textContent = `${analysis.breakdown.experience || 0}/25`;
+                document.getElementById('score-education').textContent = `${analysis.breakdown.education || 0}/20`;
+                document.getElementById('score-skills').textContent = `${analysis.breakdown.skills || 0}/15`;
+                document.getElementById('score-relevance').textContent = `${analysis.breakdown.relevance || 0}/5`;
+            }
             
             document.getElementById('cv-strengths').innerHTML = analysis.strengths
                 .map(strength => `<p>• ${strength}</p>`).join('');
@@ -1920,6 +2092,25 @@
                 .map(rec => `<p>• ${rec}</p>`).join('');
             
             cvAnalysisResults.classList.add('active');
+        }
+
+        function getRatingFromScore(score) {
+            if (score >= 90) return 'Xuất sắc';
+            if (score >= 75) return 'Tốt';
+            if (score >= 60) return 'Khá';
+            if (score >= 45) return 'Trung bình';
+            return 'Yếu';
+        }
+
+        function getRatingColor(rating) {
+            switch (rating) {
+                case 'Xuất sắc': return '#28a745';
+                case 'Tốt': return '#48bb78';
+                case 'Khá': return '#ffc107';
+                case 'Trung bình': return '#fd7e14';
+                case 'Yếu': return '#dc3545';
+                default: return '#6c757d';
+            }
         }
 
         // Interview Functions
