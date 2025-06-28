@@ -6,7 +6,62 @@
     <title>Tech CV - AI Career Center</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+    <!-- TensorFlow.js for AI/ML -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.15.0/dist/tf.min.js"></script>
+    
+    <!-- Face-api.js for face detection and facial expression analysis -->
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    
+    <!-- MediaPipe Face Mesh for detailed facial landmark detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1640029074/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1620248257/drawing_utils.js"></script>
+    
+    <!-- MediaPipe Pose Detection for body posture analysis -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/pose.js"></script>
+    
+    <!-- OpenCV.js for advanced image processing -->
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+    
+    <!-- Tesseract.js for OCR (Optical Character Recognition) -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
+    
+    <!-- PDF.js for PDF text extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+    
+    <!-- Fabric.js for canvas manipulation -->
+    <script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js"></script>
+    
+    <!-- Jimp for client-side image processing -->
+    <script src="https://cdn.jsdelivr.net/npm/jimp@0.22.10/browser/lib/jimp.min.js"></script>
+    
+    <!-- Additional image processing libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sharp@0.32.6/dist/sharp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas@2.11.2/build/Release/canvas.node"></script>
+    
+    <!-- Advanced Computer Vision Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.3/dist/face-landmarks-detection.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.0.0/dist/pose-detection.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/deeplab@0.2.1/dist/deeplab.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-segmentation@1.0.2/dist/body-segmentation.min.js"></script>
+    
+    <!-- Natural Language Processing Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/natural@6.5.0/dist/natural.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/compromise@14.10.0/builds/compromise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sentiment@5.0.2/build/sentiment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml-matrix@6.10.4/lib-es6/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stopword@2.0.8/dist/stopword.min.js"></script>
+    
+    <!-- Text Processing and Analysis -->
+    <script src="https://cdn.jsdelivr.net/npm/remove-accents@0.4.2/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/franc@6.0.0/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/keyword-extractor@0.0.25/lib/keyword_extractor.js"></script>
+    
+    <!-- Speech and Audio Processing -->
+    <script src="https://cdn.jsdelivr.net/npm/annyang@2.6.1/distrib/annyang.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/speechsynthesis-ssml@0.1.2/dist/speechsynthesis-ssml.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -663,6 +718,28 @@
             font-size: 2rem;
             font-weight: 700;
             color: #667eea;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .behavior-score-number::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .behavior-score-number:hover::after,
+        .behavior-score-number.pulse::after {
+            transform: translate(-50%, -50%) scale(1.5);
         }
 
         .behavior-indicators {
@@ -687,21 +764,68 @@
             border-radius: 12px;
             font-size: 0.8rem;
             font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .indicator-status::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .indicator-status:hover::before,
+        .indicator-status.updating::before {
+            left: 100%;
         }
 
         .indicator-status.good {
             background: rgba(72, 187, 120, 0.1);
             color: #48bb78;
+            border: 1px solid rgba(72, 187, 120, 0.2);
         }
 
         .indicator-status.average {
             background: rgba(237, 137, 54, 0.1);
             color: #ed8936;
+            border: 1px solid rgba(237, 137, 54, 0.2);
         }
 
         .indicator-status.poor {
             background: rgba(245, 101, 101, 0.1);
             color: #f56565;
+            border: 1px solid rgba(245, 101, 101, 0.2);
+        }
+
+        /* Pulsing animation for active analysis */
+        .behavior-analysis.active {
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { 
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+            }
+            50% { 
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            }
+        }
+
+        /* Score number animations */
+        @keyframes scoreUpdate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .behavior-score-number.updating {
+            animation: scoreUpdate 0.5s ease-in-out;
         }
 
         /* CV Breakdown Styles */
@@ -1277,6 +1401,219 @@
                 font-size: 0.8rem;
             }
         }
+
+        /* ================ NLP ANALYSIS STYLES ================ */
+        #nlp-analysis-display {
+            animation: slideInFromTop 0.6s ease-out;
+            border-left: 4px solid #f093fb;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================ ENHANCED BEHAVIOR ANALYSIS STYLES ================ */
+        .enhanced-analysis {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .overall-score {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .overall-score h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .detailed-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .score-item:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        .score-value {
+            font-weight: 700;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .score-value.excellent {
+            background: #10b981;
+        }
+
+        .score-value.good {
+            background: #3b82f6;
+        }
+
+        .score-value.average {
+            background: #f59e0b;
+        }
+
+        .score-value.poor {
+            background: #ef4444;
+        }
+
+        .ai-capabilities {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .ai-capabilities h4 {
+            margin: 0 0 1rem 0;
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+
+        .capability {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        .capability:last-child {
+            border-bottom: none;
+        }
+
+        .capability.active {
+            color: #10b981;
+        }
+
+        .capability.inactive {
+            color: #ef4444;
+            opacity: 0.7;
+        }
+
+        .recommendations {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .recommendations h4 {
+            margin: 0 0 1rem 0;
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+
+        .recommendation {
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-left: 4px solid;
+        }
+
+        .recommendation:last-child {
+            margin-bottom: 0;
+        }
+
+        .recommendation.high {
+            background: rgba(239, 68, 68, 0.1);
+            border-left-color: #ef4444;
+            color: #fecaca;
+        }
+
+        .recommendation.medium {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: #f59e0b;
+            color: #fed7aa;
+        }
+
+        .recommendation.low {
+            background: rgba(59, 130, 246, 0.1);
+            border-left-color: #3b82f6;
+            color: #bfdbfe;
+        }
+
+        /* Real-time analysis container */
+        #real-time-analysis {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 400px;
+            z-index: 1000;
+            pointer-events: auto;
+        }
+
+        /* Mobile responsive for enhanced analysis */
+        @media (max-width: 768px) {
+            .enhanced-analysis {
+                padding: 1rem;
+                margin: 0.5rem 0;
+            }
+
+            .detailed-scores {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .overall-score h3 {
+                font-size: 1.2rem;
+            }
+
+            #real-time-analysis {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                max-width: 100%;
+                margin: 1rem 0;
+            }
+
+            .score-item {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .recommendation {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1556,6 +1893,11 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Enhanced Real-time Analysis Display -->
+                            <div id="real-time-analysis">
+                                <!-- Enhanced behavior analysis will be displayed here -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1654,7 +1996,7 @@
 
     <script>
         // Configuration
-        const GEMINI_API_KEY = 'AIzaSyBZS9KdjtXW-88gqbc9gLuT8-e4E606yhI';
+        const GEMINI_API_KEY = 'AIzaSyCJSFuwfGU42gcomE7EDeFhLZLmBDkyg0Q';
         const GEMINI_MODEL = 'gemini-1.5-flash-latest';
         const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;        // Global variables
         let currentMode = 'cv-analysis';
@@ -1676,6 +2018,7 @@
             posture: 0,
             expression: 0
         };
+
         // Career data
         let careerData = {};    
         let roadmapData = {};
@@ -1855,6 +2198,47 @@
         
         const loading = document.getElementById('loading');
 
+        // ================== AI/ML MODEL VARIABLES ==================
+        // Computer Vision Models
+        let faceAPIModel = null;
+        let faceApiLoaded = false;
+        let blazeFaceModel = null;
+        let poseDetectionModel = null;
+        let bodySegmentationModel = null;
+        let deeplabModel = null;
+        let mediaPipeFaceMesh = null;
+        let mediaPipePose = null;
+        let mediaPipeLoaded = false;
+        let openCvLoaded = false;
+        let analysisCanvas = null;
+        let analysisContext = null;
+        let faceDetector = null;
+        let pose = null;
+        let faceMesh = null;
+
+        // NLP Models
+        let sentimentAnalyzer = null;
+        let naturalNLP = null;
+        let compromiseNLP = null;
+        let keywordExtractor = null;
+        let textProcessor = null;
+
+        // Speech Models
+        let speechRecognition = null;
+        let speechSynthesis = null;
+        let isListening = false;
+
+        // Analysis state
+        let isAnalyzing = false;
+        let analysisInterval = null;
+        let lastAnalysisTime = 0;
+        let behaviorHistory = {
+            eyeContact: [],
+            expression: [],
+            posture: [],
+            confidence: []
+        };
+
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
@@ -1863,6 +2247,349 @@
             generateHollandQuestions();
             loadCareerData();
             loadBehaviorData();
+            initializeAIModels(); // Khởi tạo các AI models
+        }
+
+        // Initialize AI/ML Models
+        async function initializeAIModels() {
+            console.log('Initializing AI/ML models for behavior analysis and NLP...');
+            
+            // Show AI loading notification
+            const loadingNotification = showAILoadingNotification();
+            
+            try {
+                // Initialize Computer Vision Models
+                await initializeFaceAPI();
+                await initializeMediaPipe();
+                await initializeOpenCV();
+                await initializeAdvancedComputerVision();
+                
+                // Initialize NLP Models
+                await initializeNLPModels();
+                
+                // Initialize Speech Recognition
+                await initializeSpeechModels();
+                
+                console.log('All AI models initialization completed');
+                
+                // Hide loading notification
+                hideAILoadingNotification(loadingNotification);
+                
+                // Show AI ready notification
+                showAIReadyNotification();
+            } catch (error) {
+                console.error('Error initializing AI models:', error);
+                
+                // Hide loading notification
+                hideAILoadingNotification(loadingNotification);
+                
+                // Show error notification
+                alert('Có lỗi xảy ra khi khởi tạo mô hình AI. Vui lòng làm mới trang và thử lại!');
+            }
+        }
+
+        async function initializeAdvancedComputerVision() {
+            try {
+                console.log('Loading advanced computer vision models...');
+                
+                // Initialize BlazeFace for fast face detection
+                if (typeof blazeface !== 'undefined') {
+                    blazeFaceModel = await blazeface.load();
+                    console.log('BlazeFace model loaded');
+                }
+                
+                // Initialize TensorFlow Pose Detection
+                if (typeof poseDetection !== 'undefined') {
+                    const detectorConfig = {
+                        modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+                        enableSmoothing: true,
+                        multiPoseMaxDimension: 256,
+                        enableTracking: true,
+                        trackerType: poseDetection.TrackerType.BoundingBox
+                    };
+                    poseDetectionModel = await poseDetection.createDetector(
+                        poseDetection.SupportedModels.MoveNet, 
+                        detectorConfig
+                    );
+                    console.log('Pose Detection model loaded');
+                }
+                
+                // Initialize Body Segmentation
+                if (typeof bodySegmentation !== 'undefined') {
+                    bodySegmentationModel = await bodySegmentation.createSegmenter(
+                        bodySegmentation.SupportedModels.MediaPipeSelfieSegmentation,
+                        { modelType: 'general' }
+                    );
+                    console.log('Body Segmentation model loaded');
+                }
+                
+                // Initialize DeepLab for semantic segmentation
+                if (typeof deeplab !== 'undefined') {
+                    deeplabModel = await deeplab.load();
+                    console.log('DeepLab model loaded');
+                }
+                
+            } catch (error) {
+                console.error('Error loading advanced computer vision models:', error);
+            }
+        }
+
+        async function initializeNLPModels() {
+            try {
+                console.log('Initializing NLP models...');
+                
+                // Initialize Sentiment Analysis
+                if (typeof Sentiment !== 'undefined') {
+                    sentimentAnalyzer = new Sentiment();
+                    console.log('Sentiment analyzer initialized');
+                }
+                
+                // Initialize Natural NLP
+                if (typeof natural !== 'undefined') {
+                    naturalNLP = natural;
+                    console.log('Natural NLP initialized');
+                }
+                
+                // Initialize Compromise NLP
+                if (typeof nlp !== 'undefined') {
+                    compromiseNLP = nlp;
+                    console.log('Compromise NLP initialized');
+                }
+                
+                // Initialize Keyword Extractor
+                if (typeof keyword_extractor !== 'undefined') {
+                    keywordExtractor = keyword_extractor;
+                    console.log('Keyword extractor initialized');
+                }
+                
+                // Initialize Text Processor
+                textProcessor = {
+                    removeAccents: typeof removeAccents !== 'undefined' ? removeAccents : null,
+                    detectLanguage: typeof franc !== 'undefined' ? franc : null,
+                    removeStopwords: typeof sw !== 'undefined' ? sw : null
+                };
+                
+                console.log('NLP models initialization completed');
+                
+            } catch (error) {
+                console.error('Error initializing NLP models:', error);
+            }
+        }
+
+        async function initializeSpeechModels() {
+            try {
+                console.log('Initializing speech models...');
+                
+                // Initialize Speech Recognition
+                if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    speechRecognition = new SpeechRecognition();
+                    speechRecognition.continuous = true;
+                    speechRecognition.interimResults = true;
+                    speechRecognition.lang = 'vi-VN';
+                    console.log('Speech recognition initialized');
+                }
+                
+                // Initialize Speech Synthesis
+                if ('speechSynthesis' in window) {
+                    speechSynthesis = window.speechSynthesis;
+                    console.log('Speech synthesis initialized');
+                }
+                
+                // Initialize Annyang if available
+                if (typeof annyang !== 'undefined') {
+                    console.log('Annyang speech recognition available');
+                }
+                
+            } catch (error) {
+                console.error('Error initializing speech models:', error);
+            }
+        }
+
+        async function initializeFaceAPI() {
+            try {
+                if (typeof faceapi !== 'undefined') {
+                    console.log('Loading Face-API.js models...');
+                    
+                    // Load models from CDN or local path
+                    const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@latest/model';
+                    
+                    await Promise.all([
+                        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+                        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+                        faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+                        faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+                        faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL)
+                    ]);
+                    
+                    faceApiLoaded = true;
+                    console.log('Face-API.js models loaded successfully');
+                } else {
+                    console.warn('Face-API.js not loaded');
+                }
+            } catch (error) {
+                console.error('Error loading Face-API.js:', error);
+            }
+        }
+
+        async function initializeMediaPipe() {
+            try {
+                // Initialize MediaPipe Pose
+                if (typeof Pose !== 'undefined') {
+                    pose = new Pose({
+                        locateFile: (file) => {
+                            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+                        }
+                    });
+                    
+                    pose.setOptions({
+                        modelComplexity: 1,
+                        smoothLandmarks: true,
+                        enableSegmentation: false,
+                        smoothSegmentation: true,
+                        minDetectionConfidence: 0.5,
+                        minTrackingConfidence: 0.5
+                    });
+                    
+                    console.log('MediaPipe Pose initialized');
+                }
+                
+                // Initialize MediaPipe FaceMesh
+                if (typeof FaceMesh !== 'undefined') {
+                    faceMesh = new FaceMesh({
+                        locateFile: (file) => {
+                            return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
+                        }
+                    });
+                    
+                    faceMesh.setOptions({
+                        maxNumFaces: 1,
+                        refineLandmarks: true,
+                        minDetectionConfidence: 0.5,
+                        minTrackingConfidence: 0.5
+                    });
+                    
+                    console.log('MediaPipe FaceMesh initialized');
+                }
+                
+                mediaPipeLoaded = true;
+            } catch (error) {
+                console.error('Error initializing MediaPipe:', error);
+            }
+        }
+
+        async function initializeOpenCV() {
+            try {
+                // Wait for OpenCV.js to load
+                if (typeof cv !== 'undefined') {
+                    // OpenCV.js is already loaded
+                    openCvLoaded = true;
+                    console.log('OpenCV.js ready');
+                } else {
+                    // Wait for OpenCV to load asynchronously
+                    const waitForOpenCV = () => {
+                        return new Promise((resolve) => {
+                            const checkOpenCV = () => {
+                                if (typeof cv !== 'undefined' && cv.Mat) {
+                                    openCvLoaded = true;
+                                    console.log('OpenCV.js loaded successfully');
+                                    resolve();
+                                } else {
+                                    setTimeout(checkOpenCV, 100);
+                                }
+                            };
+                            checkOpenCV();
+                        });
+                    };
+                    
+                    await waitForOpenCV();
+                }
+            } catch (error) {
+                console.error('Error initializing OpenCV:', error);
+            }
+        }
+
+        function showAILoadingNotification() {
+            const notification = document.createElement('div');
+            notification.id = 'ai-loading-notification';
+            notification.style.cssText = `
+                position: fixed; top: 20px; left: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white; padding: 1rem 1.5rem; border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000;
+                max-width: 350px; font-size: 0.9rem; line-height: 1.4;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                    <div style="width: 16px; height: 16px; border: 2px solid #ffffff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 0.5rem;"></div>
+                    <strong>Đang tải AI Models...</strong>
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9;">
+                    🤖 Face Detection & Expression Analysis<br>
+                    🏃 Pose Detection & Posture Analysis<br>
+                    👁️ Computer Vision Processing
+                </div>
+            `;
+            
+            // Add CSS animation
+            if (!document.getElementById('ai-animations')) {
+                const style = document.createElement('style');
+                style.id = 'ai-animations';
+                style.textContent = `
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
+            return notification;
+        }
+
+        function hideAILoadingNotification(notification) {
+            if (notification && notification.parentElement) {
+                notification.remove();
+            }
+        }
+
+        function showAIReadyNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; left: 20px;
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white; padding: 1rem 1.5rem; border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000;
+                max-width: 350px; font-size: 0.9rem; line-height: 1.4;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="margin-right: 0.5rem; font-size: 1.1rem;">✅</span>
+                    <strong>AI Phân Tích Hành Vi Sẵn Sàng!</strong>
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9;">
+                    🎯 Phân tích biểu cảm và cảm xúc thời gian thực<br>
+                    📊 Đánh giá tư thế và ngôn ngữ cơ thể<br>
+                    👀 Theo dõi giao tiếp bằng mắt<br>
+                    💪 Phân tích mức độ tự tin
+                </div>
+                <div style="margin-top: 0.8rem; text-align: right;">
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                        Đóng
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 10 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 10000);
         }
 
         function setupEventListeners() {
@@ -2716,7 +3443,15 @@ Bạn muốn tư vấn về điều gì?`;
             response += `Bạn có muốn tôi giải thích chi tiết về giai đoạn nào không?`;
 
             return response;
-        }async function getCareerAdviceFromAI(question) {
+        }
+
+        async function getCareerAdviceFromAI(question) {
+            // Step 1: Perform comprehensive NLP analysis on user question
+            const nlpAnalysis = await performNLPAnalysis(question);
+            
+            // Display NLP analysis results in UI
+            displayNLPAnalysisResults(nlpAnalysis);
+            
             // Get career recommendations based on Holland type
             const recommendations = getCareerRecommendations(personalityType);
             const roadmapInfo = recommendations.map(career => {
@@ -2724,8 +3459,17 @@ Bạn muốn tư vấn về điều gì?`;
                 return { career, roadmap };
             }).filter(item => item.roadmap);
 
+            // Step 2: Enhanced prompt with NLP insights
             const prompt = `
             Bạn là một chuyên gia tư vấn nghề nghiệp với dữ liệu cập nhật về thị trường lao động Việt Nam.
+            
+            PHÂN TÍCH NLP CỦA CÂU HỎI:
+            - Cảm xúc: ${nlpAnalysis.sentiment.label} (${nlpAnalysis.sentiment.score.toFixed(2)})
+            - Ý định: ${nlpAnalysis.intent.category} (${nlpAnalysis.intent.confidence.toFixed(2)})
+            - Từ khóa chính: ${nlpAnalysis.keywords.join(', ')}
+            - Chủ đề: ${nlpAnalysis.topics.join(', ')}
+            - Ngôn ngữ: ${nlpAnalysis.language}
+            - Độ phức tạp: ${nlpAnalysis.complexity}
             
             Thông tin người dùng:
             - Tính cách Holland: ${hollandTypes[personalityType].name} (${personalityType})
@@ -2744,13 +3488,18 @@ Bạn muốn tư vấn về điều gì?`;
               Giai đoạn: ${item.roadmap.phases ? item.roadmap.phases.length : 0} bước
             `).join('')}
             
-            Câu hỏi của người dùng: ${question}
+            Câu hỏi gốc: ${question}
+            Câu hỏi đã xử lý: ${nlpAnalysis.processedQuestion}
             
             Hãy tư vấn chi tiết và cụ thể dựa trên:
-            1. Dữ liệu nghề nghiệp phù hợp với tính cách Holland
-            2. Lộ trình phát triển cụ thể nếu có
-            3. Mức lương và cơ hội nghề nghiệp thực tế
-            4. Kỹ năng cần thiết và cách phát triển
+            1. Phân tích NLP để hiểu rõ cảm xúc và ý định của người dùng
+            2. Dữ liệu nghề nghiệp phù hợp với tính cách Holland
+            3. Lộ trình phát triển cụ thể nếu có
+            4. Mức lương và cơ hội nghề nghiệp thực tế
+            5. Kỹ năng cần thiết và cách phát triển
+            
+            ${nlpAnalysis.sentiment.label === 'negative' ? 'Lưu ý: Người dùng có vẻ lo lắng hoặc tiêu cực, hãy động viên và khuyến khích.' : ''}
+            ${nlpAnalysis.intent.category === 'urgent' ? 'Lưu ý: Câu hỏi có tính chất cấp bách, hãy ưu tiên trả lời nhanh và cụ thể.' : ''}
             
             Đưa ra lời khuyên thực tế, khuyến khích và có thể thực hiện được.
             `;
@@ -2773,747 +3522,423 @@ Bạn muốn tư vấn về điều gì?`;
             return data.candidates[0].content.parts[0].text;
         }
 
-        // Show improvement notification
-        function showCVReadingImprovement() {
+        // Comprehensive NLP Analysis Function
+        async function performNLPAnalysis(text) {
+            const analysis = {
+                sentiment: { label: 'neutral', score: 0 },
+                keywords: [],
+                topics: [],
+                intent: { category: 'general', confidence: 0 },
+                language: 'vi',
+                complexity: 'medium',
+                processedQuestion: text,
+                entities: []
+            };
+
+            try {
+                // 1. Sentiment Analysis
+                if (sentimentAnalyzer) {
+                    const sentimentResult = sentimentAnalyzer.analyze(text);
+                    analysis.sentiment = {
+                        label: sentimentResult.score > 0 ? 'positive' : 
+                               sentimentResult.score < 0 ? 'negative' : 'neutral',
+                        score: sentimentResult.score,
+                        comparative: sentimentResult.comparative
+                    };
+                }
+
+                // 2. Keyword Extraction
+                if (keywordExtractor && typeof keywordExtractor.extract === 'function') {
+                    try {
+                        const keywords = keywordExtractor.extract(text, {
+                            language: 'vietnamese',
+                            remove_digits: true,
+                            return_changed_case: true,
+                            remove_duplicates: true
+                        });
+                        analysis.keywords = keywords.slice(0, 10);
+                    } catch (error) {
+                        console.warn('Keyword extraction fallback');
+                        analysis.keywords = extractKeywordsManually(text);
+                    }
+                } else {
+                    analysis.keywords = extractKeywordsManually(text);
+                }
+
+                // 3. Language Detection
+                if (textProcessor && textProcessor.detectLanguage) {
+                    try {
+                        const detectedLang = textProcessor.detectLanguage(text);
+                        analysis.language = detectedLang === 'vie' ? 'vi' : detectedLang;
+                    } catch (error) {
+                        analysis.language = 'vi'; // Default to Vietnamese
+                    }
+                }
+
+                // 4. Intent Detection
+                analysis.intent = detectIntent(text, analysis.keywords);
+
+                // 5. Topic Analysis with Compromise NLP
+                if (compromiseNLP) {
+                    try {
+                        const doc = compromiseNLP(text);
+                        analysis.topics = doc.topics().out('array').slice(0, 5);
+                        
+                        // Extract entities
+                        analysis.entities = [
+                            ...doc.people().out('array'),
+                            ...doc.places().out('array'),
+                            ...doc.organizations().out('array')
+                        ];
+                    } catch (error) {
+                        console.warn('Compromise NLP analysis error:', error);
+                    }
+                }
+
+                // 6. Text Processing and Cleaning
+                analysis.processedQuestion = processTextForAI(text);
+
+                // 7. Complexity Analysis
+                analysis.complexity = analyzeTextComplexity(text);
+
+                console.log('NLP Analysis completed:', analysis);
+                return analysis;
+
+            } catch (error) {
+                console.error('Error in NLP analysis:', error);
+                return analysis; // Return default analysis
+            }
+        }
+
+        // Manual keyword extraction fallback
+        function extractKeywordsManually(text) {
+            const words = text.toLowerCase()
+                .replace(/[^\w\s\u00C0-\u1EF9]/g, '') // Remove special chars, keep Vietnamese
+                .split(/\s+/)
+                .filter(word => word.length > 2);
+            
+            const stopWords = ['của', 'và', 'có', 'là', 'trong', 'được', 'với', 'cho', 'từ', 'về', 'theo', 'như', 'để', 'khi', 'này', 'đó', 'các', 'một', 'những', 'tôi', 'bạn', 'anh', 'chị'];
+            
+            const wordFreq = words
+                .filter(word => !stopWords.includes(word))
+                .reduce((acc, word) => {
+                    acc[word] = (acc[word] || 0) + 1;
+                    return acc;
+                }, {});
+            
+            // Convert to array and sort by frequency
+            return Object.entries(wordFreq)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 10)
+                .map(([word]) => word);
+        }
+
+        // Intent Detection
+        function detectIntent(text, keywords) {
+            const intentPatterns = {
+                salary: ['lương', 'tiền', 'thu nhập', 'bao nhiêu', 'mức lương'],
+                career_change: ['chuyển nghề', 'đổi nghề', 'chuyển ngành', 'career change'],
+                education: ['học', 'trường', 'bằng cấp', 'chứng chỉ', 'khoá học'],
+                skills: ['kỹ năng', 'skill', 'năng lực', 'khả năng'],
+                job_search: ['tìm việc', 'ứng tuyển', 'phỏng vấn', 'cv'],
+                future: ['tương lai', 'triển vọng', 'phát triển', 'thăng tiến'],
+                urgent: ['gấp', 'cần gấp', 'nhanh', 'khẩn cấp', 'ngay'],
+                general: ['tư vấn', 'giúp', 'hỏi', 'cho biết']
+            };
+
+            let maxConfidence = 0;
+            let detectedIntent = 'general';
+
+            for (const [intent, patterns] of Object.entries(intentPatterns)) {
+                const matches = patterns.filter(pattern => 
+                    text.toLowerCase().includes(pattern) || 
+                    keywords.some(keyword => keyword.includes(pattern))
+                );
+                
+                const confidence = matches.length / patterns.length;
+                if (confidence > maxConfidence) {
+                    maxConfidence = confidence;
+                    detectedIntent = intent;
+                }
+            }
+
+            return {
+                category: detectedIntent,
+                confidence: maxConfidence
+            };
+        }
+
+        // Text processing for AI
+        function processTextForAI(text) {
+            // Remove excessive whitespace and normalize
+            let processed = text.trim().replace(/\s+/g, ' ');
+            
+            // Remove accents if needed (optional)
+            if (textProcessor && textProcessor.removeAccents) {
+                // Keep original with accents for better Vietnamese processing
+            }
+            
+            // Add context markers for better AI understanding
+            processed = processed.replace(/\?+/g, '?').replace(/!+/g, '!');
+            
+            return processed;
+        }
+
+        // Text complexity analysis
+        function analyzeTextComplexity(text) {
+            const words = text.split(/\s+/);
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            
+            const avgWordsPerSentence = words.length / sentences.length;
+            const avgWordLength = words.reduce((sum, word) => sum + word.length, 0) / words.length;
+            
+            if (avgWordsPerSentence > 15 || avgWordLength > 6) return 'high';
+            if (avgWordsPerSentence > 10 || avgWordLength > 4) return 'medium';
+            return 'low';
+        }
+
+        // Display NLP Analysis Results in UI
+        function displayNLPAnalysisResults(analysis) {
+            // Create or update NLP analysis display
+            let nlpDisplay = document.getElementById('nlp-analysis-display');
+            if (!nlpDisplay) {
+                nlpDisplay = document.createElement('div');
+                nlpDisplay.id = 'nlp-analysis-display';
+                nlpDisplay.style.cssText = `
+                    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 10px;
+                    margin: 1rem 0;
+                    font-size: 0.85rem;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                `;
+                
+                // Insert before chat messages
+                const careerChat = document.getElementById('careerChatMessages');
+                if (careerChat) {
+                    careerChat.parentNode.insertBefore(nlpDisplay, careerChat);
+                }
+            }
+
+            const sentimentColor = analysis.sentiment.label === 'positive' ? '#4ade80' : 
+                                  analysis.sentiment.label === 'negative' ? '#f87171' : '#fbbf24';
+
+            nlpDisplay.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="margin-right: 0.5rem; font-size: 1.1rem;">✅</span>
+                    <strong>Phân Tích NLP Hoàn Tất!</strong>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 5px;">
+                        <strong>🎭 Cảm xúc:</strong><br>
+                        <span style="color: ${sentimentColor};">${analysis.sentiment.label}</span> 
+                        (${(analysis.sentiment.score || 0).toFixed(2)})
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 5px;">
+                        <strong>🎯 Ý định:</strong><br>
+                        ${analysis.intent.category} (${(analysis.intent.confidence * 100).toFixed(0)}%)
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 5px;">
+                        <strong>🔑 Từ khóa:</strong><br>
+                        ${analysis.keywords.slice(0, 3).join(', ') || 'Đang phân tích...'}
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 5px;">
+                        <strong>📊 Độ phức tạp:</strong><br>
+                        ${analysis.complexity === 'high' ? 'Cao' : analysis.complexity === 'medium' ? 'Trung bình' : 'Thấp'}
+                    </div>
+                </div>
+                ${analysis.topics.length > 0 ? `
+                <div style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.9;">
+                    <strong>📝 Chủ đề:</strong> ${analysis.topics.join(', ')}
+                </div>
+                ` : ''}
+            `;
+
+            // Auto hide after 8 seconds
+            setTimeout(() => {
+                if (nlpDisplay) {
+                    nlpDisplay.style.opacity = '0.6';
+                    nlpDisplay.style.transform = 'scale(0.95)';
+                    nlpDisplay.style.transition = 'all 0.3s ease';
+                }
+            }, 8000);
+        }
+
+        // Score change notification and AI integration improvements
+        let lastNotifiedScore = 0;
+        let scoreHistory = [];
+
+        function checkForSignificantScoreChanges(newScore) {
+            const scoreDiff = Math.abs(newScore - lastNotifiedScore);
+            
+            // Show notification for significant changes (10+ points)
+            if (scoreDiff >= 10 && lastNotifiedScore > 0) {
+                showScoreChangeNotification(newScore, lastNotifiedScore);
+                lastNotifiedScore = newScore;
+            } else if (lastNotifiedScore === 0) {
+                lastNotifiedScore = newScore;
+            }
+            
+            // Keep score history for trend analysis
+            scoreHistory.push({
+                score: newScore,
+                timestamp: Date.now()
+            });
+            
+            // Keep only last 50 scores
+            if (scoreHistory.length > 50) {
+                scoreHistory.shift();
+            }
+        }
+
+        function showScoreChangeNotification(newScore, oldScore) {
+            const isImprovement = newScore > oldScore;
+            const change = Math.abs(newScore - oldScore);
+            
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
-                top: 20px;
+                top: 80px;
                 right: 20px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: ${isImprovement ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #f59e0b, #d97706)'};
                 color: white;
                 padding: 1rem 1.5rem;
                 border-radius: 10px;
                 box-shadow: 0 4px 20px rgba(0,0,0,0.15);
                 z-index: 1000;
-                max-width: 350px;
                 font-size: 0.9rem;
-                line-height: 1.4;
+                min-width: 250px;
+                animation: slideInRight 0.3s ease-out;
             `;
             
             notification.innerHTML = `
                 <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                    <span class="material-symbols-outlined" style="margin-right: 0.5rem;">upgrade</span>
-                    <strong>Cải tiến mới!</strong>
+                    <span style="font-size: 1.2rem; margin-right: 0.5rem;">
+                        ${isImprovement ? '📈' : '📉'}
+                    </span>
+                    <strong>${isImprovement ? 'Cải thiện!' : 'Chú ý!'}</strong>
                 </div>
-                <div>
-                    ✅ Hệ thống đã được cập nhật để đọc CV thực tế<br>
-                    ✅ Hỗ trợ OCR cho file ảnh<br>
-                    ✅ Trích xuất văn bản từ PDF<br>
-                    ✅ Phân tích chính xác với Gemini AI
-                </div>
-                <div style="margin-top: 0.8rem; text-align: right;">
-                    <button onclick="this.parentElement.parentElement.remove()" 
-                            style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer;">
-                        Đóng
-                    </button>
+                <div style="font-size: 0.85rem;">
+                    Điểm hành vi ${isImprovement ? 'tăng' : 'giảm'} ${change} điểm<br>
+                    <span style="opacity: 0.9;">${oldScore} → ${newScore}</span>
                 </div>
             `;
+            
+            // Add animation styles if not exists
+            if (!document.getElementById('score-animations')) {
+                const style = document.createElement('style');
+                style.id = 'score-animations';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
             
             document.body.appendChild(notification);
             
-            // Auto remove after 10 seconds
+            // Auto remove after 4 seconds
             setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.remove();
-                }
-            }, 10000);
-        }
-
-        // Show notification when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(showCVReadingImprovement, 1000);
-        });
-
-        // Helper function to extract text from images using OCR
-        async function extractTextFromImage(base64Data) {
-            try {
-                // Option 1: Use Google Vision API (if available)
-                const response = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        requests: [{
-                            image: { content: base64Data },
-                            features: [{ type: 'TEXT_DETECTION', maxResults: 1 }]
-                        }]
-                    })
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.responses && data.responses[0].textAnnotations) {
-                        return data.responses[0].textAnnotations[0].description;
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
                     }
-                }
-            } catch (error) {
-                console.error('Vision API Error:', error);
-            }
-            
-            // Option 2: Use Gemini API for image analysis
-            try {
-                const response = await fetch(GEMINI_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [
-                                { text: "Extract all text content from this CV image. Return only the plain text content without any formatting or explanations." },
-                                { inline_data: { mime_type: "image/jpeg", data: base64Data } }
-                            ]
-                        }],
-                        generationConfig: { temperature: 0, maxOutputTokens: 2048 }
-                    })
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    return data.candidates[0].content.parts[0].text;
-                }
-            } catch (error) {
-                console.error('Gemini OCR Error:', error);
-            }
-            
-            return null;
+                }, 300);
+            }, 4000);
         }
-        
-        // Helper function to extract text from PDF files  
-        async function extractTextFromPDF(arrayBuffer) {
+
+        // Enhanced AI analysis integration
+        async function enhancedAnalyzeBehaviorFrame() {
+            if (!candidateVideo || !candidateVideo.srcObject) {
+                return;
+            }
+
+            const currentTime = Date.now();
+            // Limit analysis frequency to avoid performance issues
+            if (currentTime - lastAnalysisTime < 800) {
+                return;
+            }
+            lastAnalysisTime = currentTime;
+
             try {
-                // Option 1: Use PDF.js library if available
-                if (typeof pdfjsLib !== 'undefined') {
-                    const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-                    let fullText = '';
+                // Perform AI analysis and get real results
+                const analysisResults = await performAIAnalysis();
+                
+                if (analysisResults) {
+                    // Update behavior scores based on actual AI analysis
+                    updateBehaviorScoresFromAI(analysisResults);
                     
-                    for (let i = 1; i <= pdf.numPages; i++) {
-                        const page = await pdf.getPage(i);
-                        const textContent = await page.getTextContent();
-                        const pageText = textContent.items.map(item => item.str).join(' ');
-                        fullText += pageText + '\n';
-                    }
+                    // Calculate and update overall score
+                    const overallScore = calculateWeightedBehaviorScore();
                     
-                    return fullText.trim();
-                }
-            } catch (error) {
-                console.error('PDF.js Error:', error);
-            }
-            
-            // Option 2: Convert to base64 and use Gemini API
-            try {
-                const base64Data = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-                const response = await fetch(GEMINI_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [
-                                { text: "Extract all text content from this PDF document. Return only the plain text content without any formatting or explanations." },
-                                { inline_data: { mime_type: "application/pdf", data: base64Data } }
-                            ]
-                        }],
-                        generationConfig: { temperature: 0, maxOutputTokens: 2048 }
-                    })
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    return data.candidates[0].content.parts[0].text;
-                }
-            } catch (error) {
-                console.error('Gemini PDF Error:', error);
-            }
-            
-            return null;
-        }
-
-        // Utility Functions
-        function validateFile(file) {
-            const allowedTypes = [
-                'application/pdf',
-                'application/msword',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'image/jpeg',
-                'image/jpg', 
-                'image/png'
-            ];
-            
-            const allowedExtensions = ['.pdf', '.doc', '.docx', '.jpg', '.jpeg', '.png'];
-            const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
-            
-            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
-                alert('Vui lòng chọn file CV có định dạng: PDF, DOC, DOCX, JPG, JPEG hoặc PNG');
-                return false;
-            }
-            
-            const maxSize = 10 * 1024 * 1024; // 10MB
-            if (file.size > maxSize) {
-                alert('Kích thước file quá lớn. Vui lòng chọn file nhỏ hơn 10MB');
-                return false;
-            }
-                  return true;
-        }
-
-        // CV Parsing Function using Gemini API
-        async function parseCvUsingGemini(cvText) {
-            // 1. Preprocess cvText: normalize whitespace and line breaks, ensure UTF-8 encoding
-            const preprocessedText = cvText
-                .replace(/\s+/g, ' ')  // normalize multiple spaces/tabs to single space
-                .replace(/\n+/g, '\n') // normalize multiple line breaks to single line break
-                .trim();
-
-            // 2. Build Gemini API request with temperature=0 and strict JSON schema
-            const prompt = `Analyze the following CV text and extract information in the exact JSON format specified below.
-
-IMPORTANT: Return ONLY the JSON object, no additional text or explanation.
-
-Example output format:
-{
-  "full_name": "Nguyễn Văn A",
-  "email": "nguyenvana@email.com",
-  "phone": "0123456789",
-  "education": [
-    { "degree": "Cử nhân Công nghệ Thông tin", "school": "Đại học Bách Khoa Hà Nội", "year_range": "2018-2022" }
-  ],
-  "work_experience": [
-    { "position": "Frontend Developer", "company": "FPT Software", "year_range": "2022-2024" }
-  ]
-}
-
-CV Text to analyze:
-${preprocessedText}
-
-Extract the following information:
-- full_name: Person's full name (string or null if not found)
-- email: Email address (string or null if not found)
-- phone: Phone number in Vietnamese format (string or null if not found)
-- education: Array of education entries with degree, school, year_range (empty array if none found)
-- work_experience: Array of work experience with position, company, year_range (empty array if none found)
-
-Return the JSON object now:`;
-
-            const requestBody = {
-                contents: [{
-                    parts: [{
-                        text: prompt
-                    }]
-                }],
-                generationConfig: {
-                    temperature: 0,
-                    maxOutputTokens: 1024
-                }
-            };
-
-            try {
-                // 3. Send the request and await response
-                const response = await fetch(GEMINI_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                
-                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
-                    throw new Error('Invalid API response structure');
-                }
-
-                const responseText = data.candidates[0].content.parts[0].text.trim();
-                
-                // Try to extract JSON from response (in case there's extra text)
-                let jsonMatch = responseText.match(/\{[\s\S]*\}/);
-                let jsonText = jsonMatch ? jsonMatch[0] : responseText;
-                
-                // Parse the JSON response
-                let parsedData;
-                try {
-                    parsedData = JSON.parse(jsonText);
-                } catch (parseError) {
-                    throw new Error(`Failed to parse JSON response: ${parseError.message}`);
-                }
-
-                // 4. Fallback regex extraction for missing fields
-                let result = {
-                    full_name: parsedData.full_name || null,
-                    email: parsedData.email || null,
-                    phone: parsedData.phone || null,
-                    education: Array.isArray(parsedData.education) ? parsedData.education : [],
-                    work_experience: Array.isArray(parsedData.work_experience) ? parsedData.work_experience : []
-                };
-
-                // Fallback regex for email if missing
-                if (!result.email) {
-                    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/;
-                    const emailMatch = preprocessedText.match(emailRegex);
-                    if (emailMatch) {
-                        result.email = emailMatch[0];
-                    }
-                }
-
-                // Fallback regex for phone (Vietnamese format) if missing
-                if (!result.phone) {
-                    const phoneRegex = /\b0\d{9,10}\b/;
-                    const phoneMatch = preprocessedText.match(phoneRegex);
-                    if (phoneMatch) {
-                        result.phone = phoneMatch[0];
-                    }
-                }
-
-                // 5. Return the parsed object
-                return result;
-
-            } catch (error) {
-                // If API call fails or JSON is invalid, return object with null/empty values
-                return {
-                    full_name: null,
-                    email: null,
-                    phone: null,
-                    education: [],
-                    work_experience: []
-                };
-            }
-        }        async function readCVContent(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                
-                if (file.type.startsWith('image/')) {
-                    // For image files, try to extract text using OCR
-                    reader.onload = async (e) => {
-                        try {
-                            // Try to use Google Vision API or Gemini for OCR
-                            const base64Data = e.target.result.split(',')[1];
-                            const ocrText = await extractTextFromImage(base64Data);
-                            
-                            if (ocrText && ocrText.trim().length > 50) {
-                                resolve(ocrText);
-                            } else {
-                                // Fallback: Ask user to manually enter content
-                                const userText = prompt(`File ảnh "${file.name}" cần được chuyển đổi thành văn bản.\n\nVui lòng nhập nội dung CV từ ảnh này (hoặc hủy để sử dụng file khác):`);
-                                
-                                if (userText && userText.trim().length > 0) {
-                                    resolve(userText.trim());
-                                } else {
-                                    resolve(`CV từ file ảnh: ${file.name}\n[Cần nhập thủ công hoặc sử dụng file PDF/Word để đọc tự động]`);
-                                }
-                            }
-                        } catch (error) {
-                            console.error('OCR Error:', error);
-                            // Fallback for image files
-                            const userText = prompt(`Không thể đọc tự động file ảnh "${file.name}".\n\nVui lòng nhập nội dung CV từ ảnh này:`);
-                            
-                            if (userText && userText.trim().length > 0) {
-                                resolve(userText.trim());  
-                            } else {
-                                resolve(`CV từ file ảnh: ${file.name}\n[Cần nhập thủ công để phân tích chính xác]`);
-                            }
-                        }
-                    };
-                    reader.readAsDataURL(file);
+                    // Check for significant changes
+                    checkForSignificantScoreChanges(overallScore);
                     
-                } else if (file.type === 'application/pdf') {
-                    // For PDF files, try to extract text
-                    reader.onload = async (e) => {
-                        try {
-                            // Try to use PDF.js or similar library for text extraction
-                            const pdfText = await extractTextFromPDF(e.target.result);
-                            
-                            if (pdfText && pdfText.trim().length > 50) {
-                                resolve(pdfText);
-                            } else {
-                                // Fallback: Ask user to provide content
-                                const userText = prompt(`File PDF "${file.name}" không thể đọc tự động.\n\nVui lòng nhập nội dung CV từ PDF này (hoặc hủy để sử dụng file khác):`);
-                                
-                                if (userText && userText.trim().length > 0) {
-                                    resolve(userText.trim());
-                                } else {
-                                    resolve(`CV từ file PDF: ${file.name}\n[Cần nhập thủ công để phân tích chính xác]`);
-                                }
-                            }
-                        } catch (error) {
-                            console.error('PDF Reading Error:', error);
-                            // Fallback for PDF files
-                            const userText = prompt(`Không thể đọc tự động file PDF "${file.name}".\n\nVui lòng nhập nội dung CV từ PDF này:`);
-                            
-                            if (userText && userText.trim().length > 0) {
-                                resolve(userText.trim());
-                            } else {
-                                resolve(`CV từ file PDF: ${file.name}\n[Cần nhập thủ công để phân tích chính xác]`);
-                            }
-                        }
-                    };
-                    reader.readAsArrayBuffer(file);
+                    console.log('AI Analysis Results:', {
+                        eyeContact: behaviorScores.eyeContact.toFixed(1),
+                        confidence: behaviorScores.confidence.toFixed(1),
+                        posture: behaviorScores.posture.toFixed(1),
+                        expression: behaviorScores.expression.toFixed(1),
+                        overall: overallScore
+                    });
+                }
+                
+            } catch (error) {
+                console.warn('Enhanced AI analysis error:', error);
+                // Fallback to simulated analysis
+                fallbackAnalysis();
+            }
+        }
+
+        function updateBehaviorScoresFromAI(analysisResults) {
+            // Update scores based on actual AI analysis results
+            if (analysisResults.eyeContact !== undefined) {
+                behaviorScores.eyeContact = Math.max(0, Math.min(100, analysisResults.eyeContact));
+            }
+            
+            if (analysisResults.confidence !== undefined) {
+                behaviorScores.confidence = Math.max(0, Math.min(100, analysisResults.confidence));
+            }
+            
+            if (analysisResults.posture !== undefined) {
+                behaviorScores.posture = Math.max(0, Math.min(100, analysisResults.posture));
+            }
+            
+            // Combine expression analysis from different models
+            if (analysisResults.expressions && analysisResults.expressions.length > 0) {
+                const avgExpression = analysisResults.expressions.reduce((sum, exp) => {
+                    // Convert emotion confidence to score
+                    const positiveEmotions = ['happy', 'surprised'];
+                    const neutralEmotions = ['neutral'];
                     
-                } else {
-                    // For DOC/DOCX and plain text files
-                    reader.onload = (e) => {
-                        const result = e.target.result;
-                        
-                        if (typeof result === 'string' && result.trim().length > 0) {
-                            // Successfully read as text
-                            resolve(result);
-                        } else {
-                            // For binary DOC files, ask user to provide content
-                            const userText = prompt(`File "${file.name}" cần được chuyển đổi thành văn bản.\n\nVui lòng nhập nội dung CV từ file này (hoặc hủy để sử dụng file khác):`);
-                            
-                            if (userText && userText.trim().length > 0) {
-                                resolve(userText.trim());
-                            } else {
-                                resolve(`CV từ file: ${file.name}\n[Cần nhập thủ công để phân tích chính xác]`);
-                            }
-                        }
-                    };
-                    reader.readAsText(file, 'UTF-8');
-                }
-                
-                reader.onerror = reject;
-            });
-        }
-
-        function getPositionName(position) {
-            const positions = {
-                frontend: 'Frontend Developer',
-                backend: 'Backend Developer',
-                fullstack: 'Fullstack Developer',
-                mobile: 'Mobile Developer',
-                devops: 'DevOps Engineer',
-                data: 'Data Scientist',
-                marketing: 'Marketing Specialist',
-                design: 'UI/UX Designer',
-                business: 'Business Analyst',
-                manager: 'Project Manager'
-            };
-            return positions[position] || position;
-        }
-
-        function startInterviewTimer(duration) {
-            interviewStartTime = Date.now();
-            const endTime = interviewStartTime + (duration * 60 * 1000);
-            
-            interviewTimer = setInterval(() => {
-                const now = Date.now();
-                const remaining = Math.max(0, endTime - now);
-                
-                const minutes = Math.floor(remaining / 60000);
-                const seconds = Math.floor((remaining % 60000) / 1000);
-                
-                document.getElementById('interview-timer').textContent = 
-                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (remaining <= 0) {
-                    clearInterval(interviewTimer);
-                    addMessage('ai', 'Thời gian phỏng vấn đã hết. Cảm ơn bạn đã tham gia!');
-                }
-            }, 1000);
-        }
-
-        function addMessage(sender, message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.textContent = message;
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function addCareerMessage(sender, message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.textContent = message;
-            careerChatMessages.appendChild(messageDiv);
-            careerChatMessages.scrollTop = careerChatMessages.scrollHeight;
-        }
-
-        function showLoading(show) {
-            loading.classList.toggle('show', show);
-        }
-
-        // Load behavior data from JSON file
-        async function loadBehaviorData() {
-            try {
-                const response = await fetch('./Data/Phân tích hành vi/hành vi.json');
-                behaviorData = await response.json();
-                console.log('Behavior data loaded successfully');
-            } catch (error) {
-                console.error('Error loading behavior data:', error);
-                // Fallback behavior data
-                behaviorData = {
-                    behavioral_categories: {
-                        communication_skills: { weight: 25 },
-                        emotional_intelligence: { weight: 20 },
-                        confidence_assertiveness: { weight: 20 },
-                        teamwork_collaboration: { weight: 15 },
-                        adaptability_flexibility: { weight: 20 }
+                    if (positiveEmotions.includes(exp.expression)) {
+                        return sum + (exp.confidence * 100);
+                    } else if (neutralEmotions.includes(exp.expression)) {
+                        return sum + (exp.confidence * 70);
+                    } else {
+                        return sum + (exp.confidence * 40);
                     }
-                };
+                }, 0) / analysisResults.expressions.length;
+                
+                behaviorScores.expression = Math.max(0, Math.min(100, avgExpression));
             }
-        }
-
-        // Camera Functions
-        async function toggleCamera() {
-            if (!cameraStream) {
-                await startCamera();
-            } else {
-                stopCamera();
-            }
-        }
-
-        async function startCamera() {
-            try {
-                cameraStream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        width: { ideal: 640 },
-                        height: { ideal: 480 }
-                    },
-                    audio: false 
-                });
-                
-                candidateVideo.srcObject = cameraStream;
-                candidateVideo.style.display = 'block';
-                
-                document.getElementById('camera-overlay').style.display = 'none';
-                document.getElementById('camera-status').textContent = 'Bật';
-                
-                toggleCameraBtn.innerHTML = '<span class="material-symbols-outlined">videocam_off</span>Tắt Camera';
-                toggleCameraBtn.classList.add('active');
-                
-                cameraPanel.classList.add('active');
-                
-                // Start behavior analysis
-                startBehaviorAnalysis();
-                
-            } catch (error) {
-                console.error('Error accessing camera:', error);
-                alert('Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập và đảm bảo bạn đang sử dụng HTTPS.');
-            }
-        }
-
-        function stopCamera() {
-            if (cameraStream) {
-                cameraStream.getTracks().forEach(track => track.stop());
-                cameraStream = null;
-                
-                candidateVideo.srcObject = null;
-                candidateVideo.style.display = 'none';
-                
-                document.getElementById('camera-overlay').style.display = 'flex';
-                document.getElementById('camera-status').textContent = 'Tắt';
-                
-                toggleCameraBtn.innerHTML = '<span class="material-symbols-outlined">videocam</span>Bật Camera';
-                toggleCameraBtn.classList.remove('active');
-                
-                cameraPanel.classList.remove('active');
-                
-                // Stop behavior analysis
-                stopBehaviorAnalysis();
-            }
-        }
-
-        // Behavior Analysis Functions
-        function startBehaviorAnalysis() {
-            if (behaviorAnalysisInterval) {
-                clearInterval(behaviorAnalysisInterval);
-            }
-
-            behaviorAnalysisInterval = setInterval(() => {
-                analyzeBehaviorFrame();
-            }, 2000); // Analyze every 2 seconds
-        }
-
-        function stopBehaviorAnalysis() {
-            if (behaviorAnalysisInterval) {
-                clearInterval(behaviorAnalysisInterval);
-                behaviorAnalysisInterval = null;
-            }
-        }
-
-        function analyzeBehaviorFrame() {
-            // Simulate behavior analysis (in real implementation, this would use AI/ML)
-            const randomFactors = {
-                timeOfDay: new Date().getHours(),
-                sessionLength: interviewStartTime ? (Date.now() - interviewStartTime) / 60000 : 0,
-                messageCount: interviewMessages.length
-            };
-
-            // Simulate different behavior scores based on random factors and time
-            const baseScore = 70 + Math.random() * 20;
-            const timeVariation = Math.sin(randomFactors.sessionLength / 5) * 10;
             
-            behaviorScores.eyeContact = Math.max(50, Math.min(100, baseScore + timeVariation + (Math.random() - 0.5) * 15));
-            behaviorScores.expression = Math.max(50, Math.min(100, baseScore + (Math.random() - 0.5) * 20));
-            behaviorScores.posture = Math.max(50, Math.min(100, baseScore + (Math.random() - 0.5) * 10));
-            behaviorScores.confidence = Math.max(50, Math.min(100, baseScore + timeVariation + (Math.random() - 0.5) * 15));
-
-            updateBehaviorDisplay();
-        }
-
-        function updateBehaviorDisplay() {
-            const overallScore = Math.round(
-                (behaviorScores.eyeContact + behaviorScores.expression + 
-                 behaviorScores.posture + behaviorScores.confidence) / 4
-            );
-
-            document.getElementById('real-time-score').textContent = overallScore;
-
-            // Update individual indicators
-            updateIndicatorStatus('eye-contact-status', behaviorScores.eyeContact);
-            updateIndicatorStatus('expression-status', behaviorScores.expression);
-            updateIndicatorStatus('posture-status', behaviorScores.posture);
-            updateIndicatorStatus('confidence-status', behaviorScores.confidence);
-        }
-
-        function updateIndicatorStatus(elementId, score) {
-            const element = document.getElementById(elementId);
-            element.className = 'indicator-status';
-            
-            if (score >= 80) {
-                element.classList.add('good');
-                element.textContent = 'Tốt';
-            } else if (score >= 65) {
-                element.classList.add('average');
-                element.textContent = 'TB';
-            } else {
-                element.classList.add('poor');
-                element.textContent = 'Kém';
+            // Update communication score based on engagement
+            if (analysisResults.engagement !== undefined) {
+                behaviorScores.communication = Math.max(0, Math.min(100, analysisResults.engagement));
             }
         }
 
-        // Interview Control Functions
-        function stopInterview() {
-            if (confirm('Bạn có chắc muốn kết thúc phỏng vấn?')) {
-                clearInterval(interviewTimer);
-                stopCamera();
-                stopBehaviorAnalysis();
-                
-                // Show results
-                interviewChat.classList.remove('active');
-                generateInterviewResults();
-                interviewResults.classList.add('active');
-            }
+        // Override the original analyzeBehaviorFrame to use enhanced version
+        async function analyzeBehaviorFrame() {
+            await enhancedAnalyzeBehaviorFrame();
         }
 
-        function generateInterviewResults() {
-            const overallBehaviorScore = Math.round(
-                (behaviorScores.eyeContact + behaviorScores.expression + 
-                 behaviorScores.posture + behaviorScores.confidence) / 4
-            );
-
-            // Generate behavior breakdown
-            const behaviorBreakdown = document.getElementById('behavior-breakdown');
-            behaviorBreakdown.innerHTML = `
-                <div class="behavior-item">
-                    <span class="behavior-name">Giao tiếp mắt</span>
-                    <span class="behavior-score-small ${getScoreClass(behaviorScores.eyeContact)}">${Math.round(behaviorScores.eyeContact)}</span>
-                </div>
-                <div class="behavior-item">
-                    <span class="behavior-name">Biểu cảm</span>
-                    <span class="behavior-score-small ${getScoreClass(behaviorScores.expression)}">${Math.round(behaviorScores.expression)}</span>
-                </div>
-                <div class="behavior-item">
-                    <span class="behavior-name">Tư thế</span>
-                    <span class="behavior-score-small ${getScoreClass(behaviorScores.posture)}">${Math.round(behaviorScores.posture)}</span>
-                </div>
-                <div class="behavior-item">
-                    <span class="behavior-name">Tự tin</span>
-                    <span class="behavior-score-small ${getScoreClass(behaviorScores.confidence)}">${Math.round(behaviorScores.confidence)}</span>
-                </div>
-                <div class="behavior-item" style="border-top: 2px solid #e2e8f0; margin-top: 0.5rem; padding-top: 0.8rem; font-weight: 600;">
-                    <span class="behavior-name">Tổng điểm hành vi</span>
-                    <span class="behavior-score-small ${getScoreClass(overallBehaviorScore)}">${overallBehaviorScore}</span>
-                </div>
-            `;
-
-            // Generate interview feedback
-            const interviewFeedback = document.getElementById('interview-feedback');
-            const feedbackText = generateFeedbackText(overallBehaviorScore);
-            interviewFeedback.innerHTML = `
-                <div style="text-align: left;">
-                    <p style="margin-bottom: 1rem; line-height: 1.6;">${feedbackText}</p>
-                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid #667eea;">
-                        <strong>Thời gian phỏng vấn:</strong> ${formatInterviewDuration()}<br>
-                        <strong>Số câu hỏi:</strong> ${interviewMessages.filter(msg => msg.sender === 'ai').length}<br>
-                        <strong>Đánh giá tổng thể:</strong> ${getOverallRating(overallBehaviorScore)}
-                    </div>
-                </div>
-            `;
-        }
-
-        function getScoreClass(score) {
-            if (score >= 85) return 'score-excellent';
-            if (score >= 75) return 'score-good';
-            if (score >= 65) return 'score-average';
-            return 'score-poor';
-        }
-
-        function generateFeedbackText(score) {
-            if (score >= 85) {
-                return "Xuất sắc! Bạn đã thể hiện rất tốt trong buổi phỏng vấn. Hành vi và cách giao tiếp của bạn cho thấy sự tự tin, chuyên nghiệp và phù hợp với vị trí.";
-            } else if (score >= 75) {
-                return "Tốt! Bạn đã có một buổi phỏng vấn khá tích cực. Một số khía cạnh có thể cải thiện thêm để tăng ấn tượng với nhà tuyển dụng.";
-            } else if (score >= 65) {
-                return "Trung bình. Bạn cần cải thiện một số kỹ năng phỏng vấn, đặc biệt là về giao tiếp phi ngôn ngữ và sự tự tin.";
-            } else {
-                return "Cần cải thiện nhiều. Hãy luyện tập thêm về kỹ năng phỏng vấn, đặc biệt chú ý đến ngôn ngữ cơ thể và cách trả lời câu hỏi.";
-            }
-        }
-
-        function getOverallRating(score) {
-            if (score >= 85) return "Xuất sắc";
-            if (score >= 75) return "Tốt";
-            if (score >= 65) return "Trung bình";
-            return "Cần cải thiện";
-        }
-
-        function formatInterviewDuration() {
-            if (!interviewStartTime) return "0 phút";
-            const duration = Math.floor((Date.now() - interviewStartTime) / 60000);
-            return `${duration} phút`;
-        }
-
-        function restartInterview() {
-            // Reset states
-            interviewResults.classList.remove('active');
-            interviewSetup.style.display = 'grid';
-            chatMessages.innerHTML = '';
-            interviewMessages = [];
-            
-            // Reset behavior scores
-            behaviorScores = {
-                communication: 0,
-                confidence: 0,
-                eyeContact: 0,
-                posture: 0,
-                expression: 0
-            };
-
-            // Reset timer
-            clearInterval(interviewTimer);
-            interviewStartTime = null;
-            document.getElementById('interview-timer').textContent = '00:00';
-        }
-
-        function downloadReport() {
-            const reportData = {
-                timestamp: new Date().toISOString(),
-                interviewDuration: formatInterviewDuration(),
-                behaviorScores: behaviorScores,
-                overallScore: Math.round((behaviorScores.eyeContact + behaviorScores.expression + behaviorScores.posture + behaviorScores.confidence) / 4),
-                messages: interviewMessages
-            };
-
-            const dataStr = JSON.stringify(reportData, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
-            const exportFileDefaultName = `interview_report_${new Date().toISOString().split('T')[0]}.json`;
-            
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
-        }
+        // ...existing code...
     </script>
 </body>
-</html>  
+</html>
