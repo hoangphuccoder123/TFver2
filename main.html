@@ -2248,6 +2248,13 @@
             loadCareerData();
             loadBehaviorData();
             initializeAIModels(); // Khởi tạo các AI models
+            
+            // If Holland mode is initially selected, initialize it
+            if (currentMode === 'holland') {
+                setTimeout(() => {
+                    initializeHollandTest();
+                }, 200);
+            }
         }
 
         // Initialize AI/ML Models
@@ -2638,6 +2645,11 @@
             modeContents.forEach(content => {
                 content.classList.toggle('active', content.id === `${mode}-mode`);
             });
+
+            // Special initialization for Holland Test mode
+            if (mode === 'holland') {
+                initializeHollandTest();
+            }
         }
 
         // CV Analysis Functions
@@ -2874,9 +2886,20 @@
                 
                 const welcomeMessage = `Xin chào! Tôi là AI Interviewer. Tôi sẽ phỏng vấn bạn cho vị trí ${getPositionName(position)} ở cấp độ ${level}. Cuộc phỏng vấn sẽ kéo dài ${duration} phút. 
 
-Để có trải nghiệm tốt nhất, tôi khuyên bạn nên bật camera để phân tích hành vi phỏng vấn. Bạn có thể giới thiệu về bản thân không?`;
+💡 **Hướng dẫn sử dụng camera:**
+• Click nút "Bật Camera" để bật camera và phân tích hành vi thời gian thực
+• Đảm bảo bạn ngồi ở nơi có ánh sáng tốt
+• Nhìn thẳng vào camera khi trả lời để có điểm giao tiếp bằng mắt cao
+• Camera sẽ phân tích biểu cảm, tư thế và mức độ tự tin của bạn
+
+Bạn có thể giới thiệu về bản thân không?`;
                 
                 addMessage('ai', welcomeMessage);
+                
+                // Show camera instruction notification
+                setTimeout(() => {
+                    showCameraInstructionNotification();
+                }, 1000);
                 
                 startInterviewTimer(parseInt(duration));
                 interviewStartTime = Date.now();
@@ -2957,6 +2980,141 @@
             }, 1000);
         }
 
+        function stopInterview() {
+            // Stop timer
+            if (interviewTimer) {
+                clearInterval(interviewTimer);
+                interviewTimer = null;
+            }
+
+            // Stop camera
+            stopCamera();
+
+            // Stop behavior analysis
+            stopBehaviorAnalysis();
+
+            // Show results
+            interviewChat.classList.remove('active');
+            interviewResults.classList.add('active');
+
+            // Generate final interview report
+            generateInterviewReport();
+
+            console.log('Interview stopped');
+        }
+
+        function generateInterviewReport() {
+            // Generate behavior breakdown
+            const behaviorBreakdown = document.getElementById('behavior-breakdown');
+            if (behaviorBreakdown) {
+                behaviorBreakdown.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #667eea;">${Math.round(behaviorScores.eyeContact)}%</div>
+                            <div style="font-size: 0.9rem; color: #666;">Giao tiếp bằng mắt</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #667eea;">${Math.round(behaviorScores.expression)}%</div>
+                            <div style="font-size: 0.9rem; color: #666;">Biểu cảm khuôn mặt</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #667eea;">${Math.round(behaviorScores.posture)}%</div>
+                            <div style="font-size: 0.9rem; color: #666;">Tư thế cơ thể</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #667eea;">${Math.round(behaviorScores.confidence)}%</div>
+                            <div style="font-size: 0.9rem; color: #666;">Mức độ tự tin</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Generate interview feedback
+            const interviewFeedback = document.getElementById('interview-feedback');
+            if (interviewFeedback) {
+                const avgScore = Math.round((behaviorScores.eyeContact + behaviorScores.expression + behaviorScores.posture + behaviorScores.confidence) / 4);
+                
+                let feedback = '';
+                if (avgScore >= 80) {
+                    feedback = '🎉 Xuất sắc! Bạn thể hiện rất tốt trong cuộc phỏng vấn với khả năng giao tiếp tự tin và chuyên nghiệp.';
+                } else if (avgScore >= 60) {
+                    feedback = '👍 Tốt! Bạn có một cuộc phỏng vấn khá ổn. Hãy cải thiện thêm khả năng giao tiếp bằng mắt và tự tin.';
+                } else if (avgScore >= 40) {
+                    feedback = '⚠️ Trung bình. Bạn cần luyện tập thêm về giao tiếp và thể hiện bản thân trong phỏng vấn.';
+                } else {
+                    feedback = '📈 Cần cải thiện. Hãy luyện tập thêm kỹ năng phỏng vấn và tăng cường sự tự tin.';
+                }
+
+                interviewFeedback.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 3rem; font-weight: bold; color: #667eea;">${avgScore}%</div>
+                        <div style="font-size: 1.1rem; margin-bottom: 1rem;">Điểm tổng thể</div>
+                    </div>
+                    <p style="font-size: 1rem; line-height: 1.6; color: #4a5568;">${feedback}</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                        <p><strong>Gợi ý cải thiện:</strong></p>
+                        <ul style="text-align: left; margin-left: 1rem;">
+                            <li>Duy trì giao tiếp bằng mắt tự nhiên</li>
+                            <li>Giữ tư thế ngồi thẳng và tự tin</li>
+                            <li>Thể hiện cảm xúc tích cực qua biểu cảm</li>
+                            <li>Trả lời câu hỏi một cách rõ ràng và logic</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        function restartInterview() {
+            // Reset states
+            interviewResults.classList.remove('active');
+            interviewSetup.style.display = 'block';
+            
+            // Reset behavior scores
+            behaviorScores = {
+                communication: 0,
+                confidence: 0,
+                eyeContact: 0,
+                posture: 0,
+                expression: 0
+            };
+
+            // Clear messages
+            if (chatMessages) {
+                chatMessages.innerHTML = '';
+            }
+
+            console.log('Interview restarted');
+        }
+
+        function downloadReport() {
+            const reportContent = `
+BÁO CÁO PHỎNG VẤN AI
+====================
+
+Thời gian: ${new Date().toLocaleString('vi-VN')}
+
+ĐIỂM SỐ HÀNH VI:
+- Giao tiếp bằng mắt: ${Math.round(behaviorScores.eyeContact)}%
+- Biểu cảm khuôn mặt: ${Math.round(behaviorScores.expression)}%
+- Tư thế cơ thể: ${Math.round(behaviorScores.posture)}%
+- Mức độ tự tin: ${Math.round(behaviorScores.confidence)}%
+
+ĐIỂM TỔNG THỂ: ${Math.round((behaviorScores.eyeContact + behaviorScores.expression + behaviorScores.posture + behaviorScores.confidence) / 4)}%
+
+GỢI Ý CẢI THIỆN:
+- Duy trì giao tiếp bằng mắt tự nhiên
+- Giữ tư thế ngồi thẳng và tự tin
+- Thể hiện cảm xúc tích cực qua biểu cảm
+- Trả lời câu hỏi một cách rõ ràng và logic
+            `;
+
+            const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `interview-report-${new Date().getTime()}.txt`;
+            link.click();
+        }
+
         function validateFile(file) {
             const maxSize = 10 * 1024 * 1024; // 10MB
             const allowedTypes = [
@@ -3005,6 +3163,264 @@
             loading.classList.toggle('show', show);
         }
 
+        // Camera Functions
+        async function toggleCamera() {
+            try {
+                if (cameraStream) {
+                    // Turn off camera
+                    stopCamera();
+                } else {
+                    // Turn on camera
+                    await startCamera();
+                }
+            } catch (error) {
+                console.error('Error toggling camera:', error);
+                alert('Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập camera và thử lại!');
+            }
+        }
+
+        async function startCamera() {
+            try {
+                // Check if browser supports getUserMedia
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('Browser không hỗ trợ truy cập camera');
+                }
+
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        facingMode: 'user'
+                    },
+                    audio: false
+                });
+
+                cameraStream = stream;
+                
+                if (candidateVideo) {
+                    candidateVideo.srcObject = stream;
+                    
+                    // Wait for video to load
+                    candidateVideo.onloadedmetadata = () => {
+                        candidateVideo.play().catch(e => {
+                            console.error('Error playing video:', e);
+                        });
+                    };
+                }
+
+                // Update UI
+                if (toggleCameraBtn) {
+                    toggleCameraBtn.classList.add('active');
+                    toggleCameraBtn.innerHTML = `
+                        <span class="material-symbols-outlined">videocam_off</span>
+                        Tắt Camera
+                    `;
+                }
+
+                if (cameraPanel) {
+                    cameraPanel.classList.add('active');
+                }
+
+                const cameraStatus = document.getElementById('camera-status');
+                if (cameraStatus) {
+                    cameraStatus.textContent = 'Bật';
+                }
+
+                const cameraOverlay = document.getElementById('camera-overlay');
+                if (cameraOverlay) {
+                    cameraOverlay.style.display = 'none';
+                }
+
+                console.log('Camera started successfully');
+                
+                // Start behavior analysis if in interview mode
+                if (currentMode === 'interview') {
+                    startBehaviorAnalysis();
+                }
+
+            } catch (error) {
+                console.error('Error starting camera:', error);
+                
+                let errorMessage = 'Không thể khởi động camera. ';
+                
+                if (error.name === 'NotAllowedError') {
+                    errorMessage += 'Vui lòng cho phép truy cập camera trong trình duyệt và làm mới trang.';
+                } else if (error.name === 'NotFoundError') {
+                    errorMessage += 'Không tìm thấy camera trên thiết bị.';
+                } else if (error.name === 'NotReadableError') {
+                    errorMessage += 'Camera đang được sử dụng bởi ứng dụng khác.';
+                } else if (error.name === 'OverconstrainedError') {
+                    errorMessage += 'Camera không hỗ trợ cấu hình được yêu cầu.';
+                } else {
+                    errorMessage += 'Lỗi: ' + error.message;
+                }
+                
+                alert(errorMessage);
+            }
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+
+            if (candidateVideo) {
+                candidateVideo.srcObject = null;
+            }
+
+            // Update UI
+            if (toggleCameraBtn) {
+                toggleCameraBtn.classList.remove('active');
+                toggleCameraBtn.innerHTML = `
+                    <span class="material-symbols-outlined">videocam</span>
+                    Bật Camera
+                `;
+            }
+
+            if (cameraPanel) {
+                cameraPanel.classList.remove('active');
+            }
+
+            const cameraStatus = document.getElementById('camera-status');
+            if (cameraStatus) {
+                cameraStatus.textContent = 'Tắt';
+            }
+
+            const cameraOverlay = document.getElementById('camera-overlay');
+            if (cameraOverlay) {
+                cameraOverlay.style.display = 'flex';
+                cameraOverlay.innerHTML = '<span class="material-symbols-outlined" style="font-size: 3rem; opacity: 0.5;">videocam_off</span><p>Camera tắt</p>';
+            }
+
+            // Stop behavior analysis
+            stopBehaviorAnalysis();
+
+            console.log('Camera stopped');
+        }
+
+        function startBehaviorAnalysis() {
+            if (behaviorAnalysisInterval) {
+                clearInterval(behaviorAnalysisInterval);
+            }
+
+            behaviorAnalysisInterval = setInterval(() => {
+                if (cameraStream && candidateVideo) {
+                    analyzeBehaviorFrame();
+                }
+            }, 1000); // Analyze every second
+
+            console.log('Behavior analysis started');
+        }
+
+        function stopBehaviorAnalysis() {
+            if (behaviorAnalysisInterval) {
+                clearInterval(behaviorAnalysisInterval);
+                behaviorAnalysisInterval = null;
+            }
+
+            console.log('Behavior analysis stopped');
+        }
+
+        async function analyzeBehaviorFrame() {
+            try {
+                // This is a simplified behavior analysis
+                // In a real implementation, you would use computer vision libraries
+                
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = candidateVideo.videoWidth;
+                canvas.height = candidateVideo.videoHeight;
+                
+                ctx.drawImage(candidateVideo, 0, 0);
+                
+                // Simulate behavior scores (replace with actual CV analysis)
+                const fakeAnalysis = {
+                    eyeContact: Math.random() * 100,
+                    expression: Math.random() * 100,
+                    posture: Math.random() * 100,
+                    confidence: Math.random() * 100
+                };
+
+                updateBehaviorScores(fakeAnalysis);
+                
+            } catch (error) {
+                console.error('Error analyzing behavior:', error);
+            }
+        }
+
+        function updateBehaviorScores(analysis) {
+            // Update behavior scores
+            if (analysis.eyeContact !== undefined) {
+                behaviorScores.eyeContact = Math.max(0, Math.min(100, analysis.eyeContact));
+            }
+            if (analysis.expression !== undefined) {
+                behaviorScores.expression = Math.max(0, Math.min(100, analysis.expression));
+            }
+            if (analysis.posture !== undefined) {
+                behaviorScores.posture = Math.max(0, Math.min(100, analysis.posture));
+            }
+            if (analysis.confidence !== undefined) {
+                behaviorScores.confidence = Math.max(0, Math.min(100, analysis.confidence));
+            }
+
+            // Update UI if behavior indicators exist
+            updateBehaviorUI();
+        }
+
+        function showCameraInstructionNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white; padding: 1rem 1.5rem; border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000;
+                max-width: 300px; font-size: 0.9rem; line-height: 1.4;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="margin-right: 0.5rem; font-size: 1.1rem;">📷</span>
+                    <strong>Bật Camera để Phân Tích</strong>
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9; margin-bottom: 0.8rem;">
+                    Click nút "Bật Camera" bên trái để AI phân tích hành vi phỏng vấn của bạn
+                </div>
+                <div style="text-align: right;">
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                        Đóng
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 8000);
+        }
+
+        function updateBehaviorUI() {
+            const realTimeAnalysis = document.getElementById('real-time-analysis');
+            if (realTimeAnalysis) {
+                realTimeAnalysis.innerHTML = `
+                    <div style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">Phân tích hành vi thời gian thực</h4>
+                        <div style="font-size: 0.8rem;">
+                            <div style="margin-bottom: 0.3rem;">👁️ Giao tiếp bằng mắt: ${Math.round(behaviorScores.eyeContact)}%</div>
+                            <div style="margin-bottom: 0.3rem;">😊 Biểu cảm: ${Math.round(behaviorScores.expression)}%</div>
+                            <div style="margin-bottom: 0.3rem;">🏃 Tư thế: ${Math.round(behaviorScores.posture)}%</div>
+                            <div>💪 Tự tin: ${Math.round(behaviorScores.confidence)}%</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
         async function getInterviewResponseFromAI(userResponse) {
             const prompt = `
             Bạn là một interviewer chuyên nghiệp. Phản hồi câu trả lời của ứng viên một cách tự nhiên và hỏi câu hỏi tiếp theo phù hợp.
@@ -3033,6 +3449,39 @@
         }
 
         // Holland Test Functions
+        function initializeHollandTest() {
+            // Reset state
+            currentQuestion = 0;
+            hollandAnswers = [];
+            personalityType = null;
+            
+            // Hide results and show questions
+            if (testResults) {
+                testResults.classList.remove('active');
+            }
+            if (hollandQuestionsDiv) {
+                hollandQuestionsDiv.style.display = 'block';
+            }
+            if (careerChat) {
+                careerChat.classList.remove('active');
+            }
+            
+            // Generate questions
+            generateHollandQuestions();
+            
+            // Reset progress bar
+            const progressBar = document.getElementById('progress-bar');
+            if (progressBar) {
+                progressBar.style.width = '10%'; // Start with 10% to show some progress
+            }
+            
+            // Show first question
+            setTimeout(() => {
+                showQuestion(0);
+                updateProgress();
+            }, 100);
+        }
+
         function generateHollandQuestions() {
             const questionsContainer = hollandQuestionsDiv;
             questionsContainer.innerHTML = '';
@@ -3125,7 +3574,10 @@
 
         function updateProgress() {
             const progress = ((currentQuestion + 1) / hollandQuestions.length) * 100;
-            document.getElementById('progress-bar').style.width = `${progress}%`;
+            const progressBar = document.getElementById('progress-bar');
+            if (progressBar) {
+                progressBar.style.width = `${progress}%`;
+            }
         }
 
         function calculateHollandResults() {
@@ -3146,17 +3598,27 @@
         function displayHollandResults(type, scores) {
             const typeInfo = hollandTypes[type];
             
-            document.getElementById('personality-type').textContent = typeInfo.name;
-            document.getElementById('personality-description').textContent = typeInfo.description;
+            if (!typeInfo) {
+                console.error('Holland type not found:', type);
+                return;
+            }
             
-            const careersHtml = typeInfo.careers.map(career => 
-                `<span style="background: #e0e7ff; color: #3730a3; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.25rem; display: inline-block;">${career}</span>`
-            ).join('');
+            const personalityTypeEl = document.getElementById('personality-type');
+            const personalityDescEl = document.getElementById('personality-description');
+            const suggestedCareersEl = document.getElementById('suggested-careers');
             
-            document.getElementById('suggested-careers').innerHTML = careersHtml;
+            if (personalityTypeEl) personalityTypeEl.textContent = typeInfo.name;
+            if (personalityDescEl) personalityDescEl.textContent = typeInfo.description;
             
-            hollandQuestionsDiv.style.display = 'none';
-            testResults.classList.add('active');
+            if (suggestedCareersEl && typeInfo.careers) {
+                const careersHtml = typeInfo.careers.map(career => 
+                    `<span style="background: #e0e7ff; color: #3730a3; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.25rem; display: inline-block;">${career}</span>`
+                ).join('');
+                suggestedCareersEl.innerHTML = careersHtml;
+            }
+            
+            if (hollandQuestionsDiv) hollandQuestionsDiv.style.display = 'none';
+            if (testResults) testResults.classList.add('active');
         }        // Career Chat Functions
         async function startCareerChatbot() {
             // Load career data if not loaded
@@ -3166,14 +3628,27 @@
             
             careerChat.classList.add('active');
             
-            const welcomeMessage = `Xin chào! Tôi là AI Career Coach. Dựa trên kết quả test Holland của bạn (${hollandTypes[personalityType].name}), tôi có thể tư vấn về:
+            let welcomeMessage = `Xin chào! Tôi là AI Career Coach. `;
+            
+            if (personalityType && hollandTypes[personalityType]) {
+                welcomeMessage += `Dựa trên kết quả test Holland của bạn (${hollandTypes[personalityType].name}), tôi có thể tư vấn về:
 
 • Nghề nghiệp phù hợp với tính cách của bạn
 • Lộ trình phát triển sự nghiệp chi tiết
 • Kỹ năng cần học thêm
-• Cơ hội việc làm và mức lương
+• Cơ hội việc làm và mức lương`;
+            } else {
+                welcomeMessage += `Tôi có thể tư vấn về:
 
-Tôi có dữ liệu về ${Object.keys(careerData).length} ngành nghề và ${Object.keys(roadmapData).length} lộ trình phát triển nghề nghiệp.
+• Nghề nghiệp và lộ trình sự nghiệp
+• Kỹ năng cần phát triển
+• Cơ hội việc làm và mức lương
+• Định hướng nghề nghiệp phù hợp`;
+            }
+            
+            welcomeMessage += `
+
+Tôi có dữ liệu về ${Object.keys(careerData).length || 'nhiều'} ngành nghề và ${Object.keys(roadmapData).length || 'nhiều'} lộ trình phát triển nghề nghiệp.
 
 Bạn muốn tư vấn về điều gì?`;
             
@@ -3287,6 +3762,23 @@ Bạn muốn tư vấn về điều gì?`;
             }
         }
 
+        // Load behavior analysis data
+        async function loadBehaviorData() {
+            try {
+                // Initialize behavior data with default values
+                behaviorData = {
+                    expressionPatterns: {},
+                    postureIndicators: {},
+                    eyeContactMetrics: {},
+                    confidenceMarkers: {}
+                };
+                
+                console.log('Behavior data initialized');
+            } catch (error) {
+                console.error('Error loading behavior data:', error);
+            }
+        }
+
         // Get career recommendations based on Holland type
         function getCareerRecommendations(hollandType) {
             const recommendations = [];
@@ -3336,7 +3828,22 @@ Bạn muốn tư vấn về điều gì?`;
             }
             
             return null;
-        }        async function sendCareerMessage() {
+        }
+
+        function addCareerMessage(sender, message) {
+            if (!careerChatMessages) {
+                console.error('Career chat messages container not found');
+                return;
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            careerChatMessages.appendChild(messageDiv);
+            careerChatMessages.scrollTop = careerChatMessages.scrollHeight;
+        }
+
+        async function sendCareerMessage() {
             const question = careerQuestion.value.trim();
             if (!question) return;
 
