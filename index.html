@@ -1,0 +1,4404 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinHocTre - Trang chủ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.8), transparent);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Animated Gradient Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0c0c0c, #1a1a1a, #2d2d2d, #0c1821, #1a2332);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: -350px;
+            width: 350px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(0, 212, 170, 0.3);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar.open {
+            left: 0;
+        }
+
+        .nav-header {
+            padding: 30px 20px 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .nav-logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-subtitle {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        /* Auth Buttons in Navigation */
+        .nav-auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .nav-auth-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-auth-btn.login {
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+        }
+
+        .nav-auth-btn.register {
+            background: transparent;
+            border: 2px solid #00d4aa;
+            color: #00d4aa;
+        }
+
+        .nav-auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        .nav-auth-btn.login:hover {
+            background: linear-gradient(45deg, #00b8a0, #0098c4);
+        }
+
+        .nav-auth-btn.register:hover {
+            background: rgba(0, 212, 170, 0.1);
+            border-color: #00b8a0;
+        }
+
+        .nav-auth-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-auth-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Animated separator */
+        .nav-separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.5), transparent);
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .nav-separator::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            animation: separatorFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes separatorFlow {
+            0%, 100% { width: 0; left: 0; }
+            50% { width: 100%; left: 0; }
+        }
+
+        .nav-menu {
+            padding: 20px 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 15px 25px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 212, 170, 0.1);
+            border-left-color: #00d4aa;
+            transform: translateX(5px);
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            display: inline-block;
+            width: 25px;
+        }
+
+        /* Contact Section in Navigation */
+        .nav-contact {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+
+        .nav-contact-title {
+            text-align: center;
+            font-size: 1rem;
+            color: #00d4aa;
+            margin-bottom: 15px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            border-radius: 1px;
+        }
+
+        /* Contact Info Styles */
+        .nav-contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .nav-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: #ffffff;
+        }
+
+        .nav-contact-item .nav-contact-icon {
+            font-size: 1rem;
+            color: #00d4aa;
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-contact-item .nav-contact-text {
+            color: #d0d0d0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+
+        .nav-social-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .nav-social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-social-link.facebook:hover {
+            background: rgba(24, 119, 242, 0.2);
+            border-color: #1877f2;
+            color: #1877f2;
+        }
+
+        .nav-social-link.phone:hover {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .nav-social-link.gmail:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .nav-social-link.linkedin:hover {
+            background: rgba(14, 165, 233, 0.2);
+            border-color: #0ea5e9;
+            color: #0ea5e9;
+        }
+
+        .nav-social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 170, 0.3);
+        }
+
+        .nav-social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-social-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-social-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* Social platform specific icons */
+        .nav-social-link.facebook .nav-social-icon {
+            color: #1877f2;
+        }
+
+        .nav-social-link.linkedin .nav-social-icon {
+            color: #0077b5;
+        }
+
+        .nav-social-link.gmail .nav-social-icon {
+            color: #ea4335;
+        }
+
+        /* Contact icons styling */
+        .nav-contact-icon {
+            color: #00d4aa;
+        }
+
+        .nav-contact-icon i,
+        .nav-social-icon i {
+            font-size: 14px;
+        }
+
+        .nav-social-text {
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Floating animation for social icons */
+        @keyframes socialFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-3px) rotate(2deg);
+            }
+        }
+
+        .nav-social-link:nth-child(1) .nav-social-icon {
+            animation: socialFloat 3s ease-in-out infinite;
+            animation-delay: 0s;
+        }
+
+        .nav-social-link:nth-child(2) .nav-social-icon {
+            animation: socialFloat 3s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        .nav-social-link:nth-child(3) .nav-social-icon {
+            animation: socialFloat 3s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .nav-social-link:nth-child(4) .nav-social-icon {
+            animation: socialFloat 3s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        /* Pulsing glow effect */
+            @keyframes socialPulse {
+                0%, 100% {
+                    box-shadow: 0 0 5px rgba(0, 212, 170, 0.3);
+                }
+                50% {
+                    box-shadow: 0 0 20px rgba(0, 212, 170, 0.6);
+                }
+            }
+            
+            @keyframes sparkleEffect {
+                0% {
+                    opacity: 1;
+                    transform: scale(0) rotate(0deg);
+                }
+                50% {
+                    opacity: 1;
+                    transform: scale(1.5) rotate(180deg);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(0.5) rotate(360deg);
+                }
+            }
+            
+            @keyframes socialRipple {
+                to {
+                    transform: scale(2.5);
+                    opacity: 0;
+                }
+            }        /* Menu Toggle Button */
+        .menu-toggle {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 1001;
+            background: rgba(0, 212, 170, 0.2);
+            border: 2px solid #00d4aa;
+            border-radius: 12px;
+            color: #00d4aa;
+            font-size: 1.5rem;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(0, 212, 170, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .menu-toggle.open {
+            left: 375px;
+        }
+
+        /* Transparent Top Navbar */
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 2000;
+            background: transparent;
+            backdrop-filter: none;
+            box-shadow: none;
+            border-bottom: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: navbarFadeIn 1s ease forwards;
+        }
+        @keyframes navbarFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .top-navbar.scrolled {
+            background: transparent;
+            box-shadow: none;
+            border-bottom: none;
+        }
+        .top-nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+        }
+        .top-nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .top-nav-logo:hover {
+            background: rgba(0,212,170,0.1);
+            border: none;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,212,170,0.3);
+        }
+        .top-nav-logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,212,170,0.2);
+            border: 2px solid rgba(0,212,170,0.4);
+        }
+        .top-nav-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4aa, #00b4d8, #ff6ec4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            letter-spacing: 1.2px;
+            text-shadow: 0 2px 10px rgba(0,212,170,0.3);
+        }
+
+
+        
+
+        .top-nav-links {
+            display: flex;
+            gap: 12px;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            border: none;
+            backdrop-filter: none;
+        }
+        .top-nav-link {
+            color: #e2e8f0;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 12px 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            white-space: nowrap;
+            backdrop-filter: blur(15px);
+        }
+        
+        /* Individual colors for each nav link - transparent glass effect */
+        .top-nav-link:nth-child(1) {
+            background: transparent;
+            border: none;
+            color: #60a5fa;
+            box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+        }
+        .top-nav-link:nth-child(1):hover {
+            background: rgba(59, 130, 246, 0.1);
+            border: none;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .top-nav-link:nth-child(2) {
+            background: transparent;
+            border: none;
+            color: #34d399;
+            box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+        }
+        .top-nav-link:nth-child(2):hover {
+            background: rgba(16, 185, 129, 0.1);
+            border: none;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+        }
+        
+        .top-nav-link:nth-child(3) {
+            background: transparent;
+            border: none;
+            color: #f87171;
+            box-shadow: 0 0 0 rgba(245, 101, 101, 0);
+        }
+        .top-nav-link:nth-child(3):hover {
+            background: rgba(245, 101, 101, 0.1);
+            border: none;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(245, 101, 101, 0.3);
+        }
+        
+        .top-nav-link:nth-child(4) {
+            background: transparent;
+            border: none;
+            color: #fbbf24;
+            box-shadow: 0 0 0 rgba(251, 191, 36, 0);
+        }
+        .top-nav-link:nth-child(4):hover {
+            background: rgba(251, 191, 36, 0.1);
+            border: none;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        .top-nav-link:nth-child(5) {
+            background: transparent;
+            border: none;
+            color: #a855f7;
+            box-shadow: 0 0 0 rgba(168, 85, 247, 0);
+        }
+        .top-nav-link:nth-child(5):hover {
+            background: rgba(168, 85, 247, 0.1);
+            border: none;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.3);
+        }
+        
+        /* Add glow effect on hover */
+        .top-nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .top-nav-link:hover::before {
+            opacity: 1;
+        }
+        
+        /* Add active state indicator */
+        .top-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .top-nav-link:nth-child(1)::after { background: #3b82f6; }
+        .top-nav-link:nth-child(2)::after { background: #10b981; }
+        .top-nav-link:nth-child(3)::after { background: #f56565; }
+        .top-nav-link:nth-child(4)::after { background: #fbbf24; }
+        .top-nav-link:nth-child(5)::after { background: #a855f7; }
+        
+        .top-nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Auth Button in Top Navbar */
+        .top-nav-auth-btn {
+            padding: 8px 16px;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .top-nav-auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+            background: linear-gradient(45deg, #00b4d8, #00d4aa);
+        }
+
+        .top-nav-auth-btn.logout {
+            background: linear-gradient(45deg, #ff6b6b, #ff8787);
+        }
+
+        .top-nav-auth-btn.logout:hover {
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+
+        .top-nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .top-nav-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: 2px solid;
+            outline: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .top-nav-btn.login {
+            background: linear-gradient(135deg, #00d4aa, #00b4d8);
+            color: #fff;
+            border-color: #00d4aa;
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+        }
+        .top-nav-btn.login:hover {
+            background: linear-gradient(135deg, #00b8a0, #0098c4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.5);
+        }
+        .top-nav-btn.register {
+            background: transparent;
+            border-color: #ff6ec4;
+            color: #ff6ec4;
+        }
+        .top-nav-btn.register:hover {
+            background: rgba(255, 110, 196, 0.15);
+            border-color: #ff6ec4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 110, 196, 0.3);
+        }
+        @media (max-width: 900px) {
+            .top-nav-content { 
+                flex-direction: column; 
+                gap: 12px; 
+                padding: 12px 20px; 
+            }
+            .top-nav-links { 
+                gap: 8px;
+                padding: 6px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .top-nav-link {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            .top-nav-actions { 
+                gap: 8px; 
+            }
+        }
+        @media (max-width: 600px) {
+            .top-nav-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 4vw;
+                gap: 0;
+            }
+            .top-nav-menu-btn {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 44px;
+                height: 44px;
+                background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,180,216,0.2));
+                border: 2px solid #00d4aa;
+                border-radius: 12px;
+                cursor: pointer;
+                margin-left: auto;
+                z-index: 2100;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+            .top-nav-menu-btn:hover {
+                background: linear-gradient(135deg, rgba(0,212,170,0.3), rgba(0,180,216,0.3));
+                transform: scale(1.05);
+                box-shadow: 0 4px 15px rgba(0,212,170,0.3);
+            }
+            .top-nav-menu-btn:focus {
+                outline: 3px solid rgba(0,212,170,0.5);
+                outline-offset: 2px;
+            }
+            .menu-bar {
+                display: block;
+                width: 26px;
+                height: 3px;
+                background: #00d4aa;
+                margin: 3px 0;
+                border-radius: 2px;
+                transition: all 0.3s ease;
+            }
+            .top-nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100vw;
+                background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+                backdrop-filter: blur(20px);
+                box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+                border-top: 2px solid rgba(0,212,170,0.3);
+                flex-direction: column;
+                gap: 0;
+                align-items: stretch;
+                margin-top: 0;
+                padding: 20px 0;
+                z-index: 2001;
+                transform: translateY(-120%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.4s cubic-bezier(.77,0,.18,1), opacity 0.3s ease;
+            }
+            .top-nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .top-nav-link {
+                font-size: 1.1rem;
+                padding: 16px 24px;
+                margin: 6px 20px;
+                border-radius: 12px;
+                text-align: center;
+                width: calc(100% - 40px);
+                border-bottom: none;
+                transition: all 0.3s ease;
+            }
+            
+            /* Mobile specific colors - transparent glass buttons */
+            .top-nav-link:nth-child(1) {
+                background: transparent;
+                border: none;
+                box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+            }
+            .top-nav-link:nth-child(2) {
+                background: transparent;
+                border: none;
+                box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+            }
+            .top-nav-link:nth-child(3) {
+                background: transparent;
+                border: none;
+                box-shadow: 0 0 0 rgba(245, 101, 101, 0);
+            }
+            .top-nav-link:nth-child(4) {
+                background: transparent;
+                border: none;
+                box-shadow: 0 0 0 rgba(251, 191, 36, 0);
+            }
+            .top-nav-link:nth-child(5) {
+                background: transparent;
+                border: none;
+                box-shadow: 0 0 0 rgba(168, 85, 247, 0);
+            }
+            
+            .top-nav-link:hover {
+                transform: translateX(8px);
+                box-shadow: 0 4px 15px rgba(0,212,170,0.2);
+                background: rgba(255, 255, 255, 0.05);
+            }
+            .top-nav-logo-img {
+                width: 36px;
+                height: 36px;
+            }
+            .top-nav-brand {
+                font-size: 1.2rem;
+            }
+            .top-navbar {
+                padding: 0;
+            }
+            .top-nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0,0,0,0.4);
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                backdrop-filter: blur(4px);
+            }
+            .top-nav-overlay.open {
+                display: block;
+                opacity: 1;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .cta-btn {
+                width: 100%;
+                font-size: 1.1rem;
+                padding: 14px 0;
+                border-radius: 15px;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            padding: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8, #0077b6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 10px rgba(0, 212, 170, 0.5));
+            }
+            to {
+                filter: drop-shadow(0 0 20px rgba(0, 212, 170, 0.8));
+            }
+        }
+
+        .hero-slogan {
+            font-size: clamp(1.3rem, 3vw, 2.1rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #00d4aa, #00b4d8, #ff6ec4, #7873f5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 16px rgba(0,212,170,0.15);
+            animation: sloganGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes sloganGlow {
+            from { filter: drop-shadow(0 0 8px #00d4aa); }
+            to { filter: drop-shadow(0 0 18px #ff6ec4); }
+        }
+
+        .slogan-highlight {
+            background: linear-gradient(90deg, #ff6ec4, #00b4d8, #00d4aa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .cta-btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 220px;
+            justify-content: center;
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            color: white;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid #00d4aa;
+            color: #00d4aa;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 212, 170, 0.1), rgba(0, 180, 216, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 170, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 212, 170, 0.2);
+            background: rgba(0, 212, 170, 0.1);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            color: #00d4aa;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-description {
+            color: #c0c0c0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Feature Icon Wrapper */
+        .feature-icon-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-badge {
+            position: absolute;
+            top: -10px;
+            right: -20px;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(255, 110, 196, 0.3);
+            animation: badgePulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes badgePulse {
+            from { 
+                box-shadow: 0 4px 12px rgba(255, 110, 196, 0.3);
+                transform: scale(1);
+            }
+            to { 
+                box-shadow: 0 6px 20px rgba(255, 110, 196, 0.5);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Feature Stats */
+        .feature-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 170, 0.2);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            text-align: center;
+        }
+
+        .stat-item i {
+            color: #00d4aa;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        /* Feature CTA Button */
+        .feature-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.5);
+            background: linear-gradient(45deg, #00b8a0, #0098c4);
+        }
+
+        .feature-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .feature-cta:hover::before {
+            left: 100%;
+        }
+
+        .feature-cta i {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-cta:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Login Required Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .login-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-modal-content {
+            position: relative;
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.95), rgba(42, 42, 42, 0.95));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 212, 170, 0.2);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.3s ease;
+        }
+
+        .login-modal.show .login-modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .login-modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(0, 212, 170, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(45deg, rgba(0, 212, 170, 0.1), rgba(0, 180, 216, 0.1));
+        }
+
+        .login-modal-header h3 {
+            color: #00d4aa;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-modal-close {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .login-modal-close:hover {
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+            transform: rotate(90deg);
+        }
+
+        .login-modal-body {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .login-modal-icon {
+            margin-bottom: 20px;
+        }
+
+        .login-modal-icon i {
+            font-size: 4rem;
+            color: #00d4aa;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 170, 0.5));
+            animation: lockPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes lockPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .login-modal-body p {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .login-modal-subtitle {
+            color: #b0b0b0 !important;
+            font-size: 1rem !important;
+            font-weight: 400 !important;
+        }
+
+        .login-modal-footer {
+            padding: 25px 30px;
+            border-top: 1px solid rgba(0, 212, 170, 0.2);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .login-modal-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-modal-btn.primary {
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .login-modal-btn.primary:hover {
+            background: linear-gradient(45deg, #00b8a0, #0098c4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        .login-modal-btn.secondary {
+            background: transparent;
+            color: #ff6ec4;
+            border: 2px solid #ff6ec4;
+        }
+
+        .login-modal-btn.secondary:hover {
+            background: rgba(255, 110, 196, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 110, 196, 0.3);
+        }
+
+        .login-modal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .login-modal-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Disabled state for navbar links and buttons */
+        .nav-disabled {
+            opacity: 0.5;
+            cursor: not-allowed !important;
+            pointer-events: none;
+        }
+
+        .nav-disabled::after {
+            content: '🔒';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.8rem;
+            background: rgba(245, 101, 101, 0.8);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive modal */
+        @media (max-width: 600px) {
+            .login-modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+            
+            .login-modal-header {
+                padding: 20px;
+            }
+            
+            .login-modal-body {
+                padding: 30px 20px;
+            }
+            
+            .login-modal-footer {
+                padding: 20px;
+                flex-direction: column;
+            }
+            
+            .login-modal-btn {
+                min-width: auto;
+            }
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(0, 212, 170, 0.1), rgba(0, 180, 216, 0.1));
+            animation: floatShape 20s linear infinite;
+        }
+
+        /* Floating Icons */
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(0, 212, 170, 0.6);
+            animation: floatIcon 15s linear infinite;
+            opacity: 0;
+        }
+
+        .floating-icon img {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: brightness(1.2) contrast(1.1);
+        }
+
+        .floating-icon.image-icon {
+            font-size: 2rem;
+        }
+
+        .floating-icon:nth-child(even) {
+            color: rgba(0, 180, 216, 0.6);
+            animation-duration: 18s;
+        }
+
+        .floating-icon:nth-child(3n) {
+            color: rgba(255, 110, 196, 0.5);
+            animation-duration: 22s;
+        }
+
+        .floating-icon:nth-child(4n) {
+            color: rgba(120, 115, 245, 0.5);
+            animation-duration: 25s;
+        }
+
+        @keyframes floatIcon {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1);
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Tech Icons Specific Animations */
+        .tech-icon {
+            animation: techFloat 20s ease-in-out infinite;
+        }
+
+        .tech-icon:nth-child(2n) {
+            animation-delay: -2s;
+        }
+
+        .tech-icon:nth-child(3n) {
+            animation-delay: -4s;
+        }
+
+        .tech-icon:nth-child(4n) {
+            animation-delay: -6s;
+        }
+
+        @keyframes techFloat {
+            0%, 100% {
+                transform: translateY(100vh) translateX(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            15% {
+                transform: translateY(85vh) translateX(30px) rotate(45deg);
+            }
+            30% {
+                transform: translateY(70vh) translateX(-20px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(50vh) translateX(40px) rotate(180deg);
+                opacity: 0.9;
+            }
+            70% {
+                transform: translateY(30vh) translateX(-30px) rotate(270deg);
+            }
+            85% {
+                transform: translateY(15vh) translateX(20px) rotate(315deg);
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(-50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Pulsing Icons */
+        .pulse-icon {
+            animation: pulseFloat 16s linear infinite;
+        }
+
+        @keyframes pulseFloat {
+            0%, 100% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 0;
+                filter: brightness(1);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1);
+            }
+            25% {
+                transform: translateY(75vh) scale(1.3);
+                filter: brightness(1.5);
+            }
+            50% {
+                transform: translateY(50vh) scale(1.1);
+                filter: brightness(1.2);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateY(25vh) scale(1.4);
+                filter: brightness(1.6);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) scale(1);
+            }
+            100% {
+                transform: translateY(-10vh) scale(0.8);
+                opacity: 0;
+                filter: brightness(1);
+            }
+        }
+
+        /* Career Icons Special Effects */
+        .career-icon {
+            animation: careerFloat 15s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px currentColor);
+        }
+
+        @keyframes careerFloat {
+            0%, 100% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(85vh) translateX(10px) rotate(15deg) scale(1);
+            }
+            25% {
+                transform: translateY(70vh) translateX(-15px) rotate(-10deg) scale(1.2);
+            }
+            50% {
+                transform: translateY(50vh) translateX(20px) rotate(180deg) scale(1.5);
+                opacity: 0.9;
+                filter: drop-shadow(0 0 15px currentColor) brightness(1.3);
+            }
+            75% {
+                transform: translateY(30vh) translateX(-10px) rotate(270deg) scale(1.1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(15vh) translateX(5px) rotate(345deg) scale(1);
+            }
+            100% {
+                transform: translateY(-10vh) translateX(0) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Interactive floating icons on hover */
+        .floating-icon:hover {
+            animation-play-state: paused;
+            transform: scale(2) !important;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 320px;
+                left: -320px;
+            }
+
+            .menu-toggle.open {
+                left: 345px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 250px;
+                justify-content: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 1fr);
+                padding: 40px 15px;
+                gap: 25px;
+            }
+
+            .feature-card {
+                min-height: 220px;
+                padding: 30px 20px;
+            }
+
+            .feature-stats {
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .stat-item {
+                flex-direction: row;
+                gap: 8px;
+                font-size: 0.8rem;
+            }
+
+            .feature-badge {
+                font-size: 0.6rem;
+                padding: 3px 6px;
+                top: -8px;
+                right: -15px;
+            }
+
+            .feature-cta {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                max-width: 800px;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        /* Features Introduction Section */
+        .features-intro {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.95), rgba(25, 25, 25, 0.9));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 180, 216, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .features-intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .intro-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8, #ff6ec4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .intro-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(0, 212, 170, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 212, 170, 0.1), rgba(0, 180, 216, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 170, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 212, 170, 0.2);
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-item > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, rgba(0, 212, 170, 0.2), rgba(0, 180, 216, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .feature-icon-fa {
+            font-size: 2.5rem;
+            color: #00d4aa;
+        }
+
+        .feature-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 212, 170, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-overlay i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-item:hover .feature-overlay {
+            opacity: 1;
+        }
+
+        .feature-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .feature-stats-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: rgba(0, 212, 170, 0.1);
+            color: #00d4aa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 212, 170, 0.3);
+        }
+
+        .intro-cta {
+            text-align: center;
+        }
+
+        .intro-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+
+        .intro-btn.primary {
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .intro-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 212, 170, 0.4);
+        }
+
+        .intro-btn.secondary {
+            background: transparent;
+            color: #ff6ec4;
+            border: 2px solid #ff6ec4;
+        }
+
+        .intro-btn.secondary:hover {
+            background: rgba(255, 110, 196, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 110, 196, 0.3);
+        }
+
+        .btn-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .intro-btn:hover .btn-shine {
+            left: 100%;
+        }
+
+        /* Footer Styles - Optimized */
+        .footer {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+            padding: 60px 0 20px;
+            border-top: 2px solid rgba(0, 212, 170, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.03) 0%, transparent 50%);
+            animation: footerGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes footerGlow {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1.1); }
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8, #ff6ec4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            border-radius: 2px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .footer-logo-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid rgba(0, 212, 170, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .footer-logo:hover .footer-logo-img {
+            transform: scale(1.1) rotate(5deg);
+            border-color: #00d4aa;
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        .footer-brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8, #ff6ec4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: rgba(0, 212, 170, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d4aa;
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(0, 212, 170, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            left: 0;
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 30px rgba(0, 212, 170, 0.5);
+            border-color: transparent;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links li:hover {
+            transform: translateX(8px);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .footer-links a::before {
+            content: '▶';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            color: #00d4aa;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: #00d4aa;
+            padding-left: 25px;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .footer-contact .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact .contact-item:hover {
+            background: rgba(0, 212, 170, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            color: #00d4aa;
+            width: 25px;
+            font-size: 1.2rem;
+        }
+
+        .footer-newsletter {
+            margin-top: 30px;
+        }
+
+        .footer-newsletter h5 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 5px;
+            border: 1px solid rgba(0, 212, 170, 0.2);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00d4aa, #00b4d8);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.5);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(0, 212, 170, 0.2);
+            padding-top: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-legal a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00d4aa;
+            transition: width 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #00d4aa;
+        }
+
+        .footer-legal a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive Footer */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .footer-legal {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Notification Animations */
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutToRight {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutToLeft {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #00d4aa;
+        }
+
+        /* Responsive Design for New Sections */
+        @media (max-width: 768px) {
+            .intro-title {
+                font-size: 2.5rem;
+            }
+
+            .intro-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-item {
+                padding: 30px 20px;
+            }
+
+            .intro-btn {
+                padding: 15px 25px;
+                font-size: 1rem;
+                margin: 5px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Transparent Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="top-nav-content">
+            <a href="index.html" class="top-nav-logo">
+                <img src="ảnh/icon/Logo2.jpg" alt="Logo" class="top-nav-logo-img">
+                <span class="top-nav-brand">TechFuture</span>
+                <!-- Login Status Indicator -->
+                <div id="loginStatusIndicator" style="
+                    position: absolute;
+                    top: -8px;
+                    right: -8px;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background: linear-gradient(45deg, #f56565, #ef4444);
+                    border: 2px solid white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 10px;
+                    color: white;
+                    font-weight: bold;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                " title="Trạng thái đăng nhập">🔒</div>
+            </a>
+            <button class="top-nav-menu-btn" aria-label="Mở menu" tabindex="0" style="display:none">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <div class="top-nav-links">
+                <a href="agent cv .html" class="top-nav-link gradient-text">AI CV Analyzer</a>
+                <a href="holland+chatbot.html" class="top-nav-link gradient-text">Holland Chatbot</a>
+                <a href="phòng phỏng vấn ảo..html" class="top-nav-link gradient-text">Phỏng vấn ảo</a>
+                <a href="lọc cv.html" class="top-nav-link gradient-text">Lọc CV</a>
+                <a href="tạo cv.html" class="top-nav-link gradient-text">Tạo CV</a>
+                <a href="#" id="authToggleBtn" class="top-nav-auth-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Đăng nhập</span>
+                </a>
+            </div>
+        </div>
+        <div class="top-nav-overlay"></div>
+    </nav>
+
+    <!-- Animated Background -->
+    <div class="gradient-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="floating-shapes" id="floatingShapes"></div>
+    
+    <!-- Floating Icons -->
+    <div class="floating-icons" id="floatingIcons"></div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Login Required Modal -->
+    <div class="login-modal" id="loginModal" style="display: none;">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+                <h3>Yêu cầu đăng nhập</h3>
+                <button class="login-modal-close" id="closeLoginModal">&times;</button>
+            </div>
+            <div class="login-modal-body">
+                <div class="login-modal-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <p>Bạn cần đăng nhập để truy cập tính năng này!</p>
+                <p class="login-modal-subtitle">Đăng nhập để khám phá toàn bộ các công cụ AI mạnh mẽ của TechFuture.</p>
+            </div>
+            <div class="login-modal-footer">
+                <a href="đăng nhập.html" class="login-modal-btn primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Đăng nhập ngay
+                </a>
+                <a href="đăng ký.html" class="login-modal-btn secondary">
+                    <i class="fas fa-user-plus"></i>
+                    Đăng ký
+                </a>
+            </div>
+        </div>
+        <div class="login-modal-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">TechFuture AI</h1>
+                <p class="hero-slogan">Khơi nguồn sáng tạo, dẫn lối tương lai!</p>
+                <p class="hero-description">
+                    Đột phá cùng AI: Phân tích CV, Chatbot nghề nghiệp, phỏng vấn ảo và nhiều công nghệ thông minh khác. <br>
+                    <span class="slogan-highlight">Trải nghiệm tương lai ngay hôm nay!</span>
+                </p>
+
+                <!-- Features Grid đã được xóa -->
+
+            </div>
+        </section>
+
+        <!-- Features Introduction Section -->
+        <section class="features-intro">
+            <div class="features-intro-container">
+                <div class="intro-header">
+                    <h2 class="intro-title">Khám Phá Tính Năng Nổi Bật</h2>
+                    <p class="intro-subtitle">Những công cụ AI tiên tiến giúp bạn xây dựng sự nghiệp thành công</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="ảnh/icon/toppcv.png" alt="CV Analysis" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">AI CV Analyzer</h3>
+                        <p class="feature-desc">Phân tích CV thông minh với AI, đưa ra đánh giá chi tiết và gợi ý cải thiện để tối ưu hóa cơ hội việc làm của bạn.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">⚡ Phân tích nhanh</span>
+                            <span class="stat">📊 Báo cáo chi tiết</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="ảnh/icon/hollandd.jpg" alt="Holland Test" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Holland Chatbot</h3>
+                        <p class="feature-desc">Chatbot AI thông minh giúp bạn khám phá tính cách nghề nghiệp theo mô hình Holland, định hướng con đường sự nghiệp phù hợp.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🎯 Định hướng chính xác</span>
+                            <span class="stat">💬 Tương tác thông minh</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <i class="fas fa-video feature-icon-fa"></i>
+                            <div class="feature-overlay">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Phỏng Vấn Ảo</h3>
+                        <p class="feature-desc">Luyện tập phỏng vấn với AI trong môi trường ảo, nhận phản hồi chi tiết để cải thiện kỹ năng giao tiếp và thuyết trình.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🎤 Thực hành thực tế</span>
+                            <span class="stat">📈 Cải thiện kỹ năng</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <i class="fas fa-filter feature-icon-fa"></i>
+                            <div class="feature-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Lọc CV Thông Minh</h3>
+                        <p class="feature-desc">Hệ thống lọc CV tự động với AI, giúp nhà tuyển dụng tìm được ứng viên phù hợp một cách nhanh chóng và chính xác.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🔍 Tìm kiếm thông minh</span>
+                            <span class="stat">⏱️ Tiết kiệm thời gian</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="ảnh/icon/Logo2.jpg" alt="CV Builder" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Tạo CV Chuyên Nghiệp</h3>
+                        <p class="feature-desc">Công cụ tạo CV với AI hỗ trợ, nhiều mẫu đẹp, tự động tối ưu nội dung để tạo ra CV ấn tượng và chuyên nghiệp.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🎨 Thiết kế đẹp</span>
+                            <span class="stat">🤖 AI hỗ trợ</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="ảnh/icon/côngnghe.jpg" alt="FPT Integration" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-link"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Tích Hợp Công Nghệ</h3>
+                        <p class="feature-desc">Kết hợp công nghệ AI tiên tiến với hệ sinh thái tuyển dụng, mang đến trải nghiệm hoàn chỉnh cho cả ứng viên và nhà tuyển dụng.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🔗 Kết nối toàn diện</span>
+                            <span class="stat">🚀 Công nghệ tiên tiến</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="ảnh/icon/Logo2.jpg" alt="TechFuture Logo" class="footer-logo-img">
+                        <span class="footer-brand">TechFuture</span>
+                    </div>
+                    <p class="footer-desc">
+                        Nền tảng AI thông minh cho sự nghiệp của bạn. 
+                        Chúng tôi mang đến những công cụ hiện đại nhất 
+                        để giúp bạn phát triển và thành công trong công việc.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/profile.php?id=61577736765345&sk=friends_likes" target="_blank" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.twitter.com" target="_blank" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.youtube.com" target="_blank" class="social-link" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Sản Phẩm</h4>
+                    <ul class="footer-links">
+                        <li><a href="agent cv .html">AI CV Analyzer</a></li>
+                        <li><a href="holland+chatbot.html">Holland Chatbot</a></li>
+                        <li><a href="phòng phỏng vấn ảo..html">Phỏng Vấn Ảo</a></li>
+                        <li><a href="lọc cv.html">Lọc CV</a></li>
+                        <li><a href="tạo cv.html">Tạo CV</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Thông Tin Hệ Thống</h4>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hải Phòng, Việt Nam</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+84 89.2801.2008 </span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@techfuture.com</span>
+                        </div>
+                        <div class="contact-item" id="loginStatusFooter">
+                            <i class="fas fa-lock" style="color: #f44336;"></i>
+                            <span style="color: #f44336;">Chưa đăng nhập</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        © 2025 TechFuture. Tất cả quyền được bảo lưu.
+                    </p>
+                    <div class="footer-legal">
+                        <a href="#">Chính Sách Bảo Mật</a>
+                        <a href="#">Điều Khoản Sử Dụng</a>
+                        <a href="#">Cookie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+
+    <script>
+        // Enhanced Authentication System for GitHub Pages
+        class AuthSystem {
+            constructor() {
+                this.isLoggedIn = false;
+                this.userEmail = '';
+                this.loginModal = document.getElementById('loginModal');
+                this.closeModalBtn = document.getElementById('closeLoginModal');
+                this.sessionKey = 'tf_session_' + Date.now();
+                this.init();
+            }
+
+            init() {
+                // Check multiple sources for login status
+                this.isLoggedIn = this.checkLoginStatus();
+                
+                // Setup UI based on login status
+                this.setupUI();
+                
+                // Setup event listeners
+                this.setupEventListeners();
+                
+                // Setup URL parameter checking (for GitHub Pages)
+                this.checkURLParams();
+                
+                // Show welcome message if just logged in
+                if (this.isLoggedIn) {
+                    this.showWelcomeMessage();
+                }
+
+                // Setup demo login for testing
+                this.setupDemoLogin();
+            }
+
+            checkURLParams() {
+                // Check for login success from URL parameters (GitHub Pages friendly)
+                const urlParams = new URLSearchParams(window.location.search);
+                const loginSuccess = urlParams.get('login');
+                const userEmail = urlParams.get('email') || urlParams.get('user');
+                
+                if (loginSuccess === 'success' && userEmail) {
+                    this.performLogin(decodeURIComponent(userEmail));
+                    // Clean URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    return;
+                }
+
+                // Check for demo mode
+                const demoMode = urlParams.get('demo');
+                if (demoMode === 'true') {
+                    this.performLogin('demo.user@techfuture.ai');
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+
+            checkLoginStatus() {
+                // Check multiple storage methods for compatibility
+                const sources = [
+                    localStorage.getItem('isLoggedIn'),
+                    sessionStorage.getItem('isLoggedIn'),
+                    this.getCookie('isLoggedIn')
+                ];
+
+                const emailSources = [
+                    localStorage.getItem('userEmail'),
+                    sessionStorage.getItem('userEmail'),
+                    this.getCookie('userEmail')
+                ];
+
+                const timeSources = [
+                    localStorage.getItem('loginTime'),
+                    sessionStorage.getItem('loginTime'),
+                    this.getCookie('loginTime')
+                ];
+
+                for (let i = 0; i < sources.length; i++) {
+                    const loginStatus = sources[i];
+                    const userEmail = emailSources[i];
+                    const loginTime = timeSources[i];
+
+                    if (loginStatus === 'true' && loginTime) {
+                        // Check if login is still valid (24 hours)
+                        const loginDate = new Date(loginTime);
+                        const now = new Date();
+                        const hoursDiff = (now - loginDate) / (1000 * 60 * 60);
+                        
+                        if (hoursDiff < 24) {
+                            this.userEmail = userEmail || '';
+                            return true;
+                        }
+                    }
+                }
+                
+                return false;
+            }
+
+            performLogin(email = 'demo@techfuture.ai') {
+                // Clean and validate email
+                const cleanEmail = email.trim();
+                if (!cleanEmail) {
+                    console.warn('❌ Không có email để đăng nhập');
+                    return;
+                }
+
+                // Validate email format (allow demo emails)
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(cleanEmail) && !cleanEmail.includes('demo')) {
+                    console.warn('❌ Email không hợp lệ:', cleanEmail);
+                    // Show error message to user
+                    this.showErrorMessage('Email không hợp lệ!');
+                    return;
+                }
+
+                this.isLoggedIn = true;
+                this.userEmail = cleanEmail;
+                
+                const loginData = {
+                    isLoggedIn: 'true',
+                    userEmail: cleanEmail,
+                    loginTime: new Date().toISOString(),
+                    sessionId: this.sessionKey || 'session_' + Date.now()
+                };
+
+                // Store in multiple places for reliability
+                try {
+                    Object.entries(loginData).forEach(([key, value]) => {
+                        localStorage.setItem(key, value);
+                        sessionStorage.setItem(key, value);
+                        this.setCookie(key, value, 1); // 1 day
+                    });
+                    console.log('✅ Lưu trữ đăng nhập thành công');
+                } catch (e) {
+                    console.warn('⚠️ Lưu trữ không khả dụng:', e);
+                    // Still allow login even if storage fails
+                }
+
+                this.setupUI();
+                this.showWelcomeMessage();
+                
+                // Log success
+                console.log('🎉 Đăng nhập thành công:', cleanEmail);
+            }
+
+            showErrorMessage(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(45deg, #ff6b6b, #ff8787);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+                    z-index: 10000;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    animation: slideInFromRight 0.5s ease-out;
+                `;
+                
+                errorDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                    ${message}
+                `;
+                
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    errorDiv.style.animation = 'slideOutToRight 0.5s ease-in';
+                    setTimeout(() => {
+                        if (errorDiv.parentNode) {
+                            errorDiv.parentNode.removeChild(errorDiv);
+                        }
+                    }, 500);
+                }, 3000);
+            }
+
+            setupDemoLogin() {
+                // Only show demo button if not logged in
+                if (this.isLoggedIn) return;
+                
+                // Only show on GitHub Pages or localhost for testing
+                const hostname = window.location.hostname;
+                if (!(hostname.includes('github.io') || hostname === 'localhost' || hostname === '127.0.0.1')) {
+                    return;
+                }
+
+                // Check if demo button already exists
+                if (document.querySelector('.demo-login-btn')) return;
+
+                // Add a demo login button for testing on GitHub Pages
+                const demoBtn = document.createElement('button');
+                demoBtn.className = 'demo-login-btn';
+                demoBtn.innerHTML = '� Demo Login (GitHub Pages)';
+                demoBtn.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: linear-gradient(45deg, #ff6ec4, #00d4aa, #00b4d8);
+                    background-size: 200% 200%;
+                    animation: gradientShift 3s ease infinite;
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 30px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    z-index: 10000;
+                    font-size: 0.95rem;
+                    box-shadow: 0 6px 20px rgba(255, 110, 196, 0.4);
+                    transition: all 0.3s ease;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                `;
+
+                // Add hover effects
+                demoBtn.onmouseover = () => {
+                    demoBtn.style.transform = 'translateY(-3px) scale(1.05)';
+                    demoBtn.style.boxShadow = '0 10px 30px rgba(255, 110, 196, 0.6)';
+                };
+                
+                demoBtn.onmouseout = () => {
+                    demoBtn.style.transform = 'translateY(0) scale(1)';
+                    demoBtn.style.boxShadow = '0 6px 20px rgba(255, 110, 196, 0.4)';
+                };
+                
+                demoBtn.onclick = () => {
+                    // Use a more realistic demo email
+                    this.performLogin('demo.user@techfuture.ai');
+                    demoBtn.remove();
+                    
+                    // Show demo info
+                    this.showDemoInfo();
+                };
+                
+                document.body.appendChild(demoBtn);
+
+                // Auto-hide after 10 seconds if not used
+                setTimeout(() => {
+                    if (demoBtn.parentNode && !this.isLoggedIn) {
+                        demoBtn.style.opacity = '0.5';
+                        demoBtn.style.transform = 'scale(0.9)';
+                    }
+                }, 10000);
+            }
+
+            showDemoInfo() {
+                const infoDiv = document.createElement('div');
+                infoDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 20px;
+                    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+                    color: white;
+                    padding: 20px 25px;
+                    border-radius: 15px;
+                    box-shadow: 0 8px 25px rgba(68, 160, 141, 0.3);
+                    z-index: 10000;
+                    font-weight: 600;
+                    max-width: 350px;
+                    animation: slideInFromLeft 0.5s ease-out;
+                `;
+                
+                infoDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <i class="fas fa-info-circle" style="font-size: 1.2rem;"></i>
+                        <strong>Demo Mode Activated</strong>
+                    </div>
+                    <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+                        Bạn đang sử dụng tài khoản demo: <br>
+                        <strong>demo.user@techfuture.ai</strong><br>
+                        Tất cả tính năng đã được mở khóa!
+                    </p>
+                `;
+                
+                document.body.appendChild(infoDiv);
+                
+                setTimeout(() => {
+                    infoDiv.style.animation = 'slideOutToLeft 0.5s ease-in';
+                    setTimeout(() => {
+                        if (infoDiv.parentNode) {
+                            infoDiv.parentNode.removeChild(infoDiv);
+                        }
+                    }, 500);
+                }, 5000);
+            }
+
+            setCookie(name, value, days) {
+                try {
+                    const expires = new Date();
+                    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+                    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+                } catch (e) {
+                    console.warn('Cookie setting failed:', e);
+                }
+            }
+
+            getCookie(name) {
+                try {
+                    const nameEQ = name + "=";
+                    const ca = document.cookie.split(';');
+                    for (let i = 0; i < ca.length; i++) {
+                        let c = ca[i];
+                        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                    }
+                } catch (e) {
+                    console.warn('Cookie reading failed:', e);
+                }
+                return null;
+            }
+
+            showWelcomeMessage() {
+                // Create welcome notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(45deg, #00d4aa, #00b4d8);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 25px rgba(0, 212, 170, 0.3);
+                    z-index: 10000;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    animation: slideInFromRight 0.5s ease-out;
+                    cursor: pointer;
+                    max-width: 350px;
+                `;
+                
+                notification.innerHTML = `
+                    <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+                    Đăng nhập thành công! 🎉<br>
+                    <small style="font-size: 0.9rem; opacity: 0.9;">Đã mở khóa tất cả tính năng AI!</small>
+                `;
+                
+                // Add CSS animation if not exists
+                if (!document.getElementById('welcomeAnimationStyle')) {
+                    const style = document.createElement('style');
+                    style.id = 'welcomeAnimationStyle';
+                    style.textContent = `
+                        @keyframes slideInFromRight {
+                            from { transform: translateX(100%); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                        @keyframes slideOutToRight {
+                            from { transform: translateX(0); opacity: 1; }
+                            to { transform: translateX(100%); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                document.body.appendChild(notification);
+                
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutToRight 0.5s ease-in';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }, 5000);
+                
+                // Click to close
+                notification.addEventListener('click', () => {
+                    notification.style.animation = 'slideOutToRight 0.5s ease-in';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                });
+            }
+
+            setupUI() {
+                if (this.isLoggedIn) {
+                    this.enableProtectedElements();
+                    this.showFeaturesSection();
+                    this.updateLoginStatusIndicator(true);
+                    this.updateAuthButton(true);
+                } else {
+                    this.disableProtectedElements();
+                    this.hideFeaturesSection();
+                    this.updateLoginStatusIndicator(false);
+                    this.updateAuthButton(false);
+                }
+            }
+
+            updateAuthButton(isLoggedIn) {
+                const authBtn = document.getElementById('authToggleBtn');
+                if (authBtn) {
+                    if (isLoggedIn) {
+                        authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span>';
+                        authBtn.classList.add('logout');
+                        authBtn.onclick = () => this.logout();
+                    } else {
+                        authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>Đăng nhập</span>';
+                        authBtn.classList.remove('logout');
+                        authBtn.onclick = () => window.location.href = 'đăng nhập.html';
+                    }
+                }
+            }
+
+            updateLoginStatusIndicator(isLoggedIn) {
+                const indicator = document.getElementById('loginStatusIndicator');
+                if (indicator) {
+                    if (isLoggedIn) {
+                        indicator.style.background = 'linear-gradient(45deg, #00d4aa, #00b4d8)';
+                        indicator.innerHTML = '✓';
+                        indicator.title = 'Đã đăng nhập thành công';
+                    } else {
+                        indicator.style.background = 'linear-gradient(45deg, #f56565, #ef4444)';
+                        indicator.innerHTML = '🔒';
+                        indicator.title = 'Chưa đăng nhập';
+                    }
+                }
+            }
+
+            showFeaturesSection() {
+                const featuresSection = document.getElementById('features');
+                if (featuresSection) {
+                    featuresSection.style.display = 'grid';
+                    // Add fade in animation
+                    featuresSection.style.animation = 'fadeInUp 0.8s ease-out';
+                }
+            }
+
+            hideFeaturesSection() {
+                const featuresSection = document.getElementById('features');
+                if (featuresSection) {
+                    featuresSection.style.display = 'none';
+                }
+            }
+
+            disableProtectedElements() {
+                // Disable navbar links
+                const navLinks = document.querySelectorAll('.top-nav-link');
+                navLinks.forEach(link => {
+                    link.classList.add('nav-disabled');
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                });
+
+                // Disable "Khám phá tính năng" button
+                const exploreBtn = document.querySelector('.cta-btn.secondary');
+                if (exploreBtn) {
+                    exploreBtn.classList.add('nav-disabled');
+                    exploreBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                }
+
+                // Disable feature CTA buttons
+                const featureCTAs = document.querySelectorAll('.feature-cta');
+                featureCTAs.forEach(cta => {
+                    cta.classList.add('nav-disabled');
+                    cta.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                });
+            }
+
+            enableProtectedElements() {
+                // Enable navbar links
+                const navLinks = document.querySelectorAll('.top-nav-link');
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-disabled');
+                    // Remove all click event listeners by cloning the element
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                });
+
+                // Enable "Khám phá tính năng" button
+                const exploreBtn = document.querySelector('.cta-btn.secondary');
+                if (exploreBtn) {
+                    exploreBtn.classList.remove('nav-disabled');
+                    // Remove click listeners and restore original functionality
+                    const newExploreBtn = exploreBtn.cloneNode(true);
+                    exploreBtn.parentNode.replaceChild(newExploreBtn, exploreBtn);
+                    this.setupExploreButton();
+                }
+
+                // Enable feature CTA buttons
+                const featureCTAs = document.querySelectorAll('.feature-cta');
+                featureCTAs.forEach(cta => {
+                    cta.classList.remove('nav-disabled');
+                    const newCTA = cta.cloneNode(true);
+                    cta.parentNode.replaceChild(newCTA, cta);
+                });
+            }
+
+            setupEventListeners() {
+                // Close modal events
+                if (this.closeModalBtn) {
+                    this.closeModalBtn.addEventListener('click', () => {
+                        this.hideLoginModal();
+                    });
+                }
+
+                // Close modal when clicking overlay
+                if (this.loginModal) {
+                    const overlay = this.loginModal.querySelector('.login-modal-overlay');
+                    if (overlay) {
+                        overlay.addEventListener('click', () => {
+                            this.hideLoginModal();
+                        });
+                    }
+                }
+
+                // ESC key to close modal
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.loginModal.classList.contains('show')) {
+                        this.hideLoginModal();
+                    }
+                });
+
+                // Listen for successful login (this would be called from login page)
+                window.addEventListener('userLoggedIn', () => {
+                    this.login();
+                });
+            }
+
+            showLoginModal() {
+                if (this.loginModal) {
+                    this.loginModal.style.display = 'flex';
+                    setTimeout(() => {
+                        this.loginModal.classList.add('show');
+                    }, 10);
+                    
+                    // Add shake animation
+                    this.loginModal.addEventListener('animationend', () => {
+                        this.loginModal.style.animation = '';
+                    }, { once: true });
+                }
+            }
+
+            hideLoginModal() {
+                if (this.loginModal) {
+                    this.loginModal.classList.remove('show');
+                    setTimeout(() => {
+                        this.loginModal.style.display = 'none';
+                    }, 300);
+                }
+            }
+
+            login() {
+                this.isLoggedIn = true;
+                localStorage.setItem('userLoggedIn', 'true');
+                this.enableProtectedElements();
+                this.hideLoginModal();
+                
+                // Show success message
+                this.showSuccessMessage();
+            }
+
+            logout() {
+                this.isLoggedIn = false;
+                this.userEmail = '';
+                
+                // Clear from all storage methods
+                const keysToRemove = ['isLoggedIn', 'userEmail', 'loginTime'];
+                
+                keysToRemove.forEach(key => {
+                    try {
+                        localStorage.removeItem(key);
+                        sessionStorage.removeItem(key);
+                        this.setCookie(key, '', -1); // Expire cookie
+                    } catch (e) {
+                        console.warn('Storage cleanup failed:', e);
+                    }
+                });
+
+                // Remove legacy keys
+                try {
+                    localStorage.removeItem('userLoggedIn');
+                } catch (e) {
+                    console.warn('Legacy cleanup failed:', e);
+                }
+                
+                this.setupUI();
+                this.showLogoutMessage();
+                
+                // Re-add demo button
+                setTimeout(() => {
+                    this.setupDemoLogin();
+                }, 1000);
+            }
+
+            setupUI() {
+                if (this.isLoggedIn) {
+                    this.enableProtectedElements();
+                    this.showFeaturesSection();
+                    this.updateLoginStatusIndicator(true);
+                    this.updateAuthButton(true);
+                    // Hide demo button if visible
+                    const demoBtn = document.querySelector('button[style*="Demo Login"]');
+                    if (demoBtn) demoBtn.style.display = 'none';
+                } else {
+                    this.disableProtectedElements();
+                    this.hideFeaturesSection();
+                    this.updateLoginStatusIndicator(false);
+                    this.updateAuthButton(false);
+                }
+            }
+
+            updateAuthButton(isLoggedIn) {
+                const authBtn = document.getElementById('authToggleBtn');
+                if (authBtn) {
+                    if (isLoggedIn) {
+                        authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span>';
+                        authBtn.classList.add('logout');
+                        authBtn.onclick = () => this.logout();
+                    } else {
+                        authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>Đăng nhập</span>';
+                        authBtn.classList.remove('logout');
+                        authBtn.onclick = () => {
+                            // For GitHub Pages, use demo login instead
+                            if (window.location.hostname.includes('github.io') || window.location.hostname === 'localhost') {
+                                this.performLogin('github.demo@techfuture.ai');
+                            } else {
+                                window.location.href = 'đăng nhập.html';
+                            }
+                        };
+                    }
+                }
+            }
+
+            disableProtectedElements() {
+                // Disable navbar links
+                const navLinks = document.querySelectorAll('.top-nav-link');
+                navLinks.forEach(link => {
+                    link.classList.add('nav-disabled');
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                });
+
+                // Disable footer product links
+                const footerLinks = document.querySelectorAll('.footer-links a');
+                footerLinks.forEach(link => {
+                    link.classList.add('nav-disabled');
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                });
+
+                // Disable intro CTA buttons
+                const introCTAs = document.querySelectorAll('.intro-btn');
+                introCTAs.forEach(btn => {
+                    btn.classList.add('nav-disabled');
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                });
+
+                // Disable feature CTA buttons
+                const featureCTAs = document.querySelectorAll('.feature-cta');
+                featureCTAs.forEach(cta => {
+                    cta.classList.add('nav-disabled');
+                    cta.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                });
+            }
+
+            enableProtectedElements() {
+                // Enable navbar links
+                const navLinks = document.querySelectorAll('.top-nav-link');
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-disabled');
+                    // Remove all click event listeners by cloning the element
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                });
+
+                // Enable footer product links
+                const footerLinks = document.querySelectorAll('.footer-links a');
+                footerLinks.forEach(link => {
+                    link.classList.remove('nav-disabled');
+                    // Remove all click event listeners by cloning the element
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                });
+
+                // Enable intro CTA buttons
+                const introCTAs = document.querySelectorAll('.intro-btn');
+                introCTAs.forEach(btn => {
+                    btn.classList.remove('nav-disabled');
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                });
+
+                // Enable feature CTA buttons
+                const featureCTAs = document.querySelectorAll('.feature-cta');
+                featureCTAs.forEach(cta => {
+                    cta.classList.remove('nav-disabled');
+                    const newCTA = cta.cloneNode(true);
+                    cta.parentNode.replaceChild(newCTA, cta);
+                });
+            }
+
+            showLogoutMessage() {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(45deg, #f56565, #ef4444);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 25px rgba(245, 101, 101, 0.3);
+                    z-index: 10000;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    animation: slideInFromRight 0.5s ease-out;
+                `;
+                
+                notification.innerHTML = `
+                    <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>
+                    Đã đăng xuất thành công! 👋
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutToRight 0.5s ease-in';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }, 3000);
+            }
+
+            showSuccessMessage() {
+                // Create and show success notification
+                const notification = document.createElement('div');
+                notification.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: linear-gradient(45deg, #00d4aa, #00b4d8);
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 12px;
+                        box-shadow: 0 8px 25px rgba(0, 212, 170, 0.3);
+                        z-index: 10001;
+                        font-weight: 600;
+                        animation: slideInRight 0.5s ease;
+                    ">
+                        <i class="fas fa-check-circle"></i>
+                        Đăng nhập thành công! Bây giờ bạn có thể truy cập tất cả tính năng.
+                    </div>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            setupExploreButton() {
+                const exploreBtn = document.querySelector('.cta-btn.secondary');
+                const featuresGrid = document.getElementById('features');
+                if (exploreBtn && featuresGrid) {
+                    let featuresOpen = false;
+                    exploreBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        featuresOpen = !featuresOpen;
+                        if (featuresOpen) {
+                            featuresGrid.style.display = 'grid';
+                            featuresGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else {
+                            featuresGrid.style.display = 'none';
+                        }
+                    });
+                }
+            }
+
+            showFeaturesSection() {
+                const featuresSection = document.querySelector('.features-intro');
+                if (featuresSection) {
+                    featuresSection.style.opacity = '1';
+                    featuresSection.style.pointerEvents = 'auto';
+                }
+            }
+
+            hideFeaturesSection() {
+                const featuresSection = document.querySelector('.features-intro');
+                if (featuresSection) {
+                    featuresSection.style.opacity = '0.5';
+                    featuresSection.style.pointerEvents = 'none';
+                }
+            }
+
+            updateLoginStatusIndicator(isLoggedIn) {
+                const indicator = document.getElementById('loginStatusIndicator');
+                const footerStatus = document.getElementById('loginStatusFooter');
+                
+                if (indicator) {
+                    if (isLoggedIn) {
+                        indicator.innerHTML = `<i class="fas fa-unlock" style="color: #4CAF50;"></i> Đã đăng nhập thành công`;
+                        indicator.style.color = '#4CAF50';
+                    } else {
+                        indicator.innerHTML = '<i class="fas fa-lock" style="color: #f44336;"></i> Cần đăng nhập để sử dụng tính năng';
+                        indicator.style.color = '#f44336';
+                    }
+                }
+
+                // Update footer status
+                if (footerStatus) {
+                    if (isLoggedIn) {
+                        footerStatus.innerHTML = `
+                            <i class="fas fa-unlock" style="color: #4CAF50;"></i>
+                            <span style="color: #4CAF50;">Đã đăng nhập thành công</span>
+                        `;
+                    } else {
+                        footerStatus.innerHTML = `
+                            <i class="fas fa-lock" style="color: #f44336;"></i>
+                            <span style="color: #f44336;">Chưa đăng nhập</span>
+                        `;
+                    }
+                }
+            }
+
+            showLoginModal() {
+                // Create login prompt modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                    justify-content: center; z-index: 10000;
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; margin: 20px;">
+                        <i class="fas fa-lock" style="font-size: 48px; color: #f44336; margin-bottom: 20px;"></i>
+                        <h3 style="margin: 0 0 15px 0; color: #333;">Cần đăng nhập</h3>
+                        <p style="margin: 0 0 25px 0; color: #666;">Vui lòng đăng nhập để truy cập tính năng này.</p>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" 
+                                style="padding: 10px 20px; background: #ddd; border: none; border-radius: 5px; cursor: pointer;">
+                                Hủy
+                            </button>
+                            <button onclick="window.location.href='đăng nhập.html'" 
+                                style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                Đăng nhập
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+
+                document.body.appendChild(modal);
+                
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 5000);
+            }
+
+            setupDemoLogin() {
+                // Only add demo button if not logged in and on GitHub Pages or localhost
+                if (this.isLoggedIn) return;
+                if (!(window.location.hostname.includes('github.io') || window.location.hostname === 'localhost')) return;
+                
+                // Check if demo button already exists
+                if (document.querySelector('button[style*="Demo Login"]')) return;
+                
+                const demoBtn = document.createElement('button');
+                demoBtn.innerHTML = '🚀 Demo Login (GitHub Pages)';
+                demoBtn.style.cssText = `
+                    position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+                    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                    color: white; border: none; padding: 12px 20px;
+                    border-radius: 25px; cursor: pointer; font-weight: bold;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    transition: transform 0.3s ease;
+                `;
+                
+                demoBtn.onmouseover = () => demoBtn.style.transform = 'scale(1.05)';
+                demoBtn.onmouseout = () => demoBtn.style.transform = 'scale(1)';
+                demoBtn.onclick = () => {
+                    this.performLogin('github.demo@techfuture.ai');
+                    demoBtn.remove();
+                };
+                
+                document.body.appendChild(demoBtn);
+            }
+        }
+
+
+
+        // Initialize auth system
+        const authSystem = new AuthSystem();
+
+        // Check URL parameters on page load
+        window.addEventListener('load', () => {
+            authSystem.checkUrlParams();
+        });
+
+        // Message from login page
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'LOGIN_SUCCESS' && event.data.email) {
+                authSystem.performLogin(event.data.email);
+            }
+        });
+
+        // Add CSS for success animation
+        const successStyle = document.createElement('style');
+        successStyle.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(successStyle);
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.top-navbar');
+            if (window.scrollY > 30) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Auth buttons special effects
+        document.querySelectorAll('.nav-auth-btn').forEach(button => {
+            // Add pulsing effect to login button
+            if (button.classList.contains('login')) {
+                setInterval(() => {
+                    button.style.boxShadow = '0 4px 20px rgba(0, 212, 170, 0.6)';
+                    setTimeout(() => {
+                        button.style.boxShadow = '0 4px 15px rgba(0, 212, 170, 0.3)';
+                    }, 1000);
+                }, 3000);
+            }
+
+            // Add click ripple effect
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);    
+                    animation: authRipple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+
+            // Add hover particle effect
+            button.addEventListener('mouseenter', function() {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const particle = document.createElement('div');
+                        particle.style.cssText = `
+                            position: absolute;
+                            width: 4px;
+                            height: 4px;
+                            background: #00d4aa;
+                            border-radius: 50%;
+                            left: ${Math.random() * 100}%;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            animation: authParticle 1s ease-out forwards;
+                            pointer-events: none;
+                        `;
+                        this.appendChild(particle);
+                        
+                        setTimeout(() => {
+                            if (particle.parentNode) {
+                                particle.remove();
+                            }
+                        }, 1000);
+                    }, i * 100);
+                }
+            });
+        });
+
+        // Social links special effects
+        document.querySelectorAll('.nav-social-link').forEach((link, index) => {
+            // Add staggered entrance animation
+            link.style.opacity = '0';
+            link.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                link.style.transition = 'all 0.5s ease';
+                link.style.opacity = '1';
+                link.style.transform = 'translateY(0)';
+            }, 200 * (index + 1));
+
+            // Add special hover effects
+            link.addEventListener('mouseenter', function() {
+                this.style.animation = 'socialPulse 1s ease-in-out infinite';
+                
+                // Create sparkle effect
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.style.cssText = `
+                            position: absolute;
+                            width: 3px;
+                            height: 3px;
+                            background: currentColor;
+                            border-radius: 50%;
+                            left: ${Math.random() * 100}%;
+                            top: ${Math.random() * 100}%;
+                            animation: sparkleEffect 1s ease-out forwards;
+                            pointer-events: none;
+                            z-index: 10;
+                        `;
+                        this.appendChild(sparkle);
+                        
+                        setTimeout(() => sparkle.remove(), 1000);
+                    }, i * 150);
+                }
+            });
+
+            link.addEventListener('mouseleave', function() {
+                this.style.animation = '';
+            });
+
+            // Add click feedback
+            link.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: socialRipple 0.8s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 800);
+            });
+        });
+
+        // Create Particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Create Floating Shapes (Simple Background Elements)
+        function createFloatingShapes() {
+            const container = document.getElementById('floatingShapes');
+            
+            setInterval(() => {
+                const shape = document.createElement('div');
+                shape.className = 'floating-shape';
+                
+                const size = Math.random() * 100 + 50;
+                shape.style.width = size + 'px';
+                shape.style.height = size + 'px';
+                shape.style.left = Math.random() * 100 + '%';
+                shape.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                
+                container.appendChild(shape);
+                
+                // Remove shape after animation
+                setTimeout(() => {
+                    if (shape.parentNode) {
+                        shape.parentNode.removeChild(shape);
+                    }
+                }, 25000);
+            }, 3000);
+        }
+
+        // Create Floating Icons (both Font Awesome and Custom Images)
+        function createFloatingIcons() {
+            const container = document.getElementById('floatingIcons');
+            
+            // Tech-related Font Awesome icons
+            const techIcons = [
+                'fas fa-robot',           // AI/Robot
+                'fas fa-brain',           // Intelligence
+                'fas fa-microchip',       // Technology
+                'fas fa-code',            // Programming
+                'fas fa-laptop-code',     // Development
+                'fas fa-database',        // Data
+                'fas fa-cloud',           // Cloud
+                'fas fa-network-wired',   // Network
+                'fas fa-cogs',            // Settings/Automation
+                'fas fa-rocket',          // Innovation
+                'fas fa-chart-line',      // Analytics
+                'fas fa-file-code',       // Files
+                'fas fa-user-tie',        // Professional
+                'fas fa-graduation-cap',  // Education
+                'fas fa-lightbulb',       // Ideas
+                'fas fa-search',          // Search/Analysis
+                'fas fa-shield-alt',      // Security
+                'fas fa-globe',           // Global
+                'fas fa-mobile-alt',      // Mobile
+                'fas fa-desktop'          // Desktop
+            ];
+
+            // Your custom icon images
+            const customIcons = [
+                'ảnh/icon/Logo2.jpg',
+                'ảnh/icon/hollandd.jpg',
+                'ảnh/icon/fpt.png',
+                'ảnh/icon/toppcv.png'
+            ];
+
+            function createIcon() {
+                // Random choice between Font Awesome icon or custom image
+                const useCustomIcon = Math.random() < 0.3; // 30% chance for custom icons
+                
+                if (useCustomIcon) {
+                    // Create custom image icon
+                    const iconWrapper = document.createElement('div');
+                    iconWrapper.className = 'floating-icon image-icon';
+                    
+                    const img = document.createElement('img');
+                    const randomIcon = customIcons[Math.floor(Math.random() * customIcons.length)];
+                    img.src = randomIcon;
+                    img.alt = 'Custom Icon';
+                    img.onerror = function() {
+                        // If image fails to load, remove the wrapper
+                        if (iconWrapper.parentNode) {
+                            iconWrapper.parentNode.removeChild(iconWrapper);
+                        }
+                    };
+                    
+                    iconWrapper.appendChild(img);
+                    
+                    // Random positioning
+                    iconWrapper.style.left = Math.random() * 100 + '%';
+                    iconWrapper.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+                    
+                    // Random animation class
+                    const animationClasses = ['tech-icon', 'pulse-icon'];
+                    const randomAnimation = animationClasses[Math.floor(Math.random() * animationClasses.length)];
+                    iconWrapper.classList.add(randomAnimation);
+                    
+                    // Random delay
+                    iconWrapper.style.animationDelay = Math.random() * 5 + 's';
+                    
+                    container.appendChild(iconWrapper);
+                    
+                    // Remove icon after animation
+                    setTimeout(() => {
+                        if (iconWrapper.parentNode) {
+                            iconWrapper.parentNode.removeChild(iconWrapper);
+                        }
+                    }, 25000);
+                } else {
+                    // Create Font Awesome icon
+                    const icon = document.createElement('i');
+                    const randomIcon = techIcons[Math.floor(Math.random() * techIcons.length)];
+                    icon.className = `${randomIcon} floating-icon`;
+                    
+                    // Random positioning
+                    icon.style.left = Math.random() * 100 + '%';
+                    icon.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                    
+                    // Random animation class
+                    const animationClasses = ['tech-icon', 'pulse-icon'];
+                    const randomAnimation = animationClasses[Math.floor(Math.random() * animationClasses.length)];
+                    icon.classList.add(randomAnimation);
+                    
+                    // Random delay
+                    icon.style.animationDelay = Math.random() * 5 + 's';
+                    
+                    container.appendChild(icon);
+                    
+                    // Remove icon after animation
+                    setTimeout(() => {
+                        if (icon.parentNode) {
+                            icon.parentNode.removeChild(icon);
+                        }
+                    }, 25000);
+                }
+            }
+
+            // Create icons at intervals
+            setInterval(createIcon, 2000);
+            
+            // Initial icons
+            for (let i = 0; i < 3; i++) {
+                setTimeout(createIcon, i * 1000);
+            }
+        }
+
+        // Enhanced Floating CV/Career Icons
+        function createCareerIcons() {
+            const container = document.getElementById('floatingIcons');
+            
+            const careerIcons = [
+                { icon: 'fas fa-file-alt', color: 'rgba(0, 212, 170, 0.7)' },        // CV
+                { icon: 'fas fa-briefcase', color: 'rgba(0, 180, 216, 0.7)' },       // Career
+                { icon: 'fas fa-user-circle', color: 'rgba(255, 110, 196, 0.6)' },   // Profile
+                { icon: 'fas fa-handshake', color: 'rgba(120, 115, 245, 0.6)' },     // Interview
+                { icon: 'fas fa-trophy', color: 'rgba(251, 191, 36, 0.7)' },         // Achievement
+                { icon: 'fas fa-star', color: 'rgba(245, 101, 101, 0.6)' },          // Rating
+                { icon: 'fas fa-target', color: 'rgba(16, 185, 129, 0.7)' },         // Goals
+                { icon: 'fas fa-puzzle-piece', color: 'rgba(139, 92, 246, 0.6)' }    // Skills
+            ];
+
+            function createCareerIcon() {
+                const iconData = careerIcons[Math.floor(Math.random() * careerIcons.length)];
+                const icon = document.createElement('i');
+                icon.className = `${iconData.icon} floating-icon career-icon`;
+                icon.style.color = iconData.color;
+                icon.style.left = Math.random() * 100 + '%';
+                icon.style.fontSize = (Math.random() * 1.8 + 1.2) + 'rem';
+                icon.style.animationDelay = Math.random() * 3 + 's';
+                icon.style.animationDuration = (Math.random() * 8 + 12) + 's';
+                
+                // Add glow effect
+                icon.style.textShadow = `0 0 10px ${iconData.color}, 0 0 20px ${iconData.color}`;
+                
+                container.appendChild(icon);
+                
+                setTimeout(() => {
+                    if (icon.parentNode) {
+                        icon.parentNode.removeChild(icon);
+                    }
+                }, 20000);
+            }
+
+            // Create career icons less frequently but with more impact
+            setInterval(createCareerIcon, 3500);
+            
+            // Initial career icons
+            setTimeout(createCareerIcon, 500);
+            setTimeout(createCareerIcon, 2000);
+        }
+
+        // Features functionality is now handled by AuthSystem
+        // Setup initial explore button for logged-in users
+        if (authSystem.isLoggedIn) {
+            authSystem.setupExploreButton();
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Dynamic cursor effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(0, 212, 170, 0.8), transparent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const actualCursor = document.querySelector('.cursor');
+            if (actualCursor) {
+                actualCursor.style.left = e.clientX - 10 + 'px';
+                actualCursor.style.top = e.clientY - 10 + 'px';
+            }
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            createFloatingShapes();
+            createFloatingIcons();
+            createCareerIcons();
+            
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.cta-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes authRipple {
+                to {
+                    transform: scale(3);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes authParticle {
+                0% {
+                    opacity: 1;
+                    transform: translateY(-50%) scale(1);
+                }
+                50% {
+                    opacity: 0.7;
+                    transform: translateY(-80%) scale(1.2);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-120%) scale(0.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Hamburger menu for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.top-nav-menu-btn');
+            const navLinks = document.querySelector('.top-nav-links');
+            const navOverlay = document.querySelector('.top-nav-overlay');
+            const bars = menuBtn ? menuBtn.querySelectorAll('.menu-bar') : [];
+            
+            function closeMenu() {
+                navLinks.classList.remove('open');
+                navOverlay.classList.remove('open');
+                menuBtn.setAttribute('aria-label', 'Mở menu');
+                
+                // Reset hamburger animation
+                if (bars.length >= 3) {
+                    bars[0].style.transform = 'none';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'none';
+                }
+                
+                // Reset button color
+                if (menuBtn) {
+                    menuBtn.style.background = 'linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,180,216,0.2))';
+                    menuBtn.style.borderColor = '#00d4aa';
+                }
+            }
+            
+            function openMenu() {
+                navLinks.classList.add('open');
+                navOverlay.classList.add('open');
+                menuBtn.setAttribute('aria-label', 'Đóng menu');
+                
+                // Animate hamburger to X
+                if (bars.length >= 3) {
+                    bars[0].style.transform = 'rotate(45deg) translate(8px, 6px)';
+                    bars[1].style.opacity = '0';
+                    bars[2].style.transform = 'rotate(-45deg) translate(8px, -6px)';
+                }
+                
+                // Change button color when open
+                if (menuBtn) {
+                    menuBtn.style.background = 'linear-gradient(135deg, rgba(245,101,101,0.3), rgba(239,68,68,0.3))';
+                    menuBtn.style.borderColor = '#f56565';
+                }
+            }
+            
+            if (menuBtn && navLinks && navOverlay) {
+                // Hiện nút menu trên mobile
+                function checkMobileMenu() {
+                    if (window.innerWidth <= 600) {
+                        menuBtn.style.display = 'flex';
+                        closeMenu();
+                    } else {
+                        menuBtn.style.display = 'none';
+                        navLinks.classList.remove('open');
+                        navOverlay.classList.remove('open');
+                    }
+                }
+                
+                checkMobileMenu();
+                window.addEventListener('resize', checkMobileMenu);
+                
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (navLinks.classList.contains('open')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+                
+                navOverlay.addEventListener('click', closeMenu);
+                
+                navLinks.querySelectorAll('.top-nav-link').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+                
+                // Add keyboard support
+                menuBtn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (navLinks.classList.contains('open')) {
+                            closeMenu();
+                        } else {
+                            openMenu();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
