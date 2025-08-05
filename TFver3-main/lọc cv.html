@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Phân Tích CV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      /* Custom scrollbars for dark theme */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+      /* Custom styles for loader */
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #475569;
+        border-bottom-color: #3b82f6;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      /* Accordion styles */
+      .accordion-content, .criteria-accordion-content, .main-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease-in-out, padding 0.35s ease-in-out;
+      }
+      /* Custom select arrow for dark theme */
+      select:disabled {
+        background-color: #334155;
+        cursor: not-allowed;
+      }
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.7rem center;
+        background-size: 1.2em;
+        padding-right: 2.5rem;
+      }
+      /* Custom slider thumb */
+       input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #e2e8f0;
+        border: 2px solid #60a5fa;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-top: -6px;
+      }
+       input[type=range]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: #e2e8f0;
+        border: 2px solid #60a5fa;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+       input[type=range]::-webkit-slider-runnable-track {
+         background: #334155;
+         height: 6px;
+         border-radius: 3px;
+       }
+       input[type=range]::-moz-range-track {
+         background: #334155;
+         height: 6px;
+         border-radius: 3px;
+       }
+       .sub-criterion input[type=range]::-webkit-slider-thumb {
+         width: 14px;
+         height: 14px;
+         margin-top: -4px;
+         border-width: 1.5px;
+       }
+       .sub-criterion input[type=range]::-moz-range-thumb {
+         width: 14px;
+         height: 14px;
+       }
+        .sub-criterion input[type=range]::-webkit-slider-runnable-track,
+        .sub-criterion input[type=range]::-moz-range-track {
+         height: 4px;
+       }
+    </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.11.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-900 text-slate-300">
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-20">
+      <div class="container mx-auto px-4 lg:px-8 py-4 flex items-center gap-3">
+        <i class="fa-solid fa-magnifying-glass-chart text-2xl text-blue-500"></i>
+        <h1 class="text-2xl font-bold text-slate-200">AI Phân Tích CV</h1>
+      </div>
+    </header>
+
+    <main
+      class="container mx-auto p-4 lg:px-8 lg:py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+    >
+      <!-- Left Column: Criteria Panel -->
+      <aside class="lg:col-span-4 xl:col-span-3 bg-slate-800 p-4 rounded-xl shadow-md border border-slate-700 lg:sticky lg:top-24">
+        <div class="space-y-1">
+          
+          <!-- Section 1: Suggestion -->
+          <div class="border-b border-slate-700">
+             <div class="main-accordion-toggle flex justify-between items-center cursor-pointer py-3">
+                <h2 class="text-lg font-semibold text-slate-200 flex items-center gap-3">
+                    <i class="fa-solid fa-lightbulb text-slate-400 w-5 text-center"></i>
+                    1. Gợi ý Mô tả
+                </h2>
+                <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+            </div>
+            <div class="main-accordion-content">
+                <div class="space-y-3 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                    <div>
+                        <label for="suggest-industry" class="block text-sm font-medium text-slate-300 mb-1">Ngành nghề</label>
+                        <input type="text" id="suggest-industry" placeholder="Ví dụ: Công nghệ thông tin" class="w-full p-2 bg-slate-900 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm placeholder-slate-500 text-slate-200">
+                    </div>
+                    <div>
+                        <label for="suggest-position" class="block text-sm font-medium text-slate-300 mb-1">Vị trí mong muốn</label>
+                        <input type="text" id="suggest-position" placeholder="Ví dụ: Kỹ sư Frontend" class="w-full p-2 bg-slate-900 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm placeholder-slate-500 text-slate-200">
+                    </div>
+                    <button id="suggest-jd-button" class="w-full bg-slate-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-500 transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Gợi ý Mô tả</span>
+                    </button>
+                </div>
+            </div>
+          </div>
+          
+          <!-- Section 2: Job Description -->
+           <div class="border-b border-slate-700">
+             <div class="main-accordion-toggle flex justify-between items-center cursor-pointer py-3">
+                <h2 class="text-lg font-semibold text-slate-200 flex items-center gap-3">
+                    <i class="fa-solid fa-clipboard-list text-slate-400 w-5 text-center"></i>
+                    2. Mô tả Công việc
+                </h2>
+                <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+            </div>
+            <div class="main-accordion-content">
+              <textarea
+                id="job-description"
+                class="w-full h-40 p-3 bg-slate-900 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 resize-y text-sm placeholder-slate-500 text-slate-200"
+                placeholder="Dán mô tả công việc đầy đủ tại đây..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Section 3: Weighting -->
+           <div class="border-b border-slate-700">
+             <div class="main-accordion-toggle flex justify-between items-center cursor-pointer py-3">
+                <h2 class="text-lg font-semibold text-slate-200 flex items-center gap-3">
+                    <i class="fa-solid fa-sliders text-slate-400 w-5 text-center"></i>
+                    3. Phân bổ Trọng số
+                </h2>
+                <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+            </div>
+            <div class="main-accordion-content">
+                <div class="space-y-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                    <!-- Fixed Criteria: Location -->
+                    <div>
+                        <label for="criteria-location" class="block text-sm font-medium text-slate-300 mb-1">Địa điểm làm việc</label>
+                        <select id="criteria-location" class="w-full p-2 bg-slate-900 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm text-slate-200">
+                            <option value="">-- Bắt buộc chọn --</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Hải Phòng">Hải Phòng</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
+                        </select>
+                        <div class="mt-2 flex items-start">
+                            <input type="checkbox" id="criteria-location-reject" class="h-4 w-4 mt-0.5 rounded border-slate-500 bg-slate-700 text-blue-500 focus:ring-blue-500">
+                            <label for="criteria-location-reject" class="ml-2 block text-sm text-slate-400">Loại nếu ứng viên không đúng địa điểm này.</label>
+                        </div>
+                    </div>
+                    <hr class="border-slate-600 my-4">
+                    
+                    <div id="criteria-sliders-container" class="space-y-1">
+                        <p class="text-sm font-medium text-slate-300 mb-3">Phân bổ trọng số (Tổng 100%)</p>
+                        
+                        <!-- 1. Relevance -->
+                        <div class="border-b border-slate-600/80 pb-3 mb-2">
+                            <div class="flex items-center justify-between py-1">
+                                <label for="relevance-slider" class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-bullseye w-4 text-center text-slate-400"></i>
+                                    <span>Phù hợp Mô tả Công việc</span>
+                                </label>
+                                <span id="relevance-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded">20%</span>
+                            </div>
+                            <div class="pt-2 pl-6">
+                                <p class="text-xs text-slate-500 mb-2">Mức độ phù hợp tổng thể của CV so với toàn bộ Mô tả Công việc.</p>
+                                <input type="range" id="relevance-slider" min="0" max="100" value="20" class="w-full">
+                            </div>
+                        </div>
+
+                        <!-- 2. Work Experience (Nested) -->
+                        <div class="border-b border-slate-600/80 pb-2 mb-2">
+                            <div class="criteria-accordion-toggle flex items-center justify-between cursor-pointer py-1">
+                                <label class="text-sm font-medium text-slate-300 flex items-center gap-2 pointer-events-none">
+                                    <i class="fa-solid fa-briefcase w-4 text-center text-slate-400"></i>
+                                    <span>Kinh nghiệm Làm việc</span>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <span id="experience-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded pointer-events-none">25%</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                            <div class="criteria-accordion-content">
+                                <div class="pt-3 pl-6 space-y-3">
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Mức độ liên quan</label><span id="experience-relevance-weight" class="text-xs font-semibold text-slate-400">10%</span></div>
+                                        <input type="range" id="experience-relevance-slider" min="0" max="100" value="10" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Số năm kinh nghiệm</label><span id="experience-duration-weight" class="text-xs font-semibold text-slate-400">7%</span></div>
+                                        <input type="range" id="experience-duration-slider" min="0" max="100" value="7" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Sự thăng tiến</label><span id="experience-progression-weight" class="text-xs font-semibold text-slate-400">5%</span></div>
+                                        <input type="range" id="experience-progression-slider" min="0" max="100" value="5" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Uy tín công ty</label><span id="experience-company-weight" class="text-xs font-semibold text-slate-400">3%</span></div>
+                                        <input type="range" id="experience-company-slider" min="0" max="100" value="3" class="w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 3. Technical Skills (Nested) -->
+                        <div class="border-b border-slate-600/80 pb-2 mb-2">
+                            <div class="criteria-accordion-toggle flex items-center justify-between cursor-pointer py-1">
+                                <label class="text-sm font-medium text-slate-300 flex items-center gap-2 pointer-events-none">
+                                    <i class="fa-solid fa-gears w-4 text-center text-slate-400"></i>
+                                    <span>Kỹ năng Chuyên môn</span>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <span id="tech-skills-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded pointer-events-none">20%</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                            <div class="criteria-accordion-content">
+                                <div class="pt-3 pl-6 space-y-3">
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Công nghệ cốt lõi</label><span id="tech-core-weight" class="text-xs font-semibold text-slate-400">12%</span></div>
+                                        <input type="range" id="tech-core-slider" min="0" max="100" value="12" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Công nghệ phụ</label><span id="tech-secondary-weight" class="text-xs font-semibold text-slate-400">5%</span></div>
+                                        <input type="range" id="tech-secondary-slider" min="0" max="100" value="5" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Công cụ/Nền tảng</label><span id="tech-tools-weight" class="text-xs font-semibold text-slate-400">3%</span></div>
+                                        <input type="range" id="tech-tools-slider" min="0" max="100" value="3" class="w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 4. Achievements (Nested) -->
+                        <div class="border-b border-slate-600/80 pb-2 mb-2">
+                            <div class="criteria-accordion-toggle flex items-center justify-between cursor-pointer py-1">
+                                <label class="text-sm font-medium text-slate-300 flex items-center gap-2 pointer-events-none">
+                                    <i class="fa-solid fa-trophy w-4 text-center text-slate-400"></i>
+                                    <span>Thành tựu & Kết quả</span>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <span id="achievements-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded pointer-events-none">15%</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                            <div class="criteria-accordion-content">
+                                <div class="pt-3 pl-6 space-y-3">
+                                <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Có thể đo lường</label><span id="achievements-quantifiable-weight" class="text-xs font-semibold text-slate-400">8%</span></div>
+                                        <input type="range" id="achievements-quantifiable-slider" min="0" max="100" value="8" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Mức độ ảnh hưởng</label><span id="achievements-impact-weight" class="text-xs font-semibold text-slate-400">4%</span></div>
+                                        <input type="range" id="achievements-impact-slider" min="0" max="100" value="4" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Mức độ liên quan</label><span id="achievements-relevance-weight" class="text-xs font-semibold text-slate-400">3%</span></div>
+                                        <input type="range" id="achievements-relevance-slider" min="0" max="100" value="3" class="w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 5. Education (Nested) -->
+                        <div class="border-b border-slate-600/80 pb-2 mb-2">
+                            <div class="criteria-accordion-toggle flex items-center justify-between cursor-pointer py-1">
+                                <label class="text-sm font-medium text-slate-300 flex items-center gap-2 pointer-events-none">
+                                    <i class="fa-solid fa-graduation-cap w-4 text-center text-slate-400"></i>
+                                    <span>Học vấn</span>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <span id="education-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded pointer-events-none">10%</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                            <div class="criteria-accordion-content">
+                                <div class="pt-3 pl-6 space-y-3">
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Học vị (ĐH/CĐ)</label><span id="education-degree-weight" class="text-xs font-semibold text-slate-400">4%</span></div>
+                                        <input type="range" id="education-degree-slider" min="0" max="100" value="4" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Loại bằng (Giỏi/XS)</label><span id="education-grade-weight" class="text-xs font-semibold text-slate-400">2%</span></div>
+                                        <input type="range" id="education-grade-slider" min="0" max="100" value="2" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Chứng chỉ liên quan</label><span id="education-certificates-weight" class="text-xs font-semibold text-slate-400">3%</span></div>
+                                        <input type="range" id="education-certificates-slider" min="0" max="100" value="3" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Giải thưởng/Thành tích</label><span id="education-awards-weight" class="text-xs font-semibold text-slate-400">1%</span></div>
+                                        <input type="range" id="education-awards-slider" min="0" max="100" value="1" class="w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 6. Soft Skills (Nested) -->
+                        <div class="border-b border-slate-600/80 pb-2 mb-2">
+                            <div class="criteria-accordion-toggle flex items-center justify-between cursor-pointer py-1">
+                                <label class="text-sm font-medium text-slate-300 flex items-center gap-2 pointer-events-none">
+                                    <i class="fa-solid fa-users w-4 text-center text-slate-400"></i>
+                                    <span>Kỹ năng mềm</span>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <span id="soft-skills-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded pointer-events-none">5%</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                            <div class="criteria-accordion-content">
+                                <div class="pt-3 pl-6 space-y-3">
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Giao tiếp & Trình bày</label><span id="soft-communication-weight" class="text-xs font-semibold text-slate-400">2%</span></div>
+                                        <input type="range" id="soft-communication-slider" min="0" max="100" value="2" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Làm việc nhóm</label><span id="soft-teamwork-weight" class="text-xs font-semibold text-slate-400">1%</span></div>
+                                        <input type="range" id="soft-teamwork-slider" min="0" max="100" value="1" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Giải quyết vấn đề</label><span id="soft-problem-solving-weight" class="text-xs font-semibold text-slate-400">1%</span></div>
+                                        <input type="range" id="soft-problem-solving-slider" min="0" max="100" value="1" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Khả năng Lãnh đạo</label><span id="soft-leadership-weight" class="text-xs font-semibold text-slate-400">1%</span></div>
+                                        <input type="range" id="soft-leadership-slider" min="0" max="100" value="1" class="w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. Professionalism (Nested) -->
+                        <div class="pb-2">
+                            <div class="criteria-accordion-toggle flex items-center justify-between cursor-pointer py-1">
+                                <label class="text-sm font-medium text-slate-300 flex items-center gap-2 pointer-events-none">
+                                    <i class="fa-solid fa-file-invoice w-4 text-center text-slate-400"></i>
+                                    <span>Chuyên nghiệp & Rõ ràng</span>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <span id="professionalism-weight" class="text-sm font-semibold text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded pointer-events-none">5%</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                            <div class="criteria-accordion-content">
+                                <div class="pt-3 pl-6 space-y-3">
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Bố cục & Định dạng</label><span id="professionalism-format-weight" class="text-xs font-semibold text-slate-400">2%</span></div>
+                                        <input type="range" id="professionalism-format-slider" min="0" max="100" value="2" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Rõ ràng & Ngắn gọn</label><span id="professionalism-clarity-weight" class="text-xs font-semibold text-slate-400">2%</span></div>
+                                        <input type="range" id="professionalism-clarity-slider" min="0" max="100" value="2" class="w-full">
+                                    </div>
+                                    <div class="sub-criterion">
+                                        <div class="flex justify-between items-center mb-1"><label class="text-xs font-medium text-slate-400">Ngữ pháp & Chính tả</label><span id="professionalism-grammar-weight" class="text-xs font-semibold text-slate-400">1%</span></div>
+                                        <input type="range" id="professionalism-grammar-slider" min="0" max="100" value="1" class="w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Weight Display -->
+                    <div class="pt-4 mt-2 border-t border-slate-600 flex justify-between items-center">
+                        <span class="text-sm font-bold text-slate-100">Tổng trọng số:</span>
+                        <span id="total-weight-display" class="font-bold text-lg">100%</span>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Upload -->
+          <div class="border-b border-slate-700">
+             <div class="main-accordion-toggle flex justify-between items-center cursor-pointer py-3">
+                <h2 class="text-lg font-semibold text-slate-200 flex items-center gap-3">
+                    <i class="fa-solid fa-file-arrow-up text-slate-400 w-5 text-center"></i>
+                    4. Tải lên CV
+                </h2>
+                <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+            </div>
+            <div class="main-accordion-content">
+                <label for="cv-files" class="w-full cursor-pointer bg-blue-500/10 text-blue-300 font-semibold py-3 px-4 rounded-lg border-2 border-dashed border-blue-500/40 hover:bg-blue-500/20 hover:border-blue-500/60 transition duration-200 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Chọn Tệp</span>
+                </label>
+                <input type="file" id="cv-files" multiple accept=".txt,.pdf,.doc,.docx,.jpg,.jpeg,.png" class="hidden"/>
+                <div id="file-list" class="mt-3 space-y-1 text-sm text-slate-400"></div>
+            </div>
+          </div>
+
+          <!-- Section 5: Analyze Button -->
+          <div class="pt-4">
+            <button id="analyze-button" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-300 disabled:bg-slate-600 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Phân Tích CV</span>
+            </button>
+            <div id="error-message" class="mt-3 text-sm text-red-500 font-medium"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Column: Results Panel -->
+      <section class="lg:col-span-8 xl:col-span-9 space-y-6">
+        <div class="bg-slate-800 p-6 rounded-xl shadow-md border border-slate-700 min-h-[60vh]">
+          <h2 class="text-2xl font-bold text-slate-200 mb-1">
+            Kết Quả Phân Tích
+          </h2>
+          <p class="text-slate-400 mb-4">Các ứng viên được xếp hạng theo mức độ phù hợp từ cao đến thấp.</p>
+          
+          <!-- Filter Panel -->
+          <div id="filter-panel" class="hidden bg-slate-900/80 p-5 rounded-lg border border-slate-700 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+              <i class="fa-solid fa-filter text-xl text-blue-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-200">Bộ Lọc & Tìm Kiếm</h3>
+                <p class="text-sm text-slate-400">Lọc nhanh các ứng viên trong kết quả.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+              <!-- Hạng -->
+              <div>
+                <label for="filter-grade" class="block text-sm font-medium text-slate-300 mb-1">Hạng</label>
+                <select id="filter-grade" class="w-full p-2 bg-slate-800 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm">
+                  <option value="all">Tất cả hạng</option>
+                  <option value="A">Hạng A</option>
+                  <option value="B">Hạng B</option>
+                  <option value="C">Hạng C</option>
+                </select>
+              </div>
+              <!-- Vị trí ứng tuyển -->
+              <div>
+                <label for="filter-position" class="block text-sm font-medium text-slate-300 mb-1">Vị trí ứng tuyển</label>
+                <select id="filter-position" class="w-full p-2 bg-slate-800 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm">
+                  <option value="all">Tất cả vị trí</option>
+                </select>
+              </div>
+              <!-- Địa điểm -->
+              <div>
+                <label for="filter-location" class="block text-sm font-medium text-slate-300 mb-1">Địa điểm</label>
+                <select id="filter-location" class="w-full p-2 bg-slate-800 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm">
+                  <option value="all">Tất cả địa điểm</option>
+                </select>
+              </div>
+               <!-- Kinh Nghiệm -->
+              <div>
+                <label for="filter-experience" class="block text-sm font-medium text-slate-300 mb-1">Kinh Nghiệm</label>
+                <select id="filter-experience" class="w-full p-2 bg-slate-800 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm">
+                  <option value="all">Tất cả cấp độ</option>
+                </select>
+              </div>
+               <!-- Điểm CV -->
+              <div>
+                <label for="filter-score" class="block text-sm font-medium text-slate-300 mb-1">Điểm CV</label>
+                <select id="filter-score" class="w-full p-2 bg-slate-800 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm">
+                  <option value="all">Tất cả điểm</option>
+                  <option value="high">Trên 80</option>
+                  <option value="medium">Từ 60 - 79</option>
+                  <option value="low">Dưới 60</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 mb-4">
+                <label for="filter-keyword" class="block text-sm font-medium text-slate-300 mb-1">Từ Khóa</label>
+                <input type="text" id="filter-keyword" placeholder="Tìm theo tên, kỹ năng, công ty..." class="w-full p-2 bg-slate-800 border border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm text-slate-200 placeholder-slate-500">
+            </div>
+             <!-- Action Buttons -->
+            <div class="flex items-center justify-end gap-3 mt-4">
+              <button id="reset-filters-button" class="px-4 py-2 bg-slate-600 text-slate-200 font-semibold rounded-lg hover:bg-slate-700 transition duration-200 text-sm flex items-center gap-2">
+                  <i class="fa-solid fa-rotate-left"></i>Đặt Lại
+              </button>
+              <button id="apply-filters-button" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition duration-200 text-sm flex items-center gap-2">
+                  <i class="fa-solid fa-magnifying-glass"></i>Áp Dụng
+              </button>
+            </div>
+          </div>
+
+
+          <div id="results-area" class="mt-4">
+            <div id="loader" class="hidden justify-center items-center flex-col gap-4 text-center">
+              <div class="loader"></div>
+              <p class="text-slate-400 font-medium">Đang phân tích CV... Quá trình này có thể mất một chút thời gian.</p>
+            </div>
+            <div id="initial-message" class="text-center py-16">
+              <i class="fa-solid fa-chart-line text-5xl text-slate-700 mb-4"></i>
+              <h3 class="text-xl font-semibold text-slate-400">Sẵn Sàng Phân Tích</h3>
+              <p class="text-slate-500 mt-2">
+                Kết quả sẽ xuất hiện ở đây sau khi bạn cung cấp mô tả công việc và các tệp CV.
+              </p>
+            </div>
+            <div id="results-container" class="space-y-4"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/lọc cv.js"></script>
+  </body>
+</html>  

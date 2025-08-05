@@ -1,0 +1,2711 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Phỏng Vấn Ảo - TinHocTre AI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a15 0%, #111122 25%, #0f1829 50%, #081f3d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-weight: 600;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #ffd700;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Interview Options */
+        .interview-options {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .options-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-card:hover::before {
+            left: 100%;
+        }
+
+        .option-card:hover {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+        }
+
+        .option-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .option-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .option-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .option-features li {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option-features li::before {
+            content: '✓';
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        /* Interview Setup */
+        .interview-setup {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+        }
+
+        .setup-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .setup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .setup-step {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #ffd700;
+            color: #000;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .step-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .cv-upload {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cv-upload:hover {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .cv-upload.dragover {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 0.8rem;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+        }
+
+        .upload-hint {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .camera-setup {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .camera-preview {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #localVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .camera-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* CV Analysis Result */
+        .cv-analysis {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .analysis-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .candidate-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            padding: 0.8rem;
+        }
+
+        .info-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Interview Room */
+        .interview-room {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .interview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            height: 70vh;
+        }
+
+        .video-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-video {
+            flex: 1;
+            background: #000;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-video {
+            width: 200px;
+            height: 150px;
+            background: #000;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interview-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .control-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Behavior Analysis */
+        .behavior-analysis {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .analysis-section {
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 20px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #ffd700, #ef4444);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .score-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Question Panel */
+        .question-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .current-question {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .question-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Timer */
+        .timer {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Results */
+        .interview-results {
+            display: none;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 1.2rem;
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .result-description {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffd700;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .setup-grid,
+            .interview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .alert-success {
+            background: rgba(74, 222, 128, 0.2);
+            border: 1px solid rgba(74, 222, 128, 0.5);
+            color: #4ade80;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+        }
+
+        .alert-info {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            color: #667eea;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        /* Interview Options */
+        .interview-options {
+            margin-bottom: 3rem;
+        }
+
+        .options-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .option-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .option-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .option-features {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .option-features li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-features li:before {
+            content: "✓";
+            color: #4ade80;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Setup Section CSS */
+        .interview-setup {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .setup-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .setup-step {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .step-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* CV Upload */
+        .cv-upload {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .cv-upload:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .cv-upload.dragover {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .upload-hint {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Camera Setup */
+        .camera-setup {
+            text-align: center;
+        }
+
+        .camera-preview {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        #localVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+        }
+
+        .camera-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        }
+
+        .btn-success:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Score bars */
+        .score-bar {
+            margin-bottom: 0.8rem;
+        }
+
+        .score-label {
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+        }
+
+        .score-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #4ade80 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .score-text {
+            font-size: 0.8rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        /* Question panel */
+        .question-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-question {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Chat Interface */
+        .chat-interface {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-message {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-message.user-message {
+            background: rgba(102, 126, 234, 0.2);
+            border-left: 3px solid #667eea;
+            margin-left: 1rem;
+        }
+
+        .chat-message.ai-message {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid #ffd700;
+            margin-right: 1rem;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Main Dashboard */
+        .main-dashboard {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0;
+        }
+
+        /* Flow Steps */
+        .main-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .flow-step {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step.active {
+            opacity: 1;
+            border-color: #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .step-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .step-header p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* CV Upload Section */
+        .cv-upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cv-upload {
+            border: 2px dashed rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .cv-upload:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        .cv-analysis-result {
+            background: rgba(74, 222, 128, 0.12);
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 12px;
+            padding: 1.2rem;
+        }
+
+        .cv-analysis-result h4 {
+            color: #4ade80;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+        }
+
+        .candidate-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .summary-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-value {
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Position Selection */
+        .position-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .selection-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .selection-group label {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .form-select {
+            padding: 0.6rem;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-select option {
+            background: #1a1a2e;
+            color: #ffffff;
+            padding: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-select option:hover {
+            background: #667eea;
+        }
+
+        .question-types {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #667eea;
+            transform: translateY(-1px);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + span {
+            color: #4ade80;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin: 0;
+        }
+
+        /* Interview Settings */
+        .interview-settings {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .setting-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .camera-setup {
+            grid-column: 1 / -1;
+        }
+
+        .camera-preview {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .selected-questions-preview {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+        }
+
+        .selected-questions-preview h4 {
+            margin-bottom: 0.8rem;
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .questions-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .question-item {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-text {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .question-type {
+            font-size: 0.8rem;
+            color: #ffffff;
+            background: rgba(102, 126, 234, 0.8);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Buttons */
+        .btn-next {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            align-self: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .question-types {
+                flex-direction: column;
+            }
+            
+            .candidate-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-video"></i>
+                    <span>Phòng Phỏng Vấn Ảo</span>
+                </div>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span id="systemStatus">Hệ thống sẵn sàng</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Main Dashboard -->
+            <div class="main-dashboard" id="mainDashboard">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">
+                        <i class="fas fa-video"></i>
+                        Phòng Phỏng Vấn Ảo
+                    </h1>
+                    <p class="dashboard-subtitle">
+                        Luyện tập phỏng vấn với AI thông minh - Nâng cao kỹ năng tự tin
+                    </p>
+                </div>
+
+                <div class="main-flow">
+                    <!-- Step 1: Upload CV -->
+                    <div class="flow-step active" id="step1">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <h3>Upload CV</h3>
+                            <p>AI sẽ đọc và phân tích CV của bạn</p>
+                        </div>
+                        
+                        <div class="cv-upload-section">
+                            <div class="cv-upload" onclick="document.getElementById('cvFileInput').click()">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">Chọn file CV</div>
+                                <div class="upload-hint">Hỗ trợ JPG, PNG, PDF (Max 10MB)</div>
+                                <input type="file" id="cvFileInput" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                            </div>
+                            
+                            <!-- CV Analysis Result -->
+                            <div class="cv-analysis-result" id="cvAnalysisResult" style="display: none;">
+                                <h4><i class="fas fa-check-circle"></i> Thông Tin Đã Phân Tích</h4>
+                                <div class="candidate-summary" id="candidateSummary">
+                                    <!-- CV info will be displayed here -->
+                                </div>
+                                <button class="btn btn-success btn-next" onclick="proceedToStep2()">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Tiếp Tục
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Position -->
+                    <div class="flow-step" id="step2">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <h3>Chọn Vị Trí & Câu Hỏi</h3>
+                            <p>Lựa chọn vị trí và loại câu hỏi phù hợp</p>
+                        </div>
+
+                        <div class="position-selection">
+                            <div class="selection-group">
+                                <label>Vị trí công việc:</label>
+                                <select id="positionSelect" class="form-select">
+                                    <option value="">Chọn vị trí...</option>
+                                    <!-- Will be populated from data files -->
+                                </select>
+                            </div>
+                            
+                            <div class="selection-group">
+                                <label>Mức độ kinh nghiệm:</label>
+                                <select id="levelSelect" class="form-select">
+                                    <option value="">Chọn mức độ...</option>
+                                    <option value="junior">Fresher/Junior (0-2 năm)</option>
+                                    <option value="mid">Middle/Senior (2-5 năm)</option>
+                                    <option value="senior">Senior/Lead (5+ năm)</option>
+                                </select>
+                            </div>
+
+                            <div class="selection-group">
+                                <label>Loại câu hỏi:</label>
+                                <div class="question-types">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="technicalQuestions" checked>
+                                        <span>Kỹ thuật</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="behavioralQuestions" checked>
+                                        <span>Hành vi</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="cvBasedQuestions" checked>
+                                        <span>Dựa trên CV</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-next" onclick="proceedToStep3()" disabled id="step2NextBtn">
+                                <i class="fas fa-arrow-right"></i>
+                                Tiếp Tục
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Interview Settings -->
+                    <div class="flow-step" id="step3">
+                        <div class="step-header">
+                            <div class="step-number">3</div>
+                            <h3>Cài Đặt Phỏng Vấn</h3>
+                            <p>Tùy chỉnh các thiết lập cho buổi phỏng vấn</p>
+                        </div>
+
+                        <div class="interview-settings">
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label>Thời gian phỏng vấn:</label>
+                                    <select id="interviewDuration" class="form-select">
+                                        <option value="300">5 phút</option>
+                                        <option value="600">10 phút</option>
+                                        <option value="900">15 phút</option>
+                                        <option value="1200">20 phút</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label>Số câu hỏi:</label>
+                                    <select id="questionCount" class="form-select">
+                                        <option value="5">5 câu hỏi</option>
+                                        <option value="7">7 câu hỏi</option>
+                                        <option value="10">10 câu hỏi</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="enableCamera">
+                                        <span>Bật camera (phân tích hành vi)</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-item camera-setup" id="cameraSetup" style="display: none;">
+                                    <div class="camera-preview">
+                                        <video id="localVideo" autoplay muted playsinline></video>
+                                        <div class="camera-placeholder" id="cameraPlaceholder">
+                                            <i class="fas fa-video-slash"></i>
+                                            <div>Camera chưa được bật</div>
+                                        </div>
+                                    </div>
+                                    <div class="camera-controls">
+                                        <button class="btn btn-primary btn-small" id="startCameraBtn">
+                                            <i class="fas fa-camera"></i> Bật Camera
+                                        </button>
+                                        <button class="btn btn-danger btn-small hidden" id="stopCameraBtn">
+                                            <i class="fas fa-camera-slash"></i> Tắt Camera
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="selected-questions-preview" id="questionsPreview">
+                                <h4>Câu hỏi đã chọn (<span id="selectedQuestionCount">0</span>)</h4>
+                                <div class="questions-list" id="questionsList">
+                                    <!-- Questions will be displayed here -->
+                                </div>
+                            </div>
+
+                            <button class="btn btn-success btn-large" onclick="startInterview()" id="startInterviewBtn">
+                                <i class="fas fa-play"></i>
+                                Bắt Đầu Phỏng Vấn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview Room -->
+            <div class="interview-room" id="interviewSection">
+                <div class="interview-grid">
+                    <div class="video-section">
+                        <div class="main-video">
+                            <video id="mainVideo" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                            <div style="position: absolute; top: 1rem; left: 1rem; background: rgba(0,0,0,0.7); padding: 0.5rem 1rem; border-radius: 5px;">
+                                <i class="fas fa-robot"></i> AI Interviewer
+                            </div>
+                            
+                            <!-- Mic Status Indicator -->
+                            <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.7); padding: 0.5rem 1rem; border-radius: 5px;">
+                                <i id="micIcon" class="fas fa-microphone" style="color: #4ade80;"></i>
+                                <span id="micStatus">Mic ON</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem;">
+                            <div class="user-video">
+                                <video id="userVideo" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                                <div style="position: absolute; bottom: 0.5rem; left: 0.5rem; background: rgba(0,0,0,0.7); padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.8rem;">
+                                    Bạn
+                                </div>
+                            </div>
+                            
+                            <div class="interview-controls">
+                                <button class="btn btn-primary" id="toggleMicBtn" onclick="toggleMicrophone()">
+                                    <i class="fas fa-microphone"></i>
+                                    Mic
+                                </button>
+                                <button class="btn btn-success" id="nextQuestionBtn" onclick="nextQuestion()">
+                                    <i class="fas fa-forward"></i>
+                                    Câu Tiếp
+                                </button>
+                                <button class="btn btn-danger" id="endInterviewBtn" onclick="endInterview()">
+                                    <i class="fas fa-stop"></i>
+                                    Kết Thúc
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-panel">
+                        <!-- Timer -->
+                        <div class="timer">
+                            <div class="timer-display" id="timerDisplay">05:00</div>
+                            <div class="timer-label">Thời gian còn lại</div>
+                        </div>
+
+                        <!-- Question Panel -->
+                        <div class="question-panel">
+                            <h4 class="section-title">Câu Hỏi Hiện Tại</h4>
+                            <div class="current-question" id="currentQuestion">
+                                Đang chuẩn bị câu hỏi đầu tiên...
+                            </div>
+                            <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 5px; font-size: 0.9rem;">
+                                <strong>Gợi ý:</strong> <span id="answerHint">Hãy trả lời một cách tự nhiên và tự tin</span>
+                            </div>
+                        </div>
+
+                        <!-- Chat Interface -->
+                        <div class="chat-interface">
+                            <h4 class="section-title">Chat Tương Tác</h4>
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="chat-message ai-message">
+                                    <strong>AI:</strong> Chào bạn! Tôi sẽ hỗ trợ bạn trong buổi phỏng vấn này.
+                                </div>
+                            </div>
+                            <div class="chat-input-area">
+                                <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." class="chat-input">
+                                <button onclick="sendChatMessage()" class="btn btn-primary btn-small">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Behavior Analysis -->
+                        <div class="behavior-analysis">
+                            <h4 class="section-title">Phân Tích Hành Vi</h4>
+                            
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Giao tiếp mắt</span>
+                                    <span id="eyeContactScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="eyeContactBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Tự tin</span>
+                                    <span id="confidenceScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="confidenceBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Ngôn ngữ cơ thể</span>
+                                    <span id="bodyLanguageScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="bodyLanguageBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Phát âm</span>
+                                    <span id="speechScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="speechBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview Results -->
+            <div class="interview-results" id="resultsSection">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Kết Quả Phỏng Vấn</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-score" style="color: #4ade80;" id="overallScore">85</div>
+                        <div class="result-description">
+                            <strong>Điểm Tổng Thể</strong><br>
+                            Bạn đã thể hiện rất tốt trong buổi phỏng vấn
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-score" style="color: #ffd700;" id="behaviorScore">78</div>
+                        <div class="result-description">
+                            <strong>Hành Vi & Thái Độ</strong><br>
+                            Giao tiếp tốt, cần cải thiện giao tiếp mắt
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-score" style="color: #667eea;" id="communicationScore">92</div>
+                        <div class="result-description">
+                            <strong>Kỹ Năng Giao Tiếp</strong><br>
+                            Phát âm rõ ràng, trả lời logic và thuyết phục
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="restartInterview()">
+                        <i class="fas fa-redo"></i>
+                        Phỏng Vấn Lại
+                    </button>
+                    <button class="btn btn-success" onclick="downloadReport()">
+                        <i class="fas fa-download"></i>
+                        Tải Báo Cáo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gemini AI Configuration
+        class GeminiCVReader {
+            constructor() {
+                this.apiKey = 'AIzaSyBCk71sTWF6ig2Gki5AHYYFpMEhZ4Vt9tk';
+                this.baseURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+            }
+
+            async fileToBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const base64 = reader.result.split(',')[1];
+                        resolve(base64);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            getMimeType(file) {
+                const type = file.type;
+                if (type.includes('pdf')) return 'application/pdf';
+                if (type.includes('jpeg') || type.includes('jpg')) return 'image/jpeg';
+                if (type.includes('png')) return 'image/png';
+                return 'application/octet-stream';
+            }
+
+            async readCV(file) {
+                try {
+                    const base64Data = await this.fileToBase64(file);
+                    const mimeType = this.getMimeType(file);
+
+                    const prompt = `
+Bạn là chuyên gia phân tích CV để chuẩn bị phỏng vấn. Hãy đọc CV này và trích xuất thông tin chính.
+
+Trả về kết quả JSON với cấu trúc:
+{
+  "hoTen": "Họ tên ứng viên",
+  "email": "Email",
+  "soDienThoai": "Số điện thoại", 
+  "viTriUngTuyen": "Vị trí ứng tuyển",
+  "kinhNghiem": "Số năm kinh nghiệm",
+  "kyNangChinh": ["Kỹ năng 1", "Kỹ năng 2"],
+  "hocVan": "Trình độ học vấn cao nhất",
+  "diemManh": ["Điểm mạnh 1", "Điểm mạnh 2"],
+  "cauHoiPhongVan": [
+    {
+      "cauHoi": "Câu hỏi dựa trên CV",
+      "loai": "kinh-nghiem|ky-nang|du-an|tinh-huong",
+      "goiY": "Gợi ý trả lời"
+    }
+  ]
+}
+
+Tạo 5-7 câu hỏi phỏng vấn dựa trên thông tin trong CV.
+`;
+
+                    const requestBody = {
+                        contents: [{
+                            parts: [
+                                { text: prompt },
+                                {
+                                    inline_data: {
+                                        mime_type: mimeType,
+                                        data: base64Data
+                                    }
+                                }
+                            ]
+                        }],
+                        generationConfig: {
+                            temperature: 0.3,
+                            topK: 32,
+                            topP: 1,
+                            maxOutputTokens: 4096,
+                        }
+                    };
+
+                    const response = await fetch(`${this.baseURL}?key=${this.apiKey}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const content = data.candidates[0].content.parts[0].text;
+                    
+                    const jsonMatch = content.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        return JSON.parse(jsonMatch[0]);
+                    } else {
+                        throw new Error('Không thể đọc thông tin từ CV');
+                    }
+
+                } catch (error) {
+                    console.error('Error reading CV:', error);
+                    throw error;
+                }
+            }
+        }
+
+        // Global Variables
+        let cvReader = new GeminiCVReader();
+        let localStream = null;
+        let candidateData = null;
+        let interviewQuestions = [];
+        let currentQuestionIndex = 0;
+        let interviewTimer = null;
+        let behaviorAnalysisInterval = null;
+        let timeRemaining = 300; // 5 minutes
+        let selectedQuestions = [];
+        let availablePositions = {};
+
+        // Behavior Analysis Scores
+        let behaviorScores = {
+            eyeContact: 0,
+            confidence: 0,
+            bodyLanguage: 0,
+            speech: 0
+        };
+
+        // Position data mapping
+        const positionFiles = {
+            'Backend Developer': 'backend-developer.json',
+            'Frontend Developer': 'frontend-developer.json',
+            'Data Scientist': 'data-scientist.json',
+            'DevOps Engineer': 'devops-engineer.json',
+            'Product Manager': 'product-manager.json',
+            'UI/UX Designer': 'ui-ux-designer.json',
+            'Digital Marketing Manager': 'digital-marketing-manager.json',
+            'Sales Representative': 'sales-representative.json',
+            'Kỹ sư phần mềm': 'ky-su-phan-mem.json',
+            'Kỹ sư xây dựng': 'ky-su-xay-dung.json',
+            'Bác sĩ': 'bac-si.json',
+            'Kế toán viên': 'ke-toan-vien.json',
+            'Nhân viên ngân hàng': 'nhan-vien-ngan-hang.json',
+            'Nhân viên nhân sự': 'nhan-vien-nhan-su.json',
+            'Luật sư': 'luat-su.json',
+            'Nhà báo': 'nha-bao.json',
+            'Giáo viên tiểu học': 'giao-vien-tieu-hoc.json'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadPositionData();
+            setupEventListeners();
+            updateStatus('Hệ thống sẵn sàng');
+        });
+
+        async function loadPositionData() {
+            const positionSelect = document.getElementById('positionSelect');
+            
+            // Add positions to select
+            Object.keys(positionFiles).forEach(position => {
+                const option = document.createElement('option');
+                option.value = position;
+                option.textContent = position;
+                positionSelect.appendChild(option);
+            });
+        }
+
+        async function loadPositionQuestions(position) {
+            try {
+                const fileName = positionFiles[position];
+                if (!fileName) return null;
+                
+                const response = await fetch(`./Data/Câu hỏi phỏng vấn dựa theo vị trí/${fileName}`);
+                const data = await response.json();
+                availablePositions[position] = data;
+                return data;
+            } catch (error) {
+                console.error('Error loading position data:', error);
+                return null;
+            }
+        }
+
+        function setupEventListeners() {
+            // CV Upload
+            document.getElementById('cvFileInput').addEventListener('change', handleCVUpload);
+            
+            // Position and level selection
+            document.getElementById('positionSelect').addEventListener('change', updateQuestionPreview);
+            document.getElementById('levelSelect').addEventListener('change', updateQuestionPreview);
+            document.getElementById('technicalQuestions').addEventListener('change', updateQuestionPreview);
+            document.getElementById('behavioralQuestions').addEventListener('change', updateQuestionPreview);
+            document.getElementById('cvBasedQuestions').addEventListener('change', updateQuestionPreview);
+            
+            // Camera settings
+            document.getElementById('enableCamera').addEventListener('change', toggleCameraSetup);
+            document.getElementById('startCameraBtn').addEventListener('click', startCamera);
+            document.getElementById('stopCameraBtn').addEventListener('click', stopCamera);
+            
+            // Interview duration and count
+            document.getElementById('interviewDuration').addEventListener('change', updateSettings);
+            document.getElementById('questionCount').addEventListener('change', updateQuestionPreview);
+        }
+
+        async function handleCVUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                await handleCVFile(file);
+            }
+        }
+
+        async function handleCVFile(file) {
+            // Validate file
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+            
+            if (file.size > maxSize) {
+                showAlert('File quá lớn! Kích thước tối đa là 10MB.', 'error');
+                return;
+            }
+            
+            if (!allowedTypes.includes(file.type)) {
+                showAlert('Loại file không được hỗ trợ! Chỉ chấp nhận JPG, PNG, PDF.', 'error');
+                return;
+            }
+
+            try {
+                updateStatus('Đang đọc CV...');
+                showAlert('Đang phân tích CV bằng AI...', 'info');
+                
+                candidateData = await cvReader.readCV(file);
+                
+                displayCVAnalysis(candidateData);
+                updateStatus('CV đã được phân tích');
+                showAlert('CV đã được đọc thành công!', 'success');
+                
+            } catch (error) {
+                console.error('Error reading CV:', error);
+                showAlert('Có lỗi khi đọc CV: ' + error.message, 'error');
+                updateStatus('Lỗi đọc CV');
+            }
+        }
+
+        function displayCVAnalysis(data) {
+            const candidateSummary = document.getElementById('candidateSummary');
+            candidateSummary.innerHTML = `
+                <div class="summary-item">
+                    <div class="summary-label">Họ tên</div>
+                    <div class="summary-value">${data.hoTen || 'Chưa xác định'}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Email</div>
+                    <div class="summary-value">${data.email || 'Chưa xác định'}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Vị trí ứng tuyển</div>
+                    <div class="summary-value">${data.viTriUngTuyen || 'Chưa xác định'}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Kinh nghiệm</div>
+                    <div class="summary-value">${data.kinhNghiem || 'Chưa xác định'}</div>
+                </div>
+            `;
+            
+            document.getElementById('cvAnalysisResult').style.display = 'block';
+            
+            // Auto-select position if detected from CV
+            if (data.viTriUngTuyen) {
+                const positionSelect = document.getElementById('positionSelect');
+                for (let option of positionSelect.options) {
+                    if (option.textContent.toLowerCase().includes(data.viTriUngTuyen.toLowerCase())) {
+                        option.selected = true;
+                        updateQuestionPreview();
+                        break;
+                    }
+                }
+            }
+        }
+
+        function proceedToStep2() {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            
+            // Scroll to step 2
+            document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function proceedToStep3() {
+            const position = document.getElementById('positionSelect').value;
+            const level = document.getElementById('levelSelect').value;
+            
+            if (!position || !level) {
+                showAlert('Vui lòng chọn vị trí và mức độ kinh nghiệm!', 'error');
+                return;
+            }
+            
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+            
+            // Scroll to step 3
+            document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
+            
+            updateQuestionPreview();
+        }
+
+        async function updateQuestionPreview() {
+            const position = document.getElementById('positionSelect').value;
+            const level = document.getElementById('levelSelect').value;
+            const questionCount = parseInt(document.getElementById('questionCount').value);
+            
+            const includeTechnical = document.getElementById('technicalQuestions').checked;
+            const includeBehavioral = document.getElementById('behavioralQuestions').checked;
+            const includeCVBased = document.getElementById('cvBasedQuestions').checked;
+            
+            if (!position || !level) {
+                document.getElementById('step2NextBtn').disabled = true;
+                return;
+            }
+            
+            document.getElementById('step2NextBtn').disabled = false;
+            
+            selectedQuestions = [];
+            
+            // Load position data if not already loaded
+            if (!availablePositions[position]) {
+                await loadPositionQuestions(position);
+            }
+            
+            const positionData = availablePositions[position];
+            if (positionData && positionData.difficulty_levels[level]) {
+                const levelData = positionData.difficulty_levels[level];
+                
+                // Add technical questions
+                if (includeTechnical && levelData.technical) {
+                    levelData.technical.slice(0, Math.floor(questionCount * 0.6)).forEach(q => {
+                        selectedQuestions.push({
+                            cauHoi: q,
+                            loai: 'technical',
+                            goiY: 'Trả lời dựa trên kiến thức và kinh nghiệm thực tế'
+                        });
+                    });
+                }
+                
+                // Add behavioral questions
+                if (includeBehavioral && levelData.behavioral) {
+                    levelData.behavioral.slice(0, Math.floor(questionCount * 0.3)).forEach(q => {
+                        selectedQuestions.push({
+                            cauHoi: q,
+                            loai: 'behavioral',
+                            goiY: 'Sử dụng phương pháp STAR (Situation, Task, Action, Result)'
+                        });
+                    });
+                }
+            }
+            
+            // Add CV-based questions
+            if (includeCVBased && candidateData && candidateData.cauHoiPhongVan) {
+                const cvQuestions = candidateData.cauHoiPhongVan.slice(0, Math.floor(questionCount * 0.3));
+                selectedQuestions.push(...cvQuestions);
+            }
+            
+            // Limit to selected count
+            selectedQuestions = selectedQuestions.slice(0, questionCount);
+            
+            displayQuestionPreview();
+        }
+
+        function displayQuestionPreview() {
+            const questionsList = document.getElementById('questionsList');
+            const selectedQuestionCount = document.getElementById('selectedQuestionCount');
+            
+            selectedQuestionCount.textContent = selectedQuestions.length;
+            
+            questionsList.innerHTML = selectedQuestions.map((q, index) => `
+                <div class="question-item">
+                    <div class="question-text">${index + 1}. ${q.cauHoi}</div>
+                    <div class="question-type">${getQuestionTypeLabel(q.loai)}</div>
+                </div>
+            `).join('');
+        }
+
+        function getQuestionTypeLabel(type) {
+            const labels = {
+                'technical': 'Kỹ thuật',
+                'behavioral': 'Hành vi',
+                'kinh-nghiem': 'Kinh nghiệm',
+                'ky-nang': 'Kỹ năng',
+                'du-an': 'Dự án',
+                'tinh-huong': 'Tình huống'
+            };
+            return labels[type] || 'Khác';
+        }
+
+        function toggleCameraSetup() {
+            const enableCamera = document.getElementById('enableCamera').checked;
+            const cameraSetup = document.getElementById('cameraSetup');
+            
+            if (enableCamera) {
+                cameraSetup.style.display = 'block';
+            } else {
+                cameraSetup.style.display = 'none';
+                if (localStream) {
+                    stopCamera();
+                }
+            }
+        }
+
+        function updateSettings() {
+            const duration = parseInt(document.getElementById('interviewDuration').value);
+            timeRemaining = duration;
+            updateQuestionPreview();
+        }
+
+        async function startCamera() {
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: true, 
+                    audio: true 
+                });
+                
+                const localVideo = document.getElementById('localVideo');
+                if (localVideo) {
+                    localVideo.srcObject = localStream;
+                }
+                
+                const placeholder = document.getElementById('cameraPlaceholder');
+                const startBtn = document.getElementById('startCameraBtn');
+                const stopBtn = document.getElementById('stopCameraBtn');
+                
+                if (placeholder) placeholder.style.display = 'none';
+                if (startBtn) startBtn.classList.add('hidden');
+                if (stopBtn) stopBtn.classList.remove('hidden');
+                
+                updateStatus('Camera đã sẵn sàng');
+                showAlert('Camera đã được bật thành công!', 'success');
+                
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                showAlert('Không thể truy cập camera. Vui lòng cho phép quyền truy cập.', 'error');
+            }
+        }
+
+        function stopCamera() {
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
+            }
+            
+            const localVideo = document.getElementById('localVideo');
+            const placeholder = document.getElementById('cameraPlaceholder');
+            const startBtn = document.getElementById('startCameraBtn');
+            const stopBtn = document.getElementById('stopCameraBtn');
+            
+            if (localVideo) localVideo.srcObject = null;
+            if (placeholder) placeholder.style.display = 'flex';
+            if (startBtn) startBtn.classList.remove('hidden');
+            if (stopBtn) stopBtn.classList.add('hidden');
+            
+            updateStatus('Camera đã tắt');
+        }
+
+        function startInterview() {
+            if (selectedQuestions.length === 0) {
+                showAlert('Vui lòng chọn ít nhất một câu hỏi!', 'error');
+                return;
+            }
+            
+            const enableCamera = document.getElementById('enableCamera').checked;
+            if (enableCamera && !localStream) {
+                showAlert('Vui lòng bật camera trước khi bắt đầu!', 'error');
+                return;
+            }
+            
+            // Set interview questions
+            interviewQuestions = selectedQuestions;
+            
+            // Hide dashboard, show interview room
+            document.getElementById('mainDashboard').style.display = 'none';
+            document.getElementById('interviewSection').style.display = 'block';
+            
+            // Setup video streams if camera is available
+            if (localStream) {
+                const userVideo = document.getElementById('userVideo');
+                const mainVideo = document.getElementById('mainVideo');
+                if (userVideo) userVideo.srcObject = localStream;
+                if (mainVideo) mainVideo.srcObject = localStream;
+                startBehaviorAnalysis();
+            }
+            
+            // Initialize chat
+            const chatMessages = document.getElementById('chatMessages');
+            if (chatMessages) {
+                chatMessages.innerHTML = `
+                    <div class="chat-message ai-message">
+                        <strong>AI:</strong> Chào bạn! Phỏng vấn sẽ bắt đầu. Chúc bạn may mắn!
+                    </div>
+                `;
+            }
+            
+            // Start interview timer
+            startTimer();
+            
+            // Show first question
+            showQuestion(0);
+            
+            // Add welcome message to chat
+            addChatMessage('AI', `Bắt đầu phỏng vấn với ${interviewQuestions.length} câu hỏi. Thời gian: ${Math.floor(timeRemaining/60)} phút`, 'ai-message');
+            
+            updateStatus('Phỏng vấn đang diễn ra');
+            showAlert('Phỏng vấn đã bắt đầu!', 'success');
+        }
+
+        function restartInterview() {
+            // Reset all states
+            currentQuestionIndex = 0;
+            timeRemaining = parseInt(document.getElementById('interviewDuration').value) || 300;
+            behaviorScores = { eyeContact: 0, confidence: 0, bodyLanguage: 0, speech: 0 };
+            candidateData = null;
+            selectedQuestions = [];
+            microphoneEnabled = true;
+            
+            // Clear timers
+            if (interviewTimer) {
+                clearInterval(interviewTimer);
+                interviewTimer = null;
+            }
+            if (behaviorAnalysisInterval) {
+                clearInterval(behaviorAnalysisInterval);
+                behaviorAnalysisInterval = null;
+            }
+            
+            // Stop camera stream
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
+            }
+            
+            // Show dashboard, hide other sections
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('interviewSection').style.display = 'none';
+            document.getElementById('mainDashboard').style.display = 'block';
+            
+            // Reset to step 1
+            document.querySelectorAll('.flow-step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+            
+            // Clear CV analysis
+            document.getElementById('cvAnalysisResult').style.display = 'none';
+            document.getElementById('cvFileInput').value = '';
+            
+            // Reset form values
+            document.getElementById('positionSelect').value = '';
+            document.getElementById('levelSelect').value = '';
+            document.getElementById('step2NextBtn').disabled = true;
+            
+            // Reset camera setup
+            const enableCamera = document.getElementById('enableCamera');
+            if (enableCamera) enableCamera.checked = false;
+            toggleCameraSetup();
+            
+            updateStatus('Sẵn sàng cho phỏng vấn mới');
+            showAlert('Đã reset phòng phỏng vấn!', 'success');
+        }
+
+        function startTimer() {
+            timeRemaining = 300; // 5 minutes
+            interviewTimer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    endInterview();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timerDisplay) {
+                timerDisplay.textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        function startBehaviorAnalysis() {
+            behaviorAnalysisInterval = setInterval(() => {
+                simulateBehaviorScores();
+                updateBehaviorDisplay();
+            }, 2000);
+        }
+
+        function simulateBehaviorScores() {
+            behaviorScores.eyeContact = Math.min(100, behaviorScores.eyeContact + Math.random() * 10 - 2);
+            behaviorScores.confidence = Math.min(100, behaviorScores.confidence + Math.random() * 8 - 1);
+            behaviorScores.bodyLanguage = Math.min(100, behaviorScores.bodyLanguage + Math.random() * 12 - 3);
+            behaviorScores.speech = Math.min(100, behaviorScores.speech + Math.random() * 15 - 4);
+            
+            Object.keys(behaviorScores).forEach(key => {
+                behaviorScores[key] = Math.max(0, behaviorScores[key]);
+            });
+        }
+
+        function updateBehaviorDisplay() {
+            const elements = {
+                eyeContactScore: 'eyeContactScore',
+                eyeContactBar: 'eyeContactBar',
+                confidenceScore: 'confidenceScore', 
+                confidenceBar: 'confidenceBar',
+                bodyLanguageScore: 'bodyLanguageScore',
+                bodyLanguageBar: 'bodyLanguageBar',
+                speechScore: 'speechScore',
+                speechBar: 'speechBar'
+            };
+
+            Object.keys(behaviorScores).forEach(key => {
+                const scoreElement = document.getElementById(elements[key + 'Score']);
+                const barElement = document.getElementById(elements[key + 'Bar']);
+                
+                if (scoreElement) scoreElement.textContent = Math.round(behaviorScores[key]) + '%';
+                if (barElement) barElement.style.width = behaviorScores[key] + '%';
+            });
+        }
+
+        function showQuestion(index) {
+            if (index < interviewQuestions.length) {
+                const question = interviewQuestions[index];
+                const questionElement = document.getElementById('currentQuestion');
+                const hintElement = document.getElementById('answerHint');
+                
+                if (questionElement) {
+                    questionElement.textContent = `Câu ${index + 1}/${interviewQuestions.length}: ${question.cauHoi}`;
+                }
+                if (hintElement) {
+                    hintElement.textContent = question.goiY || 'Hãy trả lời một cách tự nhiên và tự tin';
+                }
+                
+                currentQuestionIndex = index;
+                
+                // Update progress
+                updateStatus(`Câu hỏi ${index + 1}/${interviewQuestions.length}`);
+            } else {
+                endInterview();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < interviewQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+                addChatMessage('AI', `Chuyển sang câu hỏi ${currentQuestionIndex + 1}`, 'ai-message');
+                showAlert(`Đã chuyển sang câu hỏi ${currentQuestionIndex + 1}`, 'info');
+            } else {
+                addChatMessage('AI', 'Đây là câu hỏi cuối cùng. Bạn có thể kết thúc phỏng vấn.', 'ai-message');
+                showAlert('Đây là câu hỏi cuối cùng!', 'info');
+                
+                // Disable next button
+                const nextBtn = document.getElementById('nextQuestionBtn');
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.innerHTML = '<i class="fas fa-check"></i> Hoàn Thành';
+                }
+            }
+        }
+
+        function endInterview() {
+            if (interviewTimer) {
+                clearInterval(interviewTimer);
+                interviewTimer = null;
+            }
+            
+            if (behaviorAnalysisInterval) {
+                clearInterval(behaviorAnalysisInterval);
+                behaviorAnalysisInterval = null;
+            }
+            
+            calculateFinalScores();
+            
+            document.getElementById('interviewSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            updateStatus('Phỏng vấn hoàn thành');
+            showAlert('Phỏng vấn đã kết thúc!', 'success');
+        }
+
+        function calculateFinalScores() {
+            const avgBehavior = Object.values(behaviorScores).reduce((a, b) => a + b, 0) / 4;
+            const enableCamera = document.getElementById('enableCamera')?.checked;
+            const overall = enableCamera ? avgBehavior * 0.7 + 85 * 0.3 : 85;
+            
+            const overallScore = document.getElementById('overallScore');
+            const behaviorScore = document.getElementById('behaviorScore');
+            const communicationScore = document.getElementById('communicationScore');
+            
+            if (overallScore) overallScore.textContent = Math.round(overall);
+            if (behaviorScore) behaviorScore.textContent = Math.round(avgBehavior);
+            if (communicationScore) communicationScore.textContent = Math.round(behaviorScores.speech || 85);
+        }
+
+        function downloadReport() {
+            const report = {
+                candidate: candidateData,
+                selectedQuestions: selectedQuestions,
+                scores: behaviorScores,
+                questions: interviewQuestions,
+                settings: {
+                    duration: document.getElementById('interviewDuration')?.value,
+                    questionCount: document.getElementById('questionCount')?.value,
+                    cameraEnabled: document.getElementById('enableCamera')?.checked,
+                    position: document.getElementById('positionSelect')?.value,
+                    level: document.getElementById('levelSelect')?.value
+                },
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(report, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `interview-report-${candidateData?.hoTen || 'candidate'}-${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            URL.revokeObjectURL(url);
+            showAlert('Báo cáo đã được tải xuống!', 'success');
+        }
+
+        function updateStatus(message) {
+            const statusElement = document.getElementById('systemStatus');
+            if (statusElement) {
+                statusElement.textContent = message;
+            }
+        }
+
+        // Microphone Control Functions
+        let microphoneEnabled = true;
+        let audioContext = null;
+
+        function toggleMicrophone() {
+            const micBtn = document.getElementById('toggleMicBtn');
+            const micIcon = document.getElementById('micIcon');
+            const micStatus = document.getElementById('micStatus');
+            
+            microphoneEnabled = !microphoneEnabled;
+            
+            if (microphoneEnabled) {
+                micBtn.innerHTML = '<i class="fas fa-microphone"></i> Mic';
+                micBtn.classList.remove('btn-danger');
+                micBtn.classList.add('btn-primary');
+                micIcon.style.color = '#4ade80';
+                micStatus.textContent = 'Mic ON';
+                
+                // Enable microphone in stream
+                if (localStream) {
+                    localStream.getAudioTracks().forEach(track => {
+                        track.enabled = true;
+                    });
+                }
+                
+                addChatMessage('System', 'Microphone đã được bật', 'ai-message');
+            } else {
+                micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> Mic';
+                micBtn.classList.remove('btn-primary');
+                micBtn.classList.add('btn-danger');
+                micIcon.style.color = '#ef4444';
+                micStatus.textContent = 'Mic OFF';
+                
+                // Disable microphone in stream
+                if (localStream) {
+                    localStream.getAudioTracks().forEach(track => {
+                        track.enabled = false;
+                    });
+                }
+                
+                addChatMessage('System', 'Microphone đã được tắt', 'ai-message');
+            }
+        }
+
+        // Chat Functions
+        function sendChatMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (message) {
+                addChatMessage('Bạn', message, 'user-message');
+                chatInput.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const aiResponse = generateAIResponse(message);
+                    addChatMessage('AI', aiResponse, 'ai-message');
+                }, 1000);
+            }
+        }
+
+        function addChatMessage(sender, message, className) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${className}`;
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function generateAIResponse(userMessage) {
+            const responses = [
+                'Cảm ơn bạn đã chia sẻ. Hãy tiếp tục trả lời câu hỏi một cách tự nhiên.',
+                'Thật tuyệt vời! Bạn có thể elabor ate thêm về điểm này không?',
+                'Tôi hiểu rồi. Hãy tập trung vào câu hỏi hiện tại.',
+                'Đó là một góc nhìn hay. Bạn có ví dụ cụ thể nào không?',
+                'Rất tốt! Hãy tiếp tục với sự tự tin như vậy.',
+                'Tôi đã ghi nhận câu trả lời của bạn. Chúng ta tiếp tục nhé!'
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Enhanced Question Navigation
+        function nextQuestion() {
+            if (currentQuestionIndex < interviewQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+                addChatMessage('AI', `Chuyển sang câu hỏi ${currentQuestionIndex + 1}`, 'ai-message');
+            } else {
+                addChatMessage('AI', 'Đây là câu hỏi cuối cùng. Bạn có thể kết thúc phỏng vấn.', 'ai-message');
+                showAlert('Đây là câu hỏi cuối cùng!', 'info');
+            }
+        }
+
+        // Enhanced Event Listeners
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const chatInput = document.getElementById('chatInput');
+                if (document.activeElement === chatInput) {
+                    sendChatMessage();
+                }
+            }
+        });
+
+        function showAlert(message, type) {
+            const existingAlerts = document.querySelectorAll('.alert');
+            existingAlerts.forEach(alert => alert.remove());
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            const container = document.querySelector('.container');
+            if (container) {
+                container.insertBefore(alertDiv, container.firstChild);
+                
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.remove();
+                    }
+                }, 5000);
+            }
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+        });
+    </script>
+</body>
+</html>
