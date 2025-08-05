@@ -4016,6 +4016,10 @@
         // Create Floating Icons (both Font Awesome and Custom Images)
         function createFloatingIcons() {
             const container = document.getElementById('floatingIcons');
+            if (!container) {
+                console.warn('FloatingIcons container not found');
+                return;
+            }
             
             // Tech-related Font Awesome icons
             const techIcons = [
@@ -4043,15 +4047,28 @@
 
             // Your custom icon images
             const customIcons = [
-                'ảnh/icon/Logo2.jpg',
-                'ảnh/icon/hollandd.jpg',
-                'ảnh/icon/fpt.png',
-                'ảnh/icon/toppcv.png'
+                './ảnh/Logo2.jpg',
+                './ảnh/hackathon 2024.jpg',
+                './ảnh/kinh doanh 2024.jpg',
+                './ảnh/top cv 2.jpg'
             ];
+
+            // Test function to check if images exist
+            function testImageLoad(src) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => {
+                        console.warn('Image not found:', src);
+                        resolve(false);
+                    };
+                    img.src = src;
+                });
+            }
 
             function createIcon() {
                 // Random choice between Font Awesome icon or custom image
-                const useCustomIcon = Math.random() < 0.3; // 30% chance for custom icons
+                const useCustomIcon = Math.random() < 0.25; // 25% chance for custom icons
                 
                 if (useCustomIcon) {
                     // Create custom image icon
@@ -4060,73 +4077,112 @@
                     
                     const img = document.createElement('img');
                     const randomIcon = customIcons[Math.floor(Math.random() * customIcons.length)];
-                    img.src = randomIcon;
-                    img.alt = 'Custom Icon';
-                    img.onerror = function() {
-                        // If image fails to load, remove the wrapper
-                        if (iconWrapper.parentNode) {
-                            iconWrapper.parentNode.removeChild(iconWrapper);
+                    
+                    // First test if image loads
+                    testImageLoad(randomIcon).then(canLoad => {
+                        if (canLoad) {
+                            img.src = randomIcon;
+                            img.alt = 'Custom Icon';
+                            img.style.cssText = `
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                                transition: all 0.3s ease;
+                                display: block;
+                            `;
+                            
+                            iconWrapper.appendChild(img);
+                            
+                            // Random positioning and animation
+                            iconWrapper.style.cssText = `
+                                position: absolute;
+                                left: ${Math.random() * 100}%;
+                                top: 100vh;
+                                z-index: 1;
+                                opacity: 0.8;
+                                animation: floatUpSmooth ${(Math.random() * 10 + 15)}s linear infinite;
+                                animation-delay: ${Math.random() * 5}s;
+                                transform: translateX(-50%);
+                            `;
+                            
+                            container.appendChild(iconWrapper);
+                            console.log('Added image icon:', randomIcon);
+                            
+                            // Remove icon after animation
+                            setTimeout(() => {
+                                if (iconWrapper.parentNode) {
+                                    iconWrapper.parentNode.removeChild(iconWrapper);
+                                }
+                            }, 25000);
+                        } else {
+                            // If image fails, create a Font Awesome icon instead
+                            createFontAwesomeIcon();
                         }
-                    };
-                    
-                    iconWrapper.appendChild(img);
-                    
-                    // Random positioning
-                    iconWrapper.style.left = Math.random() * 100 + '%';
-                    iconWrapper.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
-                    
-                    // Random animation class
-                    const animationClasses = ['tech-icon', 'pulse-icon'];
-                    const randomAnimation = animationClasses[Math.floor(Math.random() * animationClasses.length)];
-                    iconWrapper.classList.add(randomAnimation);
-                    
-                    // Random delay
-                    iconWrapper.style.animationDelay = Math.random() * 5 + 's';
-                    
-                    container.appendChild(iconWrapper);
-                    
-                    // Remove icon after animation
-                    setTimeout(() => {
-                        if (iconWrapper.parentNode) {
-                            iconWrapper.parentNode.removeChild(iconWrapper);
-                        }
-                    }, 25000);
+                    });
                 } else {
-                    // Create Font Awesome icon
-                    const icon = document.createElement('i');
-                    const randomIcon = techIcons[Math.floor(Math.random() * techIcons.length)];
-                    icon.className = `${randomIcon} floating-icon`;
-                    
-                    // Random positioning
-                    icon.style.left = Math.random() * 100 + '%';
-                    icon.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
-                    
-                    // Random animation class
-                    const animationClasses = ['tech-icon', 'pulse-icon'];
-                    const randomAnimation = animationClasses[Math.floor(Math.random() * animationClasses.length)];
-                    icon.classList.add(randomAnimation);
-                    
-                    // Random delay
-                    icon.style.animationDelay = Math.random() * 5 + 's';
-                    
-                    container.appendChild(icon);
-                    
-                    // Remove icon after animation
-                    setTimeout(() => {
-                        if (icon.parentNode) {
-                            icon.parentNode.removeChild(icon);
-                        }
-                    }, 25000);
+                    createFontAwesomeIcon();
                 }
             }
 
+            function createFontAwesomeIcon() {
+                // Create Font Awesome icon
+                const icon = document.createElement('i');
+                const randomIcon = techIcons[Math.floor(Math.random() * techIcons.length)];
+                icon.className = `${randomIcon} floating-icon`;
+                
+                // Random positioning and smooth animation
+                icon.style.cssText = `
+                    position: absolute;
+                    left: ${Math.random() * 100}%;
+                    top: 100vh;
+                    font-size: ${(Math.random() * 1.5 + 1.2)}rem;
+                    color: rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6);
+                    z-index: 1;
+                    animation: floatUpSmooth ${(Math.random() * 12 + 18)}s linear infinite;
+                    animation-delay: ${Math.random() * 3}s;
+                    transform: translateX(-50%);
+                    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+                    transition: all 0.3s ease;
+                `;
+                
+                // Add hover effect
+                icon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(-50%) scale(1.3) rotate(15deg)';
+                    this.style.textShadow = '0 4px 20px rgba(0, 212, 170, 0.8)';
+                });
+                
+                icon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(-50%) scale(1) rotate(0deg)';
+                    this.style.textShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+                });
+                
+                container.appendChild(icon);
+                
+                // Remove icon after animation
+                setTimeout(() => {
+                    if (icon.parentNode) {
+                        icon.parentNode.removeChild(icon);
+                    }
+                }, 30000);
+            }
+
             // Create icons at intervals
-            setInterval(createIcon, 2000);
+            setInterval(createIcon, 2500);
             
             // Initial icons
-            for (let i = 0; i < 3; i++) {
-                setTimeout(createIcon, i * 1000);
+            for (let i = 0; i < 5; i++) {
+                setTimeout(createIcon, i * 800);
             }
+            
+            // Debug: Test if images are accessible
+            console.log('Testing custom icons...');
+            customIcons.forEach(icon => {
+                testImageLoad(icon).then(canLoad => {
+                    console.log(`${icon}: ${canLoad ? 'OK' : 'FAILED'}`);
+                });
+            });
         }
 
         // Enhanced Floating CV/Career Icons
@@ -4293,6 +4349,28 @@
                 }
             }
             
+            @keyframes floatUpSmooth {
+                0% {
+                    transform: translateX(-50%) translateY(0) rotate(0deg) scale(0.8);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(-10vh) rotate(45deg) scale(1);
+                }
+                50% {
+                    transform: translateX(-50%) translateY(-50vh) rotate(180deg) scale(1.1);
+                }
+                90% {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(-90vh) rotate(315deg) scale(0.9);
+                }
+                100% {
+                    transform: translateX(-50%) translateY(-110vh) rotate(360deg) scale(0.5);
+                    opacity: 0;
+                }
+            }
+            
             @keyframes authParticle {
                 0% {
                     opacity: 1;
@@ -4402,3 +4480,4 @@
     </script>
 </body>
 </html> 
+ 
