@@ -940,6 +940,76 @@
                 box-shadow: 0 4px 15px rgba(0,212,170,0.2);
                 background: rgba(255, 255, 255, 0.05);
             }
+
+            /* Mobile menu improvements */
+            .top-nav-menu-btn {
+                position: relative;
+                z-index: 2200;
+            }
+
+            .top-nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 2000;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(2px);
+            }
+
+            .top-nav-overlay.open {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .top-nav-links {
+                z-index: 2001;
+                box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Better mobile link styling */
+            .top-nav-link {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .top-nav-link::before {
+                content: '';
+                position: absolute;
+                left: -100%;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.1), transparent);
+                transition: left 0.5s ease;
+            }
+
+            .top-nav-link:hover::before {
+                left: 100%;
+            }
+
+            /* Mobile actions improvements */
+            .top-nav-actions {
+                padding: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                margin-top: 20px;
+            }
+
+            .top-nav-btn {
+                width: 100%;
+                margin: 8px 0;
+                padding: 14px;
+                text-align: center;
+                font-size: 1rem;
+                border-radius: 12px;
+            }
             .top-nav-logo-img {
                 width: 36px;
                 height: 36px;
@@ -2205,6 +2275,15 @@
             background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95));
             position: relative;
             overflow: hidden;
+            margin: 0;
+        }
+
+        .achievements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .achievements::before {
@@ -2613,58 +2692,278 @@
             box-shadow: 0 8px 25px rgba(0, 212, 170, 0.5);
         }
 
-        /* Responsive cho achievements */
+        /* Responsive cho achievements - Mobile First Enhanced */
+        @media (max-width: 992px) {
+            .achievements {
+                padding: 50px 20px;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .achievement-item {
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+
+            .achievement-icon {
+                width: 75px;
+                height: 75px;
+                margin-bottom: 15px;
+            }
+
+            .achievement-img {
+                width: 75px;
+                height: 75px;
+                border-radius: 12px;
+            }
+
+            .achievement-name {
+                font-size: 1.1rem;
+                line-height: 1.3;
+                margin-bottom: 10px;
+                gap: 8px;
+            }
+
+            .medal-icon {
+                font-size: 1rem !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .achievements {
-                padding: 60px 20px;
+                padding: 40px 15px;
+            }
+
+            .achievements-header {
+                margin-bottom: 35px;
+                padding: 25px 15px;
+                border-radius: 18px;
             }
 
             .achievements-title {
                 font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 12px;
+            }
+
+            .achievements-subtitle {
+                font-size: 1rem;
+                margin-bottom: 25px;
+                line-height: 1.6;
+                max-width: 350px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .achievements-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                margin-top: 40px;
+                gap: 18px;
+                margin-top: 30px;
             }
 
             .achievement-item {
-                padding: 25px;
+                padding: 18px 15px;
+                border-radius: 15px;
+                margin-bottom: 10px;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(0, 212, 170, 0.15);
+                box-shadow: 0 4px 20px rgba(0, 212, 170, 0.1);
             }
 
             .achievement-icon {
                 width: 70px;
                 height: 70px;
+                margin-bottom: 12px;
             }
 
-            .achievement-icon i {
-                font-size: 1.75rem;
+            .achievement-img {
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            .achievement-content {
+                flex: 1;
+            }
+
+            .achievement-name {
+                font-size: 1rem;
+                line-height: 1.3;
+                margin-bottom: 10px;
+                gap: 6px;
+                display: flex;
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .achievement-desc {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-bottom: 10px;
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .achievement-year {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+                background: rgba(0, 212, 170, 0.15);
+                border-radius: 6px;
+                display: inline-block;
+            }
+
+            .medal-icon {
+                font-size: 0.9rem !important;
+                margin-right: 6px;
+                flex-shrink: 0;
             }
 
             .view-image-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
+                width: 36px;
+                height: 36px;
+                font-size: 0.85rem;
+                top: 10px;
+                right: 10px;
+                border-radius: 8px;
             }
 
             .image-modal-content {
                 max-width: 95vw;
                 max-height: 85vh;
+                margin: 10px;
+                border-radius: 16px;
             }
 
             .image-modal-header {
-                padding: 10px 15px;
+                padding: 15px 20px;
+                border-radius: 16px 16px 0 0;
+            }
+
+            .image-modal-title {
+                font-size: 1.1rem;
+                line-height: 1.3;
+            }
+
+            .image-modal-desc {
+                font-size: 0.9rem;
+                margin-top: 8px;
+                line-height: 1.4;
+            }
+
+            .image-modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .image-download-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 16px;
+                font-size: 0.85rem;
+                border-radius: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .achievements {
+                padding: 30px 10px;
+            }
+
+            .achievements-header {
+                margin-bottom: 25px;
+                padding: 20px 12px;
+                border-radius: 15px;
+            }
+
+            .achievements-title {
+                font-size: 1.7rem;
+                margin-bottom: 10px;
+            }
+
+            .achievements-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+                max-width: 300px;
+            }
+
+            .achievements-grid {
+                gap: 15px;
+                margin-top: 25px;
+            }
+
+            .achievement-item {
+                padding: 15px 12px;
+                border-radius: 12px;
+                max-width: 350px;
+            }
+
+            .achievement-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 10px;
+            }
+
+            .achievement-img {
+                width: 60px;
+                height: 60px;
+                border-radius: 8px;
+            }
+
+            .achievement-name {
+                font-size: 0.95rem;
+                line-height: 1.2;
+                margin-bottom: 8px;
+                gap: 5px;
+            }
+
+            .achievement-desc {
+                font-size: 0.8rem;
+                line-height: 1.4;
+                margin-bottom: 8px;
+            }
+
+            .achievement-year {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
+
+            .medal-icon {
+                font-size: 0.8rem !important;
+                margin-right: 4px;
+            }
+
+            .view-image-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.75rem;
+                top: 8px;
+                right: 8px;
+                border-radius: 6px;
+            }
+
+            .image-modal-content {
+                margin: 5px;
+                border-radius: 12px;
+            }
+
+            .image-modal-header {
+                padding: 12px 15px;
+                border-radius: 12px 12px 0 0;
             }
 
             .image-modal-title {
                 font-size: 1rem;
             }
 
-            .image-modal-close {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
+            .image-modal-desc {
+                font-size: 0.85rem;
             }
 
             .image-download-btn {
@@ -2675,12 +2974,34 @@
             }
         }
 
-        /* Doanh Nghiệp Hỗ Trợ Section */
+        @media (max-width: 360px) {
+            .achievements {
+                padding: 25px 8px;
+            }
+
+            .achievement-item {
+                padding: 12px 10px;
+                max-width: 320px;
+            }
+
+            .achievement-name {
+                font-size: 0.9rem;
+            }
+
+            .achievement-desc {
+                font-size: 0.75rem;
+            }
+
+            .medal-icon {
+                font-size: 0.75rem !important;
+            }
+        }        /* Doanh Nghiệp Hỗ Trợ Section */
         .business-support {
             padding: 80px 20px;
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
             position: relative;
             overflow: hidden;
+            margin: 0;
         }
 
         .business-support::before {
@@ -3302,9 +3623,825 @@
                 height: 45px;
                 padding: 10px 12px;
             }
+        }
 
-            .org-name {
+        /* Additional Mobile Touch Optimizations - Business Support Enhanced */
+        @media (max-width: 992px) {
+            .business-support {
+                padding: 50px 20px;
+            }
+
+            .business-support-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .business-support-text h3 {
+                font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 20px;
+            }
+
+            .business-support-subtitle {
+                font-size: 1.1rem;
+                max-width: 400px;
+                margin: 0 auto 25px;
+            }
+
+            .business-support-image {
+                order: -1;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+
+            .business-support-features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 30px 0;
+            }
+
+            .business-feature-item {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 25px 20px;
+            }
+
+            .partners-container {
+                gap: 25px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .partners-grid {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .business-support {
+                padding: 40px 15px;
+            }
+
+            .business-support-header {
+                margin-bottom: 30px;
+            }
+
+            .business-support-title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+                margin-bottom: 15px;
+            }
+
+            .business-support-subtitle {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 25px;
+                max-width: 350px;
+            }
+
+            .business-support-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 20px;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .business-support-image {
+                border-radius: 15px;
+                margin: 20px auto;
+                max-width: 350px;
+            }
+
+            .business-support-features {
+                gap: 15px;
+                margin: 25px 0;
+            }
+
+            .business-feature-item {
+                padding: 20px 15px;
+                border-radius: 15px;
+                max-width: 380px;
+            }
+
+            .business-feature-icon {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
+
+            .business-feature-text h4 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .business-feature-text p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .partners-container {
+                gap: 20px;
+            }
+            
+            .partners-grid {
+                gap: 12px;
+                max-width: 100%;
+            }
+            
+            .partner-item {
+                padding: 10px 12px;
+                min-height: 50px;
+                min-width: 75px;
+                border-radius: 12px;
+            }
+            
+            .partner-logo {
+                max-width: 70px;
+                max-height: 40px;
+            }
+            
+            .achievement-text {
+                padding: 20px 15px;
+                border-radius: 15px;
+                margin: 20px auto;
+                max-width: 400px;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(0, 212, 170, 0.2);
+            }
+            
+            .achievement-text p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin: 0;
+            }
+
+            .organizations-logos {
+                gap: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+
+            .org-logo {
+                height: 50px;
+                padding: 12px 15px;
+                border-radius: 12px;
+                min-width: 80px;
+            }
+
+            .support-organizations h4 {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            .business-description-enhanced {
+                padding: 20px 15px;
+                margin: 25px auto;
+                border-radius: 15px;
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .business-support {
+                padding: 30px 10px;
+            }
+
+            .business-support-title {
+                font-size: 1.5rem;
+            }
+
+            .business-support-subtitle {
+                font-size: 0.9rem;
+                max-width: 300px;
+            }
+
+            .business-support-description {
+                font-size: 0.9rem;
+                max-width: 320px;
+            }
+
+            .business-support-image {
+                max-width: 300px;
+                border-radius: 12px;
+            }
+
+            .business-feature-item {
+                padding: 15px 12px;
+                max-width: 320px;
+                border-radius: 12px;
+            }
+
+            .business-feature-icon {
+                font-size: 1.8rem;
+            }
+
+            .business-feature-text h4 {
+                font-size: 1rem;
+            }
+
+            .business-feature-text p {
                 font-size: 0.85rem;
+            }
+
+            .partner-item {
+                min-width: 65px;
+                padding: 8px 10px;
+                min-height: 45px;
+                border-radius: 10px;
+            }
+            
+            .partner-logo {
+                max-width: 60px;
+                max-height: 35px;
+            }
+            
+            .achievement-text {
+                padding: 15px 12px;
+                max-width: 320px;
+                border-radius: 12px;
+            }
+            
+            .achievement-text p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .organizations-logos {
+                gap: 12px;
+                max-width: 350px;
+            }
+
+            .org-logo {
+                height: 45px;
+                padding: 10px 12px;
+                min-width: 70px;
+                border-radius: 10px;
+            }
+
+            .business-description-enhanced {
+                padding: 15px 12px;
+                max-width: 350px;
+                border-radius: 12px;
+            }
+        }
+
+        /* Mobile Full Screen Optimizations */
+        @media (max-width: 768px) {
+            /* Business Support Full Screen Mobile */
+            .business-support {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                padding: 30px 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            
+            .business-support-container {
+                max-width: 100%;
+                padding: 0 15px;
+                margin: 0 auto;
+            }
+            
+            /* Achievements Full Screen Mobile */
+            .achievements {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                padding: 30px 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            
+            .achievements-container {
+                max-width: 100%;
+                padding: 0 15px;
+                margin: 0 auto;
+            }
+            
+            /* Grid adjustments for mobile */
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small mobile optimization */
+            .business-support,
+            .achievements {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                padding: 25px 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            
+            .business-support-container,
+            .achievements-container {
+                padding: 0 10px;
+            }
+            
+            .achievements-grid {
+                padding: 0 5px;
+                gap: 15px;
+            }
+            
+            .partners-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 0 5px;
+            }
+            
+            .achievement-item {
+                padding: 15px 12px;
+                margin-bottom: 10px;
+            }
+            
+            .partner-item {
+                padding: 12px;
+                border-radius: 10px;
+            }
+        }
+
+        /* Prevent horizontal scroll on mobile */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Ensure all content fits */
+            .intro-container,
+            .footer {
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+        }
+
+        /* Enhanced Touch-Friendly Mobile Design */
+        @media (max-width: 768px) {
+            /* Improve touch targets */
+            .view-image-btn {
+                min-width: 44px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            .intro-btn {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+
+            .feature-item {
+                touch-action: manipulation;
+                cursor: pointer;
+            }
+
+            .partner-item {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+
+            /* Improve spacing for mobile */
+            .business-support-text {
+                padding: 0 10px;
+            }
+
+            .achievement-item {
+                position: relative;
+                margin-bottom: 20px;
+            }
+
+            /* Better image modal for mobile */
+            .image-modal {
+                padding: 10px;
+            }
+
+            .image-modal-img {
+                max-height: 70vh;
+                object-fit: contain;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra touch optimizations */
+            .top-nav-link {
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 16px;
+            }
+
+            .medal-icon {
+                flex-shrink: 0;
+            }
+
+            /* Prevent horizontal scroll */
+            body {
+                overflow-x: hidden;
+            }
+
+            .intro-container,
+            .achievements,
+            .business-support {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+            
+            .achievements-container,
+            .business-support-container {
+                max-width: 100%;
+                padding: 0 15px;
+                margin: 0 auto;
+            }
+
+            /* Adjust grid for mobile full screen */
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 0 10px;
+            }
+
+            /* Better button spacing */
+            .intro-actions {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .intro-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* Landscape phone optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .intro-title {
+                font-size: 2.2rem;
+            }
+
+            .intro-subtitle {
+                font-size: 1rem;
+            }
+
+            .intro-container {
+                padding: 30px 20px 40px;
+            }
+
+            .achievements {
+                padding: 40px 20px;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 320px) {
+            .intro-title {
+                font-size: 1.8rem;
+            }
+
+            .intro-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .achievement-name {
+                font-size: 0.95rem;
+                line-height: 1.2;
+            }
+
+            .achievement-desc {
+                font-size: 0.8rem;
+            }
+
+            .medal-icon {
+                font-size: 0.8rem !important;
+            }
+
+            .view-image-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+            
+            /* Full screen for very small mobile */
+            .achievements,
+            .business-support {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                padding: 20px 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            
+            .achievements-container,
+            .business-support-container {
+                padding: 0 8px;
+            }
+            
+            .achievements-grid {
+                padding: 0 5px;
+                gap: 8px;
+            }
+            
+            .partners-grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
+                padding: 0 5px;
+            }
+        }
+
+
+        /* Legacy mobile styles - keeping for compatibility */
+        .org-name {
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Full Screen Overflow Prevention */
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+            
+            * {
+                max-width: 100vw;
+                box-sizing: border-box;
+            }
+            
+            /* Remove gaps between sections */
+            .achievements + .business-support,
+            .business-support + .achievements,
+            .intro-container + .achievements,
+            .achievements + .footer,
+            .business-support + .footer {
+                margin-top: 0;
+            }
+            
+            /* Ensure sections connect seamlessly */
+            section, .achievements, .business-support, .intro-container {
+                display: block;
+                margin: 0;
+            }
+        }
+
+        /* Mobile Performance & Accessibility Improvements */
+        @media (max-width: 768px) {
+            /* Smooth scrolling for mobile */
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Prevent zoom on input focus */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+
+            /* Better tap highlights */
+            * {
+                -webkit-tap-highlight-color: rgba(0, 212, 170, 0.3);
+                -webkit-touch-callout: none;
+            }
+
+            /* Improve text rendering */
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+
+            /* Better button interactions */
+            button, .btn, .cta-btn, .intro-btn {
+                -webkit-appearance: none;
+                appearance: none;
+                -webkit-user-select: none;
+                user-select: none;
+                cursor: pointer;
+            }
+
+            /* Prevent overscroll bounce */
+            body {
+                overscroll-behavior-y: contain;
+            }
+
+            /* Loading state improvements */
+            .loading {
+                pointer-events: none;
+                opacity: 0.7;
+            }
+
+            /* Focus improvements for accessibility */
+            .top-nav-link:focus,
+            .intro-btn:focus,
+            .view-image-btn:focus {
+                outline: 3px solid rgba(0, 212, 170, 0.6);
+                outline-offset: 2px;
+            }
+        }
+
+        /* Utility classes for mobile */
+        .mobile-hidden {
+            display: none !important;
+        }
+
+        .mobile-visible {
+            display: block !important;
+        }
+
+        .mobile-center {
+            text-align: center !important;
+        }
+
+        .mobile-full-width {
+            width: 100% !important;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-hidden {
+                display: block !important;
+            }
+            
+            .mobile-visible {
+                display: none !important;
+            }
+        }
+
+        /* Final Mobile Performance Optimizations */
+        @media (max-width: 768px) {
+            /* GPU acceleration for smoother animations */
+            .achievement-item,
+            .feature-item,
+            .partner-item,
+            .intro-btn,
+            .view-image-btn {
+                transform: translateZ(0);
+                will-change: transform;
+            }
+
+            /* Reduce motion for users who prefer it */
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
+
+            /* Better safe area handling for modern phones */
+            .top-navbar {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+
+            .intro-container,
+            .achievements,
+            .business-support {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+            }
+
+            /* Improve image loading performance */
+            .achievement-img,
+            .business-support-image img {
+                object-fit: cover;
+                image-rendering: optimizeQuality;
+            }
+
+            /* Better keyboard navigation */
+            .top-nav-link:focus-visible,
+            .intro-btn:focus-visible,
+            .view-image-btn:focus-visible {
+                outline: 3px solid #00d4aa;
+                outline-offset: 2px;
+                box-shadow: 0 0 0 5px rgba(0, 212, 170, 0.2);
+            }
+        }
+
+        /* Mobile landscape specific optimizations */
+        @media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+            .intro-container {
+                padding: 20px;
+            }
+
+            .intro-title {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .intro-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+            .intro-actions {
+                margin-top: 15px;
+            }
+
+            .achievements {
+                padding: 25px 15px;
+            }
+
+            .achievements-title {
+                font-size: 1.6rem;
+                margin-bottom: 8px;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .achievement-item {
+                padding: 12px 10px;
+            }
+
+            .business-support {
+                padding: 25px 15px;
+            }
+
+            .business-support-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Extra mobile optimizations for better UX */
+        @media (max-width: 768px) {
+            /* Improve section spacing */
+            .achievements-header,
+            .business-support-header {
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Better visual hierarchy */
+            .achievements-title::after,
+            .business-support-title::after {
+                width: 60px;
+                height: 3px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            /* Improved touch interactions */
+            .achievement-item:active,
+            .business-feature-item:active,
+            .partner-item:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+
+            /* Better content readability */
+            .achievement-desc,
+            .business-support-description,
+            .business-feature-text p {
+                text-align: left;
+                max-width: none;
+            }
+
+            /* Consistent button styling */
+            .view-image-btn,
+            .image-download-btn {
+                backdrop-filter: blur(10px);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Better modal on mobile */
+            .image-modal-img {
+                border-radius: 12px;
+                max-height: 60vh;
+                object-fit: contain;
             }
         }
 
@@ -3821,30 +4958,240 @@
             width: 100%;
         }
 
-        /* Responsive Footer */
+        /* Responsive Footer - Mobile Optimized */
         @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-container {
+                padding: 0 15px;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 35px;
                 text-align: center;
+                margin-bottom: 30px;
             }
-            
+
+            .footer-section {
+                padding: 20px 15px;
+                background: rgba(255, 255, 255, 0.02);
+                border-radius: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .footer-section h4 {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+
+            .footer-logo {
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .footer-logo-img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .footer-brand {
+                font-size: 1.4rem;
+            }
+
+            .footer-desc {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: 20px;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .footer-social {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+
+            .footer-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .footer-links li {
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+                display: block;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                background: rgba(0, 212, 170, 0.1);
+                padding-left: 12px;
+            }
+
+            .footer-contact {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .footer-contact .contact-item {
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 10px;
+                margin-bottom: 12px;
+                padding: 12px 15px;
+            }
+
+            .newsletter-form {
+                max-width: 300px;
+                margin: 0 auto;
+                background: rgba(255, 255, 255, 0.08);
+                padding: 8px;
+                border-radius: 25px;
+            }
+
+            .newsletter-input {
+                padding: 12px 18px;
+                font-size: 0.9rem;
+            }
+
+            .newsletter-btn {
+                width: 45px;
+                height: 45px;
+            }
+
+            .footer-bottom {
+                margin: 0 -15px;
+                padding: 20px 15px 15px;
+            }
+
             .footer-bottom-content {
                 flex-direction: column;
                 text-align: center;
                 gap: 15px;
             }
-            
+
             .footer-legal {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
+            }
+
+            .footer-legal a {
+                padding: 8px 15px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+                display: inline-block;
             }
         }
 
-        @media (max-width: 1024px) and (min-width: 769px) {
+        @media (max-width: 480px) {
+            .footer {
+                padding: 30px 0 15px;
+            }
+
+            .footer-container {
+                padding: 0 10px;
+            }
+
             .footer-content {
-                grid-template-columns: 1fr 1fr;
                 gap: 25px;
+                margin-bottom: 25px;
+            }
+
+            .footer-section {
+                padding: 15px 10px;
+            }
+
+            .footer-section h4 {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+
+            .footer-brand {
+                font-size: 1.2rem;
+            }
+
+            .footer-desc {
+                font-size: 0.85rem;
+                max-width: 280px;
+            }
+
+            .footer-social {
+                gap: 10px;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                max-width: 250px;
+            }
+
+            .footer-links a {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+
+            .footer-contact .contact-item {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+
+            .contact-item i {
+                font-size: 1rem;
+                width: 20px;
+            }
+
+            .newsletter-form {
+                max-width: 280px;
+                padding: 6px;
+            }
+
+            .newsletter-input {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+
+            .newsletter-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .footer-bottom {
+                padding: 15px 10px 10px;
+            }
+
+            .footer-copyright {
+                font-size: 0.8rem;
+            }
+
+            .footer-legal a {
+                font-size: 0.8rem;
+                padding: 6px 12px;
             }
         }
 
@@ -4380,6 +5727,8 @@
             animation-delay: 0s;
         }
 
+
+        
         .about-floating-icon:nth-child(2) {
             top: 20%;
             right: 10%;
@@ -4754,43 +6103,240 @@
             color: #00d4aa;
         }
 
-        /* Responsive Design for New Sections */
-        @media (max-width: 768px) {
+        /* Responsive Design - Mobile First Approach */
+        @media (max-width: 1024px) {
             .intro-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
+                letter-spacing: 1px;
             }
 
             .intro-subtitle {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
 
             .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Container Spacing */
+            .intro-container {
+                padding: 40px 20px 60px;
+            }
+
+            .intro-header {
+                margin-bottom: 40px;
+            }
+
+            /* Typography */
+            .intro-title {
+                font-size: 2.8rem;
+                line-height: 1.1;
+                letter-spacing: 0.5px;
+                margin-bottom: 15px;
+            }
+
+            .intro-title::after {
+                width: 80px;
+                height: 3px;
+                bottom: -8px;
+            }
+
+            .intro-title:hover::after {
+                width: 120px;
+                height: 4px;
+            }
+
+            .intro-subtitle {
+                font-size: 1.15rem;
+                line-height: 1.5;
+                margin-bottom: 35px;
+                padding: 0 10px;
+            }
+
+            /* Features Grid */
+            .features-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                margin-top: 40px;
             }
 
             .feature-item {
-                padding: 30px 20px;
+                padding: 25px 20px;
+                border-radius: 16px;
             }
 
+            .feature-icon {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .feature-title {
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+            }
+
+            .feature-desc {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            /* Buttons */
             .intro-btn {
-                padding: 15px 25px;
+                padding: 14px 24px;
                 font-size: 1rem;
-                margin: 5px;
+                margin: 6px;
+                border-radius: 12px;
+                min-width: 140px;
             }
 
+            .intro-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            /* Footer */
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 25px;
+                text-align: center;
             }
 
             .footer-bottom-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 15px;
             }
 
             .newsletter-form {
                 flex-direction: column;
+                gap: 12px;
+            }
+
+            .newsletter-input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Container and Spacing */
+            .intro-container {
+                padding: 30px 15px 50px;
+            }
+
+            .intro-header {
+                margin-bottom: 30px;
+            }
+
+            /* Typography */
+            .intro-title {
+                font-size: 2.2rem;
+                line-height: 1.1;
+                margin-bottom: 12px;
+            }
+
+            .intro-title::after {
+                width: 60px;
+                height: 2px;
+                bottom: -6px;
+            }
+
+            .intro-title:hover::after {
+                width: 90px;
+                height: 3px;
+            }
+
+            .intro-subtitle {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 25px;
+                padding: 0 5px;
+            }
+
+            /* Features */
+            .features-grid {
+                gap: 15px;
+                margin-top: 30px;
+            }
+
+            .feature-item {
+                padding: 20px 15px;
+                border-radius: 14px;
+            }
+
+            .feature-icon {
+                font-size: 2.2rem;
+                margin-bottom: 12px;
+            }
+
+            .feature-title {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .feature-desc {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            /* Buttons */
+            .intro-btn {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+                margin: 5px;
+                border-radius: 10px;
+                min-width: 120px;
+            }
+
+            .intro-actions {
+                gap: 10px;
+            }
+
+            /* Footer Adjustments */
+            .footer-content {
+                gap: 20px;
+            }
+
+            .footer-section h3 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 8px;
+            }
+
+            .footer-section ul li a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            /* Extra small screens */
+            .intro-title {
+                font-size: 1.9rem;
+            }
+
+            .intro-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .feature-item {
+                padding: 18px 12px;
+            }
+
+            .intro-btn {
+                padding: 11px 18px;
+                font-size: 0.9rem;
+                min-width: 110px;
             }
         }
 
@@ -4884,7 +6430,6 @@
                 <a href="holland+chatbot.html" class="top-nav-link gradient-text">Holland Chatbot</a>
                 <a href="phòng phỏng vấn ảo..html" class="top-nav-link gradient-text">Phỏng vấn ảo</a>
                 <a href="lọc cv.html" class="top-nav-link gradient-text">Lọc CV</a>
-                <a href="tạo cv.html" class="top-nav-link gradient-text">Tạo CV</a>
                 <a href="#" id="authToggleBtn" class="top-nav-auth-btn">
                     <i class="fas fa-sign-in-alt"></i>
                     <span>Đăng nhập</span>
@@ -4951,7 +6496,6 @@
         </div>
     </div>
 
-    <!-- Navigation -->
 
     <!-- Main Content -->
     <main class="main-content">
@@ -4969,7 +6513,6 @@
 
             </div>
         </section>
-
         <!-- Features Introduction Section -->
         <section class="features-intro" id="features-intro">
             <div class="features-intro-container">
@@ -4998,7 +6541,6 @@
                             <span class="stat">📊 Báo cáo chi tiết</span>
                         </div>
                     </div>
-
                     <div class="feature-item">
                         <div class="feature-icon-box">
                             <img src="ảnh/icon/hollandd.jpg" alt="Holland Test" class="feature-img">
@@ -5013,7 +6555,6 @@
                             <span class="stat">💬 Tương tác thông minh</span>
                         </div>
                     </div>
-
                     <div class="feature-item">
                         <div class="feature-icon-box">
                             <i class="fas fa-video feature-icon-fa"></i>
@@ -5043,7 +6584,6 @@
                             <span class="stat">⏱️ Tiết kiệm thời gian</span>
                         </div>
                     </div>
-
                     <div class="feature-item">
                         <div class="feature-icon-box">
                             <img src="ảnh/icon/Logo2.jpg" alt="CV Builder" class="feature-img">
@@ -5123,6 +6663,7 @@
             </div>
         </section>
 
+
         <!-- Thành Tích Nổi Bật Section -->
         <section class="achievements" id="achievements">
             <div class="achievements-container">
@@ -5135,6 +6676,8 @@
                         <span class="highlight-keyword-gold">đồng hành cùng thành công</span> của bạn
                     </p>
                 </div>
+
+
 
                 <div class="achievements-grid">
                     <!-- 1. Giải Nhất Tin Học Trẻ - Đặt ở vị trí đầu tiên -->
@@ -5372,7 +6915,6 @@
                         <li><a href="holland+chatbot.html">Holland Chatbot</a></li>
                         <li><a href="phòng phỏng vấn ảo..html">Phỏng Vấn Ảo</a></li>
                         <li><a href="lọc cv.html">Lọc CV</a></li>
-                        <li><a href="tạo cv.html">Tạo CV</a></li>
                     </ul>
                 </div>
 
