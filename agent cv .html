@@ -57,45 +57,36 @@
 
     <!-- Upload View -->
     <main id="upload-view" class="max-w-4xl mx-auto p-4 md:p-8 flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 80px);">
-      <h2 class="text-3xl font-bold text-gray-900">Nâng cấp CV của bạn với AI</h2>
-      <p class="mt-2 text-lg text-gray-600">Tải lên hoặc kéo thả ảnh CV của bạn để nhận phân tích chuyên sâu.</p>
-      
-      <div class="w-full mt-8 space-y-6">
-        <div class="space-y-4">
-          <label for="target-job-input" class="block text-sm font-medium text-gray-800">Vị trí công việc mục tiêu</label>
-          <input type="text" id="target-job-input" value="Lập trình viên React" class="mx-auto block w-full max-w-md px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-semibold" placeholder="VD: Kỹ sư phần mềm">
-        </div>
-        
-        <div id="image-upload-container" class="w-full max-w-xl mx-auto">
-            <div id="image-preview-wrapper" class="relative hidden">
-                <img id="image-preview" src="" alt="CV Preview" class="rounded-lg shadow-lg w-full">
-                <button id="remove-image-button" class="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full p-1.5 hover:bg-opacity-75 transition-all">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>
-                </button>
-            </div>
+        <div id="upload-content" class="w-full">
+            <h2 class="text-3xl font-bold text-gray-900">Nâng cấp CV của bạn với AI</h2>
+            <p class="mt-2 text-lg text-gray-600">Tải lên hoặc kéo thả ảnh CV của bạn để bắt đầu phân tích.</p>
+            
+            <div class="w-full mt-8 space-y-6">
+                <div id="image-upload-container" class="w-full max-w-xl mx-auto">
+                    <div id="image-preview-wrapper" class="relative hidden">
+                        <img id="image-preview" src="" alt="CV Preview" class="rounded-lg shadow-lg w-full">
+                        <button id="remove-image-button" class="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full p-1.5 hover:bg-opacity-75 transition-all">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>
+                        </button>
+                    </div>
 
-            <div id="drop-zone" class="cursor-pointer w-full p-10 border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition-colors border-gray-300 bg-white hover:border-blue-400">
-                <input id="file-input" type="file" class="hidden" accept="image/png, image/jpeg, image/webp">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-gray-400 mb-4"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
-                <p class="text-gray-700 font-semibold">Kéo và thả ảnh CV tại đây</p>
-                <p class="text-gray-500 text-sm">hoặc nhấn để chọn tệp</p>
-                <p class="text-xs text-gray-400 mt-2">Hỗ trợ PNG, JPG, WEBP</p>
+                    <div id="drop-zone" class="cursor-pointer w-full p-10 border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition-colors border-gray-300 bg-white hover:border-blue-400">
+                        <input id="file-input" type="file" class="hidden" accept="image/png, image/jpeg, image/webp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-gray-400 mb-4"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+                        <p class="text-gray-700 font-semibold">Kéo và thả ảnh CV tại đây</p>
+                        <p class="text-gray-500 text-sm">hoặc nhấn để chọn tệp</p>
+                        <p class="text-xs text-gray-400 mt-2">Hỗ trợ PNG, JPG, WEBP</p>
+                    </div>
+                </div>
+                
+                <div id="error-message" class="text-red-500 text-sm mt-2 hidden"></div>
             </div>
         </div>
-        
-        <div id="error-message" class="text-red-500 text-sm mt-2 hidden"></div>
-
-        <button id="analyze-button" disabled class="flex items-center justify-center w-full max-w-md mx-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed transition-all duration-300">
-            <span id="analyze-button-text">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2 inline-block"><path d="M15 4V2"></path><path d="M15 10V8"></path><path d="M10.18 4.5 11 2"></path><path d="M10.18 9.5 11 7"></path><path d="M5.31 6.5 6.13 4"></path><path d="M5.31 11.5 6.13 9"></path><path d="m2 15 2.24 2.24"></path><path d="m7 20 2.24 2.24"></path><path d="M12.76 22 22 12.76"></path><path d="m11 11 2.24 2.24"></path><path d="m16 16 2.24 2.24"></path><path d="M22 2 12.76 11.24"></path></svg>
-                Phân tích CV với AI
-            </span>
-            <span id="analyze-button-loading" class="hidden">
-                 <svg class="animate-spin w-5 h-5 mr-3 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                Đang phân tích...
-            </span>
-        </button>
-      </div>
+        <div id="upload-loading" class="hidden flex flex-col items-center justify-center">
+            <svg class="animate-spin w-16 h-16 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <p class="mt-4 text-lg font-semibold text-gray-700">Đang phân tích CV của bạn...</p>
+            <p class="text-gray-500">Quá trình này có thể mất vài giây, vui lòng chờ.</p>
+        </div>
     </main>
 
     <!-- Main View -->
@@ -138,7 +129,6 @@
         let state = {
             cvData: null,
             cvImage: { file: null, preview: null },
-            targetJob: 'Lập trình viên React',
             analysisResult: null,
             isLoading: false,
             error: null,
@@ -149,8 +139,9 @@
         // --- DOM ELEMENTS ---
         const DOMElements = {
             uploadView: document.getElementById('upload-view'),
+            uploadContent: document.getElementById('upload-content'),
+            uploadLoading: document.getElementById('upload-loading'),
             mainView: document.getElementById('main-view'),
-            targetJobInput: document.getElementById('target-job-input'),
             imageUploadContainer: document.getElementById('image-upload-container'),
             imagePreviewWrapper: document.getElementById('image-preview-wrapper'),
             imagePreview: document.getElementById('image-preview'),
@@ -158,9 +149,6 @@
             dropZone: document.getElementById('drop-zone'),
             fileInput: document.getElementById('file-input'),
             errorMessage: document.getElementById('error-message'),
-            analyzeButton: document.getElementById('analyze-button'),
-            analyzeButtonText: document.getElementById('analyze-button-text'),
-            analyzeButtonLoading: document.getElementById('analyze-button-loading'),
             reanalyzeButton: document.getElementById('reanalyze-button'),
             reanalyzeButtonText: document.getElementById('reanalyze-button-text'),
             reanalyzeButtonLoading: document.getElementById('reanalyze-button-loading'),
@@ -173,7 +161,14 @@
         };
 
         // --- GEMINI API SERVICE ---
-        const ai = new GoogleGenAI({ apiKey: "AIzaSyC3QSqG1ZOpqy-EI8HQRdq0Z_W5MbweSws" });
+        let ai;
+        try {
+            // API Key được tích hợp trực tiếp
+            ai = new GoogleGenAI({ apiKey: "AIzaSyC1DiQKS7prwii1ev3taOpg3bh7yMhXPPU" });
+        } catch (e) {
+            console.error("API Key initialization failed:", e);
+            state.error = "Không thể khởi tạo Trợ lý AI. Vui lòng kiểm tra API Key hoặc kết nối mạng.";
+        }
 
         const cvDataSchema = {
             type: Type.OBJECT,
@@ -259,15 +254,16 @@
             required: ["extractedCv", "analysis"]
         };
 
-        async function analyzeCVImage(imageBase64, mimeType, targetJob) {
+        async function analyzeCVImage(imageBase64, mimeType) {
             const model = 'gemini-2.5-flash';
             const systemInstruction = `Bạn là một chuyên gia tuyển dụng và trợ lý AI thông minh, nói tiếng Việt. Nhiệm vụ của bạn là:
 1.  **Trích xuất thông tin** từ hình ảnh CV được cung cấp. Điền tất cả thông tin bạn tìm thấy vào đối tượng JSON 'extractedCv'. Nếu không tìm thấy thông tin cho một trường nào đó, hãy để nó là một chuỗi trống (ví dụ: "").
-2.  **Phân tích CV** dựa trên thông tin vừa trích xuất. Cung cấp phân tích chi tiết, đề xuất cải thiện, và viết lại nội dung để phù hợp với vị trí mục tiêu. Điền kết quả phân tích vào đối tượng JSON 'analysis'.
+2.  **Phân tích CV** dựa trên thông tin vừa trích xuất. Cung cấp phân tích chi tiết, đề xuất cải thiện, và viết lại nội dung để làm cho CV chuyên nghiệp và hấp dẫn hơn. Điền kết quả phân tích vào đối tượng JSON 'analysis'.
 3.  Khi viết lại kinh nghiệm, hãy sử dụng các động từ mạnh, định lượng hóa kết quả và nhấn mạnh thành tích thay vì chỉ mô tả công việc.
-4.  Luôn trả về một đối tượng JSON duy nhất, hợp lệ theo đúng schema đã định nghĩa.`;
+4.  Đối với các đề xuất cải thiện, hãy đưa ra những gợi ý chung có thể áp dụng cho nhiều ngành nghề.
+5.  Luôn trả về một đối tượng JSON duy nhất, hợp lệ theo đúng schema đã định nghĩa.`;
 
-            const prompt = `Vui lòng trích xuất và phân tích CV trong hình ảnh cho vị trí mục tiêu: "${targetJob}".`;
+            const prompt = `Vui lòng trích xuất và phân tích CV trong hình ảnh này. Hãy đưa ra những đánh giá và đề xuất cải thiện một cách tổng quát.`;
 
             const imagePart = { inlineData: { mimeType, data: imageBase64 } };
             const textPart = { text: prompt };
@@ -294,7 +290,7 @@
 
             } catch (error) {
                 console.error("Lỗi khi gọi Gemini API:", error);
-                throw new Error("Không thể phân tích hình ảnh CV. Vui lòng thử lại với hình ảnh rõ nét hơn hoặc kiểm tra API key.");
+                throw new Error("Không thể phân tích hình ảnh CV. Vui lòng thử lại với hình ảnh rõ nét hơn hoặc kiểm tra cấu hình AI.");
             }
         }
 
@@ -307,11 +303,6 @@
                 <div>
                   <h2 class="text-xl font-bold text-gray-900">Thông tin CV của bạn</h2>
                   <p class="mt-1 text-sm text-gray-500">Đây là thông tin AI trích xuất được. Bạn có thể chỉnh sửa nếu cần.</p>
-                </div>
-
-                <div class="space-y-4 p-4 border-l-4 border-blue-500 bg-blue-50 rounded-r-lg">
-                  <label for="targetJobEditor" class="block text-sm font-medium text-gray-800">Vị trí công việc mục tiêu</label>
-                  <input type="text" id="targetJobEditor" value="${state.targetJob}" class="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-semibold" placeholder="VD: Kỹ sư phần mềm" />
                 </div>
                 
                 <div class="space-y-4 border rounded-lg p-4">
@@ -353,7 +344,6 @@
                 </div>
               </div>
           `;
-          document.getElementById('targetJobEditor').addEventListener('input', e => { state.targetJob = e.target.value; });
           document.getElementById('add-experience-btn').addEventListener('click', handleAddExperience);
         }
         
@@ -478,7 +468,7 @@
                     <div class="space-y-4">
                         <h3 class="font-semibold text-lg flex items-center gap-2 text-gray-800">Đề xuất bổ sung</h3>
                          <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                            <p class="text-sm text-blue-700">Để phù hợp hơn với vị trí ứng tuyển, hãy cân nhắc thêm các mục sau vào CV:</p>
+                            <p class="text-sm text-blue-700">Hãy cân nhắc thêm các mục sau vào CV để tăng tính chuyên nghiệp:</p>
                             <div class="mt-3"><h4 class="font-semibold text-blue-800">Kỹ năng:</h4><p class="text-sm text-blue-700">${enhancementSuggestions.skills.join(', ')}</p></div>
                              <div class="mt-3"><h4 class="font-semibold text-blue-800">Từ khóa:</h4><p class="text-sm text-blue-700">${enhancementSuggestions.keywords.join(', ')}</p></div>
                              <div class="mt-3"><h4 class="font-semibold text-blue-800">Dự án:</h4><ul class="list-disc list-inside mt-1 text-sm text-blue-700 space-y-1">${enhancementSuggestions.projects.map(item => `<li>${item}</li>`).join('')}</ul></div>
@@ -500,17 +490,7 @@
         }
 
         function updateUI() {
-            // Loading state for analyze button
-            if (state.isLoading) {
-                DOMElements.analyzeButton.disabled = true;
-                DOMElements.analyzeButtonLoading.classList.remove('hidden');
-                DOMElements.analyzeButtonText.classList.add('hidden');
-            } else {
-                DOMElements.analyzeButton.disabled = !state.cvImage.file;
-                DOMElements.analyzeButtonLoading.classList.add('hidden');
-                DOMElements.analyzeButtonText.classList.remove('hidden');
-            }
-            // Loading state for re-analyze button
+            // Loading state for re-analyze button in main view
             if (state.isLoading) {
                  DOMElements.reanalyzeButton.disabled = true;
                  DOMElements.reanalyzeButtonLoading.classList.remove('hidden');
@@ -534,15 +514,13 @@
                 DOMElements.imagePreview.src = state.cvImage.preview;
                 DOMElements.imagePreviewWrapper.classList.remove('hidden');
                 DOMElements.dropZone.classList.add('hidden');
-                DOMElements.analyzeButton.disabled = state.isLoading;
             } else {
                 DOMElements.imagePreview.src = '';
                 DOMElements.imagePreviewWrapper.classList.add('hidden');
                 DOMElements.dropZone.classList.remove('hidden');
-                DOMElements.analyzeButton.disabled = true;
             }
 
-            // View switching
+            // View switching and loading indicators
             if (state.cvData) {
                 DOMElements.uploadView.classList.add('hidden');
                 DOMElements.mainView.classList.remove('hidden');
@@ -555,6 +533,16 @@
                 DOMElements.uploadView.classList.remove('hidden');
                 DOMElements.mainView.classList.add('hidden');
                 DOMElements.mainView.classList.remove('grid');
+                
+                if (state.isLoading) {
+                    DOMElements.uploadContent.classList.add('hidden');
+                    DOMElements.uploadLoading.classList.remove('hidden');
+                    DOMElements.uploadLoading.classList.add('flex');
+                } else {
+                    DOMElements.uploadContent.classList.remove('hidden');
+                    DOMElements.uploadLoading.classList.add('hidden');
+                    DOMElements.uploadLoading.classList.remove('flex');
+                }
             }
         }
         
@@ -591,39 +579,50 @@
                 state.cvImage.file = file;
                 state.cvImage.preview = reader.result;
                 state.error = null;
-                updateUI();
+                handleAnalyze(); // Automatically start analysis
             };
             reader.readAsDataURL(file);
         }
 
         async function handleAnalyze() {
+            if (!ai) {
+                 state.error = "Trợ lý AI chưa được định cấu hình đúng cách. Vui lòng kiểm tra bảng điều khiển để biết chi tiết.";
+                 state.isLoading = false;
+                 // Reset image on config error to allow retry
+                 state.cvImage = { file: null, preview: null };
+                 updateUI();
+                 return;
+            }
             if (!state.cvImage.file) {
-                state.error = 'Vui lòng tải lên ảnh CV của bạn.';
+                // This might happen if re-analyze is clicked after an error that cleared the image
+                state.error = 'Vui lòng tải lại ảnh CV của bạn.';
+                state.cvData = null; // Go back to upload view
                 updateUI();
                 return;
             }
             state.isLoading = true;
             state.error = null;
-            state.analysisResult = null; // Clear previous results
-            if (state.cvData) state.activeTab = 'analysis'; // Switch to analysis tab if already in main view
+            state.analysisResult = null;
+            if (state.cvData) {
+                state.activeTab = 'analysis';
+            }
             updateUI();
-            if (state.activeTab === 'analysis') renderAnalysisResult(); // Show loader in analysis pane
+            if (state.activeTab === 'analysis') {
+                renderAnalysisResult(); 
+            }
 
             try {
                 const base64String = state.cvImage.preview.split(',')[1];
-                const result = await analyzeCVImage(base64String, state.cvImage.file.type, state.targetJob);
+                const result = await analyzeCVImage(base64String, state.cvImage.file.type);
                 state.analysisResult = result.analysis;
                 state.cvData = result.extractedCv;
-                if (!state.cvData.experience) state.cvData.experience = []; // Ensure experience is an array
+                if (!state.cvData.experience) state.cvData.experience = [];
                 
-                // After successful analysis, switch to analysis tab
                 state.activeTab = 'analysis';
 
             } catch (e) {
                 state.error = e.message;
-                // On critical error during initial analysis, reset the view
                 if (!state.cvData) {
-                    state.cvData = null;
                     state.cvImage = { file: null, preview: null };
                 }
             } finally {
@@ -635,6 +634,7 @@
         function handleAddExperience() {
           state.cvData.experience.push({ company: '', title: '', description: '' });
           renderCVEditor();
+          renderCVPreview();
         }
 
         function handleRemoveExperience(index) {
@@ -648,6 +648,7 @@
             const { summary, experience: rewrittenExps } = state.analysisResult.rewrittenContent;
 
             const updatedExperience = state.cvData.experience.map((exp) => {
+                // Find a rewritten block by matching the original description.
                 const rewrittenExp = rewrittenExps.find(r => r.original && r.original.trim().includes(exp.description.trim()));
                 return rewrittenExp ? { ...exp, description: rewrittenExp.rewritten } : exp;
             });
@@ -679,12 +680,9 @@
         // --- INITIALIZATION ---
         function init() {
             // Initial render
-            DOMElements.targetJobInput.value = state.targetJob;
             updateUI();
 
             // Event Listeners
-            DOMElements.targetJobInput.addEventListener('change', e => { state.targetJob = e.target.value; });
-            DOMElements.analyzeButton.addEventListener('click', handleAnalyze);
             DOMElements.reanalyzeButton.addEventListener('click', handleAnalyze);
 
             DOMElements.dropZone.addEventListener('click', () => DOMElements.fileInput.click());
@@ -720,8 +718,9 @@
                 }
             });
             DOMElements.cvEditor.addEventListener('click', e => {
-                if (e.target.classList.contains('remove-experience-btn')) {
-                    handleRemoveExperience(parseInt(e.target.dataset.index, 10));
+                if (e.target.classList.contains('remove-experience-btn') || e.target.parentElement.classList.contains('remove-experience-btn')) {
+                   const button = e.target.closest('.remove-experience-btn');
+                   handleRemoveExperience(parseInt(button.dataset.index, 10));
                 }
             });
         }
@@ -729,4 +728,3 @@
     </script>
 </body>
 </html>
- 
