@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DOM Elements ---
     const suggestIndustryEl = document.getElementById('suggest-industry');
     const suggestPositionEl = document.getElementById('suggest-position');
+    const suggestSalaryEl = document.getElementById('suggest-salary');
+    const suggestAgeEl = document.getElementById('suggest-age');
     const suggestJdButtonEl = document.getElementById('suggest-jd-button');
     
     const jobDescriptionEl = document.getElementById('job-description');
@@ -280,8 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (analyzeButtonEl) analyzeButtonEl.addEventListener('click', handleAnalysis);
     if (applyFiltersButton) applyFiltersButton.addEventListener('click', applyAndRenderFilters);
     if (resetFiltersButton) resetFiltersButton.addEventListener('click', resetAllFilters);
-    
-    // Initialize
+  // Initialize
     updateAndValidateWeights();
     initializeCriteriaAccordions();
     initializeMainAccordions();
@@ -342,16 +343,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (errorMessageEl) errorMessageEl.textContent = '';
     }
     
-    function createJdSuggestionPrompt(industry, position) {
+    function createJdSuggestionPrompt(industry, position, salary, age) {
+        let additionalInfo = '';
+        if (salary) {
+            additionalInfo += `- **Mức lương đề xuất:** ${salary}\n`;
+        }
+        if (age) {
+            additionalInfo += `- **Yêu cầu độ tuổi:** ${age}\n`;
+        }
+
         return `
             Là một chuyên gia tuyển dụng nhân sự (HR) có nhiều năm kinh nghiệm, hãy viết một bản mô tả công việc (Job Description - JD) chi tiết và chuyên nghiệp bằng tiếng Việt cho vị trí **"${position}"** trong ngành **"${industry}"**.
+
+            ${additionalInfo ? `Hãy xem xét các thông tin bổ sung sau để đưa vào JD:\n${additionalInfo}` : ''}
 
             Bản mô tả công việc cần bao gồm các phần rõ ràng sau:
             1.  **Mô tả công việc:** Liệt kê các công việc và trách nhiệm chính hàng ngày.
             2.  **Yêu cầu về kỹ năng và kinh nghiệm:**
                 -   Liệt kê các yêu cầu "cứng" (must-have) như bằng cấp, số năm kinh nghiệm, kỹ năng chuyên môn, công nghệ, công cụ bắt buộc.
+                -   Nếu có thông tin, hãy đưa yêu cầu về **độ tuổi**.
                 -   Liệt kê các yêu cầu "mềm" (nice-to-have) là điểm cộng.
-            3.  **Quyền lợi:** Nêu bật các quyền lợi hấp dẫn mà công ty cung cấp.
+            3.  **Quyền lợi & Mức lương:**
+                -   Nêu bật các quyền lợi hấp dẫn mà công ty cung cấp.
+                -   Ghi rõ **mức lương** nếu được cung cấp.
 
             **Lưu ý:**
             -   Sử dụng ngôn ngữ chuyên nghiệp, rõ ràng và hấp dẫn để thu hút ứng viên tiềm năng.
@@ -363,6 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
         clearError();
         const industry = suggestIndustryEl.value.trim();
         const position = suggestPositionEl.value.trim();
+        const salary = suggestSalaryEl.value.trim();
+        const age = suggestAgeEl.value.trim();
 
         if (!industry || !position) {
             displayError('Vui lòng nhập ngành nghề và vị trí để nhận gợi ý.');
@@ -380,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
         jobDescriptionEl.value = '';
 
         try {
-            const prompt = createJdSuggestionPrompt(industry, position);
+            const prompt = createJdSuggestionPrompt(industry, position, salary, age);
             const response = await ai.models.generateContent({
                 model: model,
                 contents: prompt,
@@ -779,4 +795,4 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
     }
-}); 
+});
