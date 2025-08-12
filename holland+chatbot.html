@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Kiểm Tra Holland & Tư Vấn Nghề Nghiệp AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="./backend/holland/holland.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/holland.css">
+  
+</head>
+<body>
+    <div class="bg-animated"></div>
+    <div class="particles" id="particles"></div>
+
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i> HollandAI
+            </div>
+            <ul class="nav-links">
+                <li><a href="#test">Bài Kiểm Tra</a></li>
+                <li><a href="#results">Kết Quả</a></li>
+                <li><a href="#advice">Tư Vấn</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" data-aos="fade-up">
+            <h1>Khám Phá Con Đường Sự Nghiệp</h1>
+            <p>Bài kiểm tra Holland kết hợp với AI tư vấn nghề nghiệp chuyên sâu, giúp bạn tìm ra hướng đi phù hợp nhất cho tương lai</p>
+            
+            <!-- Test Level Selection -->
+            <div class="test-level-container" id="test-level-container">
+                <h3 style="margin-bottom: 2rem; color: var(--text-secondary);">Chọn mức độ kiểm tra</h3>
+                <div class="test-levels">
+                    <div class="test-level-card" data-level="basic" onclick="selectTestLevel('basic')">
+                        <div class="level-icon">📝</div>
+                        <h4>Cơ Bản</h4>
+                        <p>15 câu hỏi • 5-8 phút</p>
+                        <div class="level-description">Phù hợp để khám phá sơ bộ các xu hướng nghề nghiệp chính</div>
+                        <div class="level-features"> b
+                            <span>✓ Nhanh chóng</span>
+                            <span>✓ Dễ thực hiện</span>
+                        </div>
+                    </div>
+                    <div class="test-level-card recommended" data-level="intermediate" onclick="selectTestLevel('intermediate')">
+                        <div class="level-badge">Khuyến nghị</div>
+                        <div class="level-icon">🎯</div>
+                        <h4>Trung Bình</h4>
+                        <p>30 câu hỏi • 10-15 phút</p>
+                        <div class="level-description">Cân bằng giữa độ chính xác và thời gian thực hiện</div>
+                        <div class="level-features">
+                            <span>✓ Kết quả chính xác</span>
+                            <span>✓ Thời gian hợp lý</span>
+                        </div>
+                    </div>
+                    <div class="test-level-card" data-level="advanced" onclick="selectTestLevel('advanced')">
+                        <div class="level-icon">🔬</div>
+                        <h4>Nâng Cao</h4>
+                        <p>40 câu hỏi • 15-20 phút</p>
+                        <div class="level-description">Phân tích sâu và toàn diện nhất về tính cách nghề nghiệp</div>
+                        <div class="level-features">
+                            <span>✓ Độ chính xác cao</span>
+                            <span>✓ Phân tích chi tiết</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" id="start-test-btn" onclick="startTest()" disabled>
+                    <i class="fas fa-play"></i>
+                    Chọn mức độ kiểm tra để bắt đầu
+                </button>
+            </div>
+        </section>
+
+        <!-- Holland Test Section -->
+        <section id="test-section" class="test-section">
+            <div class="card" data-aos="fade-up">
+                <h2><i class="fas fa-clipboard-list"></i> Bài Kiểm Tra Holland</h2>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div id="questions-container"></div>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>
+                        <i class="fas fa-chevron-left"></i> Câu Trước
+                    </button>
+                    <button class="btn" id="next-btn" onclick="nextQuestion()">
+                        Câu Tiếp <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section">
+            <div class="card" data-aos="fade-up">
+                <h2><i class="fas fa-chart-pie"></i> Kết Quả Holland của Bạn</h2>
+                <div class="holland-results" id="holland-results"></div>
+                <div class="text-center">
+                    <button class="btn" onclick="showAdvice()">
+                        <i class="fas fa-robot"></i>
+                        Nhận Tư Vấn Nghề Nghiệp AI
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Advice Section -->
+        <section id="advice-section" class="advice-section">
+            <div class="card" data-aos="fade-up">
+                <h2><i class="fas fa-comments"></i> Tư Vấn Nghề Nghiệp AI</h2>
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Career Advisor</span>
+                        <div style="margin-left: auto;">
+                            <span class="status-indicator">
+                                <i class="fas fa-circle" style="color: #10b981; font-size: 0.5rem;"></i>
+                                Online
+                            </span>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai">
+                            <div class="message-content">
+                                Xin chào! Tôi là AI Career Advisor. Dựa trên kết quả Holland của bạn, tôi sẽ cung cấp lời tư vấn nghề nghiệp chuyên sâu và chi tiết. Hãy hỏi tôi bất cứ điều gì về sự nghiệp mà bạn quan tâm!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Nhập câu hỏi của bạn...">
+                        <button class="send-btn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="api/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/compromise@14.10.0/builds/compromise.min.js"></script>
+    <script src="./backend/holland/career-ai.js"></script>
+    <script src="js/holland.js"> </script>
+</body>
+</html>

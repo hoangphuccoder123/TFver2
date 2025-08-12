@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Phỏng Vấn Ảo - TinHocTre AI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    \<link rel="stylesheet" href="css/interview.css">
+    <script src="api/main.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-video"></i>
+                    <span>Phòng Phỏng Vấn Ảo</span>
+                </div>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span id="systemStatus">Hệ thống sẵn sàng</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Main Dashboard -->
+            <div class="main-dashboard" id="mainDashboard">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">
+                        <i class="fas fa-video"></i>
+                        Phòng Phỏng Vấn Ảo
+                    </h1>
+                    <p class="dashboard-subtitle">
+                        Luyện tập phỏng vấn với AI thông minh - Nâng cao kỹ năng tự tin
+                    </p>
+                </div>
+
+                <div class="main-flow">
+                    <!-- Step 1: Upload CV -->
+                    <div class="flow-step active" id="step1">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <h3>Upload CV</h3>
+                            <p>AI sẽ đọc và phân tích CV của bạn</p>
+                        </div>
+                        
+                        <div class="cv-upload-section">
+                            <div class="cv-upload" onclick="document.getElementById('cvFileInput').click()">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">Chọn file CV</div>
+                                <div class="upload-hint">Hỗ trợ JPG, PNG, PDF (Max 10MB)</div>
+                                <input type="file" id="cvFileInput" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                            </div>
+                            
+                            <!-- CV Analysis Result -->
+                            <div class="cv-analysis-result" id="cvAnalysisResult" style="display: none;">
+                                <h4><i class="fas fa-check-circle"></i> Thông Tin Đã Phân Tích</h4>
+                                <div class="candidate-summary" id="candidateSummary">
+                                    <!-- CV info will be displayed here -->
+                                </div>
+                                <button class="btn btn-success btn-next" onclick="proceedToStep2()">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Tiếp Tục
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Position -->
+                    <div class="flow-step" id="step2">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <h3>Chọn Vị Trí & Câu Hỏi</h3>
+                            <p>Lựa chọn vị trí và loại câu hỏi phù hợp</p>
+                        </div>
+
+                        <div class="position-selection">
+                            <div class="selection-group">
+                                <label>Vị trí công việc:</label>
+                                <select id="positionSelect" class="form-select">
+                                    <option value="">Chọn vị trí...</option>
+                                    <!-- Will be populated from data files -->
+                                </select>
+                            </div>
+                            
+                            <div class="selection-group">
+                                <label>Mức độ kinh nghiệm:</label>
+                                <select id="levelSelect" class="form-select">
+                                    <option value="">Chọn mức độ...</option>
+                                    <option value="junior">Fresher/Junior (0-2 năm)</option>
+                                    <option value="mid">Middle/Senior (2-5 năm)</option>
+                                    <option value="senior">Senior/Lead (5+ năm)</option>
+                                </select>
+                            </div>
+
+                            <div class="selection-group">
+                                <label>Loại câu hỏi:</label>
+                                <div class="question-types">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="technicalQuestions" checked>
+                                        <span>Kỹ thuật</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="behavioralQuestions" checked>
+                                        <span>Hành vi</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="cvBasedQuestions" checked>
+                                        <span>Dựa trên CV</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-next" onclick="proceedToStep3()" disabled id="step2NextBtn">
+                                <i class="fas fa-arrow-right"></i>
+                                Tiếp Tục
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Interview Settings -->
+                    <div class="flow-step" id="step3">
+                        <div class="step-header">
+                            <div class="step-number">3</div>
+                            <h3>Cài Đặt Phỏng Vấn</h3>
+                            <p>Tùy chỉnh các thiết lập cho buổi phỏng vấn</p>
+                        </div>
+
+                        <div class="interview-settings">
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label>Thời gian phỏng vấn:</label>
+                                    <select id="interviewDuration" class="form-select">
+                                        <option value="300">5 phút</option>
+                                        <option value="600">10 phút</option>
+                                        <option value="900">15 phút</option>
+                                        <option value="1200">20 phút</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label>Số câu hỏi:</label>
+                                    <select id="questionCount" class="form-select">
+                                        <option value="5">5 câu hỏi</option>
+                                        <option value="7">7 câu hỏi</option>
+                                        <option value="10">10 câu hỏi</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="enableCamera">
+                                        <span>Bật camera (phân tích hành vi)</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-item camera-setup" id="cameraSetup" style="display: none;">
+                                    <div class="camera-preview">
+                                        <video id="localVideo" autoplay muted playsinline></video>
+                                        <div class="camera-placeholder" id="cameraPlaceholder">
+                                            <i class="fas fa-video-slash"></i>
+                                            <div>Camera chưa được bật</div>
+                                        </div>
+                                    </div>
+                                    <div class="camera-controls">
+                                        <button class="btn btn-primary btn-small" id="startCameraBtn">
+                                            <i class="fas fa-camera"></i> Bật Camera
+                                        </button>
+                                        <button class="btn btn-danger btn-small hidden" id="stopCameraBtn">
+                                            <i class="fas fa-camera-slash"></i> Tắt Camera
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="selected-questions-preview" id="questionsPreview">
+                                <h4>Câu hỏi đã chọn (<span id="selectedQuestionCount">0</span>)</h4>
+                                <div class="questions-list" id="questionsList">
+                                    <!-- Questions will be displayed here -->
+                                </div>
+                            </div>
+
+                            <button class="btn btn-success btn-large" onclick="startInterview()" id="startInterviewBtn">
+                                <i class="fas fa-play"></i>
+                                Bắt Đầu Phỏng Vấn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview Room -->
+            <div class="interview-room" id="interviewSection">
+                <div class="interview-grid">
+                    <div class="video-section">
+                        <div class="main-video">
+                            <video id="mainVideo" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                            <div style="position: absolute; top: 1rem; left: 1rem; background: rgba(0,0,0,0.7); padding: 0.5rem 1rem; border-radius: 5px;">
+                                <i class="fas fa-robot"></i> AI Interviewer
+                            </div>
+                            
+                            <!-- Mic Status Indicator -->
+                            <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.7); padding: 0.5rem 1rem; border-radius: 5px;">
+                                <i id="micIcon" class="fas fa-microphone" style="color: #4ade80;"></i>
+                                <span id="micStatus">Mic ON</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem;">
+                            <div class="user-video">
+                                <video id="userVideo" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                                <div style="position: absolute; bottom: 0.5rem; left: 0.5rem; background: rgba(0,0,0,0.7); padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.8rem;">
+                                    Bạn
+                                </div>
+                            </div>
+                            
+                            <div class="interview-controls">
+                                <button class="btn btn-primary" id="toggleMicBtn" onclick="toggleMicrophone()">
+                                    <i class="fas fa-microphone"></i>
+                                    Mic
+                                </button>
+                                <button class="btn btn-success" id="nextQuestionBtn" onclick="nextQuestion()">
+                                    <i class="fas fa-forward"></i>
+                                    Câu Tiếp
+                                </button>
+                                <button class="btn btn-danger" id="endInterviewBtn" onclick="endInterview()">
+                                    <i class="fas fa-stop"></i>
+                                    Kết Thúc
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-panel">
+                        <!-- Timer -->
+                        <div class="timer">
+                            <div class="timer-display" id="timerDisplay">05:00</div>
+                            <div class="timer-label">Thời gian còn lại</div>
+                        </div>
+
+                        <!-- Question Panel -->
+                        <div class="question-panel">
+                            <h4 class="section-title">Câu Hỏi Hiện Tại</h4>
+                            <div class="current-question" id="currentQuestion">
+                                Đang chuẩn bị câu hỏi đầu tiên...
+                            </div>
+                            <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 5px; font-size: 0.9rem;">
+                                <strong>Gợi ý:</strong> <span id="answerHint">Hãy trả lời một cách tự nhiên và tự tin</span>
+                            </div>
+                        </div>
+
+                        <!-- Chat Interface -->
+                        <div class="chat-interface">
+                            <h4 class="section-title">Chat Tương Tác</h4>
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="chat-message ai-message">
+                                    <strong>AI:</strong> Chào bạn! Tôi sẽ hỗ trợ bạn trong buổi phỏng vấn này.
+                                </div>
+                            </div>
+                            <div class="chat-input-area">
+                                <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." class="chat-input">
+                                <button onclick="sendChatMessage()" class="btn btn-primary btn-small">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Behavior Analysis -->
+                        <div class="behavior-analysis">
+                            <h4 class="section-title">Phân Tích Hành Vi</h4>
+                            
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Giao tiếp mắt</span>
+                                    <span id="eyeContactScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="eyeContactBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Tự tin</span>
+                                    <span id="confidenceScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="confidenceBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Ngôn ngữ cơ thể</span>
+                                    <span id="bodyLanguageScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="bodyLanguageBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Phát âm</span>
+                                    <span id="speechScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="speechBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview Results -->
+            <div class="interview-results" id="resultsSection">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Kết Quả Phỏng Vấn</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-score" style="color: #4ade80;" id="overallScore">85</div>
+                        <div class="result-description">
+                            <strong>Điểm Tổng Thể</strong><br>
+                            Bạn đã thể hiện rất tốt trong buổi phỏng vấn
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-score" style="color: #ffd700;" id="behaviorScore">78</div>
+                        <div class="result-description">
+                            <strong>Hành Vi & Thái Độ</strong><br>
+                            Giao tiếp tốt, cần cải thiện giao tiếp mắt
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-score" style="color: #667eea;" id="communicationScore">92</div>
+                        <div class="result-description">
+                            <strong>Kỹ Năng Giao Tiếp</strong><br>
+                            Phát âm rõ ràng, trả lời logic và thuyết phục
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="restartInterview()">
+                        <i class="fas fa-redo"></i>
+                        Phỏng Vấn Lại
+                    </button>
+                    <button class="btn btn-success" onclick="downloadReport()">
+                        <i class="fas fa-download"></i>
+                        Tải Báo Cáo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/interview.js"></script>
+</body>
+</html>
