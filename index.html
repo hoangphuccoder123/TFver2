@@ -2,2847 +2,551 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>TechFuture - Giải pháp Công nghệ Tương lai</title>
-    <link rel="shortcut icon" href="ảnh/Logo2.jpg">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            --accent-color: #4facfe;
-            --text-dark: #1a202c;
-            --text-light: #718096;
-            --background-light: #f8fafc;
-            --white: #ffffff;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
-            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
-            --border-radius: 16px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --glow-color: rgba(102, 126, 234, 0.5);
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinHocTre - Trang chủ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css">
 
-        /* Advanced Animations & Effects */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-10px) rotate(1deg); }
-            66% { transform: translateY(5px) rotate(-1deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px var(--glow-color); }
-            50% { box-shadow: 0 0 40px var(--glow-color), 0 0 60px var(--glow-color); }
-        }
-
-        @keyframes slideInFromBottom {
-            0% { 
-                opacity: 0; 
-                transform: translateY(50px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInFromLeft {
-            0% { 
-                opacity: 0; 
-                transform: translateX(-50px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInFromRight {
-            0% { 
-                opacity: 0; 
-                transform: translateX(50px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateX(0);
-            }
-        }
-
-        /* Particle Effect Container */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: particleFloat 15s linear infinite;
-        }
-
-        @keyframes particleFloat {
-            0% { 
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            zoom: 75%;
-            transform-origin: 0 0;
-        }        /* Header & Navigation */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
-            backdrop-filter: blur(25px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            height: 65px;
-            z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
-        }
-
-        .header.scrolled {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.98) 0%, rgba(118, 75, 162, 0.98) 100%);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
-            backdrop-filter: blur(30px) saturate(200%);
-            height: 60px;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.8s;
-        }
-
-        .header:hover::before {
-            left: 100%;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-            padding: 0 2rem;
-        }        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            padding: 0.4rem 1rem;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .logo:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-        }
-
-        .logo .logo-image {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover .logo-image {
-            transform: scale(1.05);
-            border-color: rgba(255, 107, 53, 0.5);
-            box-shadow: 0 6px 16px rgba(255, 107, 53, 0.2);
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-        }
-
-        .logo-main {
-            font-size: 1.4rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ffffff, #f0f8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .logo-subtitle {
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.85);
-            margin-top: -0.1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 0.3rem;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-menu li {
-            margin: 0;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            background: transparent;
-        }
-
-        .nav-menu a:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-        }        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: var(--white);
-            padding: 0.5rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .mobile-menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 65px;
-            left: 0;
-            right: 0;
-            background: var(--primary-gradient);
-            backdrop-filter: blur(20px);
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow-lg);
-            z-index: 999;
-        }
-
-        .mobile-nav.active {
-            display: block;
-        }
-
-        .mobile-nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .mobile-nav a {
-            text-decoration: none;
-            color: var(--white);
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .mobile-nav a:hover {
-            color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.2);
-        }/* Hero Section */
-        .hero {
-            min-height: 65vh;
-            background: var(--primary-gradient);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding: 5rem 0 3.5rem;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-            animation: floatBackground 20s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
-            animation: gradientMove 15s ease-in-out infinite;
-        }
-
-        @keyframes gradientMove {
-            0%, 100% { 
-                background: radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                           radial-gradient(circle at 70% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
-            }
-            50% { 
-                background: radial-gradient(circle at 70% 30%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                           radial-gradient(circle at 30% 70%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
-            }
-        }
-
-        @keyframes floatBackground {
-            0%, 100% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-10px) translateY(-5px); }
-            50% { transform: translateX(0) translateY(-10px); }
-            75% { transform: translateX(10px) translateY(-5px); }
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content {
-            animation: fadeInUp 1s ease 0.2s both;
-        }        .hero-content h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 1.2rem;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-content .highlight {
-            background: linear-gradient(135deg, #4facfe, #00d4ff, #4facfe);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientText 3s ease-in-out infinite;
-            position: relative;
-        }
-
-        @keyframes gradientText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero-content .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #4facfe, #00d4ff);
-            border-radius: 2px;
-            animation: highlightGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes highlightGlow {
-            0%, 100% { box-shadow: 0 0 5px rgba(79, 172, 254, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(79, 172, 254, 0.8); }
-        }        .hero-content p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.2rem;
-            flex-wrap: wrap;
-        }        .btn-primary {
-            background: var(--white);
-            color: #667eea;
-            padding: 0.9rem 2.2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.35);
-            border-color: rgba(102, 126, 234, 0.3);
-            color: #5a67d8;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            padding: 0.9rem 2.2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 2px solid var(--white);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            transition: left 0.4s;
-            z-index: -1;
-        }
-
-        .btn-secondary:hover::before {
-            left: 0;
-        }
-
-        .btn-secondary:hover {
-            color: #667eea;
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.15);
-            border-color: var(--white);
-        }
-
-        /* Hero Visual */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeInUp 1s ease 0.4s both;
-        }        .feature-showcase {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            width: 100%;
-            max-width: 550px;
-        }
-
-        .showcase-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            border-radius: 12px;
-            padding: 1.2rem;
-            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.15);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            cursor: pointer;
-            opacity: 1;
-            pointer-events: auto;
-            filter: none;
-            position: relative;
-            overflow: hidden;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .showcase-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .showcase-card:hover::before {
-            left: 100%;
-        }        
-        .showcase-card:nth-child(1) { animation-delay: 0s; }
-        .showcase-card:nth-child(2) { animation-delay: 0.8s; }
-        .showcase-card:nth-child(3) { animation-delay: 1.6s; }
-        .showcase-card:nth-child(4) { animation-delay: 2.4s; }
-        .showcase-card:nth-child(5) { animation-delay: 3.2s; }
-        .showcase-card:nth-child(6) { animation-delay: 4s; }
-
-        .showcase-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-            border-color: rgba(255, 107, 53, 0.3);
-        }
-
-        .showcase-card .icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 0.8rem;
-            background: var(--secondary-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25);
-            transition: all 0.3s ease;
-        }
-
-        .showcase-card:hover .icon {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
-
-        .showcase-card h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.3rem;
-        }
-
-        .showcase-card p {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            line-height: 1.3;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: var(--background-light);
-        }
-
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeInUp 1s ease both;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }        /* Features section specific styles */
-        .features .section-header h2 {
-            color: var(--white);
-        }
-
-        .features .section-header p {
-            color: rgba(255, 255, 255, 0.9);
-        }        /* About section specific styles */
-        .about-awards .section-header h2 {
-            color: var(--white);
-        }
-
-        .about-awards .section-header p {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            justify-items: center;
-            align-items: stretch;
-            margin-bottom: 2rem;
-        }        .feature-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            backdrop-filter: blur(10px);
-            padding: 1.2rem 1.2rem 1.1rem 1.2rem;
-            border-radius: 20px;
-            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.15);
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            cursor: default;
-            pointer-events: none;
-            min-width: 0;
-            max-width: 240px;
-            margin: 0 auto;
-            min-height: 170px;
-            height: 170px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--secondary-gradient);
-            border-radius: 20px 20px 0 0;
-            opacity: 0.12;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--secondary-gradient);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.6rem;
-            box-shadow: 0 2px 6px rgba(255,107,53,0.06);
-        }
-
-        .feature-icon .material-symbols-outlined {
-            font-size: 1.8rem;
-            color: var(--white);
-        }
-
-        .feature-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.3rem;
-            letter-spacing: 0.01em;
-            font-family: 'Inter', Arial, sans-serif;
-        }
-
-        .feature-card p {
-            color: #5a6270;
-            font-size: 0.88rem;
-            line-height: 1.45;
-            margin-bottom: 0;
-            font-family: 'Inter', Arial, sans-serif;
-            font-weight: 400;
-            opacity: 0.92;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            min-height: 6em;
-            max-height: 6.5em;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-        }
-
-        .features::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff6b35, transparent);
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
-        }
-
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease both;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 0.8rem;
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 550px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-            justify-items: center;
-            align-items: stretch;
-            margin-bottom: 1.5rem;
-        }        .feature-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            backdrop-filter: blur(10px);
-            padding: 1rem 1rem 0.9rem 1rem;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.12);
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            pointer-events: auto;
-            min-width: 0;
-            max-width: 220px;
-            margin: 0 auto;
-            min-height: 150px;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            position: relative;
-            overflow: hidden;
-        }        .feature-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            border-color: rgba(255, 107, 53, 0.5);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-        }
-
-        .feature-card.expanded {
-            height: auto;
-            max-height: none;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--secondary-gradient);
-            border-radius: 20px 20px 0 0;
-            opacity: 0.6;
-        }
-
-        .feature-icon {
-            width: 54px;
-            height: 54px;
-            background: var(--secondary-gradient);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.7rem;
-            box-shadow: 0 2px 8px rgba(255,107,53,0.08);
-        }
-
-        .feature-icon .material-symbols-outlined {
-            font-size: 2.1rem;
-            color: var(--white);
-        }
-
-        .feature-card h3 {
-            font-size: 1.18rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.01em;
-            font-family: 'Inter', Arial, sans-serif;
-        }
-
-        .feature-card p {
-            color: #5a6270;
-            font-size: 0.92rem;
-            line-height: 1.5;
-            margin-bottom: 0;
-            font-family: 'Inter', Arial, sans-serif;
-            font-weight: 400;
-            opacity: 0.92;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            min-height: 7.2em; /* 1.5 * 0.92rem * 5 dòng */
-            max-height: 7.5em;        }        /* About Us / Awards Section */
-        .about-awards {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%),
-                        url('ảnh/hackathon 2024.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-            overflow: hidden;
-        }.about-awards::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }        .about-awards::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.4) 0%, 
-                rgba(0, 0, 0, 0.2) 50%, 
-                rgba(0, 0, 0, 0.4) 100%);
-            z-index: 1;
-        }
-
-        @keyframes floatPattern {
-            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-            50% { transform: translateX(20px) translateY(-10px) rotate(5deg); }
-        }        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: start;
-            margin-bottom: 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .about-section {
-            text-align: center;
-            position: relative;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.08) 0%, 
-                rgba(255, 255, 255, 0.04) 50%, 
-                rgba(255, 255, 255, 0.08) 100%);
-            border-radius: 24px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .about-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -3rem;
-            transform: translateY(-50%);
-            width: 2px;
-            height: 60%;
-            background: linear-gradient(to bottom, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
-                rgba(255, 107, 53, 0.6),
-                rgba(255, 255, 255, 0.4), 
-                transparent);
-            border-radius: 2px;
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
-            z-index: 1;
-        }        .about-section:last-child::before {
-            display: none;
-        }
-
-        .about-section h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            position: relative;
-        }
-
-        .about-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--secondary-gradient);
-            border-radius: 2px;
-        }
-
-        .achievements {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .achievement-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: var(--transition);
-        }
-
-        .achievement-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(255, 107, 53, 0.2);
-        }
-
-        .achievement-icon {
-            font-size: 2rem;
-            width: 3rem;
-            height: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .achievement-text h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .achievement-text p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }        .awards-gallery {
-            position: relative;
-        }        .gallery-container {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            margin: 0 auto;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 
-                0 25px 80px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border: 3px solid rgba(255, 255, 255, 0.25);
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.12), 
-                rgba(255, 255, 255, 0.06));
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gallery-container:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 
-                0 35px 100px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.35);
-        }
-
-        .gallery-wrapper {
-            position: relative;
-            width: 100%;
-            height: 450px;
-            border-radius: 25px;
-            overflow: hidden;
-        }
-
-        .gallery-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .gallery-slide.active {
-            opacity: 1;
-        }
-
-        .gallery-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }        .slide-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            color: var(--white);
-            padding: 2rem 1.5rem 1.5rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .slide-overlay h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            background: linear-gradient(135deg, #ffffff, #f0f8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .slide-overlay p {
-            font-size: 0.95rem;
-            opacity: 0.95;
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .gallery-controls {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: space-between;
-            padding: 0 1rem;
-            pointer-events: none;
-        }        .gallery-btn {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            pointer-events: auto;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .gallery-btn:hover {
-            background: linear-gradient(135deg, var(--white), rgba(255, 255, 255, 0.95));
-            transform: scale(1.15);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-btn .material-symbols-outlined {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            font-weight: bold;
-        }
-
-        .gallery-dots {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-        }        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .dot.active {
-            background: var(--white);
-            transform: scale(1.1);
-        }/* CTA Section */
-        .cta {
-            padding: 3.5rem 0;
-            background: var(--text-dark);
-            color: var(--white);
-            text-align: center;
-            position: relative;
-        }
-
-        .cta::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #4facfe, transparent);
-            box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
-        }
-
-        .cta-content h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }        .cta-content p {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* CTA specific button styling */
-        .cta .hero-buttons {
-            gap: 1rem;
-        }
-
-        .cta .btn-primary,
-        .cta .btn-secondary {
-            padding: 0.8rem 1.8rem;
-            font-size: 0.9rem;        }/* Footer */
-        .footer {
-            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-            color: var(--white);
-            padding: 2.5rem 0 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.6), rgba(102, 126, 234, 0.6), transparent);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
-        }
-
-        .footer::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1.8fr 1fr 1fr 1.3fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Footer Brand Section */
-        .footer-brand {
-            padding-right: 1rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-logo .logo-image {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;            padding: 8px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 16px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.4), rgba(102, 126, 234, 0.4));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: exclude;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-        }
-
-        .logo-icon .material-symbols-outlined {
-            font-size: 2.2rem;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-        }
-
-        .footer-logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-logo h3 {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--white);
-            margin: 0;
-            background: linear-gradient(135deg, #ffffff, #f0f8ff, #e6f3ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
-        }
-
-        .footer-logo-subtitle {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #ff6b35;
-            margin-top: -0.1rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .footer-description {
-            color: #cbd5e0;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            padding-right: 1rem;
-        }
-
-        /* Newsletter Section */
-        .newsletter-section {
-            margin-top: 1.5rem;
-        }
-
-        .newsletter-section h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ff6b35;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .newsletter-form {
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .newsletter-form:focus-within {
-            border-color: rgba(255, 107, 53, 0.5);
-            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
-        }
-
-        .newsletter-input {
-            flex: 1;
-            padding: 0.875rem 1rem;
-            background: transparent;
-            border: none;
-            color: var(--white);
-            font-size: 0.9rem;
-            outline: none;
-        }
-
-        .newsletter-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .newsletter-btn {
-            padding: 0.875rem 1rem;
-            background: var(--secondary-gradient);
-            border: none;
-            color: var(--white);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .newsletter-btn:hover {
-            background: linear-gradient(135deg, #ff8c66 0%, #ffa64d 100%);
-            transform: translateX(-2px);
-        }
-
-        /* Footer Section Styles */
-        .footer-section h3 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
-            color: var(--white);
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background: var(--secondary-gradient);
-            border-radius: 1px;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links li a {
-            color: #a0aec0;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.25rem 0;
-            border-radius: 6px;
-        }
-
-        .footer-links li a .material-symbols-outlined {
-            font-size: 1.1rem;
-            color: #ff6b35;
-            opacity: 0.8;
-        }
-
-        .footer-links li a:hover {
-            color: var(--white);
-            transform: translateX(4px);
-        }
-
-        .footer-links li a:hover .material-symbols-outlined {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        /* Contact Section */        .footer-contact h3 {
-            margin-bottom: 1rem;
-        }
-
-        .contact-info {
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .contact-item .material-symbols-outlined {
-            font-size: 1.1rem;
-            color: #ff6b35;
-            flex-shrink: 0;
-        }
-
-        .contact-item a {
-            color: #cbd5e0;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contact-item a:hover {
-            color: #ff6b35;
-        }
-
-        .contact-item span {
-            color: #cbd5e0;
-        }
-
-        /* Social Links */        .social-links {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            margin-top: 0.5rem;
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            color: #cbd5e0;
-        }
-
-        .social-link svg,
-        .social-link .material-symbols-outlined {
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);            border-color: rgba(255, 107, 53, 0.5);
-            background: rgba(255, 107, 53, 0.1);
-            color: #ff6b35;
-        }
-
-        /* Footer Bottom */        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem 0;
-            margin-top: 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-bottom-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-copyright p {
-            color: #a0aec0;
-            font-size: 0.875rem;
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        .footer-copyright strong {
-            color: var(--white);
-            font-weight: 700;
-        }
-
-        .footer-legal-links {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.875rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-legal-links a {
-            color: #a0aec0;
-            text-decoration: none;
-            transition: var(--transition);
-            padding: 0.25rem 0;
-        }
-
-        .footer-legal-links a:hover {
-            color: #ff6b35;
-        }
-
-        .footer-legal-links .separator {
-            color: #4a5568;
-            font-weight: 300;
-        }
-
-        /* Footer Responsive Design */
-        @media (max-width: 1200px) {
-            .footer-content {
-                grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-                gap: 2.5rem;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 2.5rem;
-            }
-
-            .footer-brand {
-                padding-right: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .footer {
-                padding: 3rem 0 0;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }            .footer-logo {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .footer-logo-text {
-                align-items: center;
-            }
-
-            .footer-description {
-                text-align: center;
-                padding-right: 0;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .contact-info {
-                align-items: center;
-            }
-
-            .contact-item {
-                justify-content: flex-start;
-                text-align: left;
-            }
-
-            .footer-bottom-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.75rem;
-            }
-
-            .footer-legal-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .footer-content {
-                gap: 2rem;
-            }
-
-            .footer-logo h3 {
-                font-size: 1.75rem;
-            }
-
-            .footer-legal-links {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .footer-legal-links .separator {
-                display: none;
-            }
-        }/* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .animate-in {
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--secondary-gradient);
-            z-index: 10000;
-            transition: width 0.25s ease;
-        }
-
-        /* Enhanced loading animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #ff6b35;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Glowing text effect */
-        .glow-text {
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
-            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(79, 172, 254, 0.5); }
-        }        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2.2rem;
-            }
-
-            .section-header p {
-                font-size: 1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                gap: 1.3rem;
-            }
-
-            .nav-menu {
-                gap: 1.2rem;
-            }
-
-            .nav-menu a {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
-            }
-
-            .logo-main {
-                font-size: 1.5rem;
-            }
-
-            .logo-subtitle {
-                font-size: 0.6rem;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.2rem;
-            }
-
-            .feature-card {
-                padding: 1.5rem 1.2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                height: 60px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .logo {
-                padding: 0.3rem 0.8rem;
-                gap: 0.6rem;
-            }
-
-            .logo .logo-image {
-                width: 36px;
-                height: 36px;
-            }
-
-            .logo-main {
-                font-size: 1.2rem;
-            }
-
-            .logo-subtitle {
-                font-size: 0.55rem;
-            }
-
-            .mobile-nav {
-                top: 60px;
-            }
-
-            .logo-subtitle {
-                font-size: 0.65rem;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content p {
-                font-size: 0.95rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-                gap: 1rem;
-            }
-
-            .btn-primary, .btn-secondary {
-                padding: 0.8rem 1.8rem;
-                font-size: 0.9rem;
-            }            .feature-showcase {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 350px;
-                gap: 0.8rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-
-            .feature-card {
-                padding: 1.5rem 1.2rem;
-                max-width: 100%;
-            }            .cta-content h2 {
-                font-size: 1.8rem;
-            }            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-section h3 {
-                font-size: 1.4rem;
-            }
-
-            .achievement-item {
-                padding: 1.2rem;
-            }            .achievement-icon {
-                font-size: 1.5rem;
-                width: 2.5rem;
-                height: 2.5rem;
-            }            .gallery-wrapper {
-                height: 250px;
-            }
-
-            .gallery-btn {
-                width: 32px;
-                height: 32px;
-            }
-
-            .gallery-btn .material-symbols-outlined {
-                font-size: 1.1rem;
-            }        }        @media (max-width: 480px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.2rem;
-                padding: 0.3rem 0.6rem;
-                gap: 0.5rem;
-            }
-
-            .logo .logo-image {
-                width: 32px;
-                height: 32px;
-            }
-
-            .logo-main {
-                font-size: 1.1rem;
-            }
-
-            .logo-subtitle {
-                font-size: 0.5rem;
-            }
-
-            .feature-showcase {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 280px;
-                gap: 0.6rem;
-            }
-
-            .showcase-card {
-                padding: 0.8rem;
-            }
-
-            .showcase-card .icon {
-                width: 36px;
-                height: 36px;
-                margin-bottom: 0.6rem;
-            }
-
-            .showcase-card h4 {
-                font-size: 0.8rem;
-                margin-bottom: 0.2rem;
-            }
-
-            .showcase-card p {
-                font-size: 0.7rem;
-            }
-
-            .section-container {
-                padding: 0 1rem;
-            }
-
-            .hero-content h1 {
-                font-size: 1.7rem;
-            }
-
-            .hero-content p {
-                font-size: 0.9rem;
-            }
-
-            .btn-primary, .btn-secondary {
-                padding: 0.75rem 1.6rem;
-                font-size: 0.85rem;
-            }            .cta-content h2 {
-                font-size: 1.6rem;
-            }.section-header h2 {
-                font-size: 2rem;
-            }            .about-section h3 {
-                font-size: 1.2rem;
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-
-            .achievement-item {
-                padding: 1rem;
-                flex-direction: column;
-                text-align: center;
-            }            .achievement-icon {
-                align-self: center;
-            }
-
-            .gallery-wrapper {
-                height: 200px;
-            }
-
-            .gallery-controls {
-                padding: 0 0.5rem;
-            }
-
-            .gallery-btn {
-                width: 30px;
-                height: 30px;
-            }
-
-            .gallery-btn .material-symbols-outlined {
-                font-size: 1rem;
-            }
-
-            .slide-overlay {
-                padding: 1rem 0.8rem 0.8rem;
-            }
-
-            .slide-overlay h4 {
-                font-size: 1rem;
-            }
-
-            .slide-overlay p {
-                font-size: 0.8rem;
-            }
-
-            .footer-logo {
-                justify-content: center;
-                gap: 0.8rem;
-            }
-
-            .footer-logo .material-symbols-outlined {
-                font-size: 2.2rem;
-            }
-
-            .footer-logo h3 {
-                font-size: 1.5rem;
-            }
-
-            .footer-logo-subtitle {
-                font-size: 0.65rem;
-            }
-
-            .gallery-btn {
-                width: 30px;
-                height: 30px;
-            }
-
-            .gallery-btn .material-symbols-outlined {
-                font-size: 1rem;
-            }
-
-            .slide-overlay {
-                padding: 1rem 0.8rem 0.8rem;
-            }
-
-            .slide-overlay h4 {
-                font-size: 1rem;
-            }
-
-            .slide-overlay p {
-                font-size: 0.8rem;
-            }
-
-            .footer-logo {
-                justify-content: center;
-                gap: 0.8rem;
-            }
-
-            .footer-logo .material-symbols-outlined {
-                font-size: 2.2rem;
-            }
-
-            .footer-logo h3 {
-                font-size: 1.5rem;
-            }            .footer-logo-subtitle {
-                font-size: 0.65rem;
-            }
-
-            .gallery-wrapper {
-                height: 250px;
-            }
-
-            .gallery-controls {
-                padding: 0 0.5rem;
-            }
-
-            .gallery-btn {
-                width: 35px;
-                height: 35px;
-            }
-
-            .gallery-btn .material-symbols-outlined {
-                font-size: 1.1rem;
-            }
-
-            .slide-overlay {
-                padding: 1.5rem 1rem 1rem;
-            }
-
-            .slide-overlay h4 {
-                font-size: 1.1rem;
-            }
-
-            .slide-overlay p {
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #ff6b35;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
+    <script src="api/main.js"></script>
+    <!-- Transparent Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="top-nav-content">
+            <a href="index.html" class="top-nav-logo">
+                <img src="photo/icon/Logo2.jpg" alt="Logo" class="top-nav-logo-img">
+                <span class="top-nav-brand">TechFuture</span>
+                <!-- Login Status Indicator -->
+                <div id="loginStatusIndicator" title="Trạng thái đăng nhập">🔒</div>
+            </a>
+            <button class="top-nav-menu-btn" aria-label="Mở menu" tabindex="0" style="display:none">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <div class="top-nav-links">
+                <a href="agent-cv.html" class="top-nav-link gradient-text">AI CV Analyzer</a>
+                <a href="holland+chatbot.html" class="top-nav-link gradient-text">Holland Chatbot</a>
+                <a href="interview.html" class="top-nav-link gradient-text">Phỏng vấn ảo</a>
+                <a href="cv.html" class="top-nav-link gradient-text">Lọc CV</a>
+                <a href="#" id="authToggleBtn" class="top-nav-auth-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Đăng nhập</span>
+                </a>
+            </div>
+        </div>
+        <div class="top-nav-overlay"></div>
+    </nav>
+
+    <!-- Animated Background -->
+    <div class="gradient-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="floating-shapes" id="floatingShapes"></div>
+    
+    <!-- Floating Icons -->
+    <div class="floating-icons" id="floatingIcons"></div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Login Required Modal -->
+    <div class="login-modal" id="loginModal" style="display: none;">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+                <h3>Yêu cầu đăng nhập</h3>
+                <button class="login-modal-close" id="closeLoginModal">&times;</button>
+            </div>
+            <div class="login-modal-body">
+                <div class="login-modal-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <p>Bạn cần đăng nhập để truy cập tính năng này!</p>
+                <p class="login-modal-subtitle">Đăng nhập để khám phá toàn bộ các công cụ AI mạnh mẽ của TechFuture.</p>
+            </div>
+            <div class="login-modal-footer">
+                <a href="login.html" class="login-modal-btn primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Đăng nhập ngay
+                </a>
+                <a href="register.html" class="login-modal-btn secondary">
+                    <i class="fas fa-user-plus"></i>
+                    Đăng ký
+                </a>
+            </div>
+        </div>
+        <div class="login-modal-overlay"></div>
     </div>
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav-container"><a href="#home" class="logo">
-                <img src="ảnh/Logo2.jpg" alt="TechFuture Logo" class="logo-image">
-                <div class="logo-text">
-                    <span class="logo-main">TechFuture</span>
-                    <span class="logo-subtitle">Technology Solutions</span>
-                </div>
-            </a><ul class="nav-menu">
-                <li><a href="#home">Trang chủ</a></li>
-                <li><a href="#features">Tính năng</a></li>
-                <li><a href="thành tích/team achievements.html">Về chúng tôi</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
-            </ul>
-
-            <button class="mobile-menu-toggle" id="mobileToggle">
-                <span class="material-symbols-outlined">menu</span>
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content" id="imageModalContent">
+            <div class="image-modal-header">
+                <h3 class="image-modal-title" id="imageModalTitle">Xem ảnh thành tích</h3>
+                <button class="image-modal-close" id="closeImageModal">&times;</button>
+            </div>
+            <img src="" alt="" class="image-modal-img" id="imageModalImg">
+            <div class="image-modal-footer">
+                <p class="image-modal-description" id="imageModalDesc">Mô tả thành tích</p>
+            </div>
+            <button class="image-download-btn" id="imageDownloadBtn">
+                <i class="fas fa-download"></i>
+                Tải xuống
             </button>
-        </nav>
-
-        <!-- Mobile Menu -->        <div class="mobile-nav" id="mobileNav">            <ul>
-                <li><a href="#home">Trang chủ</a></li>
-                <li><a href="#features">Tính năng</a></li>
-                <li><a href="team achievements.html">Về chúng tôi</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
-            </ul>
         </div>
-    </header>    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <!-- Particle Effects -->
-        <div class="particles" id="particles"></div>
-          <div class="hero-container"><div class="hero-content">
-                <h1>Đưa <span class="highlight">Công nghệ</span> vào <span class="highlight">Tương lai</span> Doanh nghiệp</h1>
-                <p>TechFuture cung cấp các giải pháp công nghệ tiên tiến, từ phát triển phần mềm, AI, đến tự động hóa quy trình. Chúng tôi giúp doanh nghiệp chuyển đổi số và tối ưu hiệu quả hoạt động.</p>
-                <div class="hero-buttons">
-                    <a href="#features" class="btn-primary">
-                        <span class="material-symbols-outlined">rocket_launch</span>
-                        Khám phá Giải pháp
-                    </a>
-                    <a href="#contact" class="btn-secondary">
-                        <span class="material-symbols-outlined">support_agent</span>
-                        Tư vấn miễn phí
-                    </a>
-                </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">TechFuture AI</h1>
+                <p class="hero-slogan">Khơi nguồn sáng tạo, dẫn lối tương lai!</p>
+                <p class="hero-description">
+                    Đột phá cùng AI: Phân tích CV, Chatbot nghề nghiệp, phỏng vấn ảo và nhiều công nghệ thông minh khác. <br>
+                    <span class="slogan-highlight">Trải nghiệm tương lai ngay hôm nay!</span>
+                </p>
+
+                <!-- Features Grid đã được xóa -->
+
             </div>
-
-            <div class="hero-visual">                <div class="feature-showcase">
-                    <div class="showcase-card" data-link="#automation">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">precision_manufacturing</span>
-                        </div>
-                        <h4>Tự động hóa</h4>
-                        <p>Quy trình thông minh</p>
-                    </div>
-                    <div class="showcase-card" data-link="#ai-solutions">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">psychology</span>
-                        </div>
-                        <h4>AI Solutions</h4>
-                        <p>Trí tuệ nhân tạo</p>
-                    </div>
-                    <div class="showcase-card" data-link="#cloud-services">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">cloud</span>
-                        </div>
-                        <h4>Cloud Services</h4>
-                        <p>Điện toán đám mây</p>
-                    </div>
-                    <div class="showcase-card" data-link="#cybersecurity">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">security</span>
-                        </div>
-                        <h4>Bảo mật</h4>
-                        <p>An toàn thông tin</p>
-                    </div>
-                    <div class="showcase-card" data-link="#innovation">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">lightbulb</span>
-                        </div>
-                        <h4>Đổi mới sáng tạo</h4>
-                        <p>Công nghệ tiên tiến</p>
-                    </div>
-                    <div class="showcase-card" data-link="#support">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">support_agent</span>
-                        </div>
-                        <h4>Hỗ trợ 24/7</h4>
-                        <p>Dịch vụ chuyên nghiệp</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>Tính năng nổi bật</h2>
-                <p>Khám phá các tính năng độc đáo được tích hợp AI giúp bạn thành công trong sự nghiệp</p>
-            </div>
-
-            <div class="features-grid">                <!-- AI Interview -->
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">psychology</span>
-                    </div>
-                    <h3>🎯 Phỏng vấn ảo với AI</h3>
-                    <p>Luyện tập phỏng vấn 1-1 với AI, mô phỏng tình huống thực tế, nhận phản hồi chi tiết về câu trả lời, kỹ năng giao tiếp và ngôn ngữ cơ thể. Tăng tự tin, cải thiện ứng biến, chuẩn bị tốt cho phỏng vấn thật.</p>
-                </div>
-
-                <!-- CV Analysis -->
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">description</span>
-                    </div>
-                    <h3>📊 Phân tích CV thông minh</h3>
-                    <p>AI đánh giá điểm mạnh, điểm yếu từng phần trong CV, đề xuất cải thiện, tối ưu từ khóa để vượt qua hệ thống lọc tự động. Hỗ trợ nhiều định dạng file, trả kết quả nhanh chóng, trực quan.</p>
-                </div>
-
-                <!-- Career Guidance -->
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">route</span>
-                    </div>
-                    <h3>🚀 Hướng nghiệp cá nhân hóa</h3>
-                    <p>Xây dựng lộ trình nghề nghiệp riêng dựa trên kỹ năng, sở thích, xu hướng thị trường. Đề xuất khóa học, chứng chỉ, mục tiêu rõ ràng, từng bước phát triển sự nghiệp.</p>
-                </div>
-
-                <!-- Recruitment Management -->
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">groups</span>
-                    </div>
-                    <h3>💼 Quản lý tuyển dụng toàn diện</h3>
-                    <p>Dashboard HR hiện đại: đăng tin, lọc CV tự động, quản lý pipeline ứng viên, phỏng vấn video, báo cáo phân tích chi tiết. Giảm thời gian, nâng cao chất lượng tuyển dụng.</p>
-                </div>
-
-                <!-- Holland Test -->
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">psychology_alt</span>
-                    </div>
-                    <h3>🧠 Trắc nghiệm Holland RIASEC</h3>
-                    <p>Bài test tính cách nghề nghiệp quốc tế, phân tích 6 nhóm tính cách, gợi ý top 10 nghề phù hợp. Hỗ trợ định hướng nghề nghiệp sớm, chính xác.</p>
-                </div>
-            </div>        </div>    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="cta">
-        <div class="section-container">
-            <div class="cta-content fade-in">
-                <h2>Sẵn sàng bước vào tương lai sự nghiệp?</h2>
-                <p>Tham gia cùng hàng chục ngàn ứng viên và nhà tuyển dụng đã thành công với Tech CV. Bắt đầu hành trình phát triển sự nghiệp của bạn ngay hôm nay!</p>
-                <div class="hero-buttons" style="justify-content: center;">
-                    <a href="Ứng Viên.html" class="btn-primary">
-                        <span class="material-symbols-outlined">person_add</span>
-                        Bắt đầu với tư cách Ứng viên
-                    </a>                    <a href="đăng nhập nhà tuyển dụng.html" class="btn-secondary">
-                        <span class="material-symbols-outlined">business_center</span>
-                        Đăng ký Nhà tuyển dụng
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="section-container">
-            <!-- Main Footer Content -->
-            <div class="footer-content">
-                <!-- Company Info Section -->
-                <div class="footer-section footer-brand">
-                    <div class="footer-logo">
-                        <img src="ảnh/logo2.jpg" alt="TechFuture" class="logo-image">
-                        <div class="footer-logo-text">
-                            <h3>TechFuture</h3>
-                            <span class="footer-logo-subtitle">Technology Solutions</span>
-                        </div>
-                    </div>
-                    <p class="footer-description">
-                        Đơn vị tiên phong trong lĩnh vực công nghệ, chuyên cung cấp các giải pháp AI, tự động hóa và chuyển đổi số.
+        </section>
+        <!-- Features Introduction Section -->
+        <section class="features-intro" id="features-intro">
+            <div class="features-intro-container">
+                <div class="intro-header">
+                    <h2 class="intro-title">Khám Phá Tính Năng Nổi Bật</h2>
+                    <p class="intro-subtitle">
+                        Những <span class="highlight-keyword">công cụ AI tiên tiến</span> và 
+                        <span class="highlight-keyword">giải pháp thông minh</span> giúp bạn 
+                        <span class="highlight-keyword">xây dựng sự nghiệp thành công</span> 
+                        trong kỷ nguyên số
                     </p>
-                </div>                <!-- Features for Candidates -->
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="photo/icon/toppcv.png" alt="CV Analysis" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">AI CV Analyzer</h3>
+                        <p class="feature-desc">Phân tích CV thông minh với AI, đưa ra đánh giá chi tiết và gợi ý cải thiện để tối ưu hóa cơ hội việc làm của bạn.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">⚡ Phân tích nhanh</span>
+                            <span class="stat">📊 Báo cáo chi tiết</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="photo/icon/hollandd.jpg" alt="Holland Test" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Holland Chatbot</h3>
+                        <p class="feature-desc">Chatbot AI thông minh giúp bạn khám phá tính cách nghề nghiệp theo mô hình Holland, định hướng con đường sự nghiệp phù hợp.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🎯 Định hướng chính xác</span>
+                            <span class="stat">💬 Tương tác thông minh</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <i class="fas fa-video feature-icon-fa"></i>
+                            <div class="feature-overlay">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Phỏng Vấn Ảo</h3>
+                        <p class="feature-desc">Luyện tập phỏng vấn với AI trong môi trường ảo, nhận phản hồi chi tiết để cải thiện kỹ năng giao tiếp và thuyết trình.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🎤 Thực hành thực tế</span>
+                            <span class="stat">📈 Cải thiện kỹ năng</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <i class="fas fa-filter feature-icon-fa"></i>
+                            <div class="feature-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Lọc CV Thông Minh</h3>
+                        <p class="feature-desc">Hệ thống lọc CV tự động với AI, giúp nhà tuyển dụng tìm được ứng viên phù hợp một cách nhanh chóng và chính xác.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🔍 Tìm kiếm thông minh</span>
+                            <span class="stat">⏱️ Tiết kiệm thời gian</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="photo/icon/Logo2.jpg" alt="CV Builder" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Tạo CV Chuyên Nghiệp</h3>
+                        <p class="feature-desc">Công cụ tạo CV với AI hỗ trợ, nhiều mẫu đẹp, tự động tối ưu nội dung để tạo ra CV ấn tượng và chuyên nghiệp.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🎨 Thiết kế đẹp</span>
+                            <span class="stat">🤖 AI hỗ trợ</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon-box">
+                            <img src="photo/icon/congnghe.jpg" alt="FPT Integration" class="feature-img">
+                            <div class="feature-overlay">
+                                <i class="fas fa-link"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-name">Tích Hợp Công Nghệ</h3>
+                        <p class="feature-desc">Kết hợp công nghệ AI tiên tiến với hệ sinh thái tuyển dụng, mang đến trải nghiệm hoàn chỉnh cho cả ứng viên và nhà tuyển dụng.</p>
+                        <div class="feature-stats-row">
+                            <span class="stat">🔗 Kết nối toàn diện</span>
+                            <span class="stat">🚀 Công nghệ tiên tiến</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About TechFuture Section -->
+        <section class="about-techfuture" id="about-techfuture">
+            <div class="about-container">
+                <div class="about-header">
+                    <h2 class="about-title"> Về TechFuture AI </h2>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-text">
+                        <div class="about-description-enhanced">
+                            <p class="about-main-description">
+                                <span class="company-name">TechFuture</span> được thành lập với sứ mệnh mang 
+                                <span class="highlight-keyword">công nghệ AI tiên tiến</span> đến gần hơn với mọi người trong lĩnh vực 
+                                <span class="highlight-keyword">tuyển dụng</span> và <span class="highlight-keyword">phát triển sự nghiệp</span>. 
+                                Chúng tôi tin rằng <span class="ai-text">AI</span> không chỉ là công nghệ mà còn là 
+                                <span class="bridge-text">cầu nối</span> giúp kết nối <span class="talent-text">tài năng</span> với 
+                                <span class="opportunity-text">cơ hội</span>. Với <span class="team-text">đội ngũ chuyên gia giàu kinh nghiệm</span> 
+                                trong lĩnh vực <span class="tech-keywords">AI, Machine Learning và HR Tech</span>, chúng tôi không ngừng 
+                                <span class="innovation-text">nghiên cứu và phát triển</span> những 
+                                <span class="solution-text">giải pháp thông minh, hiệu quả và dễ sử dụng</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <span class="about-stat-number">100+</span>
+                        <span class="about-stat-label">CV được phân tích</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-number">80%+</span>
+                        <span class="about-stat-label">Độ chính xác AI</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-number">50+</span>
+                        <span class="about-stat-label">Người dùng hài lòng</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-number">24/7</span>
+                        <span class="about-stat-label">Hỗ trợ kỹ thuật</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Thành Tích Nổi Bật Section -->
+        <section class="achievements" id="achievements">
+            <div class="achievements-container">
+                <div class="achievements-header">
+                    <h2 class="achievements-title">Thành Tích Nổi Bật</h2>
+                    <p class="achievements-subtitle">
+                        Những <span class="highlight-keyword-gold">cột mốc quan trọng</span> và 
+                        <span class="highlight-keyword-gold">thành tựu đáng tự hào</span> của TechFuture 
+                        trong <span class="highlight-keyword-gold">hành trình phát triển</span> và 
+                        <span class="highlight-keyword-gold">đồng hành cùng thành công</span> của bạn
+                    </p>
+                </div>
+
+
+
+                <div class="achievements-grid">
+                    <!-- 1. Giải Nhất Tin Học Trẻ - Đặt ở vị trí đầu tiên -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <img src="photo/tropine/tmhp.png" alt="Giải Nhất Tin Học Trẻ" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/tmhp.png', 'Giải Nhất Tin Học Trẻ Khu Vực Miền Bắc Bảng D3', 'Đạt giải Nhất cuộc thi Tin Học Trẻ khu vực Miền Bắc bảng D3 - thành tích xuất sắc trong lĩnh vực công nghệ thông tin')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="achievement-content">
+                            <h3 class="achievement-name">
+                                <i class="fas fa-medal medal-icon medal-first"></i>
+                                Giải Nhất Tin Học Trẻ Khu Vực Miền Bắc Bảng D3
+                            </h3>
+                            <p class="achievement-desc">Đạt giải Nhất cuộc thi Tin Học Trẻ khu vực Miền Bắc bảng D3 - thành tích xuất sắc trong lĩnh vực công nghệ thông tin</p>
+                            <span class="achievement-year">2024</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Giải Nhất Biz Day -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <img src="photo/tropine/Bizday.jpg" alt="Business Day" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/Bizday.jpg', 'Giải Nhất Biz Day Cuộc Thi Kinh Doanh Cấp Trường', 'Đạt giải Nhất cuộc thi Biz Day kinh doanh cấp trường với presentation xuất sắc về tương lai AI trong doanh nghiệp')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="achievement-content">
+                            <h3 class="achievement-name">
+                                <i class="fas fa-medal medal-icon medal-first"></i>
+                                Giải Nhất Biz Day Cuộc Thi Kinh Doanh Cấp Trường
+                            </h3>
+                            <p class="achievement-desc">Đạt giải Nhất cuộc thi Biz Day kinh doanh cấp trường với presentation xuất sắc về tương lai AI trong doanh nghiệp</p>
+                            <span class="achievement-year">2024</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Giải Đặc Biệt Sáng Tạo -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <img src="photo/tropine/stttnnd.jpg" alt="Sáng tạo thanh thiếu niên" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/stttnnd.jpg', 'Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng', 'Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="achievement-content">
+                            <h3 class="achievement-name">
+                                <i class="fas fa-star medal-icon medal-special"></i>
+                                Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng
+                            </h3>
+                            <p class="achievement-desc">Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ</p>
+                            <span class="achievement-year">2023</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Giải Nhì Tin Học Trẻ -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <img src="photo/tropine/tinhoctre.png" alt="Tin học trẻ" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/tinhoctre.png', 'Giải Nhì Tin Học Trẻ Bảng D3 Thành Phố Hải Phòng', 'Đạt giải Nhì cuộc thi Tin Học Trẻ bảng D3 thành phố Hải Phòng - thành tích xuất sắc trong lĩnh vực công nghệ thông tin địa phương')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="achievement-content">
+                            <h3 class="achievement-name">
+                                <i class="fas fa-medal medal-icon medal-second"></i>
+                                Giải Nhì Tin Học Trẻ Bảng D3 Thành Phố Hải Phòng
+                            </h3>
+                            <p class="achievement-desc">Đạt giải Nhì cuộc thi Tin Học Trẻ bảng D3 thành phố Hải Phòng - thành tích xuất sắc trong lĩnh vực công nghệ thông tin địa phương</p>
+                            <span class="achievement-year">2023</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. Giải Triển Vọng FPT -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <img src="photo/tropine/hackathon2024.jpg" alt="Hackathon 2024" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/hackathon2024.jpg', 'Giải Triển Vọng FPT Edy Hackathon', 'Đạt giải Triển vọng tại cuộc thi FPT Edy Hackathon 2024 với dự án AI tuyển dụng thông minh và sáng tạo')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="achievement-content">
+                            <h3 class="achievement-name">
+                                <i class="fas fa-trophy medal-icon medal-potential"></i>
+                                Giải Triển Vọng FPT Edy Hackathon
+                            </h3>
+                            <p class="achievement-desc">Đạt giải Triển vọng tại cuộc thi FPT Edy Hackathon 2024 với dự án AI tuyển dụng thông minh và sáng tạo</p>
+                            <span class="achievement-year">2024</span>
+                        </div>
+                    </div>
+
+                    <!-- 6. Top 50 VNU -->
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <img src="photo/tropine/kinhdoanh2024.jpg" alt="Kinh doanh 2024" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/kinhoanh2024.jpg', 'Top 50 Dự Án Kinh Doanh Xuất Sắc Nhất VNU', 'Được vinh danh trong Top 50 dự án kinh doanh xuất sắc nhất của Đại học Quốc gia Việt Nam (VNU) với ý tưởng công nghệ AI')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="achievement-content">
+                            <h3 class="achievement-name">
+                                <i class="fas fa-award medal-icon medal-top"></i>
+                                Top 50 Dự Án Kinh Doanh Xuất Sắc Nhất VNU
+                            </h3>
+                            <p class="achievement-desc">Được vinh danh trong Top 50 dự án kinh doanh xuất sắc nhất của Đại học Quốc gia Việt Nam (VNU) với ý tưởng công nghệ AI</p>
+                            <span class="achievement-year">2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Doanh Nghiệp Hỗ Trợ Section -->
+    <section class="business-support" id="business-support">
+        <div class="business-support-container">
+            <div class="business-support-header">
+                <h2 class="business-support-title">Doanh Nghiệp Hỗ Trợ</h2>
+                <p class="business-support-subtitle">
+                    Chúng tôi <span class="highlight-keyword-purple">tự hào được đồng hành</span> cùng các 
+                    <span class="highlight-keyword-purple">doanh nghiệp hàng đầu</span> trong việc 
+                    <span class="highlight-keyword-purple">phát triển nguồn nhân lực</span> và 
+                    <span class="highlight-keyword-purple">ứng dụng công nghệ AI</span> hiệu quả
+                </p>
+            </div>
+            
+            <div class="business-support-content">
+                <!-- Cột trái: Thông tin và tính năng -->
+                <div class="business-support-text">
+                    <div class="business-description-enhanced">
+                        <p class="business-support-description">
+                            <span class="highlight-text">TechFuture</span> đã và đang hợp tác với nhiều <span class="emphasis-text">doanh nghiệp lớn nhỏ</span>, từ <span class="startup-text">startup</span> đến <span class="corporate-text">tập đoàn</span>, giúp họ <span class="benefit-text">tối ưu hóa quy trình tuyển dụng</span> và phát triển <span class="quality-text">đội ngũ nhân sự chất lượng cao</span>.
+                        </p>
+                    </div>
+                    
+                    <div class="business-support-features">
+                        <div class="business-feature-item">
+                            <div class="business-feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="business-feature-text">
+                                <h4>Thành Tích Xuất Sắc</h4>
+                                <p>Giải Nhất Tin Học Trẻ Miền Bắc - minh chứng cho chất lượng công nghệ hàng đầu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="business-feature-item">
+                            <div class="business-feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="business-feature-text">
+                                <h4>Đội Ngũ Chuyên Nghiệp</h4>
+                                <p>Hỗ trợ 24/7 với đội ngũ chuyên gia giàu kinh nghiệm</p>
+                            </div>
+                        </div>
+                        
+                        <div class="business-feature-item">
+                            <div class="business-feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="business-feature-text">
+                                <h4>Tăng Trưởng Bền Vững</h4>
+                                <p>Giải pháp tối ưu hóa hiệu quả tuyển dụng lên đến 300%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cột phải: Hình ảnh -->
+                <div class="business-support-image">
+                    <img src="photo/tropine/contact.jpg" alt="Doanh Nghiệp Hỗ Trợ" loading="lazy">
+                    <div class="business-support-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Cột 1: Thông tin công ty -->
                 <div class="footer-section">
-                    <h3>Dành cho Ứng viên</h3>
-                    <ul class="footer-links">
-                        <li><a href="#cv-analysis">Phân tích CV thông minh</a></li>
-                        <li><a href="#interview-prep">Luyện tập phỏng vấn</a></li>
-                        <li><a href="#career-advice">Tư vấn nghề nghiệp</a></li>
-                        <li><a href="#skill-assessment">Đánh giá kỹ năng</a></li>
-                    </ul>
-                </div>                <!-- Features for Employers -->
+                    <div class="footer-logo">
+                        <img src="photo/icon/Logo2.jpg" alt="TechFuture Logo" class="footer-logo-img">
+                        <span class="footer-brand">TechFuture</span>
+                    </div>
+                    <p class="footer-desc">
+                        Nền tảng AI thông minh hỗ trợ định hướng nghề nghiệp và tuyển dụng hiệu quả.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/profile.php?id=61577736765345&sk=friends_likes" target="_blank" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.twitter.com" target="_blank" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.youtube.com" target="_blank" class="social-link" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cột 2: Chức năng sản phẩm -->
                 <div class="footer-section">
-                    <h3>Dành cho Doanh nghiệp</h3>
+                    <h4 class="footer-title">Chức Năng Sản Phẩm</h4>
                     <ul class="footer-links">
-                        <li><a href="#post-jobs">Đăng tin tuyển dụng</a></li>
-                        <li><a href="#manage-candidates">Quản lý ứng viên</a></li>
-                        <li><a href="#search-cv">Tìm kiếm CV</a></li>
-                        <li><a href="#employer-brand">Xây dựng thương hiệu</a></li>
+                        <li><a href="agent-cv.html">AI CV Analyzer</a></li>
+                        <li><a href="holland+chatbot.html">Holland Chatbot</a></li>
+                        <li><a href="interview.html">Phỏng Vấn Ảo</a></li>
+                        <li><a href="cv.html">Lọc CV</a></li>
                     </ul>
                 </div>
 
-                <!-- Contact & Social Section -->
-                <div class="footer-section footer-contact">
-                    <h3>Liên hệ</h3>
+                <!-- Cột 3: Về Chúng Tôi -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Về Chúng Tôi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about-techfuture">Giới thiệu TechFuture</a></li>
+                        <li><a href="#features-intro">Tính năng nổi bật</a></li>
+                        <li><a href="#achievements">Thành tích nổi bật</a></li>
+                        <li><a href="#business-support">Đối tác hỗ trợ</a></li>
+                        <li><a href="#contact">Thông tin liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cột 4: Thông tin liên hệ -->
+                <div class="footer-section" id="contact">
+                    <h4 class="footer-title">Thông Tin Liên Hệ</h4>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hải Phòng, Việt Nam</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+84 899.28.01.08</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>hoanphuc135@gmail.com</span>
+                        </div>
                     
-                    <!-- Contact Information -->
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <span class="material-symbols-outlined">call</span>
-                            <a href="tel:+842439998888">(+84) 898280108</a>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="material-symbols-outlined">mail</span>
-                            <a href="mailto:info@techfuture.vn">hoanphuc135@gmail.com</a>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="material-symbols-outlined">location_on</span>
-                            <span>Hải An, Hải Phòng</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Social Media Links -->
-                    <div class="social-links">
-                        <a href="https://facebook.com/techfuture" target="_blank" class="social-link" title="Facebook">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>                        <a href="https://www.linkedin.com/in/phuc-truong-minh-hoang-5ba70532b/" target="_blank" class="social-link" title="LinkedIn">
-                            <span class="material-symbols-outlined">business</span>
-                        </a>
-                        <a href="https://youtube.com/@techfuture" target="_blank" class="social-link" title="YouTube">
-                            <span class="material-symbols-outlined">play_circle</span>
-                        </a>
-                        <a href="https://github.com/hoangphuccoder123" target="_blank" class="social-link" title="GitHub">
-                            <span class="material-symbols-outlined">code</span>
-                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <div class="footer-copyright">
-                        <p>&copy; 2024 <strong>TechFuture</strong>. Tất cả quyền được bảo lưu.</p>
-                    </div>
-                    
-                    <div class="footer-legal-links">
-                        <a href="/dieu-khoan">Điều khoản</a>
-                        <span class="separator">|</span>
-                        <a href="/bao-mat">Bảo mật</a>
-                        <span class="separator">|</span>
-                        <a href="/lien-he">Liên hệ</a>
+                    <p class="footer-copyright">
+                        © 2025 TechFuture. Tất cả quyền được bảo lưu.
+                    </p>
+                    <div class="footer-legal">
+                        <a href="#">Chính Sách Bảo Mật</a>
+                        <a href="#">Điều Khoản Sử Dụng</a>
+                        <a href="#">Cookie</a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer><script>
-        // Particle Effect Generator
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                // Random size between 2px and 6px
-                const size = Math.random() * 4 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                
-                // Random horizontal position
-                particle.style.left = Math.random() * 100 + '%';
-                
-                // Random animation duration between 10s and 20s
-                const duration = Math.random() * 10 + 10;
-                particle.style.animationDuration = duration + 's';
-                
-                // Random delay
-                const delay = Math.random() * 20;
-                particle.style.animationDelay = delay + 's';
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
+    </footer>
+    <script src="js/index.js"></script>
 
-        // Advanced Intersection Observer for animations
-        function initScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.fade-in, .feature-card, .showcase-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                            entry.target.classList.add('animate-in');
-                        }, index * 100);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            animatedElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                observer.observe(el);
-            });
-        }
-
-        // Card Tilt Effect
-        function initCardTiltEffect() {
-            const cards = document.querySelectorAll('.showcase-card, .feature-card');
-            
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-                });
-            });
-        }
-
-        // Smooth scroll with easing
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        const headerOffset = 80;
-                        const elementPosition = target.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Enhanced Header Scroll Effect
-        function initHeaderEffects() {
-            const header = document.getElementById('header');
-            let lastScrollY = window.scrollY;
-            
-            window.addEventListener('scroll', () => {
-                const currentScrollY = window.scrollY;
-                
-                if (currentScrollY > 100) {
-                    header.classList.add('scrolled');
-                    if (currentScrollY > lastScrollY) {
-                        header.style.transform = 'translateY(-100%)';
-                    } else {
-                        header.style.transform = 'translateY(0)';
-                    }
-                } else {
-                    header.classList.remove('scrolled');
-                    header.style.transform = 'translateY(0)';
-                }
-                
-                lastScrollY = currentScrollY;
-            });
-        }        // Loading animation
-        window.addEventListener('load', function() {
-            const loading = document.getElementById('loading');
-            setTimeout(() => {
-                loading.classList.add('hidden');
-                initScrollAnimations();
-                createParticles();
-                initCardTiltEffect();
-                initSmoothScroll();
-                initHeaderEffects();
-                initNewsletterForm();
-                initFooterAnimations();
-                initContactLinks();
-            }, 1000);
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        const mobileMenuIcon = mobileToggle.querySelector('.material-symbols-outlined');
-
-        mobileToggle.addEventListener('click', function() {
-            const isActive = mobileNav.classList.contains('active');
-            
-            if (isActive) {
-                mobileNav.classList.remove('active');
-                mobileMenuIcon.textContent = 'menu';
-            } else {
-                mobileNav.classList.add('active');
-                mobileMenuIcon.textContent = 'close';
-            }
-        });
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.mobile-nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                mobileNav.classList.remove('active');
-                mobileMenuIcon.textContent = 'menu';
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!mobileToggle.contains(event.target) && !mobileNav.contains(event.target)) {
-                mobileNav.classList.remove('active');
-                mobileMenuIcon.textContent = 'menu';
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Fade in animation on scroll
-        function fadeInOnScroll() {
-            const elements = document.querySelectorAll('.fade-in');
-            const windowHeight = window.innerHeight;
-
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                
-                if (elementTop < windowHeight * 0.8) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Initial check
-        fadeInOnScroll();
-
-        // Check on scroll
-        window.addEventListener('scroll', fadeInOnScroll);
-
-        // Feature card hover effects
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });        // Showcase card hover effects and click handlers
-        document.querySelectorAll('.showcase-card').forEach(card => {
-            // Enable clicking functionality
-            card.onclick = function() {
-                const link = card.getAttribute('data-link');
-                if (link) {
-                    window.location.href = link;
-                }
-            };
-            
-            // Add hover effects
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.05)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });// Apply debounced scroll handlers
-        const debouncedFadeIn = debounce(fadeInOnScroll, 10);
-        window.removeEventListener('scroll', fadeInOnScroll);
-        window.addEventListener('scroll', debouncedFadeIn);
-
-        // Handle window resize for mobile menu
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                mobileNav.classList.remove('active');
-                mobileMenuIcon.textContent = 'menu';
-            }
-        });
-
-        // Add loading states for feature cards
-        document.querySelectorAll('.feature-card, .showcase-card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Add a subtle loading effect
-                this.style.opacity = '0.8';
-                setTimeout(() => {
-                    this.style.opacity = '1';
-                }, 200);
-            });
-        });
-
-        // Performance optimization: Debounce scroll events
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        function showLoginAlert() {
-            alert('Vui lòng đăng nhập để sử dụng tính năng này!');
-        }        // Kiểm tra trạng thái đăng nhập và mở khóa các thẻ chức năng hero section
-        (function() {
-    function isLoggedIn() {
-        // Luôn return true để mở khóa các thẻ hero section
-        return true;
-    }
-    function unlockShowcaseCards() {
-        document.querySelectorAll('.showcase-card').forEach(card => {
-            card.classList.remove('locked');
-            card.onclick = function() {
-                const link = card.getAttribute('data-link');
-                if (link) window.location.href = link;
-            };
-            card.style.opacity = '1';
-            card.style.pointerEvents = 'auto';
-            card.style.filter = 'none';
-        });
-    }
-    function lockShowcaseCards() {
-        document.querySelectorAll('.showcase-card').forEach(card => {
-            card.classList.add('locked');
-            card.onclick = function() { showLoginAlert(); };
-            card.style.opacity = '0.6';
-            card.style.pointerEvents = 'none';
-            card.style.filter = 'grayscale(0.3)';
-        });
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        // Luôn mở khóa các thẻ hero section
-        unlockShowcaseCards();
-    });
-    window.unlockShowcaseCards = unlockShowcaseCards;
-    window.lockShowcaseCards = lockShowcaseCards;
-})();        // Gallery Slider functionality for dual galleries
-        
-        // Achievement Gallery
-        let achievementCurrentSlide = 0;
-        const achievementSlides = document.querySelectorAll('.about-section:first-child .gallery-slide');
-        const achievementDots = document.querySelectorAll('.about-section:first-child .dot');
-        const achievementPrevBtn = document.getElementById('achievementPrevBtn');
-        const achievementNextBtn = document.getElementById('achievementNextBtn');
-
-        function showAchievementSlide(index) {
-            achievementSlides.forEach(slide => slide.classList.remove('active'));
-            achievementDots.forEach(dot => dot.classList.remove('active'));
-            
-            if (achievementSlides[index]) {
-                achievementSlides[index].classList.add('active');
-            }
-            if (achievementDots[index]) {
-                achievementDots[index].classList.add('active');
-            }
-            
-            achievementCurrentSlide = index;
-        }
-
-        function nextAchievementSlide() {
-            achievementCurrentSlide = (achievementCurrentSlide + 1) % achievementSlides.length;
-            showAchievementSlide(achievementCurrentSlide);
-        }
-
-        function prevAchievementSlide() {
-            achievementCurrentSlide = (achievementCurrentSlide - 1 + achievementSlides.length) % achievementSlides.length;
-            showAchievementSlide(achievementCurrentSlide);
-        }
-
-        // Partnership Gallery
-        let partnershipCurrentSlide = 0;
-        const partnershipSlides = document.querySelectorAll('.about-section:last-child .gallery-slide');
-        const partnershipDots = document.querySelectorAll('.about-section:last-child .dot');
-        const partnershipPrevBtn = document.getElementById('partnershipPrevBtn');
-        const partnershipNextBtn = document.getElementById('partnershipNextBtn');
-
-        function showPartnershipSlide(index) {
-            partnershipSlides.forEach(slide => slide.classList.remove('active'));
-            partnershipDots.forEach(dot => dot.classList.remove('active'));
-            
-            if (partnershipSlides[index]) {
-                partnershipSlides[index].classList.add('active');
-            }
-            if (partnershipDots[index]) {
-                partnershipDots[index].classList.add('active');
-            }
-            
-            partnershipCurrentSlide = index;
-        }
-
-        function nextPartnershipSlide() {
-            partnershipCurrentSlide = (partnershipCurrentSlide + 1) % partnershipSlides.length;
-            showPartnershipSlide(partnershipCurrentSlide);
-        }
-
-        function prevPartnershipSlide() {
-            partnershipCurrentSlide = (partnershipCurrentSlide - 1 + partnershipSlides.length) % partnershipSlides.length;
-            showPartnershipSlide(partnershipCurrentSlide);
-        }
-
-        // Event listeners for Achievement gallery
-        if (achievementNextBtn) {
-            achievementNextBtn.addEventListener('click', nextAchievementSlide);
-        }
-        if (achievementPrevBtn) {
-            achievementPrevBtn.addEventListener('click', prevAchievementSlide);
-        }
-
-        // Event listeners for Partnership gallery
-        if (partnershipNextBtn) {
-            partnershipNextBtn.addEventListener('click', nextPartnershipSlide);
-        }
-        if (partnershipPrevBtn) {
-            partnershipPrevBtn.addEventListener('click', prevPartnershipSlide);
-        }
-
-        // Dot navigation for Achievement
-        achievementDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showAchievementSlide(index));
-        });
-
-        // Dot navigation for Partnership
-        partnershipDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showPartnershipSlide(index));
-        });
-
-        // Auto-play for both galleries (optional)
-        setInterval(() => {
-            nextAchievementSlide();
-            nextPartnershipSlide();
-        }, 6000); // Change slide every 6 seconds
-
-        // Touch/swipe support for Achievement gallery
-        const achievementWrapper = document.querySelector('.about-section:first-child .gallery-wrapper');
-        if (achievementWrapper) {
-            let startX = 0;
-            let endX = 0;
-
-            achievementWrapper.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-            });
-
-            achievementWrapper.addEventListener('touchend', (e) => {
-                endX = e.changedTouches[0].clientX;
-                const threshold = 50;
-                const diff = startX - endX;
-
-                if (Math.abs(diff) > threshold) {
-                    if (diff > 0) {
-                        nextAchievementSlide();
-                    } else {
-                        prevAchievementSlide();
-                    }
-                }
-            });
-        }
-
-        // Touch/swipe support for Partnership gallery
-        const partnershipWrapper = document.querySelector('.about-section:last-child .gallery-wrapper');
-        if (partnershipWrapper) {
-            let startX = 0;
-            let endX = 0;
-
-            partnershipWrapper.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-            });
-
-            partnershipWrapper.addEventListener('touchend', (e) => {
-                endX = e.changedTouches[0].clientX;
-                const threshold = 50;
-                const diff = startX - endX;
-
-                if (Math.abs(diff) > threshold) {
-                    if (diff > 0) {
-                        nextPartnershipSlide();
-                    } else {
-                        prevPartnershipSlide();
-                    }
-                }
-            });
-        }
-    </script>
 </body>
-</html>  
+</html> 
+  
