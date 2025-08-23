@@ -1,11 +1,63 @@
 import { GoogleGenAI, Type } from "@google/genai";
+/*
+ TỐI ƯU HÓA GỌI API GEMINI – TÓM TẮT PHƯƠNG PHÁP (VI)
+ 1) Tiền xử lý & rút gọn dữ liệu đầu vào
+     - Chuẩn hóa xuống dòng/khoảng trắng, bỏ header/footer trang, bỏ dòng nhiễu, khử trùng lặp gần kề.
+     - Mục tiêu: giảm số token không cần thiết trước khi gửi lên mô hình.
+
+ 2) Chia khúc (chunk) + trích xuất fact nhẹ
+     - Cắt CV dài thành các đoạn có chồng lấn (overlap) vừa đủ để không mất ngữ cảnh.
+     - Với mỗi batch chunk, gọi API ở schema JSON nhỏ để trích fact (tên, chức danh, kỹ năng, học vấn, địa điểm, thành tựu, ước lượng năm KN...).
+     - Gộp các fact lại thành bản tóm tắt ngắn gọn cho từng CV → gửi sang bước phân tích chính thay vì gửi toàn bộ CV.
+
+ 3) Gom nhóm (batching) có nhận thức token
+     - Phân tích chính: gộp nhiều CV (đã tóm tắt) vào nhiều request nhỏ, dựa trên ước lượng token để không vượt ngưỡng.
+     - Trích fact: gom nhiều chunk trong 1 request và yêu cầu trả về mảng JSON tương ứng.
+
+ 4) Thu gọn prompt
+     - Sử dụng mô tả JD rút gọn (cắt bớt khoảng trắng, giới hạn độ dài) và mô tả trọng số ở dạng compact (key:weight).
+
+ 5) Giới hạn ngân sách token (budget)
+     - Ước lượng token theo độ dài (4 ký tự ≈ 1 token) và cắt bớt theo ngưỡng ký tự cho tóm tắt mỗi CV/JD.
+
+ 6) Hỗ trợ PDF → text
+     - Dùng pdf.js (load động qua CDN) để trích văn bản từ PDF trước khi tiền xử lý.
+
+ 7) Retry + xoay API key khi quota/auth lỗi
+     - callGenAIJson bao bọc retry; nếu gặp quota/401/403 thì thử đổi key (KeySwapManager/APIKeyLibrary) rồi gọi lại.
+
+ 8) Ghi nhận thống kê (nếu có)
+     - Tích hợp KeySwapManager.recordRequest để ghi nhận tần suất/tokens (mức ước lượng).
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- DOM Elements ---
     const suggestIndustryEl = document.getElementById('suggest-industry');
     const suggestPositionEl = document.getElementById('suggest-position');
-    const suggestSalaryEl = document.getElementById('suggest-salary');
-    const suggestAgeEl = document.getElementById('suggest-age');
+    const suggestMustHaveEl = document.getElementById('suggest-must-have');
+    const suggestNiceToHaveEl = document.getElementById('suggest-nice-to-have');
+    const suggestMinYearsEl = document.getElementById('suggest-min-years');
+    const suggestEducationCertsEl = document.getElementById('suggest-education-certs');
+    const suggestGeneralConditionsEl = document.getElementById('suggest-general-conditions');
+    // Ignore toggles
+    const ignoreIndustryEl = document.getElementById('ignore-industry');
+    const ignorePositionEl = document.getElementById('ignore-position');
+    const ignoreMustHaveEl = document.getElementById('ignore-must-have');
+    const ignoreNiceToHaveEl = document.getElementById('ignore-nice-to-have');
+    const ignoreMinYearsEl = document.getElementById('ignore-min-years');
+    const ignoreEducationCertsEl = document.getElementById('ignore-education-certs');
+    const ignoreGeneralConditionsEl = document.getElementById('ignore-general-conditions');
+    const ignoreSalaryEl = document.getElementById('ignore-salary');
+    const ignoreAgeEl = document.getElementById('ignore-age');
+    // New range inputs for salary and age
+    const salaryMinEl = document.getElementById('suggest-salary-min');
+    const salaryMaxEl = document.getElementById('suggest-salary-max');
+    const salaryMinDisplay = document.getElementById('salary-min-display');
+    const salaryMaxDisplay = document.getElementById('salary-max-display');
+    const ageMinEl = document.getElementById('suggest-age-min');
+    const ageMaxEl = document.getElementById('suggest-age-max');
+    const ageMinDisplay = document.getElementById('age-min-display');
+    const ageMaxDisplay = document.getElementById('age-max-display');
     const suggestJdButtonEl = document.getElementById('suggest-jd-button');
     
     const jobDescriptionEl = document.getElementById('job-description');
@@ -16,6 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const loaderEl = document.getElementById('loader');
     const initialMessageEl = document.getElementById('initial-message');
     const resultsContainerEl = document.getElementById('results-container');
+    // Input summary elements
+    const summaryIndustryEl = document.getElementById('summary-industry');
+    const summaryPositionEl = document.getElementById('summary-position');
+    const summarySalaryEl = document.getElementById('summary-salary');
+    const summaryAgeEl = document.getElementById('summary-age');
+    const summaryLocationEl = document.getElementById('summary-location');
 
     // Scoring Criteria Elements
     const criteriaLocationEl = document.getElementById('criteria-location');
@@ -69,6 +127,166 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Thiếu API Key cho Gemini (cv). Hãy cấu hình trong api/main.js hoặc api/library/lib2.js');
         }
     const model = 'gemini-2.5-flash';
+
+    // --- Token & Content Utilities ---
+    // Ước lượng token đơn giản: ~4 ký tự/token
+    const TOKEN_PER_CHAR = 0.25; // ~4 chars/token
+    // Ngân sách an toàn cho mỗi request đến model "flash"
+    const MAX_TOKENS_PER_REQUEST = 12000;
+    // Giới hạn ký tự của tóm tắt (mỗi CV) sau khi gộp fact
+    const MAX_SUMMARY_CHARS_PER_CV = 8000;
+    // Tham số chia khúc CV (độ dài mỗi khúc và phần chồng lấn)
+    const CHUNK_CHARS = 6000; // ~1500 tokens/chunk
+    const CHUNK_OVERLAP = 800;
+    const MAX_CHUNKS_PER_CV = 6;
+    // Batching phân tích chính: giới hạn số part và ngân sách token cho mỗi lô
+    const MAX_PARTS_PER_BATCH = 20; // số part tối đa/lô
+    const MAX_BATCH_TOKENS = 10000; // trần token bảo thủ/lô
+
+    const estimateTokens = (text = '') => Math.ceil((text.length || 0) * TOKEN_PER_CHAR);
+    const trimToCharBudget = (text = '', maxChars) => (text.length > maxChars ? text.slice(0, maxChars) : text);
+    const estimatePartTokens = (part) => {
+        if (!part) return 0;
+        if (part.text) return estimateTokens(part.text);
+        if (part.inlineData) return 2000; // rough estimate for images
+        return 500;
+    };
+
+    // --- PDF support (lazy load pdf.js from CDN) ---
+    // Tải pdf.js động từ CDN để trích văn bản PDF (tránh phụ thuộc build)
+    let pdfjsPromise;
+    async function loadPdfJs() {
+        if (pdfjsPromise) return pdfjsPromise;
+        pdfjsPromise = import('https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.mjs').then(mod => {
+            const pdfjsLib = mod;
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.mjs';
+            return pdfjsLib;
+        });
+        return pdfjsPromise;
+    }
+
+    // Trích văn bản từ PDF → chuỗi text dùng cho tiền xử lý/chia khúc
+    async function extractTextFromPdf(file) {
+        try {
+            const pdfjsLib = await loadPdfJs();
+            const arrayBuffer = await file.arrayBuffer();
+            const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+            const pdf = await loadingTask.promise;
+            const maxPages = Math.min(pdf.numPages, 100); // safety
+            const parts = [];
+            for (let i = 1; i <= maxPages; i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                const strings = content.items.map(item => item.str);
+                parts.push(strings.join(' '));
+            }
+            return parts.join('\n');
+        } catch (e) {
+            console.warn('PDF extract failed, fallback as binary string');
+            return '';
+        }
+    }
+
+    // --- Preprocess CV text ---
+    // Tiền xử lý: chuẩn hóa xuống dòng, bỏ nhiễu, khử lặp, thu gọn khoảng trắng
+    function preprocessCvText(raw = '') {
+        try {
+            let text = raw.replace(/\r\n?|\f|\t/g, '\n');
+            // collapse whitespace
+            text = text.replace(/\u00A0/g, ' ');
+            text = text.replace(/[ \t]+/g, ' ');
+            text = text.replace(/\n{3,}/g, '\n\n');
+            // remove page headers/footers & noise
+            const lines = text.split(/\n/)
+                .map(l => l.trim())
+                .filter(l => l && !/^(page|trang)\s*\d+(\/\d+)?$/i.test(l))
+                .filter(l => !/^[-=_]{3,}$/.test(l))
+                .filter(l => !/^confidential|curriculum vitae$/i.test(l))
+                .filter(l => !/^references available/i.test(l));
+            // deduplicate nearby identical lines
+            const cleaned = [];
+            let prev = '';
+            for (const l of lines) {
+                if (l !== prev) cleaned.push(l);
+                prev = l;
+            }
+            // keep only mostly relevant sections first if markers exist
+            const joined = cleaned.join('\n');
+            return joined;
+        } catch (_) {
+            return raw || '';
+        }
+    }
+
+    // Chia khúc văn bản có chồng lấn để giảm mất ngữ cảnh khi trích fact
+    function chunkText(text, chunkChars = CHUNK_CHARS, overlap = CHUNK_OVERLAP, maxChunks = MAX_CHUNKS_PER_CV) {
+        const chunks = [];
+        if (!text) return chunks;
+        let start = 0;
+        let count = 0;
+        while (start < text.length && count < maxChunks) {
+            const end = Math.min(text.length, start + chunkChars);
+            const slice = text.slice(start, end);
+            chunks.push(slice);
+            count++;
+            if (end >= text.length) break;
+            start = end - overlap;
+            if (start < 0) start = 0;
+        }
+        return chunks;
+    }
+
+    // --- Compact criteria descriptor for prompt ---
+    // Biểu diễn tiêu chí + trọng số ở dạng ngắn gọn (key:weight) để tiết kiệm token
+    function buildCompactCriteriaLines(weightedCriteria) {
+        const lines = [];
+        weightedCriteria.forEach(c => {
+            if (c.children && c.children.length) {
+                const sub = c.children.map(ch => `${ch.key}:${ch.weight}`).join(',');
+                lines.push(`${c.key}:{${sub}}`);
+            } else {
+                lines.push(`${c.key}:${c.weight}`);
+            }
+        });
+        return lines.join('\n');
+    }
+
+    // --- Lightweight retry wrapper for JSON responses ---
+    // Trình gọi API JSON có retry + rotate key khi gặp quota/401/403
+    async function callGenAIJson({ parts, schema }) {
+        const maxAttempts = (typeof window !== 'undefined' && window.APIKeyLibrary && window.APIKeyLibrary.google?.gemini?.pool?.length)
+            ? window.APIKeyLibrary.google.gemini.pool.length + 1
+            : 2;
+        let lastErr;
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+            try {
+                const resp = await ai.models.generateContent({
+                    model,
+                    contents: { parts },
+                    config: schema ? { responseMimeType: 'application/json', responseSchema: schema } : undefined,
+                });
+                if (window.KeySwapManager) window.KeySwapManager.recordRequest({ tokensEstimated: 0 });
+                return resp.text;
+            } catch (err) {
+                lastErr = err;
+                const msg = String(err?.message || '').toLowerCase();
+                const status = err?.status || err?.response?.status || 0;
+                const quotaLike = msg.includes('quota') || msg.includes('exceed') || status === 429;
+                const authLike = msg.includes('api key') || msg.includes('unauthorized') || msg.includes('permission') || status === 401 || status === 403;
+                if ((quotaLike || authLike) && attempt < maxAttempts) {
+                    const next = rotateCvKey();
+                    if (next && next !== currentKey) {
+                        currentKey = next;
+                        ai = new GoogleGenAI({ apiKey: currentKey });
+                        if (window.KeySwapManager) window.KeySwapManager.markSwitched();
+                        continue;
+                    }
+                }
+                throw err;
+            }
+        }
+        throw lastErr || new Error('callGenAIJson failed');
+    }
     // --- Criteria Weight Logic ---
      const criteria = [
         { name: 'Phù hợp Mô tả Công việc', key: 'positionRelevance', sliderId: 'relevance-slider', weightId: 'relevance-weight', defaultWeight: 20, description: "Mức độ phù hợp tổng thể của CV so với toàn bộ Mô tả Công việc." },
@@ -214,15 +432,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (totalWeight === 100) {
                 totalWeightDisplayEl.classList.remove('text-red-500');
                 totalWeightDisplayEl.classList.add('text-green-500');
-                if (analyzeButtonEl) analyzeButtonEl.disabled = false;
-                if (errorMessageEl.textContent === 'Tổng trọng số của các tiêu chí phải bằng 100%.') {
+                if (errorMessageEl && errorMessageEl.textContent === 'Tổng trọng số của các tiêu chí phải bằng 100%.') {
                     clearError();
                 }
+                // Auto-collapse Weighting section when reaching 100%
+                collapseMainSectionFromChild(totalWeightDisplayEl);
             } else {
                 totalWeightDisplayEl.classList.remove('text-green-500');
                 totalWeightDisplayEl.classList.add('text-red-500');
-                if (analyzeButtonEl) analyzeButtonEl.disabled = true;
             }
+            // Always allow clicking; validation happens on click
+            if (analyzeButtonEl) analyzeButtonEl.disabled = false;
         }
     }
 
@@ -247,12 +467,14 @@ document.addEventListener('DOMContentLoaded', () => {
             content.style.maxHeight = '0px';
             icon.style.transition = 'transform 0.3s ease-in-out';
     
-            toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', () => {
                 const isExpanded = content.style.maxHeight !== '0px';
                 if (isExpanded) {
                     content.style.maxHeight = '0px';
+            content.classList.remove('open');
                 } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.classList.add('open');
                 }
                 icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(-180deg)';
             });
@@ -261,48 +483,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeMainAccordions() {
         const toggles = document.querySelectorAll('.main-accordion-toggle');
-    
-        toggles.forEach((toggle, index) => {
+        toggles.forEach((toggle) => {
             const content = toggle.nextElementSibling;
             const icon = toggle.querySelector('.fa-chevron-down');
-            
             if (!content || !icon || !content.classList.contains('main-accordion-content')) return;
-            
-            // Sections 2 (JD) and 4 (Upload) are open by default (indices 1 and 3)
-            const isOpenByDefault = (index === 1 || index === 3);
+            // Close all by default
+            content.style.maxHeight = '0px';
+            content.style.paddingTop = '0px';
+            content.style.paddingBottom = '0px';
+            icon.style.transform = 'rotate(0deg)';
 
-            if (isOpenByDefault) {
-                content.style.maxHeight = content.scrollHeight + 'px';
-                icon.style.transform = 'rotate(-180deg)';
-                content.style.paddingTop = '0.25rem'; // Corresponds to py-1
-                content.style.paddingBottom = '1rem'; // Corresponds to pb-4
-            } else {
-                content.style.maxHeight = '0px';
-                 content.style.paddingTop = '0px';
-                content.style.paddingBottom = '0px';
-            }
-    
             toggle.addEventListener('click', () => {
                 const isExpanded = content.style.maxHeight !== '0px';
                 if (isExpanded) {
                     content.style.maxHeight = '0px';
                     content.style.paddingTop = '0px';
                     content.style.paddingBottom = '0px';
+                    content.classList.remove('open');
                 } else {
                     // Temporarily set to auto to measure, then set to scrollHeight
                     content.style.maxHeight = 'auto';
                     const scrollHeight = content.scrollHeight;
                     content.style.maxHeight = '0px';
-                    
                     setTimeout(() => {
                         content.style.maxHeight = scrollHeight + 'px';
                         content.style.paddingTop = '0.25rem';
                         content.style.paddingBottom = '1rem';
+                        content.classList.add('open');
                     }, 10);
                 }
                 icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(-180deg)';
             });
         });
+    }
+
+    // --- Ignore toggles: dim and disable corresponding inputs ---
+    function setBlockIgnored(blockId, isIgnored) {
+        const block = document.getElementById(blockId);
+        if (!block) return;
+        const focusables = block.querySelectorAll('input, textarea, select');
+        focusables.forEach(el => {
+            // Don't disable the ignore checkbox itself
+            if (el.id && el.id.startsWith('ignore-')) return;
+            el.disabled = !!isIgnored;
+        });
+        if (isIgnored) {
+            block.classList.add('opacity-50');
+        } else {
+            block.classList.remove('opacity-50');
+        }
+    }
+
+    function hookIgnoreToggle(ignoreEl, blockId, onChange) {
+        if (!ignoreEl) return;
+        const apply = () => {
+            setBlockIgnored(blockId, !!ignoreEl.checked);
+            if (typeof onChange === 'function') onChange(!!ignoreEl.checked);
+        };
+        ignoreEl.addEventListener('change', apply);
+        apply(); // initialize
     }
 
     // Helper: collapse a main accordion section given its content element
@@ -311,6 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contentEl.style.maxHeight = '0px';
         contentEl.style.paddingTop = '0px';
         contentEl.style.paddingBottom = '0px';
+    contentEl.classList.remove('open');
         const toggle = contentEl.previousElementSibling;
         if (toggle) {
             const icon = toggle.querySelector('.fa-chevron-down');
@@ -337,6 +577,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (analyzeButtonEl) analyzeButtonEl.addEventListener('click', handleAnalysis);
     if (applyFiltersButton) applyFiltersButton.addEventListener('click', applyAndRenderFilters);
     if (resetFiltersButton) resetFiltersButton.addEventListener('click', resetAllFilters);
+    // Close weighting section when clicking Done
+    const weightsDoneButtonEl = document.getElementById('weights-done-button');
+    if (weightsDoneButtonEl) {
+        weightsDoneButtonEl.addEventListener('click', () => {
+            collapseMainSectionFromChild(weightsDoneButtonEl);
+        });
+    }
     // Auto-collapse Section 2 (Job Description) when user finishes typing and leaves the field
     if (jobDescriptionEl) {
         jobDescriptionEl.addEventListener('blur', () => {
@@ -345,10 +592,65 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // Live update for salary/age ranges and summary
+    function updateSalaryAgeDisplays() {
+        if (salaryMinDisplay && salaryMinEl) salaryMinDisplay.textContent = salaryMinEl.value;
+        if (salaryMaxDisplay && salaryMaxEl) salaryMaxDisplay.textContent = salaryMaxEl.value;
+        if (ageMinDisplay && ageMinEl) ageMinDisplay.textContent = ageMinEl.value;
+        if (ageMaxDisplay && ageMaxEl) ageMaxDisplay.textContent = ageMaxEl.value;
+        // Ensure min not greater than max
+        if (salaryMinEl && salaryMaxEl && Number(salaryMinEl.value) > Number(salaryMaxEl.value)) {
+            salaryMaxEl.value = salaryMinEl.value;
+            if (salaryMaxDisplay) salaryMaxDisplay.textContent = salaryMaxEl.value;
+        }
+        if (ageMinEl && ageMaxEl && Number(ageMinEl.value) > Number(ageMaxEl.value)) {
+            ageMaxEl.value = ageMinEl.value;
+            if (ageMaxDisplay) ageMaxDisplay.textContent = ageMaxEl.value;
+        }
+    }
+
+    [salaryMinEl, salaryMaxEl, ageMinEl, ageMaxEl].forEach(el => {
+        if (el) el.addEventListener('input', () => {
+            updateSalaryAgeDisplays();
+            updateInputSummary();
+        });
+    });
+
+    function updateInputSummary() {
+        if (summaryIndustryEl) summaryIndustryEl.textContent = (suggestIndustryEl?.value || '—');
+        if (summaryPositionEl) summaryPositionEl.textContent = (suggestPositionEl?.value || '—');
+        if (summaryLocationEl) summaryLocationEl.textContent = (criteriaLocationEl?.value || 'Chưa chọn');
+        if (summarySalaryEl) {
+            if (salaryMinEl && salaryMaxEl)
+                summarySalaryEl.textContent = `${salaryMinEl.value}-${salaryMaxEl.value} triệu`; else summarySalaryEl.textContent = '—';
+        }
+        if (summaryAgeEl) {
+            if (ageMinEl && ageMaxEl)
+                summaryAgeEl.textContent = `${ageMinEl.value}-${ageMaxEl.value}`; else summaryAgeEl.textContent = '—';
+        }
+    }
+
+    if (suggestIndustryEl) suggestIndustryEl.addEventListener('input', updateInputSummary);
+    if (suggestPositionEl) suggestPositionEl.addEventListener('input', updateInputSummary);
+    if (criteriaLocationEl) criteriaLocationEl.addEventListener('change', updateInputSummary);
+
   // Initialize
     updateAndValidateWeights();
     initializeCriteriaAccordions();
     initializeMainAccordions();
+    updateSalaryAgeDisplays();
+    updateInputSummary();
+
+    // Hook ignore toggles after initial rendering
+    hookIgnoreToggle(ignoreIndustryEl, 'block-industry', updateInputSummary);
+    hookIgnoreToggle(ignorePositionEl, 'block-position', updateInputSummary);
+    hookIgnoreToggle(ignoreMustHaveEl, 'block-must-have');
+    hookIgnoreToggle(ignoreNiceToHaveEl, 'block-nice-to-have');
+    hookIgnoreToggle(ignoreMinYearsEl, 'block-min-years');
+    hookIgnoreToggle(ignoreEducationCertsEl, 'block-education-certs');
+    hookIgnoreToggle(ignoreGeneralConditionsEl, 'block-general-conditions');
+    hookIgnoreToggle(ignoreSalaryEl, 'block-salary', () => { updateSalaryAgeDisplays(); updateInputSummary(); });
+    hookIgnoreToggle(ignoreAgeEl, 'block-age', () => { updateSalaryAgeDisplays(); updateInputSummary(); });
 
 
     function handleFileSelection(event) {
@@ -357,6 +659,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cvFiles = Array.from(target.files);
             updateFileListView();
             clearError();
+            // Auto-collapse Upload section after files are selected
+            collapseMainSectionFromChild(cvFilesEl);
         }
     }
     
@@ -393,26 +697,95 @@ document.addEventListener('DOMContentLoaded', () => {
             if (analyzeButtonEl) {
                 updateAndValidateWeights(); 
                 const span = analyzeButtonEl.querySelector('span');
-                if (span) span.textContent = 'Phân Tích CV';
+                if (span) span.textContent = 'Phân Tích CV với AI';
             }
         }
     }
 
     function displayError(message) {
-        if (errorMessageEl) errorMessageEl.textContent = message;
+        if (errorMessageEl) {
+            errorMessageEl.textContent = message;
+            errorMessageEl.classList.remove('hidden');
+        }
     }
 
     function clearError() {
-        if (errorMessageEl) errorMessageEl.textContent = '';
+        if (errorMessageEl) {
+            errorMessageEl.textContent = '';
+            errorMessageEl.classList.add('hidden');
+        }
+    }
+
+    // Persist latest analysis to localStorage for the dashboard
+    function persistLatestAnalysis(candidates) {
+        try {
+            const payload = {
+                timestamp: Date.now(),
+                job: {
+                    industry: suggestIndustryEl?.value || '',
+                    position: suggestPositionEl?.value || '',
+                    salaryRange: (salaryMinEl && salaryMaxEl) ? `${salaryMinEl.value}-${salaryMaxEl.value}` : '',
+                    ageRange: (ageMinEl && ageMaxEl) ? `${ageMinEl.value}-${ageMaxEl.value}` : '',
+                    locationRequirement: criteriaLocationEl?.value || '',
+                    rejectOnMismatch: !!criteriaLocationRejectEl?.checked,
+                },
+                candidates,
+            };
+            localStorage.setItem('cvAnalysis.latest', JSON.stringify(payload));
+        } catch (_) { /* ignore storage errors */ }
+    }
+
+    // Inject a CTA to open the dashboard after analysis
+    function showDashboardCTA() {
+        const area = document.getElementById('results-area');
+        if (!area) return;
+        let cta = document.getElementById('dashboard-cta');
+        if (cta) cta.remove();
+        cta = document.createElement('div');
+        cta.id = 'dashboard-cta';
+        cta.className = 'glass-effect p-4 rounded-xl border border-blue-500/30 mb-4 flex items-center justify-between';
+    cta.innerHTML = `
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-gauge-high text-white"></i>
+                </div>
+                <div>
+                    <p class="text-slate-200 font-semibold">Bảng Thống Kê cho Nhà Tuyển Dụng</p>
+                    <p class="text-slate-400 text-sm">Xem biểu đồ cột và tròn tổng hợp kết quả xếp hạng ứng viên.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+        <a href="dashboard.html" target="_blank" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-cyan-700 transition btn-glow text-sm">
+                    Xem Dashboard
+                </a>
+            </div>
+        `;
+        area.insertBefore(cta, area.firstChild);
     }
     
-    function createJdSuggestionPrompt(industry, position, salary, age) {
+    function createJdSuggestionPrompt(industry, position, salary, age, opts = {}) {
+        const { mustHave = '', niceToHave = '', minYears = 0, educationCerts = '', generalConditions = '' } = opts || {};
         let additionalInfo = '';
         if (salary) {
-            additionalInfo += `- **Mức lương đề xuất:** ${salary}\n`;
+            additionalInfo += `- **Mức lương đề xuất:** ${salary} triệu VND/tháng\n`;
         }
         if (age) {
             additionalInfo += `- **Yêu cầu độ tuổi:** ${age}\n`;
+        }
+        if (typeof minYears === 'number' && minYears > 0) {
+            additionalInfo += `- **Số năm kinh nghiệm tối thiểu:** ${minYears} năm\n`;
+        }
+        if (mustHave && mustHave.trim()) {
+            additionalInfo += `- **Kỹ năng bắt buộc (Must-have):** ${mustHave}\n`;
+        }
+        if (niceToHave && niceToHave.trim()) {
+            additionalInfo += `- **Kỹ năng cộng điểm (Nice-to-have):** ${niceToHave}\n`;
+        }
+        if (educationCerts && educationCerts.trim()) {
+            additionalInfo += `- **Bằng cấp/Chứng chỉ bắt buộc:** ${educationCerts}\n`;
+        }
+        if (generalConditions && generalConditions.trim()) {
+            additionalInfo += `- **Điều kiện chung:** ${generalConditions}\n`;
         }
 
         return `
@@ -420,15 +793,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ${additionalInfo ? `Hãy xem xét các thông tin bổ sung sau để đưa vào JD:\n${additionalInfo}` : ''}
 
-            Bản mô tả công việc cần bao gồm các phần rõ ràng sau:
-            1.  **Mô tả công việc:** Liệt kê các công việc và trách nhiệm chính hàng ngày.
-            2.  **Yêu cầu về kỹ năng và kinh nghiệm:**
-                -   Liệt kê các yêu cầu "cứng" (must-have) như bằng cấp, số năm kinh nghiệm, kỹ năng chuyên môn, công nghệ, công cụ bắt buộc.
-                -   Nếu có thông tin, hãy đưa yêu cầu về **độ tuổi**.
-                -   Liệt kê các yêu cầu "mềm" (nice-to-have) là điểm cộng.
-            3.  **Quyền lợi & Mức lương:**
-                -   Nêu bật các quyền lợi hấp dẫn mà công ty cung cấp.
-                -   Ghi rõ **mức lương** nếu được cung cấp.
+                Bản mô tả công việc cần bao gồm các phần rõ ràng sau (dùng văn bản thuần, gạch đầu dòng):
+                1) Thông tin cơ bản: Vị trí, Ngành nghề, Địa điểm, Hình thức làm việc.
+                2) Vị trí tuyển dụng: Mục tiêu vai trò, team/bộ phận.
+                3) Ngành nghề: Lĩnh vực sản phẩm/dịch vụ liên quan.
+                4) Kỹ năng & kinh nghiệm:
+                    - Kỹ năng bắt buộc (Must-have) → nếu thiếu thì loại.
+                    - Kỹ năng cộng điểm (Nice-to-have) → giúp xếp hạng ứng viên.
+                    - Số năm kinh nghiệm tối thiểu.
+                5) Điều kiện chung: giờ làm, hình thức, onsite/hybrid/remote, công tác (nếu có).
+                6) Mức lương (min–max) → so với kỳ vọng ứng viên.
+                7) Độ tuổi (nếu thật sự cần).
+                8) Bằng cấp / chứng chỉ (nếu là điều kiện bắt buộc pháp lý).
+                9) Trọng số tiêu chí (nếu muốn chấm điểm): ví dụ Kỹ năng = 50%, Kinh nghiệm = 30%, Lương phù hợp = 10%, Độ tuổi = 10%.
 
             **Lưu ý:**
             -   Sử dụng ngôn ngữ chuyên nghiệp, rõ ràng và hấp dẫn để thu hút ứng viên tiềm năng.
@@ -438,12 +815,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function handleSuggestJd() {
         clearError();
-        const industry = suggestIndustryEl.value.trim();
-        const position = suggestPositionEl.value.trim();
-        const salary = suggestSalaryEl.value.trim();
-        const age = suggestAgeEl.value.trim();
+    const industry = ignoreIndustryEl?.checked ? '' : suggestIndustryEl.value.trim();
+    const position = ignorePositionEl?.checked ? '' : suggestPositionEl.value.trim();
+    const salary = (ignoreSalaryEl?.checked || !salaryMinEl || !salaryMaxEl) ? '' : `${salaryMinEl.value}-${salaryMaxEl.value}`;
+    const age = (ignoreAgeEl?.checked || !ageMinEl || !ageMaxEl) ? '' : `${ageMinEl.value}-${ageMaxEl.value}`;
+    const mustHave = ignoreMustHaveEl?.checked ? '' : (suggestMustHaveEl?.value || '').trim();
+    const niceToHave = ignoreNiceToHaveEl?.checked ? '' : (suggestNiceToHaveEl?.value || '').trim();
+    const minYears = ignoreMinYearsEl?.checked ? 0 : Number(suggestMinYearsEl?.value || 0);
+    const educationCerts = ignoreEducationCertsEl?.checked ? '' : (suggestEducationCertsEl?.value || '').trim();
+    const generalConditions = ignoreGeneralConditionsEl?.checked ? '' : (suggestGeneralConditionsEl?.value || '').trim();
 
-        if (!industry || !position) {
+    if (!industry || !position) {
             displayError('Vui lòng nhập ngành nghề và vị trí để nhận gợi ý.');
             return;
         }
@@ -454,12 +836,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const span = suggestJdButtonEl.querySelector('span');
             if (icon) icon.className = 'fa-solid fa-spinner animate-spin';
             if (span) span.textContent = 'Đang gợi ý...';
+            // Immediately collapse the Suggestion section after triggering
+            collapseMainSectionFromChild(suggestJdButtonEl);
         }
         
         jobDescriptionEl.value = '';
 
         try {
-            const prompt = createJdSuggestionPrompt(industry, position, salary, age);
+            const prompt = createJdSuggestionPrompt(industry, position, salary, age, { mustHave, niceToHave, minYears, educationCerts, generalConditions });
                         // Preemptive rotate based on time/RPM if needed
                         try {
                             if (window.KeySwapManager && window.KeySwapManager.shouldRotateKey()) {
@@ -507,8 +891,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
             jobDescriptionEl.style.height = 'auto';
             jobDescriptionEl.style.height = `${jobDescriptionEl.scrollHeight}px`;
-            // Auto-collapse Section 1 (Gợi ý Mô tả) after suggestion completes
-            collapseMainSectionFromChild(suggestJdButtonEl);
+            // Section is already collapsed on trigger to optimize time
 
         } catch (error) {
             console.error("JD Suggestion Error:", error);
@@ -528,9 +911,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Core Logic ---
     async function handleAnalysis() {
         clearError();
-        const jobDescription = jobDescriptionEl.value.trim();
-        const locationRequirement = criteriaLocationEl.value;
-        const rejectOnMismatch = criteriaLocationRejectEl.checked;
+    const jobDescription = jobDescriptionEl.value.trim();
+    const locationRequirement = criteriaLocationEl.value;
+    const rejectOnMismatch = criteriaLocationRejectEl.checked;
+    // Extra constraints from Suggestion section
+    const mustHave = ignoreMustHaveEl?.checked ? '' : (suggestMustHaveEl?.value || '').trim();
+    const niceToHave = ignoreNiceToHaveEl?.checked ? '' : (suggestNiceToHaveEl?.value || '').trim();
+    const minYears = ignoreMinYearsEl?.checked ? 0 : Number(suggestMinYearsEl?.value || 0);
+    const salaryRange = (ignoreSalaryEl?.checked || !salaryMinEl || !salaryMaxEl) ? '' : `${salaryMinEl.value}-${salaryMaxEl.value}`;
+    const ageRange = (ignoreAgeEl?.checked || !ageMinEl || !ageMaxEl) ? '' : `${ageMinEl.value}-${ageMaxEl.value}`;
+    const educationCerts = ignoreEducationCertsEl?.checked ? '' : (suggestEducationCertsEl?.value || '').trim();
+    const generalConditions = ignoreGeneralConditionsEl?.checked ? '' : (suggestGeneralConditionsEl?.value || '').trim();
         
         // Validation
         if (!jobDescription) { displayError('Vui lòng cung cấp mô tả công việc.'); return; }
@@ -565,7 +956,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setLoadingState(true);
 
         try {
-            const cvParts = await Promise.all(cvFiles.map(fileToGenerativePart));
+            const cvParts = await Promise.all(cvFiles.map(processFileToGenerativePart));
             // Preemptive rotate based on time/RPM if needed
             try {
                 if (window.KeySwapManager && window.KeySwapManager.shouldRotateKey()) {
@@ -577,53 +968,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             } catch(_) {}
-            const instructionPrompt = { text: createAnalysisPrompt(jobDescription, locationRequirement, rejectOnMismatch, weightedCriteria) };
-            const allParts = [instructionPrompt, ...cvParts];
-
-                        // Retry with key rotation for analysis
-                        const maxAttempts = (typeof window !== 'undefined' && window.APIKeyLibrary && window.APIKeyLibrary.google?.gemini?.pool?.length)
-                            ? window.APIKeyLibrary.google.gemini.pool.length + 1
-                            : 2;
-                        let lastErr;
-                        let responseText = '';
-                        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-                            try {
-                const response = await ai.models.generateContent({
-                                    model: model,
-                                    contents: { parts: allParts },
-                                    config: {
-                                        responseMimeType: "application/json",
-                                        responseSchema: analysisSchema,
-                                    },
-                                });
-                if (window.KeySwapManager) window.KeySwapManager.recordRequest({ tokensEstimated: 0 });
-                                responseText = response.text;
-                                break;
-                            } catch (err) {
-                                lastErr = err;
-                                const msg = String(err?.message || '').toLowerCase();
-                                const status = err?.status || err?.response?.status || 0;
-                                const quotaLike = msg.includes('quota') || msg.includes('exceed') || status === 429;
-                                const authLike = msg.includes('api key') || msg.includes('unauthorized') || msg.includes('permission') || status === 401 || status === 403;
-                        if ((quotaLike || authLike) && attempt < maxAttempts) {
-                                                    const next = rotateCvKey();
-                                                    if (next && next !== currentKey) {
-                                                        currentKey = next;
-                                                        ai = new GoogleGenAI({ apiKey: currentKey });
-                            if (window.KeySwapManager) window.KeySwapManager.markSwitched();
-                                                        continue;
-                                                    } else {
-                                                        throw err;
-                                                    }
-                                } else {
-                                    throw err;
-                                }
-                            }
-                        }
-                        allCandidates = JSON.parse(responseText);
+            const instructionPrompt = { text: createAnalysisPromptCompact(
+                jobDescription,
+                locationRequirement,
+                rejectOnMismatch,
+                weightedCriteria,
+                { mustHave, niceToHave, minYears, salaryRange, ageRange, educationCerts, generalConditions }
+            ) };
+            // Token-aware batched analysis
+            const batchedResults = await generateAnalysisInBatches(instructionPrompt, cvParts, analysisSchema);
+            allCandidates = batchedResults;
             populateFilterOptions(allCandidates);
             applyAndRenderFilters(); 
             if(filterPanelEl) filterPanelEl.classList.remove('hidden');
+            // Persist for dashboard and show CTA
+            persistLatestAnalysis(allCandidates);
+            showDashboardCTA();
 
         } catch (error) {
             console.error("Analysis Error:", error);
@@ -635,80 +995,202 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function fileToGenerativePart(file) {
+    // New pipeline: process file -> text (w/ PDF), preprocess, chunk+facts -> merged summary part
+    // Xử lý từng file CV:
+    // - Ảnh: nhúng base64 (giữ nguyên)
+    // - PDF: pdf.js → text → tiền xử lý → chia khúc → trích fact (batch) → gộp tóm tắt
+    // - Text: tiền xử lý → chia khúc → trích fact (batch) → gộp tóm tắt
+    function processFileToGenerativePart(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => {
-                if (typeof reader.result !== 'string') return reject(new Error('Lỗi khi đọc tệp.'));
+                const isString = typeof reader.result === 'string';
                 if (file.type.startsWith('image/')) {
                     const base64Data = reader.result.split(',')[1];
                     if (!base64Data) return reject(new Error('Không thể chuyển đổi hình ảnh sang base64.'));
                     resolve({ inlineData: { mimeType: file.type, data: base64Data } });
+                } else if (file.type === 'application/pdf') {
+                    // Handle PDF via pdf.js (async)
+                    extractTextFromPdf(file)
+                        .then(raw => preprocessCvText(raw))
+                        .then(clean => summarizeCvTextToPart(clean, file.name))
+                        .then(resolve).catch(reject);
+                } else if (isString) {
+                    const raw = reader.result;
+                    const clean = preprocessCvText(raw);
+                    summarizeCvTextToPart(clean, file.name).then(resolve).catch(reject);
                 } else {
-                     resolve({ text: `--- START CV: ${file.name} ---\n${reader.result}\n--- END CV: ${file.name} ---` });
+                    reject(new Error('Lỗi khi đọc tệp.'));
                 }
             };
             reader.onerror = error => reject(error);
             if (file.type.startsWith('image/')) reader.readAsDataURL(file);
+            else if (file.type === 'application/pdf') reader.readAsArrayBuffer(file);
             else reader.readAsText(file);
         });
     }
 
-    function createAnalysisPrompt(jobDescription, locationRequirement, rejectOnMismatch, weightedCriteria) {
-        let criteriaString = '';
-        const scoreCalculationParts = [];
+    // Tạo "tóm tắt CV" nhỏ gọn từ văn bản đã tiền xử lý:
+    // 1) Chia khúc + gom nhóm trích fact theo mảng JSON để giảm số request
+    // 2) Gộp fact → danh sách rút gọn (tên/chức danh/kỹ năng/học vấn/địa điểm/thành tựu/năm KN)
+    // 3) Cắt theo ngân sách ký tự để ổn định chi phí
+    async function summarizeCvTextToPart(cleanText, fileName) {
+        // Token budgeting
+        const trimmed = trimToCharBudget(cleanText, MAX_SUMMARY_CHARS_PER_CV * 2); // initial rough cap
+        const chunks = chunkText(trimmed);
+        if (chunks.length === 0) return { text: `--- START CV SUMMARY: ${fileName} ---\n${trimmed}\n--- END CV SUMMARY: ${fileName} ---` };
 
-        weightedCriteria.forEach(c => {
-            if (c.children && c.children.length > 0) {
-                const subTotal = c.children.reduce((sum, child) => sum + child.weight, 0);
-                criteriaString += `- **${c.name} (Tổng ${subTotal}%):** ${c.description}\n`;
-                c.children.forEach(child => {
-                    criteriaString += `  - *${child.name} (${child.weight}%):* ${child.description}\n`;
-                    scoreCalculationParts.push(`(scoreBreakdown.${c.key}.${child.key} * ${child.weight}/100)`);
-                });
-            } else {
-                criteriaString += `- **${c.name} (${c.weight}%):** ${c.description}\n`;
-                scoreCalculationParts.push(`(scoreBreakdown.${c.key} * ${c.weight}/100)`);
-            }
+        // Schema for compact chunk facts
+        const chunkFactsSchema = {
+            type: Type.OBJECT,
+            properties: {
+                names: { type: Type.ARRAY, items: { type: Type.STRING } },
+                titles: { type: Type.ARRAY, items: { type: Type.STRING } },
+                companies: { type: Type.ARRAY, items: { type: Type.STRING } },
+                skills: { type: Type.ARRAY, items: { type: Type.STRING } },
+                educations: { type: Type.ARRAY, items: { type: Type.STRING } },
+                locations: { type: Type.ARRAY, items: { type: Type.STRING } },
+                achievements: { type: Type.ARRAY, items: { type: Type.STRING } },
+                yearsExperience: { type: Type.INTEGER },
+            },
+            required: ["titles", "skills"],
+        };
+
+        // Batch chunks (e.g., 3 per request) and use array schema
+        const batchSize = 3;
+        const facts = [];
+        for (let i = 0; i < chunks.length; i += batchSize) {
+            const batch = chunks.slice(i, i + batchSize);
+            const arraySchema = { type: Type.ARRAY, items: chunkFactsSchema };
+            const prompt = {
+                text: `Trích xuất nhanh các fact quan trọng từ MỖI đoạn CV dưới đây (không viết văn). Trả về một MẢNG JSON, phần tử-thứ-n tương ứng đoạn-thứ-n. Các fact:\n- Họ tên (nếu có)\n- Chức danh/công việc\n- Công ty/tổ chức\n- Kỹ năng/kỹ thuật\n- Học vấn/chứng chỉ\n- Địa điểm\n- Thành tựu (ngắn, có số liệu nếu có)\n- Số năm kinh nghiệm (ước lượng)`
+            };
+            const parts = [prompt, ...batch.map(ck => ({ text: ck }))];
+            const json = await callGenAIJson({ parts, schema: arraySchema });
+            try {
+                const arr = JSON.parse(json);
+                if (Array.isArray(arr)) facts.push(...arr);
+                else if (arr) facts.push(arr);
+            } catch (_) { /* ignore malformed */ }
+        }
+        // Merge facts
+        const acc = {
+            names: new Set(), titles: new Set(), companies: new Set(), skills: new Set(),
+            educations: new Set(), locations: new Set(), achievements: new Set(), yearsExperience: 0
+        };
+        facts.forEach(f => {
+            if (!f) return;
+            ['names','titles','companies','skills','educations','locations','achievements'].forEach(k => {
+                (f[k] || []).forEach(v => { if (v && typeof v === 'string') acc[k].add(v); });
+            });
+            if (typeof f.yearsExperience === 'number') acc.yearsExperience = Math.max(acc.yearsExperience, f.yearsExperience);
         });
 
-        const scoreCalculation = scoreCalculationParts.join(' + ');
-    
-        return `
-            Là một chuyên gia tuyển dụng và thu hút nhân tài đẳng cấp thế giới, nhiệm vụ của bạn là phân tích và xếp hạng các CV sau đây dựa trên một bộ tiêu chí nghiêm ngặt và chi tiết.
+        const toList = (s) => Array.from(s).slice(0, 50);
+        const summary = [
+            `Tên: ${toList(acc.names).join(' | ') || '—'}`,
+            `Chức danh: ${toList(acc.titles).join('; ')}`,
+            `Công ty: ${toList(acc.companies).join('; ')}`,
+            `Kỹ năng: ${toList(acc.skills).join(', ')}`,
+            `Học vấn: ${toList(acc.educations).join(' | ')}`,
+            `Địa điểm: ${toList(acc.locations).join(', ')}`,
+            `Thành tựu: ${toList(acc.achievements).join(' • ')}`,
+            `Số năm kinh nghiệm (ước lượng): ${acc.yearsExperience || 0}`,
+        ].join('\n');
 
-            ---
-            Mô tả công việc chính:
-            ${jobDescription}
-            ---
+        // Final trim to per-CV summary budget
+        const compact = trimToCharBudget(summary, MAX_SUMMARY_CHARS_PER_CV);
+        return { text: `--- START CV SUMMARY: ${fileName} ---\n${compact}\n--- END CV SUMMARY: ${fileName} ---` };
+    }
 
-            ---
-            TIÊU CHÍ BẮT BUỘC VÀ PHÂN BỔ TRỌNG SỐ:
-            
-            1. Địa điểm làm việc BẮT BUỘC: "${locationRequirement}"
-               - Quy tắc loại: ${rejectOnMismatch ? "CÓ. Nếu CV không ghi rõ địa điểm hoặc địa điểm không phải là '" + locationRequirement + "', ứng viên phải được xếp hạng 'C'." : "KHÔNG."}
+    // Prompt phân tích rút gọn: JD compact + trọng số (key:weight) + công thức tính điểm
+    function createAnalysisPromptCompact(jobDescription, locationRequirement, rejectOnMismatch, weightedCriteria, opts = {}) {
+        const {
+            mustHave = '',
+            niceToHave = '',
+            minYears = 0,
+            salaryRange = '',
+            ageRange = '',
+            educationCerts = '',
+            generalConditions = ''
+        } = opts || {};
+        const lines = buildCompactCriteriaLines(weightedCriteria);
+        const scoreTerms = [];
+        weightedCriteria.forEach(c => {
+            if (c.children && c.children.length) {
+                c.children.forEach(ch => scoreTerms.push(`(scoreBreakdown.${c.key}.${ch.key}*${ch.weight}/100)`));
+            } else {
+                scoreTerms.push(`(scoreBreakdown.${c.key}*${c.weight}/100)`);
+            }
+        });
+        const formula = scoreTerms.join('+');
+        const compactJD = jobDescription.replace(/\s+/g, ' ').trim().slice(0, 4000);
+        const reqLines = [
+            `Địa điểm bắt buộc: ${locationRequirement} | Quy tắc loại địa điểm: ${rejectOnMismatch ? 'CÓ' : 'KHÔNG'}`,
+            mustHave ? `Kỹ năng bắt buộc: ${mustHave}` : '',
+            niceToHave ? `Kỹ năng cộng điểm: ${niceToHave}` : '',
+            (typeof minYears === 'number' && minYears > 0) ? `Số năm kinh nghiệm tối thiểu: ${minYears}` : '',
+            salaryRange ? `Mức lương tham chiếu (min-max): ${salaryRange} triệu` : '',
+            ageRange ? `Độ tuổi tham chiếu: ${ageRange}` : '',
+            educationCerts ? `Bằng cấp/Chứng chỉ bắt buộc (nếu pháp lý): ${educationCerts}` : '',
+            generalConditions ? `Điều kiện chung: ${generalConditions}` : '',
+        ].filter(Boolean).join('\n');
 
-            2. Phân bổ trọng số tính điểm (Tổng 100%):
-            ${criteriaString}
-            ---
+        return (
+`Mục tiêu: Chấm điểm và xếp hạng CV theo tiêu chí có trọng số, trả về JSON đúng schema.
+JD (rút gọn): ${compactJD}
+Yêu cầu & ràng buộc:
+${reqLines}
+Trọng số:
+${lines}
+Quy tắc chấm & loại:
+- Địa điểm: nếu Quy tắc loại địa điểm=CÓ và không khớp/không có -> grade='C', weaknesses nêu rõ lý do.
+- Must-have: nếu thiếu BẤT KỲ kỹ năng bắt buộc -> grade='C', weaknesses liệt kê kỹ năng thiếu. Nếu đủ thì chấm bình thường.
+- Kinh nghiệm tối thiểu: nếu tổng năm KN < ${minYears || 0} thì trừ mạnh điểm phần 'workExperience.duration'; nếu thấp hơn tối thiểu > 1 năm thì cân nhắc hạ grade='C' và nêu rõ.
+- Bằng cấp/chứng chỉ bắt buộc (nếu nêu): nếu không thấy trong CV -> giảm mạnh tiêu chí 'education' và ghi vào weaknesses; nếu là bắt buộc pháp lý thì đặt grade='C'.
+- Nice-to-have: nếu có thì tăng điểm các tiêu chí liên quan (kỹ năng phụ/công cụ) để giúp xếp hạng, nhưng KHÔNG loại nếu thiếu.
+- Mức lương & độ tuổi: chỉ cân nhắc nếu có thể suy luận kỳ vọng/tuổi từ CV; nếu không có dữ liệu thì bỏ qua, không phạt.
+- Gán điểm 0-100 cho từng tiêu chí trong scoreBreakdown; 'jobDescriptionMatchPercentage' phản ánh mức phù hợp JD tổng thể.
+- overallScore = ${formula} (làm tròn). Grade: A nếu overallScore>=80 và không vi phạm các điều kiện loại; C nếu overallScore<40 hoặc vi phạm điều kiện loại; B còn lại.
+- Hoàn thiện các trường khác theo CV (tên, chức danh, ngành, phòng ban, cấp độ KN, địa điểm, tóm tắt, strengths/weaknesses).
+`
+        );
+    }
 
-            HƯỚNG DẪN PHÂN TÍCH VÀ XẾP HẠNG:
+    // --- Batch analysis across many CV parts (token-aware) ---
+    // Phân tích chính theo lô có nhận thức token:
+    // - Gom các CV part vào nhiều lô nhỏ dựa trên ước lượng token/số lượng part
+    // - Mỗi lô trả về JSON mảng → nối lại thành kết quả cuối
+    async function generateAnalysisInBatches(instructionPrompt, cvParts, schema) {
+        const instrTokens = estimateTokens(instructionPrompt.text || '');
+        const batches = [];
+        let current = [];
+        let currentTokens = instrTokens;
+        for (const p of cvParts) {
+            const t = estimatePartTokens(p);
+            const wouldOverflow = (current.length >= MAX_PARTS_PER_BATCH) || (currentTokens + t > MAX_BATCH_TOKENS);
+            if (current.length && wouldOverflow) {
+                batches.push(current);
+                current = [];
+                currentTokens = instrTokens;
+            }
+            current.push(p);
+            currentTokens += t;
+        }
+        if (current.length) batches.push(current);
 
-            1.  **Phân tích CV:** Đối với mỗi CV, hãy trích xuất toàn bộ thông tin cần thiết.
-            2.  **Kiểm tra Địa điểm (QUAN TRỌNG NHẤT):**
-                -   So sánh địa điểm trong CV với địa điểm bắt buộc: "${locationRequirement}".
-                -   Nếu quy tắc loại là CÓ và địa điểm không khớp hoặc không tìm thấy, GÁN NGAY HẠNG "C" và ghi rõ lý do "Không đáp ứng địa điểm" vào 'weaknesses'.
-            3.  **Chấm điểm theo trọng số:**
-                -   Đánh giá toàn diện CV so với Mô tả Công việc để xác định điểm 'Phù hợp Mô tả Công việc'. Gán điểm (0-100) cho 'jobDescriptionMatchPercentage' và 'scoreBreakdown.positionRelevance'.
-                -   Đánh giá tất cả các tiêu chí còn lại (bao gồm cả các tiêu chí con) và cho điểm từ 0-100 vào các trường tương ứng trong 'scoreBreakdown' dựa trên định nghĩa của chúng.
-                -   Tính điểm 'overallScore' (0-100) bằng cách lấy **tổng có trọng số** của tất cả các điểm thành phần theo công thức: overallScore = ${scoreCalculation}. Làm tròn kết quả đến số nguyên gần nhất.
-            4.  **Xếp Hạng (A, B, C):**
-                -   **Hạng C (Loại):** BẮT BUỘC nếu vi phạm tiêu chí địa điểm (khi có quy tắc loại), HOẶC nếu điểm 'overallScore' dưới 40.
-                -   **Hạng A (Tốt):** KHÔNG vi phạm tiêu chí địa điểm VÀ điểm 'overallScore' từ 80 trở lên.
-                -   **Hạng B (Khá):** Tất cả các trường hợp còn lại.
-            5.  **Hoàn thiện Phân tích:** Trích xuất các thông tin khác (tên, chức danh...). Viết tóm tắt, điểm mạnh/yếu. Ghi chú tên file gốc vào 'fileName'.
-            6.  **Trả về kết quả:** Trả về một mảng JSON duy nhất tuân thủ schema, đảm bảo mọi trường bắt buộc được điền chính xác.
-        `;
+        const all = [];
+        for (const batch of batches) {
+            const parts = [instructionPrompt, ...batch];
+            const json = await callGenAIJson({ parts, schema });
+            try {
+                const arr = JSON.parse(json);
+                if (Array.isArray(arr)) all.push(...arr);
+            } catch (e) {
+                throw new Error('Phân tích batch trả về JSON không hợp lệ');
+            }
+        }
+        return all;
     }
     
     // --- Filtering Logic ---
@@ -928,6 +1410,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggle.addEventListener('click', () => {
                 const isExpanded = content.style.maxHeight !== '0px';
                 content.style.maxHeight = isExpanded ? '0px' : content.scrollHeight + 'px';
+                if (isExpanded) content.classList.remove('open'); else content.classList.add('open');
                 icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(-180deg)';
             });
         }
