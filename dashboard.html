@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Tuyển Dụng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/holland.css">
+  <link rel="stylesheet" href="css/cv.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+      .hover-lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+      .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(59,130,246,.12); border-color: rgba(59,130,246,.35); }
+      .fade-in { opacity: 0; transform: translateY(6px); animation: fadeIn .6s ease forwards; }
+      @keyframes fadeIn { to { opacity: 1; transform: none; } }
+      .chip { cursor: pointer; user-select: none; }
+      .chip-active { background: linear-gradient(90deg,#2563eb,#06b6d4); color: #fff; border-color: transparent; }
+      .chip-inactive { background: rgba(15,23,42,.6); color: #cbd5e1; border-color: rgba(148,163,184,.25); }
+      thead th { position: sticky; top: 0; background: rgba(15,23,42,.95); backdrop-filter: blur(8px); }
+      tbody tr:hover { background-color: rgba(30, 41, 59, .6); }
+    </style>
+  </head>
+  <body class="bg-slate-900 text-slate-200 min-h-screen">
+    <header class="relative overflow-hidden border-b border-blue-500/20">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/10 to-cyan-500/20"></div>
+      <div class="container mx-auto px-4 lg:px-8 py-6 flex items-center gap-4 relative">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/10">
+          <i class="fa-solid fa-gauge-high text-white"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold gradient-text">Dashboard Tuyển Dụng</h1>
+          <p class="text-slate-400 text-sm">Tổng hợp xếp hạng và biểu đồ từ phiên phân tích gần nhất</p>
+        </div>
+        <div class="ml-auto flex items-center gap-2">
+          <button id="btn-export-xlsx" class="px-4 py-2 text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-lg border border-emerald-500/40 hover-lift"><i class="fa-solid fa-file-excel mr-2"></i>Tải Excel (lọc)</button>
+          <button id="btn-export" class="px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg border border-blue-500/40 hover-lift"><i class="fa-solid fa-file-arrow-down mr-2"></i>Tải CSV (lọc)</button>
+          <a href="cv.html" class="px-4 py-2 text-sm bg-slate-800/70 hover:bg-slate-800 text-slate-200 rounded-lg border border-slate-600 hover-lift"><i class="fa-solid fa-rocket mr-2"></i>Quay lại AI CV</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 lg:px-8 py-8 space-y-6">
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 fade-in">
+        <aside class="lg:col-span-4 glass-effect p-6 rounded-2xl border border-blue-500/20 hover-lift">
+          <h2 class="text-lg font-bold mb-4">Thông tin phiên phân tích</h2>
+          <div id="run-info" class="text-sm space-y-2 text-slate-300">
+            <p><span class="text-slate-400">Thời gian:</span> <span id="run-time">—</span></p>
+            <p><span class="text-slate-400">Ngành:</span> <span id="job-industry">—</span></p>
+            <p><span class="text-slate-400">Vị trí:</span> <span id="job-position">—</span></p>
+            <p><span class="text-slate-400">Địa điểm bắt buộc:</span> <span id="job-location">—</span></p>
+            <p><span class="text-slate-400">Lương (triệu):</span> <span id="job-salary">—</span></p>
+            <p><span class="text-slate-400">Độ tuổi:</span> <span id="job-age">—</span></p>
+          </div>
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="bg-gradient-to-br from-blue-500/15 to-cyan-500/15 border border-blue-500/30 rounded-xl p-4 text-center hover-lift">
+              <p class="text-xs text-slate-300 flex items-center justify-center gap-2"><i class="fa-regular fa-folder-open text-blue-400"></i>Tổng CV</p>
+              <p id="stat-total" class="text-2xl font-bold text-blue-300 mt-1">0</p>
+            </div>
+            <div class="bg-gradient-to-br from-emerald-500/15 to-teal-500/15 border border-emerald-500/30 rounded-xl p-4 text-center hover-lift">
+              <p class="text-xs text-slate-300 flex items-center justify-center gap-2"><i class="fa-solid fa-star text-emerald-400"></i>Hạng A</p>
+              <p id="stat-a" class="text-2xl font-bold text-emerald-300 mt-1">0</p>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-500/15 to-orange-500/15 border border-yellow-500/30 rounded-xl p-4 text-center hover-lift">
+              <p class="text-xs text-slate-300 flex items-center justify-center gap-2"><i class="fa-solid fa-chart-line text-yellow-400"></i>Điểm TB</p>
+              <p id="stat-avg" class="text-2xl font-bold text-yellow-300 mt-1">0</p>
+            </div>
+            <div class="bg-gradient-to-br from-rose-500/15 to-pink-500/15 border border-rose-500/30 rounded-xl p-4 text-center hover-lift">
+              <p class="text-xs text-slate-300 flex items-center justify-center gap-2"><i class="fa-solid fa-ban text-rose-400"></i>Hạng C</p>
+              <p id="stat-c" class="text-2xl font-bold text-rose-300 mt-1">0</p>
+            </div>
+          </div>
+        </aside>
+
+        <section class="lg:col-span-8 space-y-6">
+          <div class="flex items-center gap-2 -mb-2">
+            <span class="text-sm text-slate-400 mr-2">Bộ lọc nhanh:</span>
+            <button data-filter="all" class="chip chip-active px-3 py-1.5 rounded-full border text-xs">Tất cả</button>
+            <button data-filter="A" class="chip chip-inactive px-3 py-1.5 rounded-full border text-xs">Hạng A</button>
+            <button data-filter="B" class="chip chip-inactive px-3 py-1.5 rounded-full border text-xs">Hạng B</button>
+            <button data-filter="C" class="chip chip-inactive px-3 py-1.5 rounded-full border text-xs">Hạng C</button>
+          </div>
+          <div class="glass-effect p-6 rounded-2xl border border-blue-500/20 hover-lift fade-in" style="animation-delay:.05s">
+            <h3 class="text-lg font-bold mb-4">Phân bố Hạng (A/B/C)</h3>
+            <canvas id="gradePie" height="140"></canvas>
+          </div>
+          <div class="glass-effect p-6 rounded-2xl border border-blue-500/20 hover-lift fade-in" style="animation-delay:.1s">
+            <h3 class="text-lg font-bold mb-4">Top 10 Điểm Tổng</h3>
+            <canvas id="topBar" height="200"></canvas>
+          </div>
+          <div class="glass-effect p-6 rounded-2xl border border-blue-500/20 hover-lift fade-in" style="animation-delay:.15s">
+            <h3 class="text-lg font-bold mb-4">Phân bố theo địa điểm (Top 5)</h3>
+            <canvas id="locBar" height="180"></canvas>
+          </div>
+        </section>
+      </section>
+
+      <section class="glass-effect p-6 rounded-2xl border border-blue-500/20 hover-lift fade-in" style="animation-delay:.2s">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+          <h3 class="text-lg font-bold">Bảng Ứng Viên</h3>
+          <div class="flex items-center gap-2">
+            <div class="relative">
+              <i class="fa-solid fa-magnifying-glass text-slate-500 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input id="searchInput" placeholder="Tìm theo tên, chức danh, địa điểm..." class="pl-9 pr-3 py-2 bg-slate-900/70 border border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+            </div>
+            <label class="text-sm text-slate-400 ml-2">Hiển thị
+              <select id="pageSize" class="ml-1 bg-slate-900/70 border border-slate-600 rounded-md px-2 py-1 text-sm">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+              dòng
+            </label>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead class="text-slate-300">
+              <tr class="border-b border-slate-700 select-none">
+                <th class="py-2 pr-4 text-left"><button class="flex items-center gap-1 th-sort" data-sort="candidateName">Họ tên <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+                <th class="py-2 px-4 text-left"><button class="flex items-center gap-1 th-sort" data-sort="grade">Hạng <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+                <th class="py-2 px-4 text-right"><button class="flex items-center gap-1 th-sort" data-sort="overallScore">Điểm <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+                <th class="py-2 px-4 text-right"><button class="flex items-center gap-1 th-sort" data-sort="jobDescriptionMatchPercentage">Phù hợp JD <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+                <th class="py-2 px-4 text-left"><button class="flex items-center gap-1 th-sort" data-sort="jobTitle">Chức danh <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+                <th class="py-2 px-4 text-left"><button class="flex items-center gap-1 th-sort" data-sort="detectedLocation">Địa điểm <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+                <th class="py-2 px-4 text-left"><button class="flex items-center gap-1 th-sort" data-sort="fileName">File <i class="fa-solid fa-arrow-up-wide-short opacity-60"></i></button></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody" class="divide-y divide-slate-800 text-slate-300"></tbody>
+          </table>
+        </div>
+        <div id="pager" class="mt-4 flex items-center justify-between text-sm text-slate-400">
+          <div id="pageInfo">—</div>
+          <div class="flex items-center gap-2">
+            <button id="prevPage" class="px-3 py-1.5 rounded-md bg-slate-800/70 border border-slate-600 hover:bg-slate-800 disabled:opacity-50">Trước</button>
+            <button id="nextPage" class="px-3 py-1.5 rounded-md bg-slate-800/70 border border-slate-600 hover:bg-slate-800 disabled:opacity-50">Sau</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+  let rawData = null;
+  let currentFilter = 'all';
+  let searchText = '';
+  let sortBy = 'gradeThenScore';
+  let sortDir = 'desc';
+  let page = 1;
+  let pageSize = 10;
+  let gradePieChart = null, topBarChart = null, locBarChart = null;
+  function loadLatest() {
+        try { return JSON.parse(localStorage.getItem('cvAnalysis.latest') || 'null'); } catch { return null; }
+      }
+      function toCSV(rows, sep = ',') {
+        const escape = (v) => {
+          if (v === null || v === undefined) return '';
+          const s = String(v).replace(/"/g,'""');
+          // Nếu có dấu phân cách, dấu nháy kép hoặc xuống dòng -> bao bằng ""
+          const needQuote = s.includes('"') || s.includes('\n') || s.includes('\r') || s.includes(sep);
+          return needQuote ? `"${s}"` : s;
+        };
+        const lines = rows.map(r => r.map(escape).join(sep));
+        return lines.join('\r\n'); // CRLF cho Excel/Windows
+      }
+      function exportCSV() {
+        const data = rawData || loadLatest();
+        if (!data) return;
+        const cols = ['candidateName','grade','overallScore','jobTitle','experienceLevel','detectedLocation','industry','department','jobDescriptionMatchPercentage','fileName'];
+        const header = ['Họ tên','Hạng','Điểm','Chức danh','Cấp độ','Địa điểm','Ngành','Bộ phận','% Phù hợp JD','Tệp'];
+        const rows = [header];
+        getFilteredCandidates().forEach(c => {
+          rows.push(cols.map(k => c[k] ?? ''));
+        });
+        // Chọn dấu phân cách phù hợp môi trường; thêm dòng "sep=" để Excel nhận đúng
+        const preferSemicolon = (navigator.language || '').toLowerCase().startsWith('vi');
+        const sep = preferSemicolon ? ';' : ',';
+        const csvBody = toCSV(rows, sep);
+        const csvWithSep = `sep=${sep}\r\n${csvBody}`;
+        // Thêm BOM UTF-8 để Excel hiển thị dấu tiếng Việt đúng
+        const blob = new Blob(['\uFEFF', csvWithSep], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const ts = new Date(data.timestamp).toISOString().replace(/[:T]/g,'-').split('.')[0];
+        a.href = url;
+        a.download = `cv-analysis-${ts}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+      function exportXLSX() {
+        const data = rawData || loadLatest();
+        if (!data) return;
+        const cols = ['candidateName','grade','overallScore','jobTitle','experienceLevel','detectedLocation','industry','department','jobDescriptionMatchPercentage','fileName'];
+        const header = ['Họ tên','Hạng','Điểm','Chức danh','Cấp độ','Địa điểm','Ngành','Bộ phận','% Phù hợp JD','Tệp'];
+        const rows = [header];
+        getFilteredCandidates().forEach(c => {
+          rows.push(cols.map(k => c[k] ?? ''));
+        });
+        // Tạo workbook/worksheet
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(rows);
+        // Định độ rộng cột (đơn vị ký tự)
+        ws['!cols'] = [
+          { wch: 24 }, // Họ tên
+          { wch: 6 },  // Hạng
+          { wch: 8 },  // Điểm
+          { wch: 26 }, // Chức danh
+          { wch: 12 }, // Cấp độ
+          { wch: 16 }, // Địa điểm
+          { wch: 14 }, // Ngành
+          { wch: 16 }, // Bộ phận
+          { wch: 12 }, // % Phù hợp JD
+          { wch: 30 }  // Tệp
+        ];
+        XLSX.utils.book_append_sheet(wb, ws, 'CV (lọc)');
+        const ts = new Date(data.timestamp).toISOString().replace(/[:T]/g,'-').split('.')[0];
+        XLSX.writeFile(wb, `cv-analysis-${ts}.xlsx`, { compression: true });
+      }
+      function fmtTime(ts) {
+        const d = new Date(ts); return d.toLocaleString('vi-VN');
+      }
+      function setFilter(f) {
+        currentFilter = f;
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+          const isActive = btn.getAttribute('data-filter') === currentFilter;
+          btn.classList.toggle('chip-active', isActive);
+          btn.classList.toggle('chip-inactive', !isActive);
+        });
+        renderAll();
+      }
+      function getFilteredCandidates() {
+        const cand = rawData?.candidates || [];
+        const byGrade = currentFilter === 'all' ? cand : cand.filter(c => c.grade === currentFilter);
+        const q = searchText.trim().toLowerCase();
+        const bySearch = !q ? byGrade : byGrade.filter(c => {
+          const bag = [c.candidateName, c.jobTitle, c.detectedLocation, c.fileName].join(' ').toLowerCase();
+          return bag.includes(q);
+        });
+        return bySearch;
+      }
+      function sortCandidates(list) {
+        const gx = {A:3,B:2,C:1};
+        const dir = sortDir === 'asc' ? 1 : -1;
+        if (sortBy === 'gradeThenScore') {
+          return list.slice().sort((a,b)=>{ const gd=(gx[b.grade]||0)-(gx[a.grade]||0); if(gd!==0) return gd; return (b.overallScore-a.overallScore); });
+        }
+        return list.slice().sort((a,b)=>{
+          const av = a[sortBy] ?? '';
+          const bv = b[sortBy] ?? '';
+          if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir;
+          return String(av).localeCompare(String(bv)) * dir;
+        });
+      }
+      function getPagedCandidates() {
+        const sorted = sortCandidates(getFilteredCandidates());
+        const total = sorted.length;
+        const pages = Math.max(1, Math.ceil(total / pageSize));
+        if (page > pages) page = pages;
+        const start = (page - 1) * pageSize;
+        const end = start + pageSize;
+        return { items: sorted.slice(start, end), total, pages };
+      }
+      function computeStats(cands) {
+        const total = cands.length;
+        const cntA = cands.filter(c=>c.grade==='A').length;
+        const cntC = cands.filter(c=>c.grade==='C').length;
+        const avg = total ? Math.round(cands.reduce((s,c)=>s+(c.overallScore||0),0)/total) : 0;
+        return { total, cntA, cntC, avg };
+      }
+      function renderStats() {
+        const cands = getFilteredCandidates();
+        const { total, cntA, cntC, avg } = computeStats(cands);
+        const totalEl = document.getElementById('stat-total');
+        const aEl = document.getElementById('stat-a');
+        const cEl = document.getElementById('stat-c');
+        const avgEl = document.getElementById('stat-avg');
+        if (totalEl) totalEl.textContent = total;
+        if (aEl) aEl.textContent = cntA;
+        if (cEl) cEl.textContent = cntC;
+        if (avgEl) avgEl.textContent = avg;
+      }
+      function destroyChart(inst) { try { inst && inst.destroy(); } catch(e){} }
+      function renderCharts() {
+        const all = rawData.candidates;
+        const cur = getFilteredCandidates();
+        const cntA = cur.filter(c=>c.grade==='A').length;
+        const cntB = cur.filter(c=>c.grade==='B').length;
+        const cntC = cur.filter(c=>c.grade==='C').length;
+        destroyChart(gradePieChart);
+        gradePieChart = new Chart(document.getElementById('gradePie'), {
+          type: 'pie',
+          data: {
+            labels: ['A','B','C'],
+            datasets: [{ data: [cntA,cntB,cntC], backgroundColor: ['#34d399','#60a5fa','#f87171'], borderColor: ['#10b981','#3b82f6','#ef4444'], borderWidth: 1 }]
+          },
+          options: { plugins: { legend: { labels: { color: '#cbd5e1' } } } }
+        });
+        const top10 = [...cur].sort((a,b)=>b.overallScore-a.overallScore).slice(0,10);
+        destroyChart(topBarChart);
+        topBarChart = new Chart(document.getElementById('topBar'), {
+          type: 'bar',
+          data: {
+            labels: top10.map(c=>c.candidateName || 'N/A'),
+            datasets: [{ label: 'Điểm tổng', data: top10.map(c=>c.overallScore), backgroundColor: '#22d3ee' }]
+          },
+          options: {
+            scales: {
+              x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+              y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' }, beginAtZero: true, suggestedMax: 100 }
+            },
+            plugins: { legend: { labels: { color: '#cbd5e1' } } }
+          }
+        });
+        const locMap = {};
+        cur.forEach(c => { const k = c.detectedLocation || 'Khác'; locMap[k] = (locMap[k]||0)+1; });
+        const locEntries = Object.entries(locMap).sort((a,b)=>b[1]-a[1]).slice(0,5);
+        destroyChart(locBarChart);
+        locBarChart = new Chart(document.getElementById('locBar'), {
+          type: 'bar',
+          data: { labels: locEntries.map(e=>e[0]), datasets: [{ label: 'Số lượng', data: locEntries.map(e=>e[1]), backgroundColor: '#a78bfa' }] },
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(148,163,184,0.1)' }, beginAtZero: true },
+              y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } }
+            },
+            plugins: { legend: { labels: { color: '#cbd5e1' } } }
+          }
+        });
+      }
+      function renderTable() {
+        const tbody = document.getElementById('tableBody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        const { items, total, pages } = getPagedCandidates();
+        items.forEach(c=>{
+          const tr = document.createElement('tr');
+          tr.className = 'transition-colors';
+          const gradeClass = c.grade==='A' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : c.grade==='B' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' : 'bg-rose-500/20 text-rose-300 border border-rose-500/30';
+          const score = c.overallScore ?? 0; const scoreColor = score>=80?'bg-emerald-500':score>=60?'bg-yellow-400':'bg-rose-500';
+          const match = c.jobDescriptionMatchPercentage ?? 0; const matchColor = match>=80?'bg-emerald-500':match>=60?'bg-yellow-400':'bg-rose-500';
+          tr.innerHTML = `
+            <td class="py-2 pr-4 whitespace-nowrap">${c.candidateName || ''}</td>
+            <td class="py-2 px-4"><span class="px-2 py-0.5 rounded-md text-xs font-semibold inline-block ${gradeClass}">${c.grade || ''}</span></td>
+            <td class="py-2 px-4 text-right">
+              <div class="flex items-center gap-2 justify-end">
+                <span>${score}</span>
+                <div class="w-24 h-2 bg-slate-700/70 rounded-full overflow-hidden"><div class="h-full ${scoreColor}" style="width:${Math.min(100,Math.max(0,score))}%"></div></div>
+              </div>
+            </td>
+            <td class="py-2 px-4 text-right">
+              <div class="flex items-center gap-2 justify-end">
+                <span>${match}%</span>
+                <div class="w-24 h-2 bg-slate-700/70 rounded-full overflow-hidden"><div class="h-full ${matchColor}" style="width:${Math.min(100,Math.max(0,match))}%"></div></div>
+              </div>
+            </td>
+            <td class="py-2 px-4">${c.jobTitle || ''}</td>
+            <td class="py-2 px-4">${c.detectedLocation || ''}</td>
+            <td class="py-2 px-4">${c.fileName || ''}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+        const pageInfo = document.getElementById('pageInfo');
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+        if (pageInfo) pageInfo.textContent = `Trang ${page}/${pages} • ${total} bản ghi`;
+        if (prevBtn) prevBtn.disabled = page<=1;
+        if (nextBtn) nextBtn.disabled = page>=pages;
+      }
+      function renderAll() {
+        renderStats();
+        renderCharts();
+        renderTable();
+      }
+      function bootstrap() {
+        const data = loadLatest();
+        if (!data) {
+          document.body.innerHTML = '<div class="container mx-auto px-4 lg:px-8 py-20 text-center text-slate-300">Chưa có dữ liệu. Hãy chạy phân tích trong trang CV trước.</div>';
+          return;
+        }
+        rawData = data;
+  const exportBtn = document.getElementById('btn-export');
+  if (exportBtn) exportBtn.addEventListener('click', exportCSV);
+  const exportXlsxBtn = document.getElementById('btn-export-xlsx');
+  if (exportXlsxBtn) exportXlsxBtn.addEventListener('click', exportXLSX);
+        document.querySelectorAll('[data-filter]').forEach(btn => btn.addEventListener('click', () => { page=1; setFilter(btn.getAttribute('data-filter')); }));
+        const searchEl = document.getElementById('searchInput');
+        const pageSizeEl = document.getElementById('pageSize');
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+        searchEl && searchEl.addEventListener('input', (e)=>{ searchText = e.target.value || ''; page=1; renderAll(); });
+        pageSizeEl && pageSizeEl.addEventListener('change', (e)=>{ pageSize = parseInt(e.target.value,10)||10; page=1; renderAll(); });
+        prevBtn && prevBtn.addEventListener('click', ()=>{ if (page>1){ page--; renderAll(); }});
+        nextBtn && nextBtn.addEventListener('click', ()=>{ page++; renderAll(); });
+        document.querySelectorAll('.th-sort').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            const key = btn.getAttribute('data-sort');
+            if (sortBy === key) { sortDir = (sortDir==='asc' ? 'desc' : 'asc'); }
+            else { sortBy = key; sortDir = (key==='candidateName' || key==='jobTitle' || key==='detectedLocation' || key==='fileName') ? 'asc' : 'desc'; }
+            page=1; renderAll();
+          });
+        });
+        const { timestamp, job } = data;
+        document.getElementById('run-time').textContent = fmtTime(timestamp);
+        document.getElementById('job-industry').textContent = job.industry || '—';
+        document.getElementById('job-position').textContent = job.position || '—';
+        document.getElementById('job-location').textContent = job.locationRequirement || '—';
+        document.getElementById('job-salary').textContent = job.salaryRange || '—';
+        document.getElementById('job-age').textContent = job.ageRange || '—';
+        renderAll();
+      }
+      document.addEventListener('DOMContentLoaded', bootstrap);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" defer></script>
+  </body>
+</html>
