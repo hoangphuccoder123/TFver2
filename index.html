@@ -82,6 +82,17 @@
         <div class="image-modal-content" id="imageModalContent">
             <div class="image-modal-header">
                 <h3 class="image-modal-title" id="imageModalTitle">Xem ảnh thành tích</h3>
+                <div class="image-modal-controls">
+                    <button class="zoom-btn" id="zoomInBtn" title="Phóng to">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomOutBtn" title="Thu nhỏ">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="zoom-btn" id="resetZoomBtn" title="Reset zoom">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                    </button>
+                </div>
                 <button class="image-modal-close" id="closeImageModal">&times;</button>
             </div>
             <img src="" alt="" class="image-modal-img" id="imageModalImg">
@@ -104,116 +115,12 @@
                 <h1 class="hero-title">TechFuture AI</h1>
                 <p class="hero-slogan">Khơi nguồn sáng tạo, dẫn lối tương lai!</p>
                 <p class="hero-description">
-                    Đột phá cùng AI: Phân tích CV, Chatbot nghề nghiệp, phỏng vấn ảo và nhiều công nghệ thông minh khác. <br>
-                    <span class="slogan-highlight">Trải nghiệm tương lai ngay hôm nay!</span>
+                    <span class="features-overview">🤖 <strong>AI CV Analyzer</strong> - Phân tích CV thông minh | 💬 <strong>Holland Chatbot</strong> - Tư vấn định hướng nghề nghiệp | 🎯 <strong>Phỏng vấn ảo</strong> - Luyện tập kỹ năng phỏng vấn | 🔍 <strong>Lọc CV</strong> - Tìm kiếm ứng viên phù hợp</span><br>
+                    <span class="slogan-highlight">✨ Trải nghiệm tương lai ngay hôm nay - Nơi AI gặp gỡ tài năng! ✨</span>
                 </p>
 
                 <!-- Features Grid đã được xóa -->
 
-            </div>
-        </section>
-        <!-- Features Introduction Section -->
-        <section class="features-intro" id="features-intro">
-            <div class="features-intro-container">
-                <div class="intro-header">
-                    <h2 class="intro-title">Khám Phá Tính Năng Nổi Bật</h2>
-                    <p class="intro-subtitle">
-                        Những <span class="highlight-keyword">công cụ AI tiên tiến</span> và 
-                        <span class="highlight-keyword">giải pháp thông minh</span> giúp bạn 
-                        <span class="highlight-keyword">xây dựng sự nghiệp thành công</span> 
-                        trong kỷ nguyên số
-                    </p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon-box">
-                            <img src="photo/icon/toppcv.png" alt="CV Analysis" class="feature-img">
-                            <div class="feature-overlay">
-                                <i class="fas fa-search"></i>
-                            </div>
-                        </div>
-                        <h3 class="feature-name">AI CV Analyzer</h3>
-                        <p class="feature-desc">Phân tích CV thông minh với AI, đưa ra đánh giá chi tiết và gợi ý cải thiện để tối ưu hóa cơ hội việc làm của bạn.</p>
-                        <div class="feature-stats-row">
-                            <span class="stat">⚡ Phân tích nhanh</span>
-                            <span class="stat">📊 Báo cáo chi tiết</span>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon-box">
-                            <img src="photo/icon/hollandd.jpg" alt="Holland Test" class="feature-img">
-                            <div class="feature-overlay">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                        </div>
-                        <h3 class="feature-name">Holland Chatbot</h3>
-                        <p class="feature-desc">Chatbot AI thông minh giúp bạn khám phá tính cách nghề nghiệp theo mô hình Holland, định hướng con đường sự nghiệp phù hợp.</p>
-                        <div class="feature-stats-row">
-                            <span class="stat">🎯 Định hướng chính xác</span>
-                            <span class="stat">💬 Tương tác thông minh</span>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon-box">
-                            <i class="fas fa-video feature-icon-fa"></i>
-                            <div class="feature-overlay">
-                                <i class="fas fa-microphone"></i>
-                            </div>
-                        </div>
-                        <h3 class="feature-name">Phỏng Vấn Ảo</h3>
-                        <p class="feature-desc">hỗ trợ mô phỏng tình huống giúp ứng viên làm quen đồng thời giúp doanh nghiệp đánh giá ứng viên nhanh và khách quan
-.</p>
-                        <div class="feature-stats-row">
-                            <span class="stat">🎤 Thực hành thực tế</span>
-                            <span class="stat">📈 Cải thiện kỹ năng</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon-box">
-                            <i class="fas fa-filter feature-icon-fa"></i>
-                            <div class="feature-overlay">
-                                <i class="fas fa-check"></i>
-                            </div>
-                        </div>
-                        <h3 class="feature-name">Lọc CV Thông Minh</h3>
-                        <p class="feature-desc">Hệ thống lọc CV tự động với AI, giúp nhà tuyển dụng tìm được ứng viên phù hợp một cách nhanh chóng và chính xác.</p>
-                        <div class="feature-stats-row">
-                            <span class="stat">🔍 Tìm kiếm thông minh</span>
-                            <span class="stat">⏱️ Tiết kiệm thời gian</span>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon-box">
-                            <img src="photo/icon/Logo2.jpg" alt="CV Builder" class="feature-img">
-                            <div class="feature-overlay">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                        </div>
-                        <h3 class="feature-name">Tạo CV Chuyên Nghiệp</h3>
-                        <p class="feature-desc">Công cụ tạo CV với AI hỗ trợ, nhiều mẫu đẹp, tự động tối ưu nội dung để tạo ra CV ấn tượng và chuyên nghiệp.</p>
-                        <div class="feature-stats-row">
-                            <span class="stat">🎨 Thiết kế đẹp</span>
-                            <span class="stat">🤖 AI hỗ trợ</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon-box">
-                            <img src="photo/icon/congnghe.jpg" alt="FPT Integration" class="feature-img">
-                            <div class="feature-overlay">
-                                <i class="fas fa-link"></i>
-                            </div>
-                        </div>
-                        <h3 class="feature-name">Tích Hợp Công Nghệ</h3>
-                        <p class="feature-desc">Kết hợp công nghệ AI tiên tiến với hệ sinh thái tuyển dụng, mang đến trải nghiệm hoàn chỉnh cho cả ứng viên và nhà tuyển dụng.</p>
-                        <div class="feature-stats-row">
-                            <span class="stat">🔗 Kết nối toàn diện</span>
-                            <span class="stat">🚀 Công nghệ tiên tiến</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -294,33 +201,33 @@
                                 Giải Nhất Tin Học Trẻ Khu Vực Miền Bắc Bảng D3
                             </h3>
                             <p class="achievement-desc">Đạt giải Nhất cuộc thi Tin Học Trẻ khu vực Miền Bắc bảng D3 - thành tích xuất sắc trong lĩnh vực công nghệ thông tin</p>
-                            <span class="achievement-year">2024</span>
+                            <span class="achievement-year">2025</span>
                         </div>
                     </div>
 
-                    <!-- 2. Giải Nhất Biz Day -->
+                    <!-- 2. Giải Khuyến Khích Hội Thi Tin Học Trẻ Toàn Quốc -->
                     <div class="achievement-item">
                         <div class="achievement-icon">
-                            <img src="photo/tropine/Bizday.jpg" alt="Business Day" class="achievement-img">
-                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/Bizday.jpg', 'Giải Nhất Biz Day Cuộc Thi Kinh Doanh Cấp Trường', 'Đạt giải Nhất cuộc thi Biz Day kinh doanh cấp trường với presentation xuất sắc về tương lai AI trong doanh nghiệp')">
+                            <img src="photo/tropine/Khuyến Khích Tin Học Trẻ.jpg" alt="Hội Thi Tin Học Trẻ Toàn Quốc" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/Khuyến Khích Tin Học Trẻ.jpg', 'Giải Khuyến Khích Hội Thi Tin Học Trẻ Toàn Quốc', 'Đạt giải Khuyến khích tại Hội thi Tin Học Trẻ Toàn quốc với dự án ứng dụng AI hỗ trợ học tập và phát triển kỹ năng số')">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
                         <div class="achievement-content">
                             <h3 class="achievement-name">
-                                <i class="fas fa-medal medal-icon medal-first"></i>
-                                Giải Nhất Biz Day Cuộc Thi Kinh Doanh Cấp Trường
+                                <i class="fas fa-award medal-icon"></i>
+                                Giải Khuyến Khích Hội Thi Tin Học Trẻ Toàn Quốc
                             </h3>
-                            <p class="achievement-desc">Đạt giải Nhất cuộc thi Biz Day kinh doanh cấp trường với presentation xuất sắc về tương lai AI trong doanh nghiệp</p>
-                            <span class="achievement-year">2024</span>
+                            <p class="achievement-desc">Đạt giải Khuyến khích tại Hội thi Tin Học Trẻ Toàn quốc với dự án ứng dụng AI hỗ trợ học tập và phát triển kỹ năng số</p>
+                            <span class="achievement-year">2025</span>
                         </div>
                     </div>
 
                     <!-- 3. Giải Đặc Biệt Sáng Tạo -->
                     <div class="achievement-item">
                         <div class="achievement-icon">
-                            <img src="photo/tropine/stttnnd.jpg" alt="Sáng tạo thanh thiếu niên" class="achievement-img">
-                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/stttnnd.jpg', 'Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng', 'Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ')">
+                            <img src="photo/tropine/sáng tạo thanh thiếu niên.jpg" alt="Sáng tạo thanh thiếu niên" class="achievement-img">
+                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/sáng tạo thanh thiếu niên.jpg', 'Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng', 'Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ')">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -330,63 +237,11 @@
                                 Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng
                             </h3>
                             <p class="achievement-desc">Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ</p>
-                            <span class="achievement-year">2023</span>
+                            <span class="achievement-year">2025</span>
                         </div>
                     </div>
 
-                    <!-- 4. Giải Nhì Tin Học Trẻ -->
-                    <div class="achievement-item">
-                        <div class="achievement-icon">
-                            <img src="photo/tropine/tinhoctre.png" alt="Tin học trẻ" class="achievement-img">
-                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/tinhoctre.png', 'Giải Nhì Tin Học Trẻ Bảng D3 Thành Phố Hải Phòng', 'Đạt giải Nhì cuộc thi Tin Học Trẻ bảng D3 thành phố Hải Phòng - thành tích xuất sắc trong lĩnh vực công nghệ thông tin địa phương')">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="achievement-content">
-                            <h3 class="achievement-name">
-                                <i class="fas fa-medal medal-icon medal-second"></i>
-                                Giải Nhì Tin Học Trẻ Bảng D3 Thành Phố Hải Phòng
-                            </h3>
-                            <p class="achievement-desc">Đạt giải Nhì cuộc thi Tin Học Trẻ bảng D3 thành phố Hải Phòng - thành tích xuất sắc trong lĩnh vực công nghệ thông tin địa phương</p>
-                            <span class="achievement-year">2023</span>
-                        </div>
-                    </div>
-
-                    <!-- 5. Giải Triển Vọng FPT -->
-                    <div class="achievement-item">
-                        <div class="achievement-icon">
-                            <img src="photo/tropine/hackathon2024.jpg" alt="Hackathon 2024" class="achievement-img">
-                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/hackathon2024.jpg', 'Giải Triển Vọng FPT Edy Hackathon', 'Đạt giải Triển vọng tại cuộc thi FPT Edy Hackathon 2024 với dự án AI tuyển dụng thông minh và sáng tạo')">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="achievement-content">
-                            <h3 class="achievement-name">
-                                <i class="fas fa-trophy medal-icon medal-potential"></i>
-                                Giải Triển Vọng FPT Edy Hackathon
-                            </h3>
-                            <p class="achievement-desc">Đạt giải Triển vọng tại cuộc thi FPT Edy Hackathon 2024 với dự án AI tuyển dụng thông minh và sáng tạo</p>
-                            <span class="achievement-year">2024</span>
-                        </div>
-                    </div>
-
-                    <!-- 6. Top 50 VNU -->
-                    <div class="achievement-item">
-                        <div class="achievement-icon">
-                            <img src="photo/tropine/kinhdoanh2024.jpg" alt="Kinh doanh 2024" class="achievement-img">
-                            <button class="view-image-btn" onclick="openImageModal('photo/tropine/kinhoanh2024.jpg', 'Top 50 Dự Án Kinh Doanh Xuất Sắc Nhất VNU', 'Được vinh danh trong Top 50 dự án kinh doanh xuất sắc nhất của Đại học Quốc gia Việt Nam (VNU) với ý tưởng công nghệ AI')">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="achievement-content">
-                            <h3 class="achievement-name">
-                                <i class="fas fa-award medal-icon medal-top"></i>
-                                Top 50 Dự Án Kinh Doanh Xuất Sắc Nhất VNU
-                            </h3>
-                            <p class="achievement-desc">Được vinh danh trong Top 50 dự án kinh doanh xuất sắc nhất của Đại học Quốc gia Việt Nam (VNU) với ý tưởng công nghệ AI</p>
-                            <span class="achievement-year">2024</span>
-                        </div>
-                    </div>
+                    <!-- (đã xóa 3 mục thành tích theo yêu cầu) -->
                 </div>
             </div>
         </section>
@@ -506,7 +361,6 @@
                     <h4 class="footer-title">Về Chúng Tôi</h4>
                     <ul class="footer-links">
                         <li><a href="#about-techfuture">Giới thiệu TechFuture</a></li>
-                        <li><a href="#features-intro">Tính năng nổi bật</a></li>
                         <li><a href="#achievements">Thành tích nổi bật</a></li>
                         <li><a href="#business-support">Đối tác hỗ trợ</a></li>
                         <li><a href="#contact">Thông tin liên hệ</a></li>
@@ -549,7 +403,6 @@
         </div>
     </footer>
     <script src="js/index.js"></script>
-
 </body>
 </html> 
  
