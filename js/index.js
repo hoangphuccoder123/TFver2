@@ -1076,7 +1076,6 @@
                     background: rgba(255, 255, 255, 0.2);
                     border-radius: 50%;
                     transform: scale(0);
-                    animation: socialRipple 0.8s linear;
                     pointer-events: none;
                 `;
                 
@@ -1086,12 +1085,21 @@
         });
 
         // Image Modal Functions
+        let currentZoom = 1;
+        let isDragging = false;
+        let startX, startY, translateX = 0, translateY = 0;
+
         function openImageModal(imageSrc, imageTitle, imageDesc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('imageModalImg');
             const modalTitle = document.getElementById('imageModalTitle');
             const modalDesc = document.getElementById('imageModalDesc');
             const downloadBtn = document.getElementById('imageDownloadBtn');
+            
+            // Reset zoom and position - start with fit-to-screen zoom
+            currentZoom = 0.8;
+            translateX = 0;
+            translateY = 0;
             
             modalImg.src = imageSrc;
             modalImg.alt = imageTitle;
@@ -1104,14 +1112,119 @@
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
             
+            // Initialize zoom and drag functionality
+            initializeImageInteractions(modalImg);
+            
+            // Apply initial zoom to fit screen
+            setTimeout(() => {
+                updateImageTransform();
+            }, 100);
+            
             // Add escape key listener
             document.addEventListener('keydown', handleImageModalEscape);
+        }
+
+        function initializeImageInteractions(img) {
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const resetZoomBtn = document.getElementById('resetZoomBtn');
+            
+            // Zoom controls
+            zoomInBtn.onclick = () => zoomImage(1.2);
+            zoomOutBtn.onclick = () => zoomImage(0.8);
+            resetZoomBtn.onclick = () => resetZoom();
+            
+            // Mouse wheel zoom
+            img.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+                zoomImage(zoomFactor, e.clientX, e.clientY);
+            });
+            
+            // Touch/Mouse drag functionality
+            img.addEventListener('mousedown', startDrag);
+            img.addEventListener('touchstart', startDrag);
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag);
+            
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function zoomImage(factor, centerX, centerY) {
+            const img = document.getElementById('imageModalImg');
+            const newZoom = Math.max(0.5, Math.min(currentZoom * factor, 5));
+            
+            if (centerX && centerY) {
+                const rect = img.getBoundingClientRect();
+                const offsetX = centerX - rect.left - rect.width / 2;
+                const offsetY = centerY - rect.top - rect.height / 2;
+                
+                translateX -= offsetX * (factor - 1);
+                translateY -= offsetY * (factor - 1);
+            }
+            
+            currentZoom = newZoom;
+            updateImageTransform();
+            
+            if (currentZoom > 0.8) {
+                img.classList.add('zoomed');
+            } else {
+                img.classList.remove('zoomed');
+            }
+        }
+
+        function resetZoom() {
+            currentZoom = 0.8;
+            translateX = 0;
+            translateY = 0;
+            updateImageTransform();
+            document.getElementById('imageModalImg').classList.remove('zoomed');
+        }
+
+        function updateImageTransform() {
+            const img = document.getElementById('imageModalImg');
+            img.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
+        }
+
+        function startDrag(e) {
+            if (currentZoom <= 0.8) return;
+            
+            isDragging = true;
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            
+            startX = clientX - translateX;
+            startY = clientY - translateY;
+            
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging || currentZoom <= 0.8) return;
+            
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+            
+            translateX = clientX - startX;
+            translateY = clientY - startY;
+            
+            updateImageTransform();
+            e.preventDefault();
+        }
+
+        function endDrag() {
+            isDragging = false;
         }
 
         function closeImageModal() {
             const modal = document.getElementById('imageModal');
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
+            
+            // Reset zoom and position
+            resetZoom();
             
             // Remove escape key listener
             document.removeEventListener('keydown', handleImageModalEscape);
