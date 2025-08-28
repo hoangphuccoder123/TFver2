@@ -401,15 +401,54 @@
 
             updateAuthButton(isLoggedIn) {
                 const authBtn = document.getElementById('authToggleBtn');
+                const logoutBtn = document.getElementById('logoutBtn');
+                const navSeparator = document.getElementById('navSeparator');
+                const recruiterDropdown = document.getElementById('recruiterDropdown');
+                const candidateDropdown = document.getElementById('candidateDropdown');
+                
                 if (authBtn) {
                     if (isLoggedIn) {
-                        authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span>';
-                        authBtn.classList.add('logout');
-                        authBtn.onclick = () => this.logout();
+                        authBtn.style.display = 'none';
                     } else {
-                        authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>Đăng nhập</span>';
+                        authBtn.innerHTML = '<span>Đăng nhập</span>';
                         authBtn.classList.remove('logout');
                         authBtn.onclick = () => window.location.href = 'login.html';
+                        authBtn.style.display = 'flex';
+                    }
+                }
+                
+                if (logoutBtn) {
+                    if (isLoggedIn) {
+                        logoutBtn.style.display = 'flex';
+                        logoutBtn.onclick = () => this.logout();
+                    } else {
+                        logoutBtn.style.display = 'none';
+                    }
+                }
+
+                // Show separator only when logged in (between login status and logout button)
+                if (navSeparator) {
+                    if (isLoggedIn) {
+                        navSeparator.style.display = 'block';
+                    } else {
+                        navSeparator.style.display = 'none';
+                    }
+                }
+
+                // Show/hide dropdowns based on login status
+                if (recruiterDropdown) {
+                    if (isLoggedIn) {
+                        recruiterDropdown.style.display = 'block';
+                    } else {
+                        recruiterDropdown.style.display = 'none';
+                    }
+                }
+
+                if (candidateDropdown) {
+                    if (isLoggedIn) {
+                        candidateDropdown.style.display = 'block';
+                    } else {
+                        candidateDropdown.style.display = 'none';
                     }
                 }
             }
@@ -446,8 +485,8 @@
             }
 
             disableProtectedElements() {
-                // Disable navbar links
-                const navLinks = document.querySelectorAll('.top-nav-link');
+                // Disable navbar links (except login and logout buttons)
+                const navLinks = document.querySelectorAll('.top-nav-link:not(#authToggleBtn):not(#logoutBtn)');
                 navLinks.forEach(link => {
                     link.classList.add('nav-disabled');
                     link.addEventListener('click', (e) => {
@@ -478,14 +517,26 @@
             }
 
             enableProtectedElements() {
-                // Enable navbar links
-                const navLinks = document.querySelectorAll('.top-nav-link');
+                // Enable navbar links (except login and logout buttons)
+                const navLinks = document.querySelectorAll('.top-nav-link:not(#authToggleBtn):not(#logoutBtn)');
                 navLinks.forEach(link => {
                     link.classList.remove('nav-disabled');
                     // Remove all click event listeners by cloning the element
                     const newLink = link.cloneNode(true);
                     link.parentNode.replaceChild(newLink, link);
                 });
+
+                // Show protected dropdowns when logged in
+                const recruiterDropdown = document.getElementById('recruiterDropdown');
+                const candidateDropdown = document.getElementById('candidateDropdown');
+                
+                if (recruiterDropdown) {
+                    recruiterDropdown.style.display = 'block';
+                }
+                
+                if (candidateDropdown) {
+                    candidateDropdown.style.display = 'block';
+                }
 
                 // Enable "Khám phá tính năng" button
                 const exploreBtn = document.querySelector('.cta-btn.secondary');
@@ -535,6 +586,48 @@
                 window.addEventListener('userLoggedIn', () => {
                     this.login();
                 });
+
+                // Protect login/logout buttons from being disabled
+                this.protectAuthButtons();
+            }
+
+            protectAuthButtons() {
+                // Ensure auth buttons are never truly disabled
+                const authBtn = document.getElementById('authToggleBtn');
+                const logoutBtn = document.getElementById('logoutBtn');
+
+                // Use MutationObserver to watch for class changes
+                if (authBtn) {
+                    const observer = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                                // If nav-disabled class is added, remove the disabling effects
+                                if (authBtn.classList.contains('nav-disabled')) {
+                                    authBtn.style.opacity = '1';
+                                    authBtn.style.pointerEvents = 'auto';
+                                    authBtn.style.cursor = 'pointer';
+                                }
+                            }
+                        });
+                    });
+                    observer.observe(authBtn, { attributes: true });
+                }
+
+                if (logoutBtn) {
+                    const observer = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                                // If nav-disabled class is added, remove the disabling effects
+                                if (logoutBtn.classList.contains('nav-disabled')) {
+                                    logoutBtn.style.opacity = '1';
+                                    logoutBtn.style.pointerEvents = 'auto';
+                                    logoutBtn.style.cursor = 'pointer';
+                                }
+                            }
+                        });
+                    });
+                    observer.observe(logoutBtn, { attributes: true });
+                }
             }
 
             showLoginModal() {
@@ -630,13 +723,16 @@
 
             updateAuthButton(isLoggedIn) {
                 const authBtn = document.getElementById('authToggleBtn');
+                const logoutBtn = document.getElementById('logoutBtn');
+                const navSeparator = document.getElementById('navSeparator');
+                const recruiterDropdown = document.getElementById('recruiterDropdown');
+                const candidateDropdown = document.getElementById('candidateDropdown');
+                
                 if (authBtn) {
                     if (isLoggedIn) {
-                        authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span>';
-                        authBtn.classList.add('logout');
-                        authBtn.onclick = () => this.logout();
+                        authBtn.style.display = 'none';
                     } else {
-                        authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>Đăng nhập</span>';
+                        authBtn.innerHTML = '<span>Đăng nhập</span>';
                         authBtn.classList.remove('logout');
                         authBtn.onclick = () => {
                             // For GitHub Pages, use demo login instead
@@ -646,13 +742,49 @@
                                 window.location.href = 'login.html';
                             }
                         };
+                        authBtn.style.display = 'flex';
+                    }
+                }
+                
+                if (logoutBtn) {
+                    if (isLoggedIn) {
+                        logoutBtn.style.display = 'flex';
+                        logoutBtn.onclick = () => this.logout();
+                    } else {
+                        logoutBtn.style.display = 'none';
+                    }
+                }
+
+                // Show separator only when logged in (between login status and logout button)
+                if (navSeparator) {
+                    if (isLoggedIn) {
+                        navSeparator.style.display = 'block';
+                    } else {
+                        navSeparator.style.display = 'none';
+                    }
+                }
+
+                // Show/hide dropdowns based on login status
+                if (recruiterDropdown) {
+                    if (isLoggedIn) {
+                        recruiterDropdown.style.display = 'block';
+                    } else {
+                        recruiterDropdown.style.display = 'none';
+                    }
+                }
+
+                if (candidateDropdown) {
+                    if (isLoggedIn) {
+                        candidateDropdown.style.display = 'block';
+                    } else {
+                        candidateDropdown.style.display = 'none';
                     }
                 }
             }
 
             disableProtectedElements() {
-                // Disable navbar links
-                const navLinks = document.querySelectorAll('.top-nav-link');
+                // Disable navbar links (except login and logout buttons)
+                const navLinks = document.querySelectorAll('.top-nav-link:not(#authToggleBtn):not(#logoutBtn)');
                 navLinks.forEach(link => {
                     link.classList.add('nav-disabled');
                     link.addEventListener('click', (e) => {
@@ -693,14 +825,26 @@
             }
 
             enableProtectedElements() {
-                // Enable navbar links
-                const navLinks = document.querySelectorAll('.top-nav-link');
+                // Enable navbar links (except login and logout buttons)
+                const navLinks = document.querySelectorAll('.top-nav-link:not(#authToggleBtn):not(#logoutBtn)');
                 navLinks.forEach(link => {
                     link.classList.remove('nav-disabled');
                     // Remove all click event listeners by cloning the element
                     const newLink = link.cloneNode(true);
                     link.parentNode.replaceChild(newLink, link);
                 });
+
+                // Show protected dropdowns when logged in
+                const recruiterDropdown = document.getElementById('recruiterDropdown');
+                const candidateDropdown = document.getElementById('candidateDropdown');
+                
+                if (recruiterDropdown) {
+                    recruiterDropdown.style.display = 'block';
+                }
+                
+                if (candidateDropdown) {
+                    candidateDropdown.style.display = 'block';
+                }
 
                 // Enable footer product links
                 const footerLinks = document.querySelectorAll('.footer-links a');
@@ -833,7 +977,7 @@
                         indicator.innerHTML = `<i class="fas fa-unlock" style="color: #4CAF50;"></i> Đã đăng nhập thành công`;
                         indicator.style.color = '#4CAF50';
                     } else {
-                        indicator.innerHTML = '<i class="fas fa-lock" style="color: #f44336;"></i> Cần đăng nhập để sử dụng tính năng';
+                        indicator.innerHTML = 'Cần đăng nhập để sử dụng tính năng';
                         indicator.style.color = '#f44336';
                     }
                 }
@@ -842,12 +986,10 @@
                 if (footerStatus) {
                     if (isLoggedIn) {
                         footerStatus.innerHTML = `
-                            <i class="fas fa-unlock" style="color: #4CAF50;"></i>
                             <span style="color: #4CAF50;">Đã đăng nhập thành công</span>
                         `;
                     } else {
                         footerStatus.innerHTML = `
-                            <i class="fas fa-lock" style="color: #f44336;"></i>
                             <span style="color: #f44336;">Chưa đăng nhập</span>
                         `;
                     }
@@ -865,7 +1007,6 @@
                 
                 modal.innerHTML = `
                     <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; margin: 20px;">
-                        <i class="fas fa-lock" style="font-size: 48px; color: #f44336; margin-bottom: 20px;"></i>
                         <h3 style="margin: 0 0 15px 0; color: #333;">Cần đăng nhập</h3>
                         <p style="margin: 0 0 25px 0; color: #666;">Vui lòng đăng nhập để truy cập tính năng này.</p>
                         <div style="display: flex; gap: 10px; justify-content: center;">
