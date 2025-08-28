@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về TechFuture - Nền tảng AI Tuyển dụng Thông minh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        /* Custom styles for better layout */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-spacing {
+            margin: 80px 0;
+        }
+        
+        .enhanced-about {
+            border-radius: 25px;
+            padding: 60px 40px;
+        }
+        
+        .enhanced-achievements {
+            border-radius: 25px;
+            padding: 60px 40px;
+        }
+        
+        /* Optimized achievements grid for single row */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .achievement-item {
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: auto;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+        
+        .achievement-icon {
+            position: relative;
+            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .achievement-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .achievement-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .achievement-name {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            flex-shrink: 0;
+        }
+        
+        .achievement-desc {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.8;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+        
+        .achievement-year {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            align-self: center;
+            flex-shrink: 0;
+        }
+        
+        .enhanced-business {
+            border-radius: 25px;
+            padding: 60px 40px;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            margin: 80px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .enhanced-about,
+            .enhanced-achievements,
+            .enhanced-business {
+                padding: 40px 20px;
+                margin: 40px 0;
+            }
+            
+            /* Responsive achievements grid */
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .achievement-item {
+                min-height: auto;
+                padding: 25px 15px;
+            }
+            
+            .achievement-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .achievement-name {
+                font-size: 1rem;
+            }
+            
+            .achievement-desc {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .achievements-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+            
+            .achievement-item {
+                min-height: 320px;
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="api/main.js"></script>
+    
+    <!-- Navigation (same as index.html) -->
+    <nav class="top-navbar">
+        <div class="top-nav-content">
+            <a href="index.html" class="top-nav-logo">
+                <img src="photo/icon/Logo2.jpg" alt="Logo" class="top-nav-logo-img">
+                <span class="top-nav-brand">TechFuture</span>
+                <div id="loginStatusIndicator" title="Trạng thái đăng nhập">🔒</div>
+            </a>
+            <button class="top-nav-menu-btn" aria-label="Mở menu" tabindex="0" style="display:none">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <div class="top-nav-links">
+                <div class="dropdown" data-require-login="true">
+                    <a href="#" class="top-nav-link dropdown-toggle">
+                        Nhà Tuyển Dụng
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                        <i class="fas fa-lock login-required-icon" title="Cần đăng nhập"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="cv.html" class="dropdown-item" data-require-login="true">
+                            <i class="fas fa-filter"></i>
+                            Lọc CV
+                        </a>
+                        <a href="cv.html" class="dropdown-item" data-require-login="true">
+                            <i class="fas fa-users"></i>
+                            Quản lý ứng viên
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown" data-require-login="true">
+                    <a href="#" class="top-nav-link dropdown-toggle">
+                        Ứng Viên
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                        <i class="fas fa-lock login-required-icon" title="Cần đăng nhập"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="agent-cv.html" class="dropdown-item" data-require-login="true">
+                            <i class="fas fa-robot"></i>
+                            AI CV Analyzer
+                        </a>
+                        <a href="holland+chatbot.html" class="dropdown-item" data-require-login="true">
+                            <i class="fas fa-comments"></i>
+                            Holland ChatBot
+                        </a>
+                        <a href="interview.html" class="dropdown-item" data-require-login="true">
+                            <i class="fas fa-video"></i>
+                            Virtual Interview Room
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <a href="#" class="top-nav-link dropdown-toggle">
+                        Tài Liệu
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="TechFuture.html" class="dropdown-item">
+                            <i class="fas fa-info-circle"></i>
+                            Giới Thiệu
+                        </a>
+                        <a href="cộng đồng.html" class="dropdown-item">
+                            <i class="fas fa-users"></i>
+                            Cộng Đồng
+                        </a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSemRr4b7JBhnq2ujf5KL4eouyUFOljV3PevrzJMXCsFIuCXYg/viewform" target="_blank" class="dropdown-item">
+                            <i class="fas fa-comment-dots"></i>
+                            FeedBack
+                        </a>
+                    </div>
+                </div>
+                
+
+
+                <a href="#" id="authToggleBtn" class="top-nav-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Đăng nhập</span>
+                </a>
+                
+                <!-- Separator -->
+                <div class="nav-separator-line">|</div>
+                
+                <!-- Logout Button -->
+                <a href="#" id="logoutBtn" class="top-nav-link" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </div>
+        <div class="top-nav-overlay"></div>
+    </nav>
+
+    <!-- Animated Background -->
+    <div class="gradient-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="floating-shapes" id="floatingShapes"></div>
+    <div class="floating-icons" id="floatingIcons"></div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content" id="imageModalContent">
+            <div class="image-modal-header">
+                <h3 class="image-modal-title" id="imageModalTitle">Xem ảnh thành tích</h3>
+                <div class="image-modal-controls">
+                    <button class="zoom-btn" id="zoomInBtn" title="Phóng to">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomOutBtn" title="Thu nhỏ">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="zoom-btn" id="resetZoomBtn" title="Reset zoom">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                    </button>
+                </div>
+                <button class="image-modal-close" id="closeImageModal">&times;</button>
+            </div>
+            <img src="" alt="" class="image-modal-img" id="imageModalImg">
+            <div class="image-modal-footer">
+                <p class="image-modal-description" id="imageModalDesc">Mô tả thành tích</p>
+            </div>
+            <button class="image-download-btn" id="imageDownloadBtn">
+                <i class="fas fa-download"></i>
+                Tải xuống
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-container">
+            <!-- About TechFuture Section -->
+            <section class="about-techfuture section-spacing enhanced-about" id="about-techfuture">
+                <div class="about-container">
+                    <div class="about-header">
+                        <h2 class="about-title">Về TechFuture AI</h2>
+                        <p class="section-subtitle">Đối tác tin cậy cho mọi nhu cầu tuyển dụng của doanh nghiệp</p>
+                    </div>
+
+                    <div class="about-content">
+                        <div class="about-text">
+                            <div class="about-description-enhanced">
+                                <p class="about-main-description">
+                                    <span class="company-name">TechFuture</span> là nền tảng 
+                                    <span class="highlight-keyword">AI hàng đầu</span> trong lĩnh vực 
+                                    <span class="highlight-keyword">tuyển dụng và quản lý nhân sự</span>. 
+                                    Chúng tôi cung cấp <span class="solution-text">giải pháp toàn diện</span> giúp 
+                                    <span class="business-text">doanh nghiệp</span> <span class="efficiency-text">tối ưu hóa quy trình tuyển dụng</span>, 
+                                    <span class="time-saving">tiết kiệm thời gian</span> và 
+                                    <span class="quality-text">nâng cao chất lượng tuyển dụng</span>. 
+                                    Với <span class="tech-keywords">công nghệ AI tiên tiến</span> và 
+                                    <span class="team-text">đội ngũ chuyên gia giàu kinh nghiệm</span>, 
+                                    TechFuture đã trở thành <span class="trust-text">đối tác tin cậy</span> của 
+                                    <span class="client-count">hàng trăm doanh nghiệp</span> từ startup đến tập đoàn lớn.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-image">
+                            <div class="about-image-frame">
+                                <img src="photo/tropine/hackathon2024.jpg" alt="TechFuture AI Platform" class="about-img">
+                                <div class="about-image-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-number">5,000+</span>
+                            <span class="about-stat-label">CV được phân tích</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">95%+</span>
+                            <span class="about-stat-label">Độ chính xác AI</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">200+</span>
+                            <span class="about-stat-label">Doanh nghiệp tin tưởng</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">70%</span>
+                            <span class="about-stat-label">Tiết kiệm thời gian</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Divider -->
+            <div class="section-divider"></div>
+
+            <!-- Thành Tích Nổi Bật Section -->
+            <section class="achievements section-spacing enhanced-achievements" id="achievements">
+                <div class="achievements-container">
+                    <div class="achievements-header">
+                        <h2 class="achievements-title">Thành Tích & Chứng nhận</h2>
+                        <p class="achievements-subtitle">
+                            Những <span class="highlight-keyword-gold">giải thưởng prestigous</span> và 
+                            <span class="highlight-keyword-gold">chứng nhận uy tín</span> khẳng định 
+                            <span class="highlight-keyword-gold">chất lượng công nghệ</span> và 
+                            <span class="highlight-keyword-gold">độ tin cậy</span> của TechFuture trong ngành
+                        </p>
+                    </div>
+
+                    <div class="achievements-grid">
+                        <!-- 1. Giải Nhất Tin Học Trẻ -->
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <img src="photo/tropine/tmhp.png" alt="Giải Nhất Tin Học Trẻ" class="achievement-img">
+                                <button class="view-image-btn" onclick="openImageModal('photo/tropine/tmhp.png', 'Giải Nhất Tin Học Trẻ Khu Vực Miền Bắc', 'Đạt giải Nhất cuộc thi Tin Học Trẻ khu vực Miền Bắc - khẳng định chất lượng công nghệ AI hàng đầu')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="achievement-name">
+                                    <i class="fas fa-medal medal-icon medal-first"></i>
+                                    Giải Nhất Tin Học Trẻ Khu Vực Miền Bắc
+                                </h3>
+                                <p class="achievement-desc">Đạt giải Nhất cuộc thi Tin Học Trẻ khu vực Miền Bắc - khẳng định chất lượng công nghệ AI hàng đầu trong lĩnh vực HR Tech</p>
+                                <span class="achievement-year">2025</span>
+                            </div>
+                        </div>
+
+                        <!-- 2. Giải Khuyến Khích Hội Thi Tin Học Trẻ Toàn Quốc -->
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <img src="photo/tropine/Khuyến Khích Tin Học Trẻ.jpg" alt="Hội Thi Tin Học Trẻ Toàn Quốc" class="achievement-img">
+                                <button class="view-image-btn" onclick="openImageModal('photo/tropine/Khuyến Khích Tin Học Trẻ.jpg', 'Giải Khuyến Khích Hội Thi Tin Học Trẻ Toàn Quốc', 'Đạt giải Khuyến khích tại Hội thi Tin Học Trẻ Toàn quốc với dự án ứng dụng AI hỗ trợ học tập và phát triển kỹ năng số')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="achievement-name">
+                                    <i class="fas fa-award medal-icon"></i>
+                                    Giải Khuyến Khích Hội Thi Tin Học Trẻ Toàn Quốc
+                                </h3>
+                                <p class="achievement-desc">Đạt giải Khuyến khích tại Hội thi Tin Học Trẻ Toàn quốc với dự án ứng dụng AI hỗ trợ học tập và phát triển kỹ năng số</p>
+                                <span class="achievement-year">2025</span>
+                            </div>
+                        </div>
+
+                        <!-- 3. Giải Đặc Biệt Sáng Tạo -->
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <img src="photo/tropine/sáng tạo thanh thiếu niên.jpg" alt="Sáng tạo thanh thiếu niên" class="achievement-img">
+                                <button class="view-image-btn" onclick="openImageModal('photo/tropine/sáng tạo thanh thiếu niên.jpg', 'Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng', 'Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="achievement-name">
+                                    <i class="fas fa-star medal-icon medal-special"></i>
+                                    Giải Đặc Biệt Sáng Tạo Thanh Thiếu Niên Thành Phố Hải Phòng
+                                </h3>
+                                <p class="achievement-desc">Đạt giải Đặc biệt cuộc thi Sáng tạo Thanh thiếu niên thành phố Hải Phòng với ý tưởng AI trong giáo dục và phát triển công nghệ</p>
+                                <span class="achievement-year">2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Divider -->
+            <div class="section-divider"></div>
+
+            <!-- Doanh Nghiệp Hỗ Trợ Section -->
+            <section class="business-support section-spacing enhanced-business" id="business-support">
+                <div class="business-support-container">
+                    <div class="business-support-header">
+                        <h2 class="business-support-title">Doanh Nghiệp Hỗ Trợ</h2>
+                        <p class="business-support-subtitle">
+                            Chúng tôi <span class="highlight-keyword-purple">tự hào được đồng hành</span> cùng các 
+                            <span class="highlight-keyword-purple">doanh nghiệp hàng đầu</span> trong việc 
+                            <span class="highlight-keyword-purple">phát triển nguồn nhân lực</span> và 
+                            <span class="highlight-keyword-purple">ứng dụng công nghệ AI</span> hiệu quả
+                        </p>
+                    </div>
+                    
+                    <div class="business-support-content">
+                        <!-- Cột trái: Thông tin và tính năng -->
+                        <div class="business-support-text">
+                            <div class="business-description-enhanced">
+                                <p class="business-support-description">
+                                    <span class="highlight-text">TechFuture</span> đã và đang hợp tác với nhiều <span class="emphasis-text">doanh nghiệp lớn nhỏ</span>, từ <span class="startup-text">startup</span> đến <span class="corporate-text">tập đoàn</span>, giúp họ <span class="benefit-text">tối ưu hóa quy trình tuyển dụng</span> và phát triển <span class="quality-text">đội ngũ nhân sự chất lượng cao</span>.
+                                </p>
+                            </div>
+                            
+                            <div class="business-support-features">
+                                <div class="business-feature-item">
+                                    <div class="business-feature-icon">
+                                        <i class="fas fa-handshake"></i>
+                                    </div>
+                                    <div class="business-feature-text">
+                                        <h4>Thành Tích Xuất Sắc</h4>
+                                        <p>Giải Nhất Tin Học Trẻ Miền Bắc - minh chứng cho chất lượng công nghệ hàng đầu</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="business-feature-item">
+                                    <div class="business-feature-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="business-feature-text">
+                                        <h4>Đội Ngũ Chuyên Nghiệp</h4>
+                                        <p>Hỗ trợ 24/7 với đội ngũ chuyên gia giàu kinh nghiệm</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="business-feature-item">
+                                    <div class="business-feature-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="business-feature-text">
+                                        <h4>Tăng Trưởng Bền Vững</h4>
+                                        <p>Giải pháp tối ưu hóa hiệu quả tuyển dụng lên đến 300%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cột phải: Hình ảnh -->
+                        <div class="business-support-image">
+                            <img src="photo/tropine/contact.jpg" alt="Doanh Nghiệp Hỗ Trợ" loading="lazy">
+                            <div class="business-support-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

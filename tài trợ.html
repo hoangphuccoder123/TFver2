@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Trợ - TechCv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .page-title p {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Support Section */
+        .support-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .support-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .support-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .support-header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Account Info */
+        .account-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .detail-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .qr-section {
+            text-align: center;
+        }
+
+        .qr-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-caption {
+            margin-top: 20px;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-1px);
+        }
+
+        /* Thank You Section */
+        .thank-you {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .thank-you h3 {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-bottom: 15px;
+        }
+
+        .thank-you p {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 15px;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+
+            .support-section {
+                padding: 25px;
+            }
+
+            .account-info {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .detail-value {
+                font-size: 1rem;
+                word-break: break-all;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .support-section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="photo/icon/Logo2.jpg" alt="TechCv Logo">
+                <span class="logo-text">TechCv</span>
+            </a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Quay lại
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-title">
+            <h1>Tài Trợ Dự Án</h1>
+            <p>Cảm ơn bạn đã quan tâm và muốn ủng hộ dự án TechCv. Sự đóng góp của bạn sẽ giúp chúng tôi phát triển và cải thiện sản phẩm tốt hơn.</p>
+        </div>
+
+        <div class="support-section">
+            <div class="support-header">
+                <h2>Thông Tin Chuyển Khoản</h2>
+                <p>Bạn có thể ủng hộ dự án thông qua chuyển khoản ngân hàng hoặc quét mã QR bên dưới</p>
+            </div>
+
+            <div class="account-info">
+                <div class="account-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Ngân hàng</div>
+                        <div class="detail-value">
+                            MB Bank
+                            <button class="copy-btn" onclick="copyToClipboard('MB Bank')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Số tài khoản</div>
+                        <div class="detail-value">
+                            28012008899999
+                            <button class="copy-btn" onclick="copyToClipboard('28012008899999')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Chủ tài khoản</div>
+                        <div class="detail-value">
+                            TRUONG MINH HOANG PHUC
+                            <button class="copy-btn" onclick="copyToClipboard('TRUONG MINH HOANG PHUC')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Nội dung chuyển khoản</div>
+                        <div class="detail-value">
+                            Ung HO Tech Cv-Tên
+                            <button class="copy-btn" onclick="copyToClipboard('Ung HO Tech Cv-Tên')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qr-section">
+                    <img src="photo/tropine/số tài khoản.jpg" alt="QR Code Chuyển Khoản" class="qr-image">
+                    <p class="qr-caption">Quét mã QR để chuyển khoản nhanh chóng</p>
+                </div>
+            </div>
+
+            <div class="thank-you">
+                <h3>💚 Cảm ơn sự ủng hộ của bạn!</h3>
+                <p>Mọi đóng góp của bạn, dù lớn hay nhỏ, đều được chúng tôi trân trọng và sẽ được sử dụng để phát triển các tính năng mới, cải thiện hiệu suất và mang đến trải nghiệm tốt nhất cho người dùng.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Copy to clipboard function
+        function copyToClipboard(text, btnElement) {
+            // Use the button element passed directly
+            const btn = btnElement || event.target.closest('.copy-btn');
+            
+            // Method 1: Try modern clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showCopySuccess(btn, text);
+                }).catch(function(err) {
+                    console.error('Clipboard API failed: ', err);
+                    fallbackCopy(text, btn);
+                });
+            } else {
+                // Method 2: Fallback for older browsers
+                fallbackCopy(text, btn);
+            }
+        }
+
+        // Fallback copy method
+        function fallbackCopy(text, btn) {
+            try {
+                // Create a temporary textarea
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                textArea.style.top = '-9999px';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                
+                // Select and copy
+                textArea.focus();
+                textArea.select();
+                textArea.setSelectionRange(0, 99999); // For mobile devices
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    showCopySuccess(btn, text);
+                } else {
+                    throw new Error('execCommand failed');
+                }
+            } catch (err) {
+                console.error('All copy methods failed: ', err);
+                // Show manual copy instructions
+                showManualCopyDialog(text);
+            }
+        }
+
+        // Show copy success
+        function showCopySuccess(btn, text) {
+            // Visual feedback on button
+            const originalHTML = btn.innerHTML;
+            const originalBg = btn.style.background;
+            
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            btn.style.transform = 'scale(0.95)';
+            
+            // Show toast
+            showToast('✅ Đã copy: ' + text, 'success');
+            
+            // Reset button after delay
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = originalBg || 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+                btn.style.transform = 'scale(1)';
+            }, 2000);
+        }
+
+        // Manual copy dialog for fallback
+        function showManualCopyDialog(text) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                font-family: 'Inter', sans-serif;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: #1a1a1a;
+                    padding: 30px;
+                    border-radius: 15px;
+                    max-width: 500px;
+                    width: 90%;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                ">
+                    <h3 style="color: white; margin-bottom: 15px; text-align: center;">
+                        📋 Copy thủ công
+                    </h3>
+                    <p style="color: #9ca3af; margin-bottom: 20px; text-align: center;">
+                        Vui lòng copy nội dung bên dưới:
+                    </p>
+                    <div style="
+                        background: #2d2d2d;
+                        padding: 15px;
+                        border-radius: 8px;
+                        margin-bottom: 20px;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                    ">
+                        <input type="text" value="${text}" readonly style="
+                            width: 100%;
+                            background: transparent;
+                            border: none;
+                            color: white;
+                            font-family: 'Courier New', monospace;
+                            font-size: 16px;
+                            outline: none;
+                            text-align: center;
+                        " onclick="this.select()">
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+                        border: none;
+                        border-radius: 8px;
+                        color: white;
+                        cursor: pointer;
+                        font-size: 16px;
+                    ">
+                        Đóng
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Auto-select text in input
+            const input = modal.querySelector('input');
+            setTimeout(() => input.select(), 100);
+        }
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const existingToast = document.querySelector('.custom-toast');
+            if (existingToast) existingToast.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.innerHTML = message;
+            
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : '#ef4444'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                z-index: 9999;
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                max-width: 300px;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Update copy button onclick to pass button reference
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const text = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    copyToClipboard(text, this);
+                });
+            });
+        });
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
