@@ -93,38 +93,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- App State ---
     let cvFiles = [];
+    let allCandidates = []; // Store analysis results
 
-        // --- Gemini API Configuration ---
-        function resolveCvKey() {
-            try {
-                let key = '';
-                if (typeof window !== 'undefined' && window.AppConfig) {
-                    key = window.AppConfig.APIs.gemini.getKey('cv') || '';
-                }
-                if ((!key || !key.trim()) && typeof window !== 'undefined' && window.APIKeyLibrary) {
-                    key = window.APIKeyLibrary.google.gemini.getActiveKey() || '';
-                }
-                return key;
-            } catch (_) { return ''; }
+    // --- Gemini API Configuration ---
+    function resolveCvKey() {
+        try {
+            let key = '';
+            if (typeof window !== 'undefined' && window.AppConfig) {
+                key = window.AppConfig.APIs.gemini.getKey('cv') || '';
+            }
+            if ((!key || !key.trim()) && typeof window !== 'undefined' && window.APIKeyLibrary) {
+                key = window.APIKeyLibrary.google.gemini.getActiveKey() || '';
+            }
+            return key;
+        } catch (_) { 
+            return ''; 
         }
-        function rotateCvKey() {
-            try {
-                if (typeof window !== 'undefined' && window.APIKeyLibrary) {
-                    const next = window.APIKeyLibrary.google.gemini.nextKey();
-                    if (typeof window !== 'undefined' && window.AppConfig && next) {
-                        window.AppConfig.APIs.gemini.keys.cv = next;
-                    }
-                    return next;
+    }
+
+    function rotateCvKey() {
+        try {
+            if (typeof window !== 'undefined' && window.APIKeyLibrary) {
+                const next = window.APIKeyLibrary.google.gemini.nextKey();
+                if (typeof window !== 'undefined' && window.AppConfig && next) {
+                    window.AppConfig.APIs.gemini.keys.cv = next;
                 }
-            } catch (_) { /* ignore */ }
-            return '';
+                return next;
+            }
+        } catch (_) { 
+            // ignore 
         }
+        return '';
+    }
 
     let currentKey = resolveCvKey();
     let ai = new GoogleGenAI({ apiKey: currentKey });
-        if (!currentKey) {
-            console.error('Thiếu API Key cho Gemini (cv). Hãy cấu hình trong api/main.js hoặc api/library/lib2.js');
-        }
+    if (!currentKey) {
+        console.warn('Thiếu API Key cho Gemini (cv). Hãy cấu hình trong api/main.js hoặc api/library/lib2.js');
+        // Show error message to user
+        displayError('Chưa cấu hình API Key cho Gemini. Vui lòng kiểm tra cấu hình API.');
+    }
     const model = 'gemini-2.5-flash';
 
     // --- Token & Content Utilities ---
@@ -573,7 +581,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
     if (suggestJdButtonEl) suggestJdButtonEl.addEventListener('click', handleSuggestJd);
     if (cvFilesEl) cvFilesEl.addEventListener('change', handleFileSelection);
-    if (analyzeButtonEl) analyzeButtonEl.addEventListener('click', handleAnalysis);
+    if (analyzeButtonEl) {
+        analyzeButtonEl.addEventListener('click', handleAnalysis);
+        console.log('Analyze button event listener attached');
+    } else {
+        console.error('Analyze button not found! Check ID: analyze-button');
+    }
     if (applyFiltersButton) applyFiltersButton.addEventListener('click', applyAndRenderFilters);
     if (resetFiltersButton) resetFiltersButton.addEventListener('click', resetAllFilters);
     // Close weighting section when clicking Done
@@ -910,49 +923,64 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Core Logic ---
     async function handleAnalysis() {
         clearError();
-    const jobDescription = jobDescriptionEl.value.trim();
-    const locationRequirement = criteriaLocationEl.value;
-    const rejectOnMismatch = criteriaLocationRejectEl.checked;
-    // Extra constraints from Suggestion section
-    const mustHave = ignoreMustHaveEl?.checked ? '' : (suggestMustHaveEl?.value || '').trim();
-    const niceToHave = ignoreNiceToHaveEl?.checked ? '' : (suggestNiceToHaveEl?.value || '').trim();
-    const minYears = ignoreMinYearsEl?.checked ? 0 : Number(suggestMinYearsEl?.value || 0);
-    const salaryRange = (ignoreSalaryEl?.checked || !salaryMinEl || !salaryMaxEl) ? '' : `${salaryMinEl.value}-${salaryMaxEl.value}`;
-    const ageRange = (ignoreAgeEl?.checked || !ageMinEl || !ageMaxEl) ? '' : `${ageMinEl.value}-${ageMaxEl.value}`;
-    const educationCerts = ignoreEducationCertsEl?.checked ? '' : (suggestEducationCertsEl?.value || '').trim();
-    const generalConditions = ignoreGeneralConditionsEl?.checked ? '' : (suggestGeneralConditionsEl?.value || '').trim();
+        const jobDescription = jobDescriptionEl.value.trim();
+        const locationRequirement = criteriaLocationEl.value;
+        const rejectOnMismatch = criteriaLocationRejectEl.checked;
         
+        // Extra constraints from Suggestion section
+        const mustHave = ignoreMustHaveEl?.checked ? '' : (suggestMustHaveEl?.value || '').trim();
+        const niceToHave = ignoreNiceToHaveEl?.checked ? '' : (suggestNiceToHaveEl?.value || '').trim();
+        const minYears = ignoreMinYearsEl?.checked ? 0 : Number(suggestMinYearsEl?.value || 0);
+        const salaryRange = (ignoreSalaryEl?.checked || !salaryMinEl || !salaryMaxEl) ? '' : `${salaryMinEl.value}-${salaryMaxEl.value}`;
+        const ageRange = (ignoreAgeEl?.checked || !ageMinEl || !ageMaxEl) ? '' : `${ageMinEl.value}-${ageMaxEl.value}`;
+        const educationCerts = ignoreEducationCertsEl?.checked ? '' : (suggestEducationCertsEl?.value || '').trim();
+        const generalConditions = ignoreGeneralConditionsEl?.checked ? '' : (suggestGeneralConditionsEl?.value || '').trim();
+            
         // Validation
-        if (!jobDescription) { displayError('Vui lòng cung cấp mô tả công việc.'); return; }
-        if (!locationRequirement) { displayError('Vui lòng chọn địa điểm làm việc bắt buộc.'); return; }
-        if (cvFiles.length === 0) { displayError('Vui lòng tải lên ít nhất một tệp CV.'); return; }
+        if (!jobDescription) { 
+            displayError('Vui lòng cung cấp mô tả công việc.'); 
+            return; 
+        }
+        if (!locationRequirement) { 
+            displayError('Vui lòng chọn địa điểm làm việc bắt buộc.'); 
+            return; 
+        }
+        if (cvFiles.length === 0) { 
+            displayError('Vui lòng tải lên ít nhất một tệp CV.'); 
+            return; 
+        }
         
         const allSliders = criteria.flatMap(c => c.children ? c.children.map(child => child.sliderEl) : [c.sliderEl]);
         const totalWeight = allSliders.reduce((sum, slider) => sum + (parseInt(slider.value, 10) || 0), 0);
 
-        if (totalWeight !== 100) { displayError('Tổng trọng số của các tiêu chí phải bằng 100%.'); return; }
+        if (totalWeight !== 100) { 
+            displayError('Tổng trọng số của các tiêu chí phải bằng 100%.'); 
+            return; 
+        }
 
         const weightedCriteria = criteria.map(c => {
             if (c.children) {
                 return {
                     ...c,
                     children: c.children.map(child => ({
-                        name: child.name, key: child.key,
+                        name: child.name, 
+                        key: child.key,
                         weight: parseInt(child.sliderEl.value, 10) || 0,
                         description: child.description
                     }))
                 };
             }
             return {
-                name: c.name, key: c.key,
+                name: c.name, 
+                key: c.key,
                 weight: parseInt(c.sliderEl.value, 10) || 0,
                 description: c.description
             };
         });
 
-    // Collapse all main sections to reduce DOM work during analysis
-    collapseAllMainSections();
-    setLoadingState(true);
+        // Collapse all main sections to reduce DOM work during analysis
+        collapseAllMainSections();
+        setLoadingState(true);
 
         try {
             const cvParts = await Promise.all(cvFiles.map(processFileToGenerativePart));
@@ -967,19 +995,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             } catch(_) {}
-            const instructionPrompt = { text: createAnalysisPromptCompact(
-                jobDescription,
-                locationRequirement,
-                rejectOnMismatch,
-                weightedCriteria,
-                { mustHave, niceToHave, minYears, salaryRange, ageRange, educationCerts, generalConditions }
-            ) };
+            
+            const instructionPrompt = { 
+                text: createAnalysisPromptCompact(
+                    jobDescription,
+                    locationRequirement,
+                    rejectOnMismatch,
+                    weightedCriteria,
+                    { mustHave, niceToHave, minYears, salaryRange, ageRange, educationCerts, generalConditions }
+                ) 
+            };
+            
             // Token-aware batched analysis
             const batchedResults = await generateAnalysisInBatches(instructionPrompt, cvParts, analysisSchema);
             allCandidates = batchedResults;
             populateFilterOptions(allCandidates);
             applyAndRenderFilters(); 
-            if(filterPanelEl) filterPanelEl.classList.remove('hidden');
+            if (filterPanelEl) filterPanelEl.classList.remove('hidden');
+            
             // Persist for dashboard and show CTA
             persistLatestAnalysis(allCandidates);
             showDashboardCTA();
@@ -994,11 +1027,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // New pipeline: process file -> text (w/ PDF), preprocess, chunk+facts -> merged summary part
-    // Xử lý từng file CV:
-    // - Ảnh: nhúng base64 (giữ nguyên)
-    // - PDF: pdf.js → text → tiền xử lý → chia khúc → trích fact (batch) → gộp tóm tắt
-    // - Text: tiền xử lý → chia khúc → trích fact (batch) → gộp tóm tắt
+    // Process file to generative part
+    // - Image: embed base64
+    // - PDF: pdf.js → text → preprocess → chunk+facts → merged summary
+    // - Text: preprocess → chunk+facts → merged summary
     function processFileToGenerativePart(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
