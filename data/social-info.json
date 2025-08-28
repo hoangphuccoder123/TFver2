@@ -1,0 +1,53 @@
+{
+  "socialMedia": {
+    "github": {
+      "name": "GitHub",
+      "url": "https://github.com/hoangphuccoder123",
+      "icon": "fab fa-github",
+      "description": "Source code và dự án công nghệ"
+    },
+    "facebook": {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=61577736765345&locale=vi_VN",
+      "icon": "fab fa-facebook-f",
+      "description": "Fanpage chính thức TechFuture"
+    },
+    "linkedin": {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/phuc-truong-minh-hoang-5ba70532b/",
+      "icon": "fab fa-linkedin-in",
+      "description": "Mạng lưới nghề nghiệp và cơ hội việc làm"
+    }
+  },
+  "contact": {
+    "phone": {
+      "number": "+84 123 456 789",
+      "display": "0123 456 789",
+      "description": "Hotline hỗ trợ 24/7"
+    },
+    "email": {
+      "address": "support@techfuture.vn",
+      "display": "support@techfuture.vn",
+      "description": "Email hỗ trợ khách hàng"
+    },
+    "businessEmail": {
+      "address": "business@techfuture.vn",
+      "display": "business@techfuture.vn",
+      "description": "Email hợp tác kinh doanh"
+    },
+    "address": {
+      "street": "123 Đường Công Nghệ",
+      "district": "Quận 1",
+      "city": "TP. Hồ Chí Minh",
+      "country": "Việt Nam",
+      "full": "123 Đường Công Nghệ, Quận 1, TP. Hồ Chí Minh, Việt Nam"
+    }
+  },
+  "company": {
+    "name": "TF Software",
+    "fullName": "TechFuture Software Company",
+    "established": "2020",
+    "description": "Công ty phần mềm tuyển dụng hàng đầu Việt Nam",
+    "mission": "Kết nối nhà tuyển dụng và ứng viên thông qua công nghệ AI tiên tiến"
+  }
+}
