@@ -136,6 +136,16 @@
                 this.setupUI();
                 this.showWelcomeMessage();
                 
+                // Trigger custom event for dropdown updates
+                window.dispatchEvent(new CustomEvent('userLoggedIn', { 
+                    detail: { email: cleanEmail } 
+                }));
+                
+                // Update dropdowns if function exists
+                if (window.updateAllDropdowns) {
+                    window.updateAllDropdowns();
+                }
+                
                 // Log success
                 console.log('🎉 Đăng nhập thành công:', cleanEmail);
             }
@@ -587,6 +597,14 @@
                 this.setupUI();
                 this.showLogoutMessage();
                 
+                // Trigger custom event for dropdown updates
+                window.dispatchEvent(new CustomEvent('userLoggedOut'));
+                
+                // Update dropdowns if function exists
+                if (window.updateAllDropdowns) {
+                    window.updateAllDropdowns();
+                }
+                
                 // Re-add demo button
                 setTimeout(() => {
                     this.setupDemoLogin();
@@ -908,6 +926,9 @@
 
         // Initialize auth system
         const authSystem = new AuthSystem();
+        
+        // Make authSystem available globally for dropdown checks
+        window.authSystem = authSystem;
 
         // Check URL parameters on page load
         window.addEventListener('load', () => {
@@ -1813,3 +1834,181 @@
                 });
             }
         });
+
+// Dropdown Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        const requireLogin = dropdown.getAttribute('data-require-login') === 'true';
+        
+        if (dropdownToggle && dropdownMenu) {
+            // Check login status and update dropdown state
+            updateDropdownLoginState(dropdown);
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Handle dropdown toggle click
+            dropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Check if login is required and user is not logged in
+                if (requireLogin && !isUserLoggedIn()) {
+                    showLoginModal();
+                    return;
+                }
+                
+                // Close all other dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            });
+            
+            // Handle dropdown items click
+            const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const itemRequireLogin = item.getAttribute('data-require-login') === 'true';
+                    
+                    if (itemRequireLogin && !isUserLoggedIn()) {
+                        e.preventDefault();
+                        showLoginModal();
+                        return;
+                    }
+                });
+            });
+            
+            // Handle touch devices
+            dropdownToggle.addEventListener('touchstart', function(e) {
+                if (requireLogin && !isUserLoggedIn()) {
+                    e.preventDefault();
+                    showLoginModal();
+                    return;
+                }
+                
+                e.preventDefault();
+                // Close all other dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+                dropdown.classList.toggle('active');
+            });
+            
+            // Handle keyboard navigation
+            dropdownToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    
+                    if (requireLogin && !isUserLoggedIn()) {
+                        showLoginModal();
+                        return;
+                    }
+                    
+                    dropdown.classList.toggle('active');
+                }
+                if (e.key === 'Escape') {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Handle dropdown items keyboard navigation
+            dropdownItems.forEach((item, index) => {
+                item.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const nextItem = dropdownItems[index + 1];
+                        if (nextItem) nextItem.focus();
+                    }
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const prevItem = dropdownItems[index - 1];
+                        if (prevItem) {
+                            prevItem.focus();
+                        } else {
+                            dropdownToggle.focus();
+                        }
+                    }
+                    if (e.key === 'Escape') {
+                        dropdown.classList.remove('active');
+                        dropdownToggle.focus();
+                    }
+                });
+            });
+        }
+    });
+    
+    // Function to check if user is logged in
+    function isUserLoggedIn() {
+        // Check if AuthSystem exists and user is logged in
+        if (window.authSystem && window.authSystem.isLoggedIn) {
+            return true;
+        }
+        
+        // Check localStorage for login status
+        const loginStatus = localStorage.getItem('tf_login_status');
+        const sessionData = localStorage.getItem('tf_session_data');
+        
+        return loginStatus === 'true' && sessionData;
+    }
+    
+    // Function to show login modal
+    function showLoginModal() {
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal) {
+            loginModal.style.display = 'flex';
+        }
+    }
+    
+    // Function to update dropdown state based on login status
+    function updateDropdownLoginState(dropdown) {
+        const requireLogin = dropdown.getAttribute('data-require-login') === 'true';
+        
+        if (requireLogin) {
+            if (isUserLoggedIn()) {
+                dropdown.classList.add('logged-in');
+            } else {
+                dropdown.classList.remove('logged-in');
+            }
+        }
+    }
+    
+    // Update all dropdowns when login status changes
+    function updateAllDropdowns() {
+        dropdowns.forEach(dropdown => {
+            updateDropdownLoginState(dropdown);
+        });
+    }
+    
+    // Listen for login status changes
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'tf_login_status') {
+            updateAllDropdowns();
+        }
+    });
+    
+    // Listen for custom login events
+    window.addEventListener('userLoggedIn', function() {
+        updateAllDropdowns();
+    });
+    
+    window.addEventListener('userLoggedOut', function() {
+        updateAllDropdowns();
+    });
+    
+    // Make functions available globally
+    window.updateDropdownLoginState = updateDropdownLoginState;
+    window.updateAllDropdowns = updateAllDropdowns;
+});
